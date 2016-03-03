@@ -1,0 +1,1 @@
+ const unsigned char TTRangeSliderVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:TTRangeSlider  PROJECT:Pods-1" "\n"; const double TTRangeSliderVersionNumber __attribute__ ((used)) = (double)1.;
