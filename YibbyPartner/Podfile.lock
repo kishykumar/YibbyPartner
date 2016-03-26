@@ -40,6 +40,7 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.5.7):
     - MMDrawerController/Core
+  - SwiftyJSON (2.3.2)
   - TTRangeSlider (1.0.3)
 
 DEPENDENCIES:
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - Google/CloudMessaging
   - GoogleMaps
   - MMDrawerController (~> 0.5.7)
+  - SwiftyJSON
   - TTRangeSlider
 
 EXTERNAL SOURCES:
@@ -56,7 +58,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   BaasBoxSDK:
-    :commit: 53060cb871be0169ee40da848488c9acbf7bd541
+    :commit: 43691371a4402e59bfa7efec123686a6f55d9e41
     :git: https://kishykumar@bitbucket.org/kishykumar/baasboxiossdk.git
 
 SPEC CHECKSUMS:
@@ -72,6 +74,7 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 82ad9f93d3615244b3f4ce440f5ab2515e8b4f56
   GoogleUtilities: 8ed9134debe11719097881711464752900668f10
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   TTRangeSlider: a12d0ac242a785cf96d4c7dacfe07e42a161251e
 
 COCOAPODS: 0.39.0

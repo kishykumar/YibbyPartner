@@ -19,36 +19,17 @@ class LoginViewController: UIViewController {
     static let EMAIL_ADDRESS_KEY_NAME = "EMAIL_ADDRESS"
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    
+    let ACTIVITY_INDICATOR_TAG: Int = 1
+
     // MARK: functions
     @IBAction func loginAction(sender: AnyObject) {
         
         
         if (emailAddress.text == "" || password.text == "") {
-            self.displayAlert("error in form", message: "Please enter email and password")
+            Util.displayAlert(self, title: "error in form", message: "Please enter email and password")
         } else {
-            
-            // Initiate the activity Indicator
-            activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
-            activityIndicator.center = self.view.center
-            activityIndicator.hidesWhenStopped = true
-            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-            view.addSubview(activityIndicator)
-            activityIndicator.startAnimating()
-            
-            UIApplication.sharedApplication().beginIgnoringInteractionEvents()
-            
-            loginUser(emailAddress.text!, passwordi: password.text!)
+            loginDriver(emailAddress.text!, passwordi: password.text!)
         }
-    }
-    
-    func displayAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
-            alert.dismissViewControllerAnimated(true, completion: nil)
-        }))
-        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     // MARK: KeyChain functions
@@ -69,12 +50,12 @@ class LoginViewController: UIViewController {
     }
     
     // BaasBox login user
-    func loginUser(usernamei: String, passwordi: String) {
+    func loginDriver(usernamei: String, passwordi: String) {
+        Util.enableActivityIndicator(self.view, tag: ACTIVITY_INDICATOR_TAG)
+
         let client: BAAClient = BAAClient.sharedClient()
-        client.authenticateUser(usernamei, password: passwordi, completion: {(success, error) -> Void in
-            
-            self.activityIndicator.stopAnimating()
-            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+        client.authenticateDriver(usernamei, password: passwordi, completion: {(success, error) -> Void in
+            Util.disableActivityIndicator(self.view, tag: self.ACTIVITY_INDICATOR_TAG)
             
             if (success) {
                 print("user logged in successfully \(success)")
@@ -84,10 +65,11 @@ class LoginViewController: UIViewController {
                 
                 let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 appDelegate.initializeMainViewController()
+                appDelegate.sendGCMTokenToServer()
                 self.presentViewController(appDelegate.centerContainer!, animated: true, completion: nil)
             }
             else {
-                self.displayAlert("Username/password incorrect", message: "Please reenter user credentials and try again.")
+                Util.displayAlert(self, title: "Username/password incorrect", message: "Please reenter user credentials and try again.")
             }
         })
     }

@@ -18,34 +18,15 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var passwordOutlet: UITextField!
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    let ACTIVITY_INDICATOR_TAG: Int = 1
 
     // MARK: Actions
     @IBAction func submitFormButton(sender: UIButton) {
         if (emailAddressOutlet.text == "" || passwordOutlet.text == "") {
-            self.displayAlert("error in form", message: "Please enter email and password")
+            Util.displayAlert(self, title: "error in form", message: "Please enter email and password")
         } else {
-            
-            // Initiate the activity Indicator
-            activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
-            activityIndicator.center = self.view.center
-            activityIndicator.hidesWhenStopped = true
-            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-            view.addSubview(activityIndicator)
-            activityIndicator.startAnimating()
-            
-            UIApplication.sharedApplication().beginIgnoringInteractionEvents()
-            
-            createUser(emailAddressOutlet.text!, passwordi: passwordOutlet.text!)
+            createDriver(emailAddressOutlet.text!, passwordi: passwordOutlet.text!)
         }
-    }
-    
-    func displayAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
-            alert.dismissViewControllerAnimated(true, completion: nil)
-        }))
-        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -74,20 +55,24 @@ class SignupViewController: UIViewController {
     // MARK: BaasBox Functions
     
     // BaasBox create user
-    func createUser(usernamei: String, passwordi: String) {
+    func createDriver(usernamei: String, passwordi: String) {
+        Util.enableActivityIndicator(self.view, tag: ACTIVITY_INDICATOR_TAG)
+
         let client: BAAClient = BAAClient.sharedClient()
-        client.createUserWithUsername(usernamei, password: passwordi, completion: {(success, error) -> Void in
+        client.createDriverWithUsername(usernamei, password: passwordi, completion: {(success, error) -> Void in
             if (success) {
                 // if login is successful, save username, password, token in keychain
                 LoginViewController.setKeyChainKeys(usernamei, password: passwordi)
                 
                 let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 appDelegate.initializeMainViewController()
+                appDelegate.sendGCMTokenToServer()
                 self.presentViewController(appDelegate.centerContainer!, animated: true, completion: nil)
             }
             else {
-                self.displayAlert("Signup failed.", message: "Please try again or wait for some time before signing up again.")
+                Util.displayAlert(self, title: "Signup failed.", message: "Please try again or wait for some time before signing up again.")
             }
+            Util.disableActivityIndicator(self.view, tag: self.ACTIVITY_INDICATOR_TAG)
         })
     }
     

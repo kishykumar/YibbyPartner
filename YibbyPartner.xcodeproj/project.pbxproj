@@ -7,11 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		123524961C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
+		123524971C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
+		123524991C8C2D5C004307EE /* DriverOnlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123524981C8C2D5C004307EE /* DriverOnlineViewController.swift */; };
+		1235249A1C8C2D5C004307EE /* DriverOnlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123524981C8C2D5C004307EE /* DriverOnlineViewController.swift */; };
+		1235249C1C8D2DD2004307EE /* OfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1235249B1C8D2DD2004307EE /* OfferViewController.swift */; };
+		1235249D1C8D2DD2004307EE /* OfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1235249B1C8D2DD2004307EE /* OfferViewController.swift */; };
+		1235249F1C915CCB004307EE /* PushController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1235249E1C915CCB004307EE /* PushController.swift */; };
+		123524A01C915CCB004307EE /* PushController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1235249E1C915CCB004307EE /* PushController.swift */; };
+		123524A21C92A049004307EE /* Bid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123524A11C92A049004307EE /* Bid.swift */; };
+		123524A31C92A049004307EE /* Bid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123524A11C92A049004307EE /* Bid.swift */; };
 		12C21E291C7DB0CB000AAFFC /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C21E281C7DB0CB000AAFFC /* Pods.framework */; };
 		12E438651C8400AB0038F9A4 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E438641C8400AB0038F9A4 /* SignupViewController.swift */; };
 		12E438661C8400AB0038F9A4 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E438641C8400AB0038F9A4 /* SignupViewController.swift */; };
-		12E438681C85828B0038F9A4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12E438671C85828A0038F9A4 /* GoogleService-Info.plist */; };
-		12E438691C85828B0038F9A4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12E438671C85828A0038F9A4 /* GoogleService-Info.plist */; };
+		12EF49751C954E1400C07FAE /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF49741C954E1400C07FAE /* Util.swift */; };
+		12EF49761C954E1400C07FAE /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF49741C954E1400C07FAE /* Util.swift */; };
+		12EF49781C96235F00C07FAE /* OfferSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF49771C96235F00C07FAE /* OfferSentViewController.swift */; };
+		12EF49791C96235F00C07FAE /* OfferSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF49771C96235F00C07FAE /* OfferSentViewController.swift */; };
 		12F1E8651C70424E0008E79D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1E8641C70424E0008E79D /* LoginViewController.swift */; };
 		12F1E8661C70424E0008E79D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1E8641C70424E0008E79D /* LoginViewController.swift */; };
 		12F1E8681C717ED30008E79D /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1E8671C717ED30008E79D /* KeychainWrapper.swift */; };
@@ -44,13 +56,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		123524951C89475D004307EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		123524981C8C2D5C004307EE /* DriverOnlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverOnlineViewController.swift; sourceTree = "<group>"; };
+		1235249B1C8D2DD2004307EE /* OfferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferViewController.swift; sourceTree = "<group>"; };
+		1235249E1C915CCB004307EE /* PushController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushController.swift; sourceTree = "<group>"; };
+		123524A11C92A049004307EE /* Bid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bid.swift; sourceTree = "<group>"; };
 		12C21E221C7DADE7000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
 		12C21E241C7DAE23000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
 		12C21E261C7DB0A0000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
 		12C21E281C7DB0CB000AAFFC /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
 		12E438641C8400AB0038F9A4 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
-		12E438671C85828A0038F9A4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		12EB18161C5A00780037EB86 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		12EF49741C954E1400C07FAE /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		12EF49771C96235F00C07FAE /* OfferSentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferSentViewController.swift; sourceTree = "<group>"; };
 		12F1E8641C70424E0008E79D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		12F1E8671C717ED30008E79D /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		12F1E86A1C76E83E0008E79D /* LeftNavDrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftNavDrawerViewController.swift; sourceTree = "<group>"; };
@@ -107,7 +125,7 @@
 		12F3CCC91C41EFC700F79A26 = {
 			isa = PBXGroup;
 			children = (
-				12E438671C85828A0038F9A4 /* GoogleService-Info.plist */,
+				123524951C89475D004307EE /* GoogleService-Info.plist */,
 				12F3CCD41C41EFC700F79A26 /* YibbyPartner */,
 				12F3CCE91C41EFC800F79A26 /* YibbyPartnerTests */,
 				12F3CCD31C41EFC700F79A26 /* Products */,
@@ -135,9 +153,13 @@
 				12F3CCD51C41EFC700F79A26 /* AppDelegate.swift */,
 				12F3CCF51C4B9C0B00F79A26 /* Podfile */,
 				12F1E8671C717ED30008E79D /* KeychainWrapper.swift */,
+				1235249E1C915CCB004307EE /* PushController.swift */,
+				123524A11C92A049004307EE /* Bid.swift */,
 				12F3CCD71C41EFC700F79A26 /* MainViewController.swift */,
 				12F3CCF91C4DDD6C00F79A26 /* DestinationPickerViewController.swift */,
 				12F3CCD91C41EFC700F79A26 /* Main.storyboard */,
+				1235249B1C8D2DD2004307EE /* OfferViewController.swift */,
+				123524981C8C2D5C004307EE /* DriverOnlineViewController.swift */,
 				12F1E86A1C76E83E0008E79D /* LeftNavDrawerViewController.swift */,
 				12F3CCDC1C41EFC700F79A26 /* Assets.xcassets */,
 				12F3CCDE1C41EFC800F79A26 /* LaunchScreen.storyboard */,
@@ -145,7 +167,9 @@
 				12F1E8641C70424E0008E79D /* LoginViewController.swift */,
 				12E438641C8400AB0038F9A4 /* SignupViewController.swift */,
 				12F1E86D1C7712190008E79D /* LeftNavDrawerTableViewCell.swift */,
+				12EF49741C954E1400C07FAE /* Util.swift */,
 				12F1E8701C7716070008E79D /* SettingsViewController.swift */,
+				12EF49771C96235F00C07FAE /* OfferSentViewController.swift */,
 			);
 			path = YibbyPartner;
 			sourceTree = "<group>";
@@ -276,7 +300,7 @@
 				12F3CCF61C4B9C0C00F79A26 /* Podfile in Resources */,
 				12F3CCE01C41EFC800F79A26 /* LaunchScreen.storyboard in Resources */,
 				12F3CCDD1C41EFC700F79A26 /* Assets.xcassets in Resources */,
-				12E438681C85828B0038F9A4 /* GoogleService-Info.plist in Resources */,
+				123524961C89475D004307EE /* GoogleService-Info.plist in Resources */,
 				12F3CCDB1C41EFC700F79A26 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,7 +309,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12E438691C85828B0038F9A4 /* GoogleService-Info.plist in Resources */,
+				123524971C89475D004307EE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,15 +368,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1235249C1C8D2DD2004307EE /* OfferViewController.swift in Sources */,
 				12E438651C8400AB0038F9A4 /* SignupViewController.swift in Sources */,
 				12F1E86B1C76E83E0008E79D /* LeftNavDrawerViewController.swift in Sources */,
 				12F1E86E1C7712190008E79D /* LeftNavDrawerTableViewCell.swift in Sources */,
 				12F1E8651C70424E0008E79D /* LoginViewController.swift in Sources */,
 				12F3CCFA1C4DDD6C00F79A26 /* DestinationPickerViewController.swift in Sources */,
 				12F3CCD81C41EFC700F79A26 /* MainViewController.swift in Sources */,
+				123524A21C92A049004307EE /* Bid.swift in Sources */,
+				12EF49781C96235F00C07FAE /* OfferSentViewController.swift in Sources */,
 				12F3CCD61C41EFC700F79A26 /* AppDelegate.swift in Sources */,
 				12F1E8681C717ED30008E79D /* KeychainWrapper.swift in Sources */,
+				123524991C8C2D5C004307EE /* DriverOnlineViewController.swift in Sources */,
+				12EF49751C954E1400C07FAE /* Util.swift in Sources */,
 				12F1E8711C7716070008E79D /* SettingsViewController.swift in Sources */,
+				1235249F1C915CCB004307EE /* PushController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,12 +391,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				12F1E86F1C7712190008E79D /* LeftNavDrawerTableViewCell.swift in Sources */,
+				1235249D1C8D2DD2004307EE /* OfferViewController.swift in Sources */,
 				12E438661C8400AB0038F9A4 /* SignupViewController.swift in Sources */,
 				12F1E86C1C76E83E0008E79D /* LeftNavDrawerViewController.swift in Sources */,
 				12F1E8691C717ED30008E79D /* KeychainWrapper.swift in Sources */,
 				12F1E8661C70424E0008E79D /* LoginViewController.swift in Sources */,
 				12F3CCEB1C41EFC800F79A26 /* YibbyPartnerTests.swift in Sources */,
+				12EF49761C954E1400C07FAE /* Util.swift in Sources */,
+				123524A01C915CCB004307EE /* PushController.swift in Sources */,
+				12EF49791C96235F00C07FAE /* OfferSentViewController.swift in Sources */,
+				1235249A1C8C2D5C004307EE /* DriverOnlineViewController.swift in Sources */,
 				12F1E8721C7716070008E79D /* SettingsViewController.swift in Sources */,
+				123524A31C92A049004307EE /* Bid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,7 +532,7 @@
 				INFOPLIST_FILE = YibbyPartner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.google.samples.quickstart.gcm12345;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yibby.app.partner;
 				PRODUCT_NAME = YibbyPartner;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = YibbyPartner/BridgingHeader.h;
@@ -518,7 +554,7 @@
 				INFOPLIST_FILE = YibbyPartner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.google.samples.quickstart.gcm12345;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yibby.app.partner;
 				PRODUCT_NAME = YibbyPartner;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = YibbyPartner/BridgingHeader.h;

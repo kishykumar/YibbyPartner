@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>GCM_SENDER_ID</key>
-	<string>40826925180</string>
+	<string>383118677842</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.google.samples.quickstart.gcm12345</string>
+	<string>com.yibby.app.partner</string>
 	<key>IS_ADS_ENABLED</key>
 	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -19,8 +19,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<false/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:40826925180:ios:b39bcf99f488437e</string>
+	<string>1:383118677842:ios:28240fdeacb171ad</string>
 	<key>PROJECT_ID</key>
-	<string>yibbydemo</string>
+	<string>yibbypartnerapp</string>
 </dict>
 </plist>

@@ -87,11 +87,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/BButton.framework"
   install_framework "Pods/BaasBoxSDK.framework"
   install_framework "Pods/MMDrawerController.framework"
+  install_framework "Pods/SwiftyJSON.framework"
   install_framework "Pods/TTRangeSlider.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/BButton.framework"
   install_framework "Pods/BaasBoxSDK.framework"
   install_framework "Pods/MMDrawerController.framework"
+  install_framework "Pods/SwiftyJSON.framework"
   install_framework "Pods/TTRangeSlider.framework"
 fi

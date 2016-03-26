@@ -50,6 +50,25 @@
 
 - (void) logoutWithCompletion:(BAABooleanResultBlock)completionBlock;
 
+// Authentication
+- (void)authenticateDriver:(NSString *)username
+                  password:(NSString *)password
+                completion:(BAABooleanResultBlock)completionBlock;
+
+- (void)createDriverWithUsername:(NSString *)username
+                        password:(NSString *)password
+                      completion:(BAABooleanResultBlock)completionBlock;
+
+- (BOOL) isDriverAuthenticated;
+
+- (void) logoutDriverWithCompletion:(BAABooleanResultBlock)completionBlock;
+
+// driver go online
+- (void)activateDriver:(BAABooleanResultBlock)completionBlock;
+
+- (void)deactivateDriver:(BAABooleanResultBlock)completionBlock;
+
+
 // Loading
 - (void) loadObject:(BAAObject *)object completion:(BAAObjectResultBlock)completionBlock;
 - (void) loadCollection:(BAAObject *)object completion:(BAAArrayResultBlock)completionBlock;
@@ -73,6 +92,9 @@
 - (void) pushNotificationToUsername:(NSString *)username withMessage:(NSString *)message completion:(BAABooleanResultBlock)completionBlock;
 - (void) pushNotificationToUsername:(NSString *)username withMessage:(NSString *)message customPayload:(NSDictionary *)customPayload completion:(BAABooleanResultBlock)completionBlock;
 
+- (void) enableDriverPushNotificationsForGCM:(NSString *)token completion:(BAABooleanResultBlock)completionBlock;
+- (void) disableDriverPushNotificationsWithCompletion:(BAABooleanResultBlock)completionBlock;
+
 // Files
 - (void) loadFiles:(BAAFile *)file completion:(BAAArrayResultBlock)completionBlock;
 - (void) loadFiles:(BAAFile *)file withParams:(NSDictionary *) parameters completion:(BAAArrayResultBlock)completionBlock;
@@ -94,7 +116,12 @@
                     dropoffLat:(NSNumber *)dropoffLat
                     dropoffLong:(NSNumber *)dropoffLong
                     dropoffLoc:(NSString *)dropoffLoc
-                    completion:(BAABooleanResultBlock)completionBlock;
+                    completion:(BAAObjectResultBlock)completionBlock;
+
+// Offer
+- (void)createOffer:(NSString *)bidId
+         offerPrice:(NSNumber *)offerPrice
+         completion:(BAAObjectResultBlock)completionBlock;
 
 // User
 - (void) loadCurrentUserWithCompletion:(BAAObjectResultBlock)completionBlock;

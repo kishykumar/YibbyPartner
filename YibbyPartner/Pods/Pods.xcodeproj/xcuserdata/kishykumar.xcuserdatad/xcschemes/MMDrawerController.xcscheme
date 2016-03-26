@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '1C6B9869AD4FA1DB1010E643'
+               BlueprintIdentifier = '4DB90C0CFD5FD890A25B55E1'
                BlueprintName = 'MMDrawerController'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'MMDrawerController.framework'>

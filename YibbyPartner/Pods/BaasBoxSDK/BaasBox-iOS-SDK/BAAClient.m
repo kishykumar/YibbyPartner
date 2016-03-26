@@ -288,6 +288,108 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
     
 }
 
+- (void)authenticateDriver:(NSString *)username
+                  password:(NSString *)password
+                completion:(BAABooleanResultBlock)completionHandler {
+    
+    [self postPath:@"driver/login"
+        parameters:@{@"username" : username, @"password": password, @"appcode" : self.appCode}
+           success:^(NSDictionary *responseObject) {
+               
+               NSString *token = responseObject[@"data"][@"X-BB-SESSION"];
+               
+               if (token) {
+                   
+                   BAAUser *user = [[BAAUser alloc] initWithDictionary:responseObject[@"data"]];
+                   user.authenticationToken = token;
+                   self.currentUser = user;
+                   [self saveUserToDisk:user];
+                   completionHandler(YES, nil);
+                   
+               } else {
+                   
+                   NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+                   [errorDetail setValue:responseObject[@"message"]
+                                  forKey:NSLocalizedDescriptionKey];
+                   NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
+                                                        code:[BaasBox errorCode]
+                                                    userInfo:errorDetail];
+                   completionHandler(NO, error);
+                   
+               }
+               
+           } failure:^(NSError *error) {
+               
+               completionHandler(NO, error);
+               
+           }];
+    
+}
+
+- (void)createDriverWithUsername:(NSString *)username
+                        password:(NSString *)password
+                      completion:(BAABooleanResultBlock)completionHandler {
+    
+    [self createDriverWithUsername:username
+                          password:password
+                  visibleByTheUser:nil
+                  visibleByFriends:nil
+          visibleByRegisteredUsers:nil
+           visibleByAnonymousUsers:nil
+                        completion:completionHandler];
+    
+}
+
+- (void)createDriverWithUsername:(NSString *)username
+                        password:(NSString *)password
+                visibleByTheUser:(NSDictionary *)visibleByTheUser
+                visibleByFriends:(NSDictionary *)visibleByFriends
+        visibleByRegisteredUsers:(NSDictionary *)visibleByRegisteredUsers
+         visibleByAnonymousUsers:(NSDictionary *)visibleByAnonymousUsers
+                      completion:(BAABooleanResultBlock)completionHandler {
+    
+    [self postPath:@"driver"
+        parameters:@{
+                     @"username" : username,
+                     @"password": password,
+                     @"appcode" : self.appCode,
+                     @"visibleByTheUser" : visibleByTheUser ?: @{},
+                     @"visibleByFriends" : visibleByFriends ?: @{},
+                     @"visibleByRegisteredUsers" : visibleByRegisteredUsers ?: @{},
+                     @"visibleByAnonymousUsers" : visibleByAnonymousUsers ?: @{}}
+           success:^(NSDictionary *responseObject) {
+               
+               NSString *token = responseObject[@"data"][@"X-BB-SESSION"];
+               
+               if (token) {
+                   
+                   BAAUser *user = [[BAAUser alloc] initWithDictionary:responseObject[@"data"]];
+                   user.authenticationToken = token;
+                   self.currentUser = user;
+                   [self saveUserToDisk:user];
+                   
+                   completionHandler(YES, nil);
+                   
+               } else {
+                   
+                   NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+                   [errorDetail setValue:responseObject[@"message"]
+                                  forKey:NSLocalizedDescriptionKey];
+                   NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
+                                                        code:[BaasBox errorCode]
+                                                    userInfo:errorDetail];
+                   completionHandler(NO, error);
+                   
+               }
+               
+           } failure:^(NSError *error) {
+               
+               completionHandler(NO, error);
+               
+           }];
+    
+}
+
 - (void)createBid:(NSNumber *)bidHigh
            bidLow:(NSNumber *)bidLow
           etaHigh:(NSNumber *)etaHigh
@@ -298,7 +400,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
        dropoffLat:(NSNumber *)dropoffLat
       dropoffLong:(NSNumber *)dropoffLong
        dropoffLoc:(NSString *)dropoffLoc
-       completion:(BAABooleanResultBlock)completionBlock {
+       completion:(BAAObjectResultBlock)completionBlock {
     
     [self postPath:@"bid"
         parameters:@{
@@ -316,14 +418,31 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
                      @"X-BB-SESSION": self.currentUser.authenticationToken
                      }
            success:^(NSDictionary *responseObject) {
-               completionBlock(YES, nil);
+               completionBlock(responseObject, nil);
            } failure:^(NSError *error) {
-               completionBlock(NO, error);
-               
+               completionBlock(nil, error);
            }];
 }
 
-
+// Offer
+- (void)createOffer:(NSString *)bidId
+         offerPrice:(NSNumber *)offerPrice
+         completion:(BAAObjectResultBlock)completionBlock {
+    
+    [self postPath:@"offer"
+        parameters:@{
+                     @"bidId" : bidId,
+                     @"offerPrice": offerPrice,
+                     @"driverUsername": self.currentUser.username,
+                     @"appcode" : self.appCode,
+                     @"X-BB-SESSION": self.currentUser.authenticationToken
+                     }
+           success:^(NSDictionary *responseObject) {
+               completionBlock(responseObject, nil);
+           } failure:^(NSError *error) {
+               completionBlock(nil, error);
+           }];
+}
 
 - (void) logoutWithCompletion:(BAABooleanResultBlock)completionHandler {
     
@@ -352,6 +471,35 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
            }];
     
 }
+
+- (void) logoutDriverWithCompletion:(BAABooleanResultBlock)completionHandler {
+    
+    NSString *path = @"driver/logout";
+    
+    if (self.currentUser.pushNotificationToken) {
+        path = [NSString stringWithFormat:@"driver/logout/%@", self.currentUser.pushNotificationToken];
+    }
+    
+    [self postPath:path
+        parameters:nil
+           success:^(id responseObject) {
+               
+               if (completionHandler) {
+                   self.currentUser = nil;
+                   [self saveUserToDisk:self.currentUser];
+                   completionHandler(YES, nil);
+               }
+               
+           } failure:^(NSError *error) {
+               
+               if (completionHandler) {
+                   completionHandler(NO, error);
+               }
+               
+           }];
+    
+}
+
 
 #pragma mark - Objects
 
@@ -1359,6 +1507,106 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
     
 }
 
+- (void) enableDriverPushNotificationsForGCM:(NSString *)token completion:(BAABooleanResultBlock)completionBlock {
+    if (self.currentUser.pushEnabled) {
+        if (completionBlock) {
+            completionBlock(YES, nil);
+            return;
+        }
+    }
+    
+    self.currentUser.pushNotificationToken = token;
+    
+    NSString *path = [NSString stringWithFormat:@"driver/push/enable/%@/%@", @"ios", self.currentUser.pushNotificationToken];
+    
+    [self putPath:path
+       parameters:nil
+          success:^(id responseObject) {
+              
+              if (completionBlock) {
+                  
+                  if (responseObject) {
+                      
+                      self.currentUser.pushEnabled = YES;
+                      completionBlock(YES, nil);
+                      
+                  } else {
+                      
+                      NSMutableDictionary* details = [NSMutableDictionary dictionary];
+                      details[@"NSLocalizedDescriptionKey"] = [NSString stringWithFormat:@"Server returned %@", responseObject];
+                      NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
+                                                           code:[BaasBox errorCode]
+                                                       userInfo:details];
+                      completionBlock(NO, error);
+                      
+                  }
+                  
+              }
+              
+          } failure:^(NSError *error) {
+              
+              if (completionBlock) {
+                  completionBlock(NO, error);
+              }
+              
+          }];
+    
+}
+
+- (void) disableDriverPushNotificationsWithCompletion:(BAABooleanResultBlock)completionBlock {
+    
+    if (!self.currentUser.pushEnabled) {
+        
+        if (completionBlock) {
+            
+            NSMutableDictionary* details = [NSMutableDictionary dictionary];
+            details[@"NSLocalizedDescriptionKey"] = @"Push notifications already disabled";
+            NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
+                                                 code:[BaasBox errorCode]
+                                             userInfo:details];
+            completionBlock(NO, error);
+            
+        }
+        
+        return;
+    }
+    
+    NSString *path = [NSString stringWithFormat:@"driver/push/disable/%@", self.currentUser.pushNotificationToken];
+    
+    [self putPath:path
+       parameters:nil
+          success:^(id responseObject) {
+              
+              if (completionBlock) {
+                  
+                  if (responseObject) {
+                      
+                      self.currentUser.pushEnabled = YES;
+                      completionBlock(YES, nil);
+                      
+                  } else {
+                      
+                      NSMutableDictionary* details = [NSMutableDictionary dictionary];
+                      details[@"NSLocalizedDescriptionKey"] = [NSString stringWithFormat:@"Server returned %@", responseObject];
+                      NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
+                                                           code:[BaasBox errorCode]
+                                                       userInfo:details];
+                      completionBlock(NO, error);
+                      
+                  }
+                  
+              }
+              
+          } failure:^(NSError *error) {
+              
+              if (completionBlock) {
+                  completionBlock(NO, error);
+              }
+              
+          }];
+    
+}
+
 - (NSString *)convertTokenToDeviceID:(NSData *)token {
     
     NSMutableString *deviceID = [NSMutableString string];
@@ -1792,5 +2040,44 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
     return self.currentUser.authenticationToken != nil;
     
 }
+
+- (BOOL) isDriverAuthenticated {
+    
+    return self.currentUser.authenticationToken != nil;
+    
+}
+
+- (BOOL) activateDriver:(BAABooleanResultBlock)completionBlock {
+    
+    [self postPath:[NSString stringWithFormat:@"driver/activate"]
+        parameters:nil
+        success:^(NSDictionary *responseObject) {
+            if (completionBlock) {
+                completionBlock(YES, nil);
+            }
+        } failure:^(NSError *error) {
+            if (completionBlock) {
+                completionBlock(NO, error);
+            }
+        }];
+    
+    
+}
+
+- (BOOL) deactivateDriver:(BAABooleanResultBlock)completionBlock {
+    
+    [self postPath:[NSString stringWithFormat:@"driver/deactivate"]
+        parameters:nil
+           success:^(NSDictionary *responseObject) {
+               if (completionBlock) {
+                   completionBlock(YES, nil);
+               }
+           } failure:^(NSError *error) {
+               if (completionBlock) {
+                   completionBlock(NO, error);
+               }
+           }];
+}
+
 
 @end
