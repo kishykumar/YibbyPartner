@@ -9,14 +9,21 @@
 import UIKit
 import GoogleMaps
 import BaasBoxSDK
+import CocoaLumberjack
 
 
-class DriverOnlineViewController: UIViewController {
+class DriverOnlineViewController: UIViewController, CLLocationManagerDelegate {
 
     // MARK: Properties
     @IBOutlet weak var gmsMapViewOutlet: GMSMapView!
     
     let ACTIVITY_INDICATOR_TAG: Int = 1
+    var locationManager:CLLocationManager!
+    let UPDATES_AGE_TIME: NSTimeInterval = 120
+    let DESIRED_HORIZONTAL_ACCURACY = 200.0
+    let LOCATION_UPDATE_TIME_INTERVAL = 4.0 // seconds
+    
+    var lastLocUpdateTS = 0.0
     
     @IBAction func onOfflineButtonClick(sender: UIButton) {
     
@@ -29,14 +36,13 @@ class DriverOnlineViewController: UIViewController {
             // diable the loading activity indicator
             Util.disableActivityIndicator(self.view, tag: self.ACTIVITY_INDICATOR_TAG)
 
-            if (success) {
-                print("driver offline")
-                self.navigationController!.popViewControllerAnimated(true)
-            }
-            else {
-                print("error in making the driver offline: \(error)")
-            }
+            // whether success or error, just pop the view controller. 
+            // Webserver will automatically take the driver offline in case of error.
+            self.navigationController!.popViewControllerAnimated(true)
         })
+        
+        // close down all active driver operations
+//        locationManager.stopUpdatingLocation()
     }
     
     func setupMap () {
@@ -51,20 +57,93 @@ class DriverOnlineViewController: UIViewController {
         
         // hide the back button
         self.navigationItem.setHidesBackButton(true, animated: false)
+        
+        
+        gmsMapViewOutlet.myLocationEnabled = true
+        gmsMapViewOutlet.settings.myLocationButton = true
+        
+        // Very Important: DONT disable consume all gestures, needed for nav drawer with a map
+        gmsMapViewOutlet.settings.consumesGesturesInView = true
     }
     
+    func setupLocationManager () {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager.requestWhenInUseAuthorization()
+//        locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+        
+        let curTime = NSDate().timeIntervalSince1970
+        
+        if ((lastLocUpdateTS == 0.0) || ((curTime > lastLocUpdateTS) &&
+            (curTime - lastLocUpdateTS > LOCATION_UPDATE_TIME_INTERVAL))) {
+            
+            // switch to high accuracy mode
+            locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        } else {
+            return;
+        }
+        
+        // how old is this newLocation?
+        let age: NSTimeInterval = -newLocation.timestamp.timeIntervalSinceNow
+        if (age > UPDATES_AGE_TIME) {
+            return
+        }
+        
+        // ignore old (cached) and less accurate updates
+        if ((newLocation.horizontalAccuracy < 0) ||
+            (newLocation.horizontalAccuracy > DESIRED_HORIZONTAL_ACCURACY)) {
+            return
+        }
+        
+        // update the timestamp
+        lastLocUpdateTS = curTime
+        
+        // switch back to low accuracy
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        
+        if let userLocation:CLLocation = newLocation {
+
+            // update the location on the webserver
+            WebInterface.makeWebRequestAndDiscardError(
+                self,
+                webRequest: {() -> Void in
+                    
+                    let client: BAAClient = BAAClient.sharedClient()
+                    
+                    client.updateDriverLocation(
+                        userLocation.coordinate.latitude,
+                        lng: userLocation.coordinate.longitude,
+                        completion: {(success, error) -> Void in
+
+                        // TODO: Fix me
+                        if (error == nil) {
+                            DDLogVerbose ("Successfully updated driver location")
+                        } else {
+                            DDLogVerbose ("Error updating driver location")
+                        }
+                    })
+            })
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         setupMap()
         setupUI()
+        setupLocationManager()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
 
     /*

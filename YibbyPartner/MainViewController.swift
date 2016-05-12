@@ -12,11 +12,19 @@ import GoogleMaps
 import MMDrawerController
 import TTRangeSlider
 import BaasBoxSDK
+import CocoaLumberjack
+
+// TODO: 
+// 1. Enable push notifications for Google needs to retry with exponential backoffs
+// 2. Push notifications 
 
 class MainViewController: UIViewController {
 
     // MARK: Properties
     let ACTIVITY_INDICATOR_TAG: Int = 1
+    let BAASBOX_AUTHENTICATION_ERROR = -22222
+
+    let ddLogLevel: DDLogLevel = DDLogLevel.Verbose
 
     // MARK: Functions
     @IBAction func leftSlideButtonTapped(sender: AnyObject) {
@@ -25,25 +33,46 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func onOnlineButtonClick(sender: UIButton) {
-
-        // enable the loading activity indicator
-        Util.enableActivityIndicator(self.view, tag: ACTIVITY_INDICATOR_TAG)
         
-        let client: BAAClient = BAAClient.sharedClient()
-        client.activateDriver({(success, error) -> Void in
-            
-            // diable the loading activity indicator
-            Util.disableActivityIndicator(self.view, tag: self.ACTIVITY_INDICATOR_TAG)
-
-            if (success) {
-                let driverOnlineViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DriverOnlineViewControllerIdentifier") as! DriverOnlineViewController
+//        let offerViewController = self.storyboard?.instantiateViewControllerWithIdentifier("OfferViewControllerIdentifier") as! OfferViewController
+//        offerViewController.userBid = Bid(id: "1234", bidHigh: 5, bidLow: 2,
+//                                          etaHigh: 5, etaLow: 2, pickupLat: 0.0,
+//                                          pickupLong: 0.0, pickupLoc: "pickupLoc", dropoffLat: 0.0,
+//                                          dropoffLong: 0.0, dropoffLoc: "dropoffLoc")
+//        self.navigationController!.pushViewController(offerViewController, animated: true)
+//        
+//        return;
+            //---------------------
+        
+        
+        // TODO: Uncomment it later
+        // Check for location
+//        if (!Util.displayLocationAlert()) {
+//            return;
+//        }
+        
+        WebInterface.makeWebRequestAndHandleError(
+            self,
+            webRequest: {(errorBlock: (BAAObjectResultBlock)) -> Void in
                 
-                // get the navigation VC and push the new VC
-                self.navigationController!.pushViewController(driverOnlineViewController, animated: true)
-            }
-            else {
-                print("error in making the driver online: \(error)")
-            }
+                // enable the loading activity indicator
+                Util.enableActivityIndicator(self.view, tag: 0)
+                let client: BAAClient = BAAClient.sharedClient()
+                
+                client.activateDriver({(success, error) -> Void in
+                    
+                    // diable the loading activity indicator
+                    Util.disableActivityIndicator(self.view, tag: self.ACTIVITY_INDICATOR_TAG)
+                    if (error == nil) {
+                        let driverOnlineViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DriverOnlineViewControllerIdentifier") as! DriverOnlineViewController
+                        
+                        // get the navigation VC and push the new VC
+                        self.navigationController!.pushViewController(driverOnlineViewController, animated: true)
+                    }
+                    else {
+                        errorBlock(success, error)
+                    }
+                })
         })
     }
     
@@ -51,19 +80,29 @@ class MainViewController: UIViewController {
  
     }
     
+    func afterViewLoadOps(sender: AnyObject) {
+        
+//        let client: BAAClient = BAAClient.sharedClient()
+//        if (client.isDriverOnline()) {
+//          self.performSegueWithIdentifier("goOnlineSegue", sender: nil)
+//        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
         setupUI()
-
     }
-
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
 
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -2052,6 +2052,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
     [self postPath:[NSString stringWithFormat:@"driver/activate"]
         parameters:nil
         success:^(NSDictionary *responseObject) {
+
             if (completionBlock) {
                 completionBlock(YES, nil);
             }
@@ -2069,6 +2070,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
     [self postPath:[NSString stringWithFormat:@"driver/deactivate"]
         parameters:nil
            success:^(NSDictionary *responseObject) {
+
                if (completionBlock) {
                    completionBlock(YES, nil);
                }
@@ -2079,5 +2081,22 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
            }];
 }
 
+- (void) updateDriverLocation: (NSNumber *)lat
+                          lng:(NSNumber *)lng
+                   completion:(BAAObjectResultBlock)completionBlock {
+    
+    [self postPath:@"location"
+        parameters:@{
+                     @"lat" : lat,
+                     @"lng": lng,
+                     @"appcode" : self.appCode,
+                     @"X-BB-SESSION": self.currentUser.authenticationToken
+                     }
+           success:^(NSDictionary *responseObject) {
+               completionBlock(responseObject, nil);
+           } failure:^(NSError *error) {
+               completionBlock(nil, error);
+           }];
+}
 
 @end

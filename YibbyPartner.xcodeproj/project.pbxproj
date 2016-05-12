@@ -7,33 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		120188121CDC6935005EF075 /* LogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120188111CDC6935005EF075 /* LogFormatter.swift */; };
+		1206823B1CC2E685004A34BB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1206823A1CC2E685004A34BB /* MapKit.framework */; };
 		123524961C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
 		123524971C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
 		123524991C8C2D5C004307EE /* DriverOnlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123524981C8C2D5C004307EE /* DriverOnlineViewController.swift */; };
-		1235249A1C8C2D5C004307EE /* DriverOnlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123524981C8C2D5C004307EE /* DriverOnlineViewController.swift */; };
 		1235249C1C8D2DD2004307EE /* OfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1235249B1C8D2DD2004307EE /* OfferViewController.swift */; };
-		1235249D1C8D2DD2004307EE /* OfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1235249B1C8D2DD2004307EE /* OfferViewController.swift */; };
 		1235249F1C915CCB004307EE /* PushController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1235249E1C915CCB004307EE /* PushController.swift */; };
-		123524A01C915CCB004307EE /* PushController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1235249E1C915CCB004307EE /* PushController.swift */; };
 		123524A21C92A049004307EE /* Bid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123524A11C92A049004307EE /* Bid.swift */; };
-		123524A31C92A049004307EE /* Bid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123524A11C92A049004307EE /* Bid.swift */; };
-		12C21E291C7DB0CB000AAFFC /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C21E281C7DB0CB000AAFFC /* Pods.framework */; };
+		126602001CA718CC00E12CFC /* DriverEnRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126601FF1CA718CC00E12CFC /* DriverEnRouteViewController.swift */; };
+		12720AA91CC5FF59002581CF /* WebInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12720AA81CC5FF59002581CF /* WebInterface.swift */; };
+		12720AAD1CD5EA5C002581CF /* BidState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12720AAC1CD5EA5C002581CF /* BidState.swift */; };
 		12E438651C8400AB0038F9A4 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E438641C8400AB0038F9A4 /* SignupViewController.swift */; };
-		12E438661C8400AB0038F9A4 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E438641C8400AB0038F9A4 /* SignupViewController.swift */; };
 		12EF49751C954E1400C07FAE /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF49741C954E1400C07FAE /* Util.swift */; };
-		12EF49761C954E1400C07FAE /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF49741C954E1400C07FAE /* Util.swift */; };
 		12EF49781C96235F00C07FAE /* OfferSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF49771C96235F00C07FAE /* OfferSentViewController.swift */; };
-		12EF49791C96235F00C07FAE /* OfferSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF49771C96235F00C07FAE /* OfferSentViewController.swift */; };
 		12F1E8651C70424E0008E79D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1E8641C70424E0008E79D /* LoginViewController.swift */; };
-		12F1E8661C70424E0008E79D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1E8641C70424E0008E79D /* LoginViewController.swift */; };
 		12F1E8681C717ED30008E79D /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1E8671C717ED30008E79D /* KeychainWrapper.swift */; };
-		12F1E8691C717ED30008E79D /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1E8671C717ED30008E79D /* KeychainWrapper.swift */; };
 		12F1E86B1C76E83E0008E79D /* LeftNavDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1E86A1C76E83E0008E79D /* LeftNavDrawerViewController.swift */; };
-		12F1E86C1C76E83E0008E79D /* LeftNavDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1E86A1C76E83E0008E79D /* LeftNavDrawerViewController.swift */; };
 		12F1E86E1C7712190008E79D /* LeftNavDrawerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1E86D1C7712190008E79D /* LeftNavDrawerTableViewCell.swift */; };
-		12F1E86F1C7712190008E79D /* LeftNavDrawerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1E86D1C7712190008E79D /* LeftNavDrawerTableViewCell.swift */; };
 		12F1E8711C7716070008E79D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1E8701C7716070008E79D /* SettingsViewController.swift */; };
-		12F1E8721C7716070008E79D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1E8701C7716070008E79D /* SettingsViewController.swift */; };
 		12F3CCD61C41EFC700F79A26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F3CCD51C41EFC700F79A26 /* AppDelegate.swift */; };
 		12F3CCD81C41EFC700F79A26 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F3CCD71C41EFC700F79A26 /* MainViewController.swift */; };
 		12F3CCDB1C41EFC700F79A26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3CCD91C41EFC700F79A26 /* Main.storyboard */; };
@@ -43,6 +35,8 @@
 		12F3CCF61C4B9C0C00F79A26 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 12F3CCF51C4B9C0B00F79A26 /* Podfile */; };
 		12F3CCF81C4CF16D00F79A26 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F3CCF71C4CF16D00F79A26 /* CoreLocation.framework */; };
 		12F3CCFA1C4DDD6C00F79A26 /* DestinationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F3CCF91C4DDD6C00F79A26 /* DestinationPickerViewController.swift */; };
+		6B9369FC30AAD797CF0D9B31 /* Pods_YibbyPartner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF052090573D5AD3602BC58 /* Pods_YibbyPartner.framework */; };
+		BB26D7E74528EB7DCDEA5742 /* Pods_YibbyPartnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F447C138937DCD881B26690E /* Pods_YibbyPartnerTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,11 +50,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		120188111CDC6935005EF075 /* LogFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogFormatter.swift; sourceTree = "<group>"; };
+		1206823A1CC2E685004A34BB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		123524951C89475D004307EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		123524981C8C2D5C004307EE /* DriverOnlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverOnlineViewController.swift; sourceTree = "<group>"; };
 		1235249B1C8D2DD2004307EE /* OfferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferViewController.swift; sourceTree = "<group>"; };
 		1235249E1C915CCB004307EE /* PushController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushController.swift; sourceTree = "<group>"; };
 		123524A11C92A049004307EE /* Bid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bid.swift; sourceTree = "<group>"; };
+		126601FF1CA718CC00E12CFC /* DriverEnRouteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverEnRouteViewController.swift; sourceTree = "<group>"; };
+		12720AA81CC5FF59002581CF /* WebInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebInterface.swift; sourceTree = "<group>"; };
+		12720AAC1CD5EA5C002581CF /* BidState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidState.swift; sourceTree = "<group>"; };
 		12C21E221C7DADE7000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
 		12C21E241C7DAE23000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
 		12C21E261C7DB0A0000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
@@ -84,13 +83,19 @@
 		12F3CCE61C41EFC800F79A26 /* Yibby.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Yibby.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		12F3CCEA1C41EFC800F79A26 /* YibbyPartnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YibbyPartnerTests.swift; sourceTree = "<group>"; };
 		12F3CCEC1C41EFC800F79A26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		12F3CCF51C4B9C0B00F79A26 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		12F3CCF51C4B9C0B00F79A26 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		12F3CCF71C4CF16D00F79A26 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		12F3CCF91C4DDD6C00F79A26 /* DestinationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationPickerViewController.swift; sourceTree = "<group>"; };
+		1AF052090573D5AD3602BC58 /* Pods_YibbyPartner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YibbyPartner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C40CC8C8B06A96C08FD964C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "YibbyPartner/Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3C666022AA9B796A1F7D9370 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "YibbyPartner/Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3C7EEF9A45F3CF691B1C4C0C /* Pods-YibbyPartner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YibbyPartner.debug.xcconfig"; path = "YibbyPartner/Pods/Target Support Files/Pods-YibbyPartner/Pods-YibbyPartner.debug.xcconfig"; sourceTree = "<group>"; };
 		4E9B87E4D6A5CBD99DAC49E1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "YibbyPartner/Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		941E935096634FE936233B79 /* Pods-YibbyPartner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YibbyPartner.release.xcconfig"; path = "YibbyPartner/Pods/Target Support Files/Pods-YibbyPartner/Pods-YibbyPartner.release.xcconfig"; sourceTree = "<group>"; };
+		B0E34C91FA60BCF501DC425D /* Pods-YibbyPartnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YibbyPartnerTests.release.xcconfig"; path = "YibbyPartner/Pods/Target Support Files/Pods-YibbyPartnerTests/Pods-YibbyPartnerTests.release.xcconfig"; sourceTree = "<group>"; };
+		D7C44C9D1D1D3E5F94EF8141 /* Pods-YibbyPartnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YibbyPartnerTests.debug.xcconfig"; path = "YibbyPartner/Pods/Target Support Files/Pods-YibbyPartnerTests/Pods-YibbyPartnerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DAF0F8A29620D810751B13B7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F447C138937DCD881B26690E /* Pods_YibbyPartnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YibbyPartnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC899BE2F991DEE8F89ACF36 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "YibbyPartner/Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,8 +104,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12C21E291C7DB0CB000AAFFC /* Pods.framework in Frameworks */,
 				12F3CCF81C4CF16D00F79A26 /* CoreLocation.framework in Frameworks */,
+				1206823B1CC2E685004A34BB /* MapKit.framework in Frameworks */,
+				6B9369FC30AAD797CF0D9B31 /* Pods_YibbyPartner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB26D7E74528EB7DCDEA5742 /* Pods_YibbyPartnerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,9 +158,12 @@
 			children = (
 				12EB18131C59FA980037EB86 /* Supporting Files */,
 				12F3CCD51C41EFC700F79A26 /* AppDelegate.swift */,
+				120188111CDC6935005EF075 /* LogFormatter.swift */,
 				12F3CCF51C4B9C0B00F79A26 /* Podfile */,
 				12F1E8671C717ED30008E79D /* KeychainWrapper.swift */,
 				1235249E1C915CCB004307EE /* PushController.swift */,
+				12720AAC1CD5EA5C002581CF /* BidState.swift */,
+				126601FF1CA718CC00E12CFC /* DriverEnRouteViewController.swift */,
 				123524A11C92A049004307EE /* Bid.swift */,
 				12F3CCD71C41EFC700F79A26 /* MainViewController.swift */,
 				12F3CCF91C4DDD6C00F79A26 /* DestinationPickerViewController.swift */,
@@ -168,6 +178,7 @@
 				12E438641C8400AB0038F9A4 /* SignupViewController.swift */,
 				12F1E86D1C7712190008E79D /* LeftNavDrawerTableViewCell.swift */,
 				12EF49741C954E1400C07FAE /* Util.swift */,
+				12720AA81CC5FF59002581CF /* WebInterface.swift */,
 				12F1E8701C7716070008E79D /* SettingsViewController.swift */,
 				12EF49771C96235F00C07FAE /* OfferSentViewController.swift */,
 			);
@@ -190,6 +201,10 @@
 				3C666022AA9B796A1F7D9370 /* Pods.release.xcconfig */,
 				3C40CC8C8B06A96C08FD964C /* Pods.debug.xcconfig */,
 				FC899BE2F991DEE8F89ACF36 /* Pods.release.xcconfig */,
+				D7C44C9D1D1D3E5F94EF8141 /* Pods-YibbyPartnerTests.debug.xcconfig */,
+				B0E34C91FA60BCF501DC425D /* Pods-YibbyPartnerTests.release.xcconfig */,
+				3C7EEF9A45F3CF691B1C4C0C /* Pods-YibbyPartner.debug.xcconfig */,
+				941E935096634FE936233B79 /* Pods-YibbyPartner.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -197,12 +212,15 @@
 		655A3CB4424C6BF7AFEE185A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1206823A1CC2E685004A34BB /* MapKit.framework */,
 				12C21E281C7DB0CB000AAFFC /* Pods.framework */,
 				12C21E261C7DB0A0000AAFFC /* BaasBoxSDK1.framework */,
 				12C21E241C7DAE23000AAFFC /* BaasBoxSDK1.framework */,
 				12C21E221C7DADE7000AAFFC /* BaasBoxSDK1.framework */,
 				12F3CCF71C4CF16D00F79A26 /* CoreLocation.framework */,
 				DAF0F8A29620D810751B13B7 /* Pods.framework */,
+				1AF052090573D5AD3602BC58 /* Pods_YibbyPartner.framework */,
+				F447C138937DCD881B26690E /* Pods_YibbyPartnerTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -234,9 +252,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 12F3CCF21C41EFC800F79A26 /* Build configuration list for PBXNativeTarget "YibbyPartnerTests" */;
 			buildPhases = (
+				CFD3E7C00E24EF457CE1A6A9 /* Check Pods Manifest.lock */,
 				12F3CCE21C41EFC800F79A26 /* Sources */,
 				12F3CCE31C41EFC800F79A26 /* Frameworks */,
 				12F3CCE41C41EFC800F79A26 /* Resources */,
+				B74F150CA032517E1E2EDF6C /* Embed Pods Frameworks */,
+				F1EA9702A2E692F1CBEC2489 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -254,6 +275,9 @@
 		12F3CCCA1C41EFC700F79A26 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					New,
+				);
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = MyComp;
@@ -262,6 +286,9 @@
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 9ESLPLTZVR;
 						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -328,7 +355,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/YibbyPartner/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/YibbyPartner/Pods/Target Support Files/Pods-YibbyPartner/Pods-YibbyPartner-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8F2DAF073F92100A711F982C /* Embed Pods Frameworks */ = {
@@ -343,7 +370,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/YibbyPartner/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/YibbyPartner/Pods/Target Support Files/Pods-YibbyPartner/Pods-YibbyPartner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B74F150CA032517E1E2EDF6C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/YibbyPartner/Pods/Target Support Files/Pods-YibbyPartnerTests/Pods-YibbyPartnerTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CFD3E7C00E24EF457CE1A6A9 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E6F39E6AA71B9E64C2C8375A /* Check Pods Manifest.lock */ = {
@@ -361,6 +418,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		F1EA9702A2E692F1CBEC2489 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/YibbyPartner/Pods/Target Support Files/Pods-YibbyPartnerTests/Pods-YibbyPartnerTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -375,14 +447,18 @@
 				12F1E8651C70424E0008E79D /* LoginViewController.swift in Sources */,
 				12F3CCFA1C4DDD6C00F79A26 /* DestinationPickerViewController.swift in Sources */,
 				12F3CCD81C41EFC700F79A26 /* MainViewController.swift in Sources */,
+				12720AAD1CD5EA5C002581CF /* BidState.swift in Sources */,
 				123524A21C92A049004307EE /* Bid.swift in Sources */,
 				12EF49781C96235F00C07FAE /* OfferSentViewController.swift in Sources */,
 				12F3CCD61C41EFC700F79A26 /* AppDelegate.swift in Sources */,
 				12F1E8681C717ED30008E79D /* KeychainWrapper.swift in Sources */,
+				126602001CA718CC00E12CFC /* DriverEnRouteViewController.swift in Sources */,
+				120188121CDC6935005EF075 /* LogFormatter.swift in Sources */,
 				123524991C8C2D5C004307EE /* DriverOnlineViewController.swift in Sources */,
 				12EF49751C954E1400C07FAE /* Util.swift in Sources */,
 				12F1E8711C7716070008E79D /* SettingsViewController.swift in Sources */,
 				1235249F1C915CCB004307EE /* PushController.swift in Sources */,
+				12720AA91CC5FF59002581CF /* WebInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,19 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12F1E86F1C7712190008E79D /* LeftNavDrawerTableViewCell.swift in Sources */,
-				1235249D1C8D2DD2004307EE /* OfferViewController.swift in Sources */,
-				12E438661C8400AB0038F9A4 /* SignupViewController.swift in Sources */,
-				12F1E86C1C76E83E0008E79D /* LeftNavDrawerViewController.swift in Sources */,
-				12F1E8691C717ED30008E79D /* KeychainWrapper.swift in Sources */,
-				12F1E8661C70424E0008E79D /* LoginViewController.swift in Sources */,
 				12F3CCEB1C41EFC800F79A26 /* YibbyPartnerTests.swift in Sources */,
-				12EF49761C954E1400C07FAE /* Util.swift in Sources */,
-				123524A01C915CCB004307EE /* PushController.swift in Sources */,
-				12EF49791C96235F00C07FAE /* OfferSentViewController.swift in Sources */,
-				1235249A1C8C2D5C004307EE /* DriverOnlineViewController.swift in Sources */,
-				12F1E8721C7716070008E79D /* SettingsViewController.swift in Sources */,
-				123524A31C92A049004307EE /* Bid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,7 +536,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -510,7 +574,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -519,7 +583,7 @@
 		};
 		12F3CCF01C41EFC800F79A26 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3C40CC8C8B06A96C08FD964C /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 3C7EEF9A45F3CF691B1C4C0C /* Pods-YibbyPartner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -530,7 +594,7 @@
 					"$(PROJECT_DIR)/YibbyPartner/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = YibbyPartner/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yibby.app.partner;
 				PRODUCT_NAME = YibbyPartner;
@@ -541,7 +605,7 @@
 		};
 		12F3CCF11C41EFC800F79A26 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC899BE2F991DEE8F89ACF36 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 941E935096634FE936233B79 /* Pods-YibbyPartner.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -552,7 +616,7 @@
 					"$(PROJECT_DIR)/YibbyPartner/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = YibbyPartner/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yibby.app.partner;
 				PRODUCT_NAME = YibbyPartner;
@@ -563,6 +627,7 @@
 		};
 		12F3CCF31C41EFC800F79A26 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7C44C9D1D1D3E5F94EF8141 /* Pods-YibbyPartnerTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = YibbyPartnerTests/Info.plist;
@@ -575,6 +640,7 @@
 		};
 		12F3CCF41C41EFC800F79A26 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0E34C91FA60BCF501DC425D /* Pods-YibbyPartnerTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = YibbyPartnerTests/Info.plist;

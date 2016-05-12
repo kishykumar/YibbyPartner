@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CocoaLumberjack
 
 class LeftNavDrawerTableViewCell: UITableViewCell {
 

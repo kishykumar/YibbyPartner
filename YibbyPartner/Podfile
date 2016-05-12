@@ -1,18 +1,34 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '8.1'
+platform :ios, '8.0'
 use_frameworks!
 
-pod 'GoogleMaps'
-pod 'Google/CloudMessaging'
-#pod 'BaasBoxSDK', '~> 0.9.0'
-pod 'BaasBoxSDK’, :git => 'https://kishykumar@bitbucket.org/kishykumar/baasboxiossdk.git'
-#pod 'BaasBoxSDK1’, :path => '/Users/kishykumar/Installs/baasboxiossdk/BaasBoxSDK.podspec'
-#pod 'PKRevealController'
-pod 'SwiftyJSON'
-#pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
-#pod 'ECSlidingViewController', '~> 2.0.3'
-pod 'MMDrawerController', '~> 0.5.7'
-pod 'TTRangeSlider'
-pod 'BButton'
+def shared_pods
+    pod 'GoogleMaps'
+    pod 'Google/CloudMessaging'
+    #pod 'BaasBoxSDK', '~> 0.9.0'
+    pod 'BaasBoxSDK’, :git => 'https://kishykumar@bitbucket.org/kishykumar/baasboxiossdk.git'
+    #pod 'BaasBoxSDK1’, :path => '/Users/kishykumar/Installs/baasboxiossdk/BaasBoxSDK.podspec'
+    #pod 'PKRevealController'
+    pod 'SwiftyJSON'
+    #pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
+    #pod 'ECSlidingViewController', '~> 2.0.3'
+    pod 'MMDrawerController', '~> 0.5.7'
+    pod 'TTRangeSlider'
+    pod 'BButton'
+    pod 'SVProgressHUD'
+    pod 'CocoaLumberjack/Swift'
+
+end
+
 xcodeproj '/Users/kishykumar/Installs/xcodeworkspace/YibbyPartner/YibbyPartner.xcodeproj'
+
+target 'YibbyPartner', :exclusive => true do
+xcodeproj '/Users/kishykumar/Installs/xcodeworkspace/YibbyPartner/YibbyPartner.xcodeproj'
+shared_pods
+end
+
+target 'YibbyPartnerTests', :exclusive => true do
+xcodeproj '/Users/kishykumar/Installs/xcodeworkspace/YibbyPartner/YibbyPartner.xcodeproj'
+shared_pods
+end

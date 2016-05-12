@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Bid {
+class Bid: NSObject, NSCopying {
     
     // MARK: Properties
     var id: String
@@ -43,8 +43,17 @@ class Bid {
         self.dropoffLoc = dropoffLoc
                 
         // Initialization should fail if there is no name or if the rating is negative.
-        if pickupLoc.isEmpty || dropoffLoc.isEmpty || bidHigh == 0 {
-            return nil
-        }
+//        if pickupLoc.isEmpty || dropoffLoc.isEmpty || bidHigh == 0 {
+//            return nil
+//        }
+    }
+    
+    func copyWithZone(zone: NSZone) -> AnyObject {
+        let copy = Bid(id: id, bidHigh: bidHigh, bidLow: bidLow,
+            etaHigh: etaHigh, etaLow: etaLow, pickupLat: pickupLat,
+            pickupLong: pickupLong, pickupLoc: pickupLoc, dropoffLat: dropoffLat,
+            dropoffLong: dropoffLong, dropoffLoc: dropoffLoc)
+        
+        return copy!
     }
 }

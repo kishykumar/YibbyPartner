@@ -68,6 +68,9 @@
 
 - (void)deactivateDriver:(BAABooleanResultBlock)completionBlock;
 
+- (void) updateDriverLocation: (NSNumber *)lat
+                lng:(NSNumber *)lng
+                completion:(BAAObjectResultBlock)completionBlock;
 
 // Loading
 - (void) loadObject:(BAAObject *)object completion:(BAAObjectResultBlock)completionBlock;

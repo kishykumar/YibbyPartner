@@ -14,12 +14,27 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CocoaLumberjack.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MMDrawerController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods.xcscheme</key>
+		<key>Pods-YibbyPartner.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-YibbyPartnerTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SVProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -37,22 +52,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1C7747B5E9A7BCFD437A5F2B954A31A3</key>
+		<key>2F7E4B34A6737914EDD2190715E7BB63</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>21B8E733806AEF7277E7CEE619B7CDC5</key>
+		<key>368050178EA493B361B4AB3978F86C00</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>817DFCC0A02CE9585D19E91A91216DDD</key>
+		<key>817DC9EFCEF7A984B9D57962A21E4156</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>904648FB3155AECCA97A9C11F50E1898</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>96D3562E47E4792B0A6093A0323EB398</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C798CD9B3A357ED8405B441EF448F927</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D082FD9722F53B9C3A1229257D4008F7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

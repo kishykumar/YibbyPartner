@@ -8,6 +8,7 @@
 
 import UIKit
 import BaasBoxSDK
+import CocoaLumberjack
 
 class LoginViewController: UIViewController {
 
@@ -18,15 +19,16 @@ class LoginViewController: UIViewController {
     static let PASSWORD_KEY_NAME = "PASSWORD"
     static let EMAIL_ADDRESS_KEY_NAME = "EMAIL_ADDRESS"
     
-    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     let ACTIVITY_INDICATOR_TAG: Int = 1
+    
+    var onStartup = true
 
     // MARK: functions
     @IBAction func loginAction(sender: AnyObject) {
         
         
         if (emailAddress.text == "" || password.text == "") {
-            Util.displayAlert(self, title: "error in form", message: "Please enter email and password")
+            Util.displayAlert("error in form", message: "Please enter email and password")
         } else {
             loginDriver(emailAddress.text!, passwordi: password.text!)
         }
@@ -58,7 +60,7 @@ class LoginViewController: UIViewController {
             Util.disableActivityIndicator(self.view, tag: self.ACTIVITY_INDICATOR_TAG)
             
             if (success) {
-                print("user logged in successfully \(success)")
+                DDLogVerbose("user logged in successfully \(success)")
                 
                 // if login is successful, save username, password, token in keychain
                 LoginViewController.setKeyChainKeys(usernamei, password: passwordi)
@@ -66,10 +68,26 @@ class LoginViewController: UIViewController {
                 let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 appDelegate.initializeMainViewController()
                 appDelegate.sendGCMTokenToServer()
-                self.presentViewController(appDelegate.centerContainer!, animated: true, completion: nil)
+                
+                if (self.onStartup) {
+                    // switch to Main View Controller
+                    appDelegate.initializeMainViewController()
+                    self.presentViewController(appDelegate.centerContainer!, animated: true, completion: nil)
+                } else {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
             }
             else {
-                Util.displayAlert(self, title: "Username/password incorrect", message: "Please reenter user credentials and try again.")
+                DDLogVerbose("Error logging in: \(error)")
+                if (error.domain == BaasBox.errorDomain() && error.code ==
+                    WebInterface.BAASBOX_AUTHENTICATION_ERROR) {
+                    
+                    // check for authentication error and redirect the user to Login page
+                    Util.displayAlert("Username/password incorrect", message: "Please reenter user credentials and try again.")
+                }
+                else {
+                    Util.displayAlert("Connectivity or Server Issues.", message: "Please check your internet connection or wait for some time.")
+                }
             }
         })
     }
@@ -82,6 +100,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.hideKeyboardWhenTappedAround()
     }
 
     override func didReceiveMemoryWarning() {

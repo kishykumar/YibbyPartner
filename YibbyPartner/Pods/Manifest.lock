@@ -1,6 +1,13 @@
 PODS:
   - BaasBoxSDK (0.9.0)
   - BButton (4.0.2)
+  - CocoaLumberjack/Core (2.3.0)
+  - CocoaLumberjack/Default (2.3.0):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.3.0):
+    - CocoaLumberjack/Default
+  - CocoaLumberjack/Swift (2.3.0):
+    - CocoaLumberjack/Extensions
   - GGLInstanceID (1.1.6)
   - Google/CloudMessaging (1.3.2):
     - GGLInstanceID (~> 1.0)
@@ -40,15 +47,18 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.5.7):
     - MMDrawerController/Core
+  - SVProgressHUD (2.0.3)
   - SwiftyJSON (2.3.2)
   - TTRangeSlider (1.0.3)
 
 DEPENDENCIES:
   - BaasBoxSDK (from `https://kishykumar@bitbucket.org/kishykumar/baasboxiossdk.git`)
   - BButton
+  - CocoaLumberjack/Swift
   - Google/CloudMessaging
   - GoogleMaps
   - MMDrawerController (~> 0.5.7)
+  - SVProgressHUD
   - SwiftyJSON
   - TTRangeSlider
 
@@ -58,12 +68,13 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   BaasBoxSDK:
-    :commit: 43691371a4402e59bfa7efec123686a6f55d9e41
+    :commit: 4dc02179bd6a10b71c0a90605059f24d05da2705
     :git: https://kishykumar@bitbucket.org/kishykumar/baasboxiossdk.git
 
 SPEC CHECKSUMS:
   BaasBoxSDK: 8a68396af4eb48137da238109d114eccac04739d
   BButton: ab0f2ed3b998ae73c5188b57d270d81e4a1eeb27
+  CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   GGLInstanceID: f92465924a9b8a48f712829d22e223653ab8dc72
   Google: 97618e118111b998cce1d8dd1bd98b82301d72db
   GoogleCloudMessaging: d1f06cd70691b8c53b3eefd66a0b42b34daeedcc
@@ -74,6 +85,7 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 82ad9f93d3615244b3f4ce440f5ab2515e8b4f56
   GoogleUtilities: 8ed9134debe11719097881711464752900668f10
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
+  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   TTRangeSlider: a12d0ac242a785cf96d4c7dacfe07e42a161251e
 

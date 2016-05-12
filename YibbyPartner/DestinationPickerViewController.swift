@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import CocoaLumberjack
 
 protocol DestinationDelegate {
     func choseDestination(location: String)
