@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		120188121CDC6935005EF075 /* LogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120188111CDC6935005EF075 /* LogFormatter.swift */; };
+		1201881C1CEC329A005EF075 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1201881A1CEC329A005EF075 /* LaunchScreen.xib */; };
+		1201881E1CEEBB84005EF075 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201881D1CEEBB84005EF075 /* SplashViewController.swift */; };
 		1206823B1CC2E685004A34BB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1206823A1CC2E685004A34BB /* MapKit.framework */; };
 		123524961C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
 		123524971C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
@@ -51,6 +53,8 @@
 
 /* Begin PBXFileReference section */
 		120188111CDC6935005EF075 /* LogFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogFormatter.swift; sourceTree = "<group>"; };
+		1201881A1CEC329A005EF075 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		1201881D1CEEBB84005EF075 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		1206823A1CC2E685004A34BB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		123524951C89475D004307EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		123524981C8C2D5C004307EE /* DriverOnlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverOnlineViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 				120188111CDC6935005EF075 /* LogFormatter.swift */,
 				12F3CCF51C4B9C0B00F79A26 /* Podfile */,
 				12F1E8671C717ED30008E79D /* KeychainWrapper.swift */,
+				1201881A1CEC329A005EF075 /* LaunchScreen.xib */,
 				1235249E1C915CCB004307EE /* PushController.swift */,
 				12720AAC1CD5EA5C002581CF /* BidState.swift */,
 				126601FF1CA718CC00E12CFC /* DriverEnRouteViewController.swift */,
@@ -168,6 +173,7 @@
 				12F3CCD71C41EFC700F79A26 /* MainViewController.swift */,
 				12F3CCF91C4DDD6C00F79A26 /* DestinationPickerViewController.swift */,
 				12F3CCD91C41EFC700F79A26 /* Main.storyboard */,
+				1201881D1CEEBB84005EF075 /* SplashViewController.swift */,
 				1235249B1C8D2DD2004307EE /* OfferViewController.swift */,
 				123524981C8C2D5C004307EE /* DriverOnlineViewController.swift */,
 				12F1E86A1C76E83E0008E79D /* LeftNavDrawerViewController.swift */,
@@ -328,6 +334,7 @@
 				12F3CCE01C41EFC800F79A26 /* LaunchScreen.storyboard in Resources */,
 				12F3CCDD1C41EFC700F79A26 /* Assets.xcassets in Resources */,
 				123524961C89475D004307EE /* GoogleService-Info.plist in Resources */,
+				1201881C1CEC329A005EF075 /* LaunchScreen.xib in Resources */,
 				12F3CCDB1C41EFC700F79A26 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,6 +466,7 @@
 				12F1E8711C7716070008E79D /* SettingsViewController.swift in Sources */,
 				1235249F1C915CCB004307EE /* PushController.swift in Sources */,
 				12720AA91CC5FF59002581CF /* WebInterface.swift in Sources */,
+				1201881E1CEEBB84005EF075 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

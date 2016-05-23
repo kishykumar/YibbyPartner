@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 import BaasBoxSDK
 import CocoaLumberjack
 
@@ -17,9 +18,20 @@ class OfferViewController: UIViewController {
     @IBOutlet weak var highBidPriceOutlet: UILabel!
     @IBOutlet weak var offerPriceOutlet: UILabel!
     @IBOutlet weak var currentTimerValueOutlet: UILabel!
+    @IBOutlet weak var gmsMapViewOutlet: GMSMapView!
     
     var userBid: Bid! // strong reference
     
+    var pickupLatLng: CLLocationCoordinate2D?
+    var pickupPlaceName: String?
+    var pickupMarker: GMSMarker?
+    
+    var dropoffLatLng: CLLocationCoordinate2D?
+    var dropoffPlaceName: String?
+    var dropoffMarker: GMSMarker?
+
+    let GMS_DEFAULT_CAMERA_ZOOM: Float = 14.0
+
     let ACTIVITY_INDICATOR_TAG: Int = 1
 
     var offerTimer = NSTimer()
@@ -51,8 +63,16 @@ class OfferViewController: UIViewController {
         highBidPriceOutlet.text = String(userBid.bidHigh)
         currentTimerValueOutlet.text = String(Int(timerStart))
         
-        DDLogVerbose("TimerStart: \(timerStart)")
+        // set pickup and dropoff
+        let puLatLng: CLLocationCoordinate2D = CLLocationCoordinate2DMake(userBid.pickupLat,userBid.pickupLong)
+        setPickupDetails(userBid.pickupLoc, loc: puLatLng)
+        
+        let doLatLng: CLLocationCoordinate2D = CLLocationCoordinate2DMake(userBid.dropoffLat,userBid.dropoffLong)
+        setDropoffDetails(userBid.dropoffLoc, loc: doLatLng)
 
+        adjustGMSCameraFocus()
+
+        DDLogVerbose("TimerStart: \(timerStart)")
         startOfferTimer()
         
         BidState.sharedInstance().setOngoingBid(userBid)
@@ -106,6 +126,43 @@ class OfferViewController: UIViewController {
                     }
                 })
         })
+    }
+    
+    func adjustGMSCameraFocus () {
+        
+        let bounds = GMSCoordinateBounds(coordinate: (pickupMarker?.position)!, coordinate: (dropoffMarker?.position)!)
+        let insets = UIEdgeInsets(top: 30.0, left: 40.0, bottom: 30.0, right: 40.0)
+        let update = GMSCameraUpdate.fitBounds(bounds, withEdgeInsets: insets)
+        gmsMapViewOutlet.moveCamera(update)
+        gmsMapViewOutlet.animateToZoom(GMS_DEFAULT_CAMERA_ZOOM)
+    }
+    
+    func setPickupDetails (address: String, loc: CLLocationCoordinate2D) {
+        
+        pickupMarker?.map = nil
+        
+        self.pickupPlaceName = address
+        self.pickupLatLng = loc
+        
+        let pumarker = GMSMarker(position: loc)
+        pumarker.map = gmsMapViewOutlet
+        pumarker.title = address
+        pickupMarker = pumarker
+        gmsMapViewOutlet.selectedMarker = pickupMarker
+    }
+    
+    func setDropoffDetails (address: String, loc: CLLocationCoordinate2D) {
+        
+        dropoffMarker?.map = nil
+        
+        self.dropoffPlaceName = address
+        self.dropoffLatLng = loc
+        
+        let domarker = GMSMarker(position: loc)
+        domarker.map = gmsMapViewOutlet
+        domarker.title = address
+        dropoffMarker = domarker
+        gmsMapViewOutlet.selectedMarker = dropoffMarker
     }
     
     @IBAction func declineRequestAction(sender: UIButton) {

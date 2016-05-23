@@ -18,6 +18,7 @@ def shared_pods
     pod 'BButton'
     pod 'SVProgressHUD'
     pod 'CocoaLumberjack/Swift'
+    pod 'LaunchScreen'
 
 end
 

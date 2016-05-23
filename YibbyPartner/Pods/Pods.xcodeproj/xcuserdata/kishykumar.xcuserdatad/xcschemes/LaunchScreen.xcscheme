@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '9F53565DDA93A805C0255062'
-               BlueprintName = 'Pods-YibbyPartner'
+               BlueprintIdentifier = '5224C334068D45709C326C44'
+               BlueprintName = 'LaunchScreen'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Pods_YibbyPartner.framework'>
+               BuildableName = 'LaunchScreen.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

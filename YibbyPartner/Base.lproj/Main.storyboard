@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mfk-1V-gJq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="aWb-3J-dFS">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -66,7 +66,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="930" y="313"/>
+            <point key="canvasLocation" x="916" y="313"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="sUJ-8k-1Ou">
@@ -160,7 +160,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Itt-Yz-cdX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-143" y="-305"/>
+            <point key="canvasLocation" x="522" y="-397"/>
         </scene>
         <!--Signup View Controller-->
         <scene sceneID="8EH-CZ-dWn">
@@ -263,7 +263,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YJS-3b-2i2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="273" y="-307"/>
+            <point key="canvasLocation" x="916" y="-397"/>
         </scene>
         <!--Driver Online View Controller-->
         <scene sceneID="Lmy-ep-N9l">
@@ -387,7 +387,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g1D-ta-lQ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1479" y="-307"/>
+            <point key="canvasLocation" x="2193" y="-397"/>
+        </scene>
+        <!--Splash View Controller-->
+        <scene sceneID="cF4-0A-3Ud">
+            <objects>
+                <viewController storyboardIdentifier="SplashViewControllerIdentifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aWb-3J-dFS" customClass="SplashViewController" customModule="YibbyPartner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JM2-Nx-Pkh"/>
+                        <viewControllerLayoutGuide type="bottom" id="mJc-WS-gvl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8dW-oQ-cSs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="mfk-1V-gJq" kind="show" identifier="mainFromSplashSegue" animates="NO" id="tj5-bK-5On"/>
+                        <segue destination="JUq-dg-2vG" kind="show" identifier="loginFromSplashSegue" animates="NO" id="mjh-Mi-5Ge"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X9V-TX-zms" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-200" y="-43"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ot5-vX-wjR">
@@ -484,7 +507,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O0D-aV-1Mb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="694" y="-305"/>
+            <point key="canvasLocation" x="1297" y="-397"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="CFr-J2-tkz">
@@ -519,7 +542,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hJI-PO-zEt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1093" y="-307"/>
+            <point key="canvasLocation" x="1775" y="-397"/>
         </scene>
         <!--Offer View Controller-->
         <scene sceneID="XyN-Tv-IOh">
@@ -710,6 +733,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="currentTimerValueOutlet" destination="Hc9-ra-QYj" id="yuY-IN-x2z"/>
+                        <outlet property="gmsMapViewOutlet" destination="pTA-T8-KzR" id="sjy-Zv-VdA"/>
                         <outlet property="highBidPriceOutlet" destination="PT3-DO-6N3" id="NQz-1w-7pO"/>
                         <outlet property="lowBidPriceOutlet" destination="5bu-4z-P1s" id="5i1-3i-Hp3"/>
                         <outlet property="offerPriceOutlet" destination="N8e-AA-Oe0" id="jPc-yV-1VZ"/>
@@ -718,7 +742,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qz6-Cu-gqH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1583" y="1048"/>
+            <point key="canvasLocation" x="2193" y="313"/>
         </scene>
         <!--Offer Sent View Controller-->
         <scene sceneID="nh7-JL-6Y3">
@@ -752,7 +776,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jju-Vs-XaX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2044" y="313"/>
+            <point key="canvasLocation" x="2602" y="313"/>
         </scene>
         <!--Driver En Route View Controller-->
         <scene sceneID="Qx7-Bw-PJK">
@@ -783,7 +807,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kBO-9d-3eD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2559" y="313"/>
+            <point key="canvasLocation" x="2947" y="313"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="l74-8d-wGb">
@@ -817,7 +841,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vei-sw-4Bi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2908" y="313"/>
+            <point key="canvasLocation" x="3296" y="313"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cec-4Y-egb">
@@ -836,10 +860,32 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vFv-Fq-L9O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1225" y="1048"/>
+            <point key="canvasLocation" x="1775" y="313"/>
+        </scene>
+        <!--Launch Screen View Controller-->
+        <scene sceneID="Azs-wg-sGE">
+            <objects>
+                <viewController storyboardIdentifier="LaunchScreenViewController" id="RhP-Jw-e3w" customClass="LaunchScreenViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QYk-ft-w0D"/>
+                        <viewControllerLayoutGuide type="bottom" id="Tax-5Y-NSR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="N5Q-vm-n4u">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4qh-DI-3Gw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-200" y="596"/>
         </scene>
     </scenes>
     <resources>
         <image name="logoMain" width="624" height="624"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="mjh-Mi-5Ge"/>
+    </inferredMetricsTieBreakers>
 </document>

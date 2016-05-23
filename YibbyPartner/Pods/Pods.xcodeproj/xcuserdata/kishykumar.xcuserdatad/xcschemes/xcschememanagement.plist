@@ -19,6 +19,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>LaunchScreen-LaunchScreen.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>LaunchScreen.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MMDrawerController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,22 +62,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2F7E4B34A6737914EDD2190715E7BB63</key>
+		<key>00195D116240C23662B5100601D2A712</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>368050178EA493B361B4AB3978F86C00</key>
+		<key>2782233023B05FCBCA649F6D5E0B5A30</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>817DC9EFCEF7A984B9D57962A21E4156</key>
+		<key>2E10035607B25BFB46438EFEB15E9953</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>904648FB3155AECCA97A9C11F50E1898</key>
+		<key>3DC20585148AF9EA90DDBFB0E746157B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,7 +87,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C798CD9B3A357ED8405B441EF448F927</key>
+		<key>B9ECE1AD707473F0CB726B4A8F44BB1F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,7 +102,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>E64F2D1AC8634B83AD0E12183ED76995</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>ECD3D6459209FCB6B9C23734199A374D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FFC60C150868ADC324A301A5CBAD01F4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

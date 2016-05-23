@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     let registrationKey = "onRegistrationCompleted"
     let messageKey = "onMessageReceived"
     let subscriptionTopic = "/topics/global"
-    let APP_FIRST_RUN = "FIRST_RUN"
 
     let GOOGLE_API_KEY_IOS = "AIzaSyAg47Gp0GvI6myz-sZZfKJ1fPtx0wUBMjU"
     let BAASBOX_APPCODE = "1234567890"
@@ -70,48 +69,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         gcmSenderID = GGLContext.sharedInstance().configuration.gcmSenderID
         // [END_EXCLUDE]
         
-        // Register for remote notifications
-        PushController.registerForPushNotifications()
-        
         // [START start_gcm_service]
         let gcmConfig = GCMConfig.defaultConfig()
         gcmConfig.receiverDelegate = self
         GCMService.sharedInstance().startWithConfig(gcmConfig)
         // [END start_gcm_service]
-
-        //Clear keychain on first run in case of reinstallation
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        if userDefaults.objectForKey(APP_FIRST_RUN) == nil {
-            // Delete values from keychain here
-            userDefaults.setValue(APP_FIRST_RUN, forKey: APP_FIRST_RUN)
-            LoginViewController.removeKeyChainKeys()
-        }
-        
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        let client: BAAClient = BAAClient.sharedClient()
-        if client.isDriverAuthenticated() {
-            DDLogVerbose("Driver already authenticated");
-            // no need to do anything if user is already authenticated
-            initializeMainViewController()
-            window!.rootViewController = centerContainer
-        } else {
-            DDLogVerbose("Driver NOT authenticated");
-            //not logged in
-//            let (retrievedEmailAddress, retrievedPassword) = LoginViewController.getKeyChainKeys()
-            
-            // Check if user entered credentials once
-//            if (retrievedEmailAddress != nil && retrievedPassword != nil) {
-                // try to login
-//                loginUser(retrievedEmailAddress!, passwordi: retrievedPassword!)
-//            } else {
-                // Show the LoginViewController View
-                window!.rootViewController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginViewControllerIdentifier") as! LoginViewController;
-//            }
-        }
-        
-        // Present the window
-        window!.makeKeyAndVisible()
         
         return true
     }
@@ -259,22 +221,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
 
         client.enableDriverPushNotificationsForGCM(gcmToken, completion: { (success, error) -> Void in
             if (success) {
-                DDLogVerbose("enabled push notifications for this user")
+                DDLogVerbose("enabled push notifications: Success")
+                SplashViewController.pushSuccessful = true
             }
             else {
-                DDLogWarn("error enabling push notifications + \(error)")
+                DDLogWarn("Error: enabled push notifications: \(error)")
+                
+                // tell Splash that push registration was not successful
+                SplashViewController.pushSuccessful = false
             }
+            SplashViewController.pushRegisterResponseArrived = true
         })
     }
     
     // [START receive_apns_token_error]
     func application( application: UIApplication, didFailToRegisterForRemoteNotificationsWithError
         error: NSError ) {
-            DDLogWarn("Registration for remote notification failed with error: \(error.localizedDescription)")
-            // [END receive_apns_token_error]
-            let userInfo = ["error": error.localizedDescription]
-            NSNotificationCenter.defaultCenter().postNotificationName(
-                registrationKey, object: nil, userInfo: userInfo)
+        DDLogWarn("Registration for remote notification failed with error: \(error.localizedDescription)")
+        // [END receive_apns_token_error]
+        let userInfo = ["error": error.localizedDescription]
+//            NSNotificationCenter.defaultCenter().postNotificationName(
+//                registrationKey, object: nil, userInfo: userInfo)
+        
+        // tell Splash that push registration was not successful
+        SplashViewController.pushSuccessful = false
+        SplashViewController.pushRegisterResponseArrived = true
     }
     
     
@@ -296,6 +267,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
             let userInfo = ["error": error.localizedDescription]
             NSNotificationCenter.defaultCenter().postNotificationName(
                 self.registrationKey, object: nil, userInfo: userInfo)
+            
+            // tell Splash that push registration was not successful
+            SplashViewController.pushSuccessful = false
+            SplashViewController.pushRegisterResponseArrived = true
         }
     }
     
@@ -382,6 +357,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
             if let pvc = vc?.presentedViewController {
                 return UIWindow.getVisibleViewControllerFrom(pvc)
             } else {
+                if let mmd = vc as? MMDrawerController {
+                    return UIWindow.getVisibleViewControllerFrom(mmd.centerViewController)
+                }
                 return vc
             }
         }

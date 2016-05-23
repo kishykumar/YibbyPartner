@@ -25,7 +25,7 @@ class MainViewController: UIViewController {
     let BAASBOX_AUTHENTICATION_ERROR = -22222
 
     let ddLogLevel: DDLogLevel = DDLogLevel.Verbose
-
+    
     // MARK: Functions
     @IBAction func leftSlideButtonTapped(sender: AnyObject) {
         let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -33,17 +33,6 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func onOnlineButtonClick(sender: UIButton) {
-        
-//        let offerViewController = self.storyboard?.instantiateViewControllerWithIdentifier("OfferViewControllerIdentifier") as! OfferViewController
-//        offerViewController.userBid = Bid(id: "1234", bidHigh: 5, bidLow: 2,
-//                                          etaHigh: 5, etaLow: 2, pickupLat: 0.0,
-//                                          pickupLong: 0.0, pickupLoc: "pickupLoc", dropoffLat: 0.0,
-//                                          dropoffLong: 0.0, dropoffLoc: "dropoffLoc")
-//        self.navigationController!.pushViewController(offerViewController, animated: true)
-//        
-//        return;
-            //---------------------
-        
         
         // TODO: Uncomment it later
         // Check for location
@@ -88,20 +77,21 @@ class MainViewController: UIViewController {
 //        }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
         setupUI()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+        self.performSelector(#selector(afterViewLoadOps), withObject: nil, afterDelay: 0.0)        
     }
     
     override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
+        super.viewDidAppear(animated)        
     }
     
     override func didReceiveMemoryWarning() {
