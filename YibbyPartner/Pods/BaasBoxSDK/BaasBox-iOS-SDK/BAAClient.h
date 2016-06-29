@@ -50,27 +50,37 @@
 
 - (void) logoutWithCompletion:(BAABooleanResultBlock)completionBlock;
 
-// Authentication
-- (void)authenticateDriver:(NSString *)username
-                  password:(NSString *)password
-                completion:(BAABooleanResultBlock)completionBlock;
-
-- (void)createDriverWithUsername:(NSString *)username
-                        password:(NSString *)password
+// Caber APIs
+- (void)createCaberWithUsername:(NSString *)type
+                      username: (NSString *)username
+                      password:(NSString *)password
                       completion:(BAABooleanResultBlock)completionBlock;
+
+// Caber Authentication
+- (void)authenticateCaber: (NSString *)type
+                  username: (NSString *)username
+                  password:(NSString *)password
+                  completion:(BAABooleanResultBlock)completionBlock;
 
 - (BOOL) isDriverAuthenticated;
 
-- (void) logoutDriverWithCompletion:(BAABooleanResultBlock)completionBlock;
+- (void) logoutCaberWithCompletion: (NSString *)type
+                        completion: (BAABooleanResultBlock)completionHandler;
 
-// driver go online
-- (void)activateDriver:(BAABooleanResultBlock)completionBlock;
+// driver status
+- (void)updateDriverStatus:(NSString *)status
+                completion: (BAABooleanResultBlock)completionBlock;
 
-- (void)deactivateDriver:(BAABooleanResultBlock)completionBlock;
+- (void)syncClient: (NSString *)type
+                    completion: (BAAObjectResultBlock)completionBlock;
 
-- (void) updateDriverLocation: (NSNumber *)lat
-                lng:(NSNumber *)lng
-                completion:(BAAObjectResultBlock)completionBlock;
+- (void) updateLocation: (NSString *)type
+                latitude: (NSNumber *)latitude
+                longitude:(NSNumber *)longitude
+                completion:(BAABooleanResultBlock)completionBlock;
+
+// dummy endpoint
+- (void)dummyCall:(BAAObjectResultBlock)completionBlock;
 
 // Loading
 - (void) loadObject:(BAAObject *)object completion:(BAAObjectResultBlock)completionBlock;
@@ -196,7 +206,5 @@ extern NSString * const kAclAllPermission;
 // Push Notification constants
 extern NSString * const kPushNotificationMessageKey;
 extern NSString * const kPushNotificationCustomPayloadKey;
-
-
 
 @end

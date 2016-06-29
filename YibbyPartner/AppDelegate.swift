@@ -11,7 +11,13 @@ import GoogleMaps
 import MMDrawerController
 import BaasBoxSDK
 import CocoaLumberjack
-
+import Fabric
+import Crashlytics
+ 
+// TODO: 
+// 1. Bug: The timer in offer view controller shows up less on one of the phones
+// 2. 
+ 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GCMReceiverDelegate {
  //-- we have removed this because we are not sending upstream messages via GCM
@@ -36,10 +42,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     
     var pushController: PushController =  PushController()
 
+    var initialized: Bool = false
+
     let ddLogLevel: DDLogLevel = DDLogLevel.Warning
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+                
+        // setup Crashlytics
+        Fabric.with([Crashlytics.self])
+
         // Configure Baasbox
         BaasBox.setBaseURL(BAASBOX_URL, appCode: BAASBOX_APPCODE)
         
@@ -55,6 +66,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         fileLogger.logFileManager.maximumNumberOfLogFiles = 7
         DDLog.addLogger(fileLogger)
 
+        // setup LocationService
+        LocationService.sharedInstance().setupLocationManager()
+
+        // setup MapService
+        MapService.sharedInstance().setupMapService()
+        
         DDLogDebug("LaunchOptions \(launchOptions)");
         
         // Override point for customization after application launch.
@@ -99,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     func loginUser(usernamei: String, passwordi: String) {
         let client: BAAClient = BAAClient.sharedClient()
         DDLogVerbose("Logging in user with username \(usernamei)")
-        client.authenticateDriver(usernamei, password: passwordi, completion: {(success, error) -> Void in
+        client.authenticateCaber("driver", username: usernamei, password: passwordi, completion: {(success, error) -> Void in
             if (success) {
                 DDLogVerbose("logged in automatically in else case: \(success)")
             }
@@ -239,7 +256,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         error: NSError ) {
         DDLogWarn("Registration for remote notification failed with error: \(error.localizedDescription)")
         // [END receive_apns_token_error]
-        let userInfo = ["error": error.localizedDescription]
+//        let userInfo = ["error": error.localizedDescription]
 //            NSNotificationCenter.defaultCenter().postNotificationName(
 //                registrationKey, object: nil, userInfo: userInfo)
         

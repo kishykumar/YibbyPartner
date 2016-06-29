@@ -34,6 +34,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>NVActivityIndicatorView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>OpenInGoogleMaps.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-YibbyPartner.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,7 +72,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>00195D116240C23662B5100601D2A712</key>
+		<key>1AB2F7CA059DD72FD4DD8465C64F8C10</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,12 +82,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2E10035607B25BFB46438EFEB15E9953</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3DC20585148AF9EA90DDBFB0E746157B</key>
+		<key>91E0EAA276BD76C39761CB616813B54A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,7 +92,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B9ECE1AD707473F0CB726B4A8F44BB1F</key>
+		<key>9D394913F46507C3681C0D073BDB26A6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A4A297673C4FE0090C526629D04AD724</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BDDC4DBF7654960710F7FF7B28F35033</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,12 +117,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E64F2D1AC8634B83AD0E12183ED76995</key>
+		<key>E1E30E578F40389F868E9B8F75725822</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>ECD3D6459209FCB6B9C23734199A374D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EEC8F06E2F90F8AF4C1083E4FDDCF4B4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

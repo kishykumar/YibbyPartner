@@ -288,75 +288,19 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
     
 }
 
-- (void)authenticateDriver:(NSString *)username
-                  password:(NSString *)password
-                completion:(BAABooleanResultBlock)completionHandler {
-    
-    [self postPath:@"driver/login"
-        parameters:@{@"username" : username, @"password": password, @"appcode" : self.appCode}
-           success:^(NSDictionary *responseObject) {
-               
-               NSString *token = responseObject[@"data"][@"X-BB-SESSION"];
-               
-               if (token) {
-                   
-                   BAAUser *user = [[BAAUser alloc] initWithDictionary:responseObject[@"data"]];
-                   user.authenticationToken = token;
-                   self.currentUser = user;
-                   [self saveUserToDisk:user];
-                   completionHandler(YES, nil);
-                   
-               } else {
-                   
-                   NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
-                   [errorDetail setValue:responseObject[@"message"]
-                                  forKey:NSLocalizedDescriptionKey];
-                   NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
-                                                        code:[BaasBox errorCode]
-                                                    userInfo:errorDetail];
-                   completionHandler(NO, error);
-                   
-               }
-               
-           } failure:^(NSError *error) {
-               
-               completionHandler(NO, error);
-               
-           }];
-    
-}
 
-- (void)createDriverWithUsername:(NSString *)username
-                        password:(NSString *)password
-                      completion:(BAABooleanResultBlock)completionHandler {
+- (void)createCaberWithUsername:(NSString *)type
+                       username: (NSString *)username
+                       password:(NSString *)password
+                     completion:(BAABooleanResultBlock)completionHandler {
     
-    [self createDriverWithUsername:username
-                          password:password
-                  visibleByTheUser:nil
-                  visibleByFriends:nil
-          visibleByRegisteredUsers:nil
-           visibleByAnonymousUsers:nil
-                        completion:completionHandler];
-    
-}
-
-- (void)createDriverWithUsername:(NSString *)username
-                        password:(NSString *)password
-                visibleByTheUser:(NSDictionary *)visibleByTheUser
-                visibleByFriends:(NSDictionary *)visibleByFriends
-        visibleByRegisteredUsers:(NSDictionary *)visibleByRegisteredUsers
-         visibleByAnonymousUsers:(NSDictionary *)visibleByAnonymousUsers
-                      completion:(BAABooleanResultBlock)completionHandler {
-    
-    [self postPath:@"driver"
+    [self postPath:@"caber"
         parameters:@{
                      @"username" : username,
                      @"password": password,
                      @"appcode" : self.appCode,
-                     @"visibleByTheUser" : visibleByTheUser ?: @{},
-                     @"visibleByFriends" : visibleByFriends ?: @{},
-                     @"visibleByRegisteredUsers" : visibleByRegisteredUsers ?: @{},
-                     @"visibleByAnonymousUsers" : visibleByAnonymousUsers ?: @{}}
+                     @"type" : type
+                    }
            success:^(NSDictionary *responseObject) {
                
                NSString *token = responseObject[@"data"][@"X-BB-SESSION"];
@@ -389,6 +333,50 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
            }];
     
 }
+
+
+- (void)authenticateCaber: (NSString *)type
+                 username: (NSString *)username
+                 password:(NSString *)password
+                completion:(BAABooleanResultBlock)completionHandler {
+    
+    [self postPath:@"caber/login"
+        parameters:@{@"username" : username,
+                     @"password": password,
+                     @"type": type,
+                     @"appcode" : self.appCode}
+           success:^(NSDictionary *responseObject) {
+               
+               NSString *token = responseObject[@"data"][@"X-BB-SESSION"];
+               
+               if (token) {
+                   
+                   BAAUser *user = [[BAAUser alloc] initWithDictionary:responseObject[@"data"]];
+                   user.authenticationToken = token;
+                   self.currentUser = user;
+                   [self saveUserToDisk:user];
+                   completionHandler(YES, nil);
+                   
+               } else {
+                   
+                   NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+                   [errorDetail setValue:responseObject[@"message"]
+                                  forKey:NSLocalizedDescriptionKey];
+                   NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
+                                                        code:[BaasBox errorCode]
+                                                    userInfo:errorDetail];
+                   completionHandler(NO, error);
+                   
+               }
+               
+           } failure:^(NSError *error) {
+               
+               completionHandler(NO, error);
+               
+           }];
+    
+}
+
 
 - (void)createBid:(NSNumber *)bidHigh
            bidLow:(NSNumber *)bidLow
@@ -472,16 +460,20 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
     
 }
 
-- (void) logoutDriverWithCompletion:(BAABooleanResultBlock)completionHandler {
+- (void) logoutCaberWithCompletion: (NSString *)type
+                        completion: (BAABooleanResultBlock)completionHandler {
     
-    NSString *path = @"driver/logout";
+    NSString *path = @"caber/logout";
     
     if (self.currentUser.pushNotificationToken) {
-        path = [NSString stringWithFormat:@"driver/logout/%@", self.currentUser.pushNotificationToken];
+        path = [NSString stringWithFormat:@"caber/logout/%@", self.currentUser.pushNotificationToken];
     }
     
     [self postPath:path
-        parameters:nil
+        parameters:@{
+                     @"appcode" : self.appCode,
+                     @"type" : type
+                     }
            success:^(id responseObject) {
                
                if (completionHandler) {
@@ -1820,6 +1812,11 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
     [[self.session dataTaskWithRequest:request
                      completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                          
+                         if(response == nil) {
+                             failure(error);
+                             return;
+                         }
+                         
                          NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
                          NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data
                                                                                     options:kNilOptions
@@ -1868,6 +1865,11 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
 	[[self.session dataTaskWithRequest:request
                      completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                          
+                         if(response == nil) {
+                             failure(error);
+                             return;
+                         }
+                         
                          NSHTTPURLResponse *r = (NSHTTPURLResponse*)response;
                          NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data
                                                                                     options:kNilOptions
@@ -1906,6 +1908,11 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
     [[self.session dataTaskWithRequest:request
                      completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                          
+                         if(response == nil) {
+                             failure(error);
+                             return;
+                         }
+ 
                          NSHTTPURLResponse *r = (NSHTTPURLResponse*)response;
                          NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data
                                                                                     options:kNilOptions
@@ -1943,6 +1950,11 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
                                                  parameters:parameters];
     [[self.session dataTaskWithRequest:request
                      completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                         
+                         if(response == nil) {
+                             failure(error);
+                             return;
+                         }
                          
                          NSHTTPURLResponse *r = (NSHTTPURLResponse*)response;
                          NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data
@@ -2047,10 +2059,13 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
     
 }
 
-- (BOOL) activateDriver:(BAABooleanResultBlock)completionBlock {
+- (BOOL) updateDriverStatus:(NSString *)status
+                 completion: (BAABooleanResultBlock)completionBlock {
     
-    [self postPath:[NSString stringWithFormat:@"driver/activate"]
-        parameters:nil
+    [self postPath:[NSString stringWithFormat:@"caber/status"]
+        parameters:@{@"status" : status,
+                     @"X-BB-SESSION": self.currentUser.authenticationToken,
+                     @"appcode" : self.appCode}
         success:^(NSDictionary *responseObject) {
 
             if (completionBlock) {
@@ -2065,38 +2080,85 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
     
 }
 
-- (BOOL) deactivateDriver:(BAABooleanResultBlock)completionBlock {
-    
-    [self postPath:[NSString stringWithFormat:@"driver/deactivate"]
-        parameters:nil
-           success:^(NSDictionary *responseObject) {
-
-               if (completionBlock) {
-                   completionBlock(YES, nil);
-               }
-           } failure:^(NSError *error) {
-               if (completionBlock) {
-                   completionBlock(NO, error);
-               }
-           }];
-}
-
-- (void) updateDriverLocation: (NSNumber *)lat
-                          lng:(NSNumber *)lng
-                   completion:(BAAObjectResultBlock)completionBlock {
+- (void) updateLocation: (NSString *)type
+                          latitude: (NSNumber *)latitude
+                          longitude:(NSNumber *)longitude
+                   completion:(BAABooleanResultBlock)completionBlock {
     
     [self postPath:@"location"
         parameters:@{
-                     @"lat" : lat,
-                     @"lng": lng,
+                     @"type" : type,
+                     @"latitude" : latitude,
+                     @"longitude": longitude,
                      @"appcode" : self.appCode,
                      @"X-BB-SESSION": self.currentUser.authenticationToken
                      }
            success:^(NSDictionary *responseObject) {
-               completionBlock(responseObject, nil);
+               completionBlock(YES, nil);
            } failure:^(NSError *error) {
                completionBlock(nil, error);
            }];
+}
+
+
+- (void)syncClient: (NSString *)type
+        completion: (BAAObjectResultBlock)completionBlock {
+    
+    if (!self.currentUser) {
+        if (completionBlock) {
+            
+            NSMutableDictionary* details = [NSMutableDictionary dictionary];
+            details[@"NSLocalizedDescriptionKey"] = @"Sync can't occur for a never logged-in user.";
+            NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
+                                                 code:[BaasBox errorCode]
+                                             userInfo:details];
+            completionBlock(NO, error);
+            
+        }
+        return;
+    }
+    
+    [self getPath:@"/caber/sync"
+       parameters:@{
+                    @"type" : type,
+                    @"appcode" : self.appCode,
+                    @"X-BB-SESSION": self.currentUser.authenticationToken
+                    }
+        success:^(NSDictionary *responseObject) {
+            
+            if (completionBlock) {
+                completionBlock(responseObject[@"data"], nil);
+            }
+            
+        } failure:^(NSError *error) {
+            
+            if (completionBlock) {
+                completionBlock(nil, error);
+            }
+            
+        }];
+}
+
+
+- (void)dummyCall:(BAAObjectResultBlock)completionBlock {
+    [self getPath:@"/caber/dumb/hello"
+       parameters:@{
+                    @"appcode" : self.appCode,
+                    @"X-BB-SESSION": self.currentUser.authenticationToken
+                    }
+          success:^(NSDictionary *responseObject) {
+              
+              if (completionBlock) {
+                  completionBlock(responseObject[@"data"], nil);
+              }
+              
+          } failure:^(NSError *error) {
+              
+              if (completionBlock) {
+                  completionBlock(nil, error);
+              }
+              
+          }];
 }
 
 @end

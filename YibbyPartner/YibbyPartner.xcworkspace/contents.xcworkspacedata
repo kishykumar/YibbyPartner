@@ -7,7 +7,4 @@
    <FileRef
       location = "group:/Users/kishykumar/Installs/xcodeworkspace/YibbyPartner/YibbyPartner.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:../YibbyPartner.xcodeproj">
-   </FileRef>
 </Workspace>

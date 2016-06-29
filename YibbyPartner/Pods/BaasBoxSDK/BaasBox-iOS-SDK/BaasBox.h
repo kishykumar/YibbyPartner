@@ -24,6 +24,12 @@
 #define BASE_URL_KEY @"baseURLKey"
 #define APP_CODE_KEY @"appCodeKey"
 
+#define BAASBOX_DRIVER_STRING @"driver"
+#define BAASBOX_RIDER_STRING @"rider"
+
+#define BAASBOX_DRIVER_STATUS_ONLINE @"online"
+#define BAASBOX_DRIVER_STATUS_OFFLINE @"offline"
+
 @interface BaasBox : NSObject
 
 + (void) setBaseURL:(NSString *)URL appCode:(NSString *)code;
