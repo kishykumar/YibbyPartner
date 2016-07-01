@@ -33,6 +33,17 @@
 		1201B7D41D23B4AC00A7EEAF /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7C91D23B4AB00A7EEAF /* KeychainWrapper.swift */; };
 		1201B7D51D23B4AC00A7EEAF /* LogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7CA1D23B4AC00A7EEAF /* LogFormatter.swift */; };
 		1201B7D61D23B4AC00A7EEAF /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7CB1D23B4AC00A7EEAF /* Util.swift */; };
+		1201B7FE1D25102A00A7EEAF /* InterfaceString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7FD1D25102A00A7EEAF /* InterfaceString.swift */; };
+		1201B8001D263B5D00A7EEAF /* Ride.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1201B7FF1D263B5D00A7EEAF /* Ride.storyboard */; };
+		1201B8021D263BA300A7EEAF /* DriverEnRoute.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1201B8011D263BA300A7EEAF /* DriverEnRoute.storyboard */; };
+		1201B8041D263C3600A7EEAF /* Offer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1201B8031D263C3600A7EEAF /* Offer.storyboard */; };
+		1201B8061D263D5D00A7EEAF /* Destination.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1201B8051D263D5D00A7EEAF /* Destination.storyboard */; };
+		1201B8081D263D7600A7EEAF /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1201B8071D263D7600A7EEAF /* Settings.storyboard */; };
+		1201B80A1D263DA600A7EEAF /* Drawer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1201B8091D263DA600A7EEAF /* Drawer.storyboard */; };
+		1201B80C1D263E1A00A7EEAF /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1201B80B1D263E1A00A7EEAF /* SignUp.storyboard */; };
+		1201B80E1D263E3500A7EEAF /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1201B80D1D263E3500A7EEAF /* Login.storyboard */; };
+		1201B8101D263E7200A7EEAF /* Online.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1201B80F1D263E7200A7EEAF /* Online.storyboard */; };
+		1201B8121D263E8900A7EEAF /* App.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1201B8111D263E8900A7EEAF /* App.storyboard */; };
 		1206823B1CC2E685004A34BB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1206823A1CC2E685004A34BB /* MapKit.framework */; };
 		123524961C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
 		123524971C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
@@ -84,6 +95,17 @@
 		1201B7C91D23B4AB00A7EEAF /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		1201B7CA1D23B4AC00A7EEAF /* LogFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogFormatter.swift; sourceTree = "<group>"; };
 		1201B7CB1D23B4AC00A7EEAF /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		1201B7FD1D25102A00A7EEAF /* InterfaceString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceString.swift; sourceTree = "<group>"; };
+		1201B7FF1D263B5D00A7EEAF /* Ride.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Ride.storyboard; sourceTree = "<group>"; };
+		1201B8011D263BA300A7EEAF /* DriverEnRoute.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DriverEnRoute.storyboard; sourceTree = "<group>"; };
+		1201B8031D263C3600A7EEAF /* Offer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Offer.storyboard; sourceTree = "<group>"; };
+		1201B8051D263D5D00A7EEAF /* Destination.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Destination.storyboard; sourceTree = "<group>"; };
+		1201B8071D263D7600A7EEAF /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		1201B8091D263DA600A7EEAF /* Drawer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Drawer.storyboard; sourceTree = "<group>"; };
+		1201B80B1D263E1A00A7EEAF /* SignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
+		1201B80D1D263E3500A7EEAF /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		1201B80F1D263E7200A7EEAF /* Online.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Online.storyboard; sourceTree = "<group>"; };
+		1201B8111D263E8900A7EEAF /* App.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = App.storyboard; sourceTree = "<group>"; };
 		1206823A1CC2E685004A34BB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		123524951C89475D004307EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		12C21E221C7DADE7000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
@@ -167,6 +189,7 @@
 		1201B7901D23B49000A7EEAF /* App */ = {
 			isa = PBXGroup;
 			children = (
+				1201B8111D263E8900A7EEAF /* App.storyboard */,
 				1201B7911D23B49000A7EEAF /* MainViewController.swift */,
 			);
 			path = App;
@@ -175,6 +198,7 @@
 		1201B7921D23B49000A7EEAF /* Destination */ = {
 			isa = PBXGroup;
 			children = (
+				1201B8051D263D5D00A7EEAF /* Destination.storyboard */,
 				1201B7931D23B49000A7EEAF /* DestinationPickerViewController.swift */,
 			);
 			path = Destination;
@@ -183,6 +207,7 @@
 		1201B7941D23B49000A7EEAF /* Drawer */ = {
 			isa = PBXGroup;
 			children = (
+				1201B8091D263DA600A7EEAF /* Drawer.storyboard */,
 				1201B7951D23B49000A7EEAF /* LeftNavDrawerTableViewCell.swift */,
 				1201B7961D23B49000A7EEAF /* LeftNavDrawerViewController.swift */,
 			);
@@ -192,6 +217,7 @@
 		1201B7971D23B49000A7EEAF /* EnRoute */ = {
 			isa = PBXGroup;
 			children = (
+				1201B8011D263BA300A7EEAF /* DriverEnRoute.storyboard */,
 				1201B7981D23B49000A7EEAF /* DriverEnRouteViewController.swift */,
 			);
 			path = EnRoute;
@@ -200,6 +226,7 @@
 		1201B7991D23B49000A7EEAF /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				1201B80D1D263E3500A7EEAF /* Login.storyboard */,
 				1201B79A1D23B49000A7EEAF /* LoginViewController.swift */,
 			);
 			path = Login;
@@ -208,6 +235,7 @@
 		1201B79B1D23B49000A7EEAF /* Offer */ = {
 			isa = PBXGroup;
 			children = (
+				1201B8031D263C3600A7EEAF /* Offer.storyboard */,
 				1201B79C1D23B49000A7EEAF /* OfferSentViewController.swift */,
 				1201B79D1D23B49000A7EEAF /* OfferViewController.swift */,
 			);
@@ -217,6 +245,7 @@
 		1201B79E1D23B49000A7EEAF /* Online */ = {
 			isa = PBXGroup;
 			children = (
+				1201B80F1D263E7200A7EEAF /* Online.storyboard */,
 				1201B79F1D23B49000A7EEAF /* DriverOnlineViewController.swift */,
 			);
 			path = Online;
@@ -233,6 +262,7 @@
 		1201B7A21D23B49000A7EEAF /* Ride */ = {
 			isa = PBXGroup;
 			children = (
+				1201B7FF1D263B5D00A7EEAF /* Ride.storyboard */,
 				1201B7A31D23B49000A7EEAF /* RideEndViewController.swift */,
 				1201B7A41D23B49000A7EEAF /* RideStartViewController.swift */,
 			);
@@ -242,6 +272,7 @@
 		1201B7A51D23B49000A7EEAF /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				1201B8071D263D7600A7EEAF /* Settings.storyboard */,
 				1201B7A61D23B49000A7EEAF /* SettingsViewController.swift */,
 			);
 			path = Settings;
@@ -250,6 +281,7 @@
 		1201B7A71D23B49000A7EEAF /* Signup */ = {
 			isa = PBXGroup;
 			children = (
+				1201B80B1D263E1A00A7EEAF /* SignUp.storyboard */,
 				1201B7A81D23B49000A7EEAF /* SignupViewController.swift */,
 			);
 			path = Signup;
@@ -312,6 +344,7 @@
 				1201B7C91D23B4AB00A7EEAF /* KeychainWrapper.swift */,
 				1201B7CA1D23B4AC00A7EEAF /* LogFormatter.swift */,
 				1201B7CB1D23B4AC00A7EEAF /* Util.swift */,
+				1201B7FD1D25102A00A7EEAF /* InterfaceString.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -519,10 +552,20 @@
 			files = (
 				12F3CCF61C4B9C0C00F79A26 /* Podfile in Resources */,
 				12F3CCE01C41EFC800F79A26 /* LaunchScreen.storyboard in Resources */,
+				1201B80E1D263E3500A7EEAF /* Login.storyboard in Resources */,
 				12F3CCDD1C41EFC700F79A26 /* Assets.xcassets in Resources */,
+				1201B80A1D263DA600A7EEAF /* Drawer.storyboard in Resources */,
+				1201B8021D263BA300A7EEAF /* DriverEnRoute.storyboard in Resources */,
+				1201B8121D263E8900A7EEAF /* App.storyboard in Resources */,
 				123524961C89475D004307EE /* GoogleService-Info.plist in Resources */,
+				1201B8101D263E7200A7EEAF /* Online.storyboard in Resources */,
+				1201B8081D263D7600A7EEAF /* Settings.storyboard in Resources */,
+				1201B80C1D263E1A00A7EEAF /* SignUp.storyboard in Resources */,
+				1201B8001D263B5D00A7EEAF /* Ride.storyboard in Resources */,
+				1201B8041D263C3600A7EEAF /* Offer.storyboard in Resources */,
 				12F3CCDB1C41EFC700F79A26 /* Main.storyboard in Resources */,
 				1201B7BA1D23B49000A7EEAF /* SplashScreen.xib in Resources */,
+				1201B8061D263D5D00A7EEAF /* Destination.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,6 +713,7 @@
 				1201B7AC1D23B49000A7EEAF /* MainViewController.swift in Sources */,
 				1201B7CF1D23B4AC00A7EEAF /* Offer.swift in Sources */,
 				1201B7D41D23B4AC00A7EEAF /* KeychainWrapper.swift in Sources */,
+				1201B7FE1D25102A00A7EEAF /* InterfaceString.swift in Sources */,
 				1201B7B41D23B49000A7EEAF /* DriverOnlineViewController.swift in Sources */,
 				1201B7B31D23B49000A7EEAF /* OfferViewController.swift in Sources */,
 				1201B7B71D23B49000A7EEAF /* RideStartViewController.swift in Sources */,

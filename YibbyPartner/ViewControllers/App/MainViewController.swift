@@ -55,7 +55,9 @@ class MainViewController: UIViewController {
                     // diable the loading activity indicator
                     Util.disableActivityIndicator(self.view)
                     if (error == nil) {
-                        let driverOnlineViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DriverOnlineViewControllerIdentifier") as! DriverOnlineViewController
+                        let onlineStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Online, bundle: nil)
+
+                        let driverOnlineViewController = onlineStoryboard.instantiateViewControllerWithIdentifier("DriverOnlineViewControllerIdentifier") as! DriverOnlineViewController
                         
                         // get the navigation VC and push the new VC
                         self.navigationController!.pushViewController(driverOnlineViewController, animated: true)

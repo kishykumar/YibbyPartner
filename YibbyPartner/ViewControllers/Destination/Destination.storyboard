@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Destination Picker View Controller-->
+        <scene sceneID="IVe-Y2-Ttz">
+            <objects>
+                <viewController storyboardIdentifier="DestinationPickerViewControllerIdentifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TgQ-yT-0Nb" customClass="DestinationPickerViewController" customModule="YibbyPartner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yLU-98-1wp"/>
+                        <viewControllerLayoutGuide type="bottom" id="ixC-hL-MDB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XIb-yE-dao">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UiC-Ae-y4r">
+                                <rect key="frame" x="235" y="33" width="65" height="30"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="sendBack:" destination="TgQ-yT-0Nb" eventType="touchUpInside" id="mPJ-m2-rOe"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FJu-kK-vEW">
+                                <rect key="frame" x="20" y="107" width="280" height="354"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="YwL-Yx-x9c">
+                                        <rect key="frame" x="0.0" y="28" width="280" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YwL-Yx-x9c" id="b06-Xc-XRG">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="49"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="TgQ-yT-0Nb" id="dcd-1m-3B1"/>
+                                    <outlet property="delegate" destination="TgQ-yT-0Nb" id="JVt-RR-lbO"/>
+                                </connections>
+                            </tableView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Destination" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ODr-N3-EID">
+                                <rect key="frame" x="20" y="33" width="215" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="215" id="OsE-Cu-obO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ODr-N3-EID" firstAttribute="leading" secondItem="FJu-kK-vEW" secondAttribute="leading" id="1Zd-p2-K1c"/>
+                            <constraint firstItem="UiC-Ae-y4r" firstAttribute="trailing" secondItem="FJu-kK-vEW" secondAttribute="trailing" id="3T3-DJ-dUw"/>
+                            <constraint firstItem="UiC-Ae-y4r" firstAttribute="top" secondItem="ODr-N3-EID" secondAttribute="top" id="7xL-x7-YYW"/>
+                            <constraint firstItem="ODr-N3-EID" firstAttribute="top" secondItem="yLU-98-1wp" secondAttribute="bottom" constant="13" id="E9t-nj-v1M"/>
+                            <constraint firstItem="UiC-Ae-y4r" firstAttribute="leading" secondItem="ODr-N3-EID" secondAttribute="trailing" id="MSC-do-XnM"/>
+                            <constraint firstItem="FJu-kK-vEW" firstAttribute="top" secondItem="ODr-N3-EID" secondAttribute="bottom" constant="44" id="WHb-Ea-yZB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UiC-Ae-y4r" secondAttribute="trailing" constant="4" id="Yy7-6S-dpm"/>
+                            <constraint firstItem="ixC-hL-MDB" firstAttribute="top" secondItem="FJu-kK-vEW" secondAttribute="bottom" constant="115" id="bME-wN-5Wd"/>
+                            <constraint firstItem="ODr-N3-EID" firstAttribute="leading" secondItem="XIb-yE-dao" secondAttribute="leadingMargin" constant="4" id="oFW-eJ-yyQ"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="tableView" destination="FJu-kK-vEW" id="BPU-l0-Ux3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g1D-ta-lQ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2193" y="-397"/>
+        </scene>
+    </scenes>
+</document>

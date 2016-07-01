@@ -105,9 +105,6 @@ public class PushController: NSObject, PushControllerProtocol {
         // handle bid
         let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        // get the storyboard to instantiate the viewcontroller
-        let mainstoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        
         if notification[MESSAGE_JSON_FIELD_NAME] == nil {
             DDLogDebug("No notification message found")
             return;
@@ -155,7 +152,9 @@ public class PushController: NSObject, PushControllerProtocol {
                             // prepare the offerViewController
                             let navController: UINavigationController = UINavigationController()
 
-                            let offerViewController = mainstoryboard.instantiateViewControllerWithIdentifier("OfferViewControllerIdentifier") as! OfferViewController
+                            let offerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Offer, bundle: nil)
+
+                            let offerViewController = offerStoryboard.instantiateViewControllerWithIdentifier("OfferViewControllerIdentifier") as! OfferViewController
 
                             navController.pushViewController(offerViewController, animated: false)
 
@@ -233,7 +232,9 @@ public class PushController: NSObject, PushControllerProtocol {
                                 }
                             }
                             
-                            let driverEnRouteViewController = mainstoryboard.instantiateViewControllerWithIdentifier("DriverEnRouteViewControllerIdentifier") as! DriverEnRouteViewController
+                            let driverEnRouteStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.DriverEnRoute, bundle: nil)
+
+                            let driverEnRouteViewController = driverEnRouteStoryboard.instantiateViewControllerWithIdentifier("DriverEnRouteViewControllerIdentifier") as! DriverEnRouteViewController
                             DDLogDebug("driverEnRouteViewController shown")
                             mmnvc.pushViewController(driverEnRouteViewController, animated: true)
                             

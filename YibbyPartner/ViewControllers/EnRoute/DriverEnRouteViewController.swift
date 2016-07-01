@@ -40,7 +40,9 @@ class DriverEnRouteViewController: UIViewController {
                     // diable the loading activity indicator
                     Util.disableActivityIndicator(self.view)
 //                    if (error == nil) {
-                        let rideStartViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RideStartViewControllerIdentifier") as! RideStartViewController
+                        let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
+
+                        let rideStartViewController = rideStoryboard.instantiateViewControllerWithIdentifier("RideStartViewControllerIdentifier") as! RideStartViewController
                         
                         // get the navigation VC and push the new VC
                         self.navigationController!.pushViewController(rideStartViewController, animated: true)

@@ -98,13 +98,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     func initializeMainViewController () {
         DDLogVerbose("Initializing MainViewController");
 
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let appStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.App, bundle: nil)
 
-        let centerController = mainStoryboard.instantiateViewControllerWithIdentifier("MainViewControllerIdentifier") as! MainViewController;
+        let centerController = appStoryboard.instantiateViewControllerWithIdentifier("MainViewControllerIdentifier") as! MainViewController;
         
         let centerNav = UINavigationController(rootViewController: centerController)
         
-        let leftController = mainStoryboard.instantiateViewControllerWithIdentifier("LeftNavDrawerViewControllerIdentifier") as! LeftNavDrawerViewController;
+        let drawerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Drawer, bundle: nil)
+
+        let leftController = drawerStoryboard.instantiateViewControllerWithIdentifier("LeftNavDrawerViewControllerIdentifier") as! LeftNavDrawerViewController;
         
         centerContainer = MMDrawerController(centerViewController: centerNav, leftDrawerViewController: leftController)
         

@@ -16,11 +16,10 @@ class LeftNavDrawerViewController: UIViewController, UITableViewDataSource, UITa
     // MARK: Properties
     @IBOutlet weak var tableView: UITableView!
     
-    var menuItems: [String] = ["Payment", "History", "Settings", "Promotions", "Help", "About", "Logout"]
+    var menuItems: [String] = ["History", "Settings", "Promotions", "Help", "About", "Logout"]
     
     enum TableIndex: Int {
-        case Payment = 0
-        case History
+        case History = 0
         case Settings
         case Promotions
         case Help
@@ -58,34 +57,38 @@ class LeftNavDrawerViewController: UIViewController, UITableViewDataSource, UITa
         var selectedViewController: UIViewController = UIViewController()
         
         switch (indexPath.row) {
-        case TableIndex.Payment.rawValue:
-            
-            selectedViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
-            
-            break
         case TableIndex.History.rawValue:
             
-            selectedViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
+            let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Settings, bundle: nil)
+            selectedViewController = settingsStoryboard.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
             
             break
         case TableIndex.Settings.rawValue:
             
-            selectedViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
+            let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Settings, bundle: nil)
+
+            selectedViewController = settingsStoryboard.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
             
             break
         case TableIndex.Promotions.rawValue:
             
-            selectedViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
+            let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Settings, bundle: nil)
+
+            selectedViewController = settingsStoryboard.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
             
             break
         case TableIndex.Help.rawValue:
             
-            selectedViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
+            let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Settings, bundle: nil)
+
+            selectedViewController = settingsStoryboard.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
             
             break
         case TableIndex.About.rawValue:
             
-            selectedViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
+            let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Settings, bundle: nil)
+
+            selectedViewController = settingsStoryboard.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
             
             break
         case TableIndex.Logout.rawValue:
@@ -134,8 +137,10 @@ class LeftNavDrawerViewController: UIViewController, UITableViewDataSource, UITa
                 // if logout is successful, remove username, password from keychain
                 LoginViewController.removeKeyChainKeys()
                 
+                let loginStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Login, bundle: nil)
+
                 // Show the LoginViewController View
-                if let loginViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewControllerIdentifier") as? LoginViewController
+                if let loginViewController = loginStoryboard.instantiateViewControllerWithIdentifier("LoginViewControllerIdentifier") as? LoginViewController
                 {
                     loginViewController.onStartup = true
                     self.presentViewController(loginViewController, animated: true, completion: nil)

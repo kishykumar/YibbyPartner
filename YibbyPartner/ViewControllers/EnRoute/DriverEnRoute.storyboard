@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Driver En Route View Controller-->
+        <scene sceneID="Qx7-Bw-PJK">
+            <objects>
+                <viewController storyboardIdentifier="DriverEnRouteViewControllerIdentifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LqG-6a-hY9" customClass="DriverEnRouteViewController" customModule="YibbyPartner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2St-A0-937"/>
+                        <viewControllerLayoutGuide type="bottom" id="zhj-8k-EWZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JvM-aZ-RtV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHY-7a-x21" customClass="GMSMapView">
+                                <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
+                                <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SsU-b8-PWd" customClass="BButton">
+                                <rect key="frame" x="12" y="28" width="292" height="46"/>
+                                <color key="backgroundColor" red="0.93067681789398193" green="0.27629810571670532" blue="0.18563550710678101" alpha="0.65020586989999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="SsU-b8-PWd" secondAttribute="height" multiplier="284:45" id="cgX-uk-EYR"/>
+                                </constraints>
+                                <state key="normal" title="Start Navigation"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="type">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="startNavAction:" destination="LqG-6a-hY9" eventType="touchUpInside" id="TPj-Ea-yZF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13i-X7-0ai" customClass="BButton">
+                                <rect key="frame" x="16" y="496" width="288" height="52"/>
+                                <color key="backgroundColor" red="0.41204333305358887" green="0.33904844522476196" blue="0.98682671785354614" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="13i-X7-0ai" secondAttribute="height" multiplier="72:13" id="jmP-t9-ZnB"/>
+                                </constraints>
+                                <state key="normal" title="Arrived at Pickup"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="type">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="arrivedAction:" destination="LqG-6a-hY9" eventType="touchUpInside" id="Zyi-kf-Ssx"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Pickup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rCa-dH-Hsu">
+                                <rect key="frame" x="8" y="97" width="52" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zjo-K7-bKL">
+                                <rect key="frame" x="89" y="97" width="218" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Zjo-K7-bKL" secondAttribute="trailing" constant="-3" id="1md-tl-UiO" userLabel="trailingMargin = Address.trailing - 8"/>
+                            <constraint firstItem="Zjo-K7-bKL" firstAttribute="top" secondItem="SsU-b8-PWd" secondAttribute="bottom" constant="23" id="22t-XM-s6d" userLabel="Address.top = Pickup.top"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="SHY-7a-x21" secondAttribute="trailing" constant="-20" id="2gR-xf-YiV"/>
+                            <constraint firstItem="SsU-b8-PWd" firstAttribute="leading" secondItem="JvM-aZ-RtV" secondAttribute="leadingMargin" constant="-4" id="8Ls-Zb-l7J"/>
+                            <constraint firstItem="SHY-7a-x21" firstAttribute="leading" secondItem="JvM-aZ-RtV" secondAttribute="leadingMargin" constant="-20" id="9nQ-OC-UTY"/>
+                            <constraint firstItem="SsU-b8-PWd" firstAttribute="top" secondItem="2St-A0-937" secondAttribute="bottom" constant="8" id="AFG-ho-YSH"/>
+                            <constraint firstItem="SHY-7a-x21" firstAttribute="top" secondItem="JvM-aZ-RtV" secondAttribute="topMargin" id="Fhq-VP-HIa"/>
+                            <constraint firstItem="13i-X7-0ai" firstAttribute="trailing" secondItem="JvM-aZ-RtV" secondAttribute="trailingMargin" id="JDY-c4-g8F"/>
+                            <constraint firstItem="rCa-dH-Hsu" firstAttribute="top" secondItem="SsU-b8-PWd" secondAttribute="bottom" constant="23" id="NSG-9u-4H3"/>
+                            <constraint firstItem="13i-X7-0ai" firstAttribute="leading" secondItem="JvM-aZ-RtV" secondAttribute="leadingMargin" id="VoR-8g-eJz"/>
+                            <constraint firstItem="Zjo-K7-bKL" firstAttribute="leading" secondItem="rCa-dH-Hsu" secondAttribute="trailing" constant="29" id="WmR-Ex-WGF"/>
+                            <constraint firstItem="zhj-8k-EWZ" firstAttribute="top" secondItem="13i-X7-0ai" secondAttribute="bottom" constant="20" id="dv4-h7-ZHr"/>
+                            <constraint firstItem="SsU-b8-PWd" firstAttribute="trailing" secondItem="JvM-aZ-RtV" secondAttribute="trailingMargin" id="ic2-Ex-NUg"/>
+                            <constraint firstItem="zhj-8k-EWZ" firstAttribute="top" secondItem="SHY-7a-x21" secondAttribute="bottom" id="yGM-aW-whd"/>
+                            <constraint firstItem="rCa-dH-Hsu" firstAttribute="leading" secondItem="JvM-aZ-RtV" secondAttribute="leadingMargin" constant="-8" id="zTu-7y-krY"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="mapViewOutlet" destination="SHY-7a-x21" id="JoF-pV-5f4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kBO-9d-3eD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3025" y="325"/>
+        </scene>
+    </scenes>
+</document>

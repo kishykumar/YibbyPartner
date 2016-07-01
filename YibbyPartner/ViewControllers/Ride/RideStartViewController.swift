@@ -33,7 +33,10 @@ class RideStartViewController: UIViewController {
                     // diable the loading activity indicator
                     Util.disableActivityIndicator(self.view)
                     //                    if (error == nil) {
-                    let rideEndViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RideEndViewControllerIdentifier") as! RideEndViewController
+                    
+                    let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
+
+                    let rideEndViewController = rideStoryboard.instantiateViewControllerWithIdentifier("RideEndViewControllerIdentifier") as! RideEndViewController
                     
                     // get the navigation VC and push the new VC
                     self.navigationController!.pushViewController(rideEndViewController, animated: true)
