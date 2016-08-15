@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>JTCalendar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>LaunchScreen-LaunchScreen.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,7 +77,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1AB2F7CA059DD72FD4DD8465C64F8C10</key>
+		<key>08C10D7AE020425ED0D11E7B13044A16</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0BCAF87D911C829DD6EEDF1F80650D98</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>163FC8CA062C26F66768116B600C6C0E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +97,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>91E0EAA276BD76C39761CB616813B54A</key>
+		<key>39B5CF86C5D5526023BFA614CD6D37DC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4324944BA12633A2861EEF6A69934078</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -93,11 +113,6 @@
 			<true/>
 		</dict>
 		<key>9D394913F46507C3681C0D073BDB26A6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A4A297673C4FE0090C526629D04AD724</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,17 +132,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E1E30E578F40389F868E9B8F75725822</key>
+		<key>E76E6B33CE6EB6F4D2E6790A0AC54FD2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>ECD3D6459209FCB6B9C23734199A374D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EEC8F06E2F90F8AF4C1083E4FDDCF4B4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

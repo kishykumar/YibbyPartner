@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
         
         
         if (emailAddress.text == "" || password.text == "") {
-            Util.displayAlert("error in form", message: "Please enter email and password")
+            AlertUtil.displayAlert("error in form", message: "Please enter email and password")
         } else {
             loginDriver(emailAddress.text!, passwordi: password.text!)
         }
@@ -51,11 +51,11 @@ class LoginViewController: UIViewController {
     
     // BaasBox login user
     func loginDriver(usernamei: String, passwordi: String) {
-        Util.enableActivityIndicator(self.view)
+        ActivityIndicatorUtil.enableActivityIndicator(self.view)
 
         let client: BAAClient = BAAClient.sharedClient()
         client.authenticateCaber(BAASBOX_DRIVER_STRING, username: usernamei, password: passwordi, completion: {(success, error) -> Void in
-            Util.disableActivityIndicator(self.view)
+            ActivityIndicatorUtil.disableActivityIndicator(self.view)
             
             if (success) {
                 DDLogVerbose("user logged in successfully \(success)")
@@ -81,10 +81,10 @@ class LoginViewController: UIViewController {
                     WebInterface.BAASBOX_AUTHENTICATION_ERROR) {
                     
                     // check for authentication error and redirect the user to Login page
-                    Util.displayAlert("Username/password incorrect", message: "Please reenter user credentials and try again.")
+                    AlertUtil.displayAlert("Username/password incorrect", message: "Please reenter user credentials and try again.")
                 }
                 else {
-                    Util.displayAlert("Connectivity or Server Issues.", message: "Please check your internet connection or wait for some time.")
+                    AlertUtil.displayAlert("Connectivity or Server Issues.", message: "Please check your internet connection or wait for some time.")
                 }
             }
         })

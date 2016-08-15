@@ -89,7 +89,7 @@ class SplashViewController: UIViewController {
     
     func removeSplash () {
         let v: UIView = self.launchScreenVC!.view!
-        UIView.animateWithDuration(2.0, delay: 4.0, options: .CurveEaseOut,
+        UIView.animateWithDuration(1.0, delay: 1.0, options: .CurveEaseOut,
                                    animations: {() -> Void in
                                     v.alpha = 0.0
             },

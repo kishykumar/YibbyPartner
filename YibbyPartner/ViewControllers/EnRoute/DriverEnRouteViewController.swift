@@ -31,14 +31,14 @@ class DriverEnRouteViewController: UIViewController {
             webRequest: {(errorBlock: (BAAObjectResultBlock)) -> Void in
 
                 // enable the loading activity indicator
-                Util.enableActivityIndicator(self.view)
+                ActivityIndicatorUtil.enableActivityIndicator(self.view)
                 
                 let client: BAAClient = BAAClient.sharedClient()
                 
                 client.dummyCall( {(success, error) -> Void in
                     
                     // diable the loading activity indicator
-                    Util.disableActivityIndicator(self.view)
+                    ActivityIndicatorUtil.disableActivityIndicator(self.view)
 //                    if (error == nil) {
                         let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
 

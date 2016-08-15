@@ -20,13 +20,13 @@ class DriverOnlineViewController: UIViewController {
     @IBAction func onOfflineButtonClick(sender: UIButton) {
     
         // enable the loading activity indicator
-        Util.enableActivityIndicator(self.view)
+        ActivityIndicatorUtil.enableActivityIndicator(self.view)
 
         let client: BAAClient = BAAClient.sharedClient()
         client.updateDriverStatus(BAASBOX_DRIVER_STATUS_OFFLINE, completion: {(success, error) -> Void in
 
             // diable the loading activity indicator
-            Util.disableActivityIndicator(self.view)
+            ActivityIndicatorUtil.disableActivityIndicator(self.view)
 
             // whether success or error, just pop the view controller. 
             // Webserver will automatically take the driver offline in case of error.

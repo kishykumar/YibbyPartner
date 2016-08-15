@@ -16,14 +16,15 @@ class LeftNavDrawerViewController: UIViewController, UITableViewDataSource, UITa
     // MARK: Properties
     @IBOutlet weak var tableView: UITableView!
     
-    var menuItems: [String] = ["History", "Settings", "Promotions", "Help", "About", "Logout"]
+    var menuItems: [String] = ["Earnings", "Documents", "Notifications", "Support", "Rewards", "Settings", "Logout"]
     
     enum TableIndex: Int {
-        case History = 0
+        case Earnings = 0
+        case Documents
+        case Notifications
+        case Support
+        case Rewards
         case Settings
-        case Promotions
-        case Help
-        case About
         case Logout
     }
     
@@ -57,40 +58,49 @@ class LeftNavDrawerViewController: UIViewController, UITableViewDataSource, UITa
         var selectedViewController: UIViewController = UIViewController()
         
         switch (indexPath.row) {
-        case TableIndex.History.rawValue:
+        case TableIndex.Earnings.rawValue:
+            
+            let earningsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Earnings, bundle: nil)
+            selectedViewController = earningsStoryboard.instantiateViewControllerWithIdentifier("EarningsSummaryViewControllerIdentifier") as! EarningsSummaryViewController
+            
+            break
+            
+        case TableIndex.Documents.rawValue:
             
             let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Settings, bundle: nil)
+
+            selectedViewController = settingsStoryboard.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
+            
+            break
+        case TableIndex.Notifications.rawValue:
+            
+            let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Settings, bundle: nil)
+
+            selectedViewController = settingsStoryboard.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
+            
+            break
+        case TableIndex.Support.rawValue:
+            
+            let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Settings, bundle: nil)
+
+            selectedViewController = settingsStoryboard.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
+            
+            break
+        case TableIndex.Rewards.rawValue:
+            
+            let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Settings, bundle: nil)
+
             selectedViewController = settingsStoryboard.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
             
             break
         case TableIndex.Settings.rawValue:
             
             let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Settings, bundle: nil)
-
+            
             selectedViewController = settingsStoryboard.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
             
             break
-        case TableIndex.Promotions.rawValue:
             
-            let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Settings, bundle: nil)
-
-            selectedViewController = settingsStoryboard.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
-            
-            break
-        case TableIndex.Help.rawValue:
-            
-            let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Settings, bundle: nil)
-
-            selectedViewController = settingsStoryboard.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
-            
-            break
-        case TableIndex.About.rawValue:
-            
-            let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Settings, bundle: nil)
-
-            selectedViewController = settingsStoryboard.instantiateViewControllerWithIdentifier("SettingsViewControllerIdentifier") as! SettingsViewController
-            
-            break
         case TableIndex.Logout.rawValue:
             
             logoutDriver()
@@ -116,12 +126,12 @@ class LeftNavDrawerViewController: UIViewController, UITableViewDataSource, UITa
     
     // BaasBox logout driver
     func logoutDriver() {
-        Util.enableActivityIndicator(self.view)
+        ActivityIndicatorUtil.enableActivityIndicator(self.view)
         
         let client: BAAClient = BAAClient.sharedClient()
         client.logoutCaberWithCompletion("driver", completion: {(success, error) -> Void in
             
-            Util.disableActivityIndicator(self.view)
+            ActivityIndicatorUtil.disableActivityIndicator(self.view)
             
             if (success || (error.domain == BaasBox.errorDomain() && error.code ==
                 WebInterface.BAASBOX_AUTHENTICATION_ERROR)) {
@@ -150,10 +160,10 @@ class LeftNavDrawerViewController: UIViewController, UITableViewDataSource, UITa
                 DDLogInfo("Error in logout \(error)")
                 // We continue the user session if Logout hits an error
                 if (error.domain == BaasBox.errorDomain()) {
-                    Util.displayAlert("Error Logging out. ", message: "This is...weird. \(error.description)")
+                    AlertUtil.displayAlert("Error Logging out. ", message: "This is...weird. \(error.description)")
                 }
                 else {
-                    Util.displayAlert("Connectivity or Server Issues.", message: "Please check your internet connection or wait for some time.")
+                    AlertUtil.displayAlert("Connectivity or Server Issues.", message: "Please check your internet connection or wait for some time.")
                 }
             }
         })

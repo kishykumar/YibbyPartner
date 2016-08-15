@@ -21,7 +21,7 @@ class SignupViewController: UIViewController {
     // MARK: Actions
     @IBAction func submitFormButton(sender: UIButton) {
         if (emailAddressOutlet.text == "" || passwordOutlet.text == "") {
-            Util.displayAlert("error in form", message: "Please enter email and password")
+            AlertUtil.displayAlert("error in form", message: "Please enter email and password")
         } else {
             createDriver(emailAddressOutlet.text!, passwordi: passwordOutlet.text!)
         }
@@ -55,7 +55,7 @@ class SignupViewController: UIViewController {
     
     // BaasBox create user
     func createDriver(usernamei: String, passwordi: String) {
-        Util.enableActivityIndicator(self.view)
+        ActivityIndicatorUtil.enableActivityIndicator(self.view)
 
         let client: BAAClient = BAAClient.sharedClient()
         client.createCaberWithUsername("driver", username: usernamei, password: passwordi, completion: {(success, error) -> Void in
@@ -71,9 +71,9 @@ class SignupViewController: UIViewController {
             }
             else {
                 DDLogVerbose("Signup failed: \(error)")
-                Util.displayAlert("Signup failed.", message: "Please try again.")
+                AlertUtil.displayAlert("Signup failed.", message: "Please try again.")
             }
-            Util.disableActivityIndicator(self.view)
+            ActivityIndicatorUtil.disableActivityIndicator(self.view)
         })
     }
     

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '046936DBCA34EAEC9E94D26F'
+               BlueprintIdentifier = 'FFC60C150868ADC324A301A5CBAD01F4'
                BlueprintName = 'LaunchScreen'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'LaunchScreen.framework'>

@@ -27,6 +27,7 @@ public class PushController: NSObject, PushControllerProtocol {
     let BID_JSON_FIELD_NAME = "bid"
     let RIDE_JSON_FIELD_NAME = "ride"
     let ID_JSON_FIELD_NAME = "id"
+    let BID_ID_JSON_FIELD_NAME = "bidId"
     let GCM_MSG_ID_JSON_FIELD_NAME = "gcm.message_id"
     
     var savedNotification: [NSObject : AnyObject]?
@@ -138,12 +139,12 @@ public class PushController: NSObject, PushControllerProtocol {
                         case BID_MESSAGE_TYPE:
                             DDLogDebug("BID message RCVD")
 
-                            let bidElapsedTime = Util.diffFromCurTimeISO(bidJson["_creation_date"].stringValue)
+                            let bidElapsedTime = TimeUtil.diffFromCurTimeISO(bidJson["_creation_date"].stringValue)
                             if (bidElapsedTime > BID_NOTIFICATION_EXPIRE_TIME) {
                                 DDLogDebug("Bid Discarded CurrentTime: \(NSDate()) bidTime: \(bidJson["_creation_date"].stringValue) bidElapsedTime: \(bidElapsedTime)")
                                 
                                 // The driver missed responding to the bid
-                                Util.displayAlert("Bid missed.",
+                                AlertUtil.displayAlert("Bid missed.",
                                                   message: "Reason: You missed sending the bid. Missing a lot of bids would bring you offline.")
                                 
                                 return;
@@ -161,10 +162,17 @@ public class PushController: NSObject, PushControllerProtocol {
                             // start the timer by accouting the time elapsed since the user actually created the bid
                             offerViewController.timerStart = NSTimeInterval(Int(OfferViewController.OFFER_TIMER_EXPIRE_PERIOD - bidElapsedTime))
                             
-                            offerViewController.userBid = Bid(id: bidJson["id"].stringValue, bidHigh: bidJson["bidHigh"].intValue, bidLow: bidJson["bidLow"].intValue,
-                                                              etaHigh: bidJson["etaHigh"].intValue, etaLow: bidJson["etaLow"].intValue, pickupLat: bidJson["pickupLat"].doubleValue,
-                                                              pickupLong: bidJson["pickupLong"].doubleValue, pickupLoc: bidJson["pickupLoc"].stringValue, dropoffLat: bidJson["dropoffLat"].doubleValue,
-                                                              dropoffLong: bidJson["dropoffLong"].doubleValue, dropoffLoc: bidJson["dropoffLoc"].stringValue)
+                            offerViewController.userBid = Bid(id: bidJson["id"].stringValue,
+                                                              bidHigh: bidJson["bidHigh"].intValue,
+                                                              bidLow: bidJson["bidLow"].intValue,
+                                                              etaHigh: bidJson["etaHigh"].intValue,
+                                                              etaLow: bidJson["etaLow"].intValue,
+                                                              pickupLat: bidJson["pickupLat"].doubleValue,
+                                                              pickupLong: bidJson["pickupLong"].doubleValue,
+                                                              pickupLoc: bidJson["pickupLoc"].stringValue,
+                                                              dropoffLat: bidJson["dropoffLat"].doubleValue,
+                                                              dropoffLong: bidJson["dropoffLong"].doubleValue,
+                                                              dropoffLoc: bidJson["dropoffLoc"].stringValue)
                             
                             DDLogDebug("userBid: \(offerViewController.userBid)")
                             
@@ -193,7 +201,9 @@ public class PushController: NSObject, PushControllerProtocol {
                                     // dismiss all view controllers till this view controller
                                     driverOnlineController.dismissViewControllerAnimated(true, completion: nil)
                                     
-                                    Util.displayAlertOnVC(driverOnlineController, title: "Offer Rejected.", message: "Reason: Your offer was not the lowest.")
+                                    AlertUtil.displayAlertOnVC(driverOnlineController,
+                                                               title: "Offer Rejected.",
+                                                               message: "Reason: Your offer was not the lowest.")
                                 }
                             }
                             
@@ -213,9 +223,15 @@ public class PushController: NSObject, PushControllerProtocol {
                             
                             DDLogDebug("DRIVER EN ROUTE")
                             
-                            if (!BidState.sharedInstance().isSameAsOngoingBid(rideJson[BID_JSON_FIELD_NAME][ID_JSON_FIELD_NAME].string)) {
+                            if (!BidState.sharedInstance().isSameAsOngoingBid(rideJson[BID_ID_JSON_FIELD_NAME].string)) {
                                 DDLogDebug("Not same as ongoingBid. Discarded: \(notification[MESSAGE_JSON_FIELD_NAME] as! String)")
-                                DDLogDebug("Ongoingbid is: \(BidState.sharedInstance().getOngoingBid())")
+                                
+                                if let ongoingBid = BidState.sharedInstance().getOngoingBid() {
+                                    DDLogDebug("Ongoingbid is: \(ongoingBid.id). Incoming is \(rideJson[BID_ID_JSON_FIELD_NAME].string)")
+                                } else {
+                                    DDLogDebug("Ongoingbid is: nil. Incoming is \(rideJson[BID_ID_JSON_FIELD_NAME].string)")
+                                }
+                                
                                 return;
                             }
                             

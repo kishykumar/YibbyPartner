@@ -26,14 +26,16 @@ public class WebInterface {
                 WebInterface.BAASBOX_AUTHENTICATION_ERROR) {
                 // check for authentication error and redirect the user to Login page
                 
-                if let loginViewController = vc.storyboard?.instantiateViewControllerWithIdentifier("LoginViewControllerIdentifier") as? LoginViewController
+                let loginStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Login, bundle: nil)
+
+                if let loginViewController = loginStoryboard.instantiateViewControllerWithIdentifier("LoginViewControllerIdentifier") as? LoginViewController
                 {
                     loginViewController.onStartup = false
                     vc.presentViewController(loginViewController, animated: true, completion: nil)
                 }
             }
             else {
-                Util.displayAlert("Connectivity or Server Issues.", message: "Please check your internet connection or wait for some time.")
+                AlertUtil.displayAlert("Connectivity or Server Issues.", message: "Please check your internet connection or wait for some time.")
             }
         })
     }

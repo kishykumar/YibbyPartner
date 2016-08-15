@@ -32,7 +32,7 @@
 		1201B7D31D23B4AC00A7EEAF /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7C61D23B4AB00A7EEAF /* MapService.swift */; };
 		1201B7D41D23B4AC00A7EEAF /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7C91D23B4AB00A7EEAF /* KeychainWrapper.swift */; };
 		1201B7D51D23B4AC00A7EEAF /* LogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7CA1D23B4AC00A7EEAF /* LogFormatter.swift */; };
-		1201B7D61D23B4AC00A7EEAF /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7CB1D23B4AC00A7EEAF /* Util.swift */; };
+		1201B7D61D23B4AC00A7EEAF /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7CB1D23B4AC00A7EEAF /* AppUtil.swift */; };
 		1201B7FE1D25102A00A7EEAF /* InterfaceString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7FD1D25102A00A7EEAF /* InterfaceString.swift */; };
 		1201B8001D263B5D00A7EEAF /* Ride.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1201B7FF1D263B5D00A7EEAF /* Ride.storyboard */; };
 		1201B8021D263BA300A7EEAF /* DriverEnRoute.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1201B8011D263BA300A7EEAF /* DriverEnRoute.storyboard */; };
@@ -45,6 +45,15 @@
 		1201B8101D263E7200A7EEAF /* Online.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1201B80F1D263E7200A7EEAF /* Online.storyboard */; };
 		1201B8121D263E8900A7EEAF /* App.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1201B8111D263E8900A7EEAF /* App.storyboard */; };
 		1206823B1CC2E685004A34BB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1206823A1CC2E685004A34BB /* MapKit.framework */; };
+		1211FF001D5991BD00AD9591 /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211FEFF1D5991BD00AD9591 /* AlertUtil.swift */; };
+		1211FF021D5991C800AD9591 /* TimeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211FF011D5991C800AD9591 /* TimeUtil.swift */; };
+		1211FF041D5991D800AD9591 /* ActivityIndicatorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211FF031D5991D800AD9591 /* ActivityIndicatorUtil.swift */; };
+		1211FF071D5AEDA200AD9591 /* EarningsSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211FF061D5AEDA200AD9591 /* EarningsSummaryViewController.swift */; };
+		1211FF091D5AEDD000AD9591 /* Earnings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1211FF081D5AEDD000AD9591 /* Earnings.storyboard */; };
+		1211FF0B1D5EF95A00AD9591 /* DailyEarningsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211FF0A1D5EF95A00AD9591 /* DailyEarningsViewController.swift */; };
+		1211FF0D1D604AC800AD9591 /* DayEarningsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211FF0C1D604AC800AD9591 /* DayEarningsTableCell.swift */; };
+		1211FF0F1D605E6B00AD9591 /* TripDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211FF0E1D605E6B00AD9591 /* TripDetailsViewController.swift */; };
+		1211FF111D61260900AD9591 /* WeeklyEarningsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211FF101D61260900AD9591 /* WeeklyEarningsViewController.swift */; };
 		123524961C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
 		123524971C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
 		12F3CCD61C41EFC700F79A26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F3CCD51C41EFC700F79A26 /* AppDelegate.swift */; };
@@ -94,7 +103,7 @@
 		1201B7C61D23B4AB00A7EEAF /* MapService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
 		1201B7C91D23B4AB00A7EEAF /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		1201B7CA1D23B4AC00A7EEAF /* LogFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogFormatter.swift; sourceTree = "<group>"; };
-		1201B7CB1D23B4AC00A7EEAF /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		1201B7CB1D23B4AC00A7EEAF /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
 		1201B7FD1D25102A00A7EEAF /* InterfaceString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceString.swift; sourceTree = "<group>"; };
 		1201B7FF1D263B5D00A7EEAF /* Ride.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Ride.storyboard; sourceTree = "<group>"; };
 		1201B8011D263BA300A7EEAF /* DriverEnRoute.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DriverEnRoute.storyboard; sourceTree = "<group>"; };
@@ -107,6 +116,15 @@
 		1201B80F1D263E7200A7EEAF /* Online.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Online.storyboard; sourceTree = "<group>"; };
 		1201B8111D263E8900A7EEAF /* App.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = App.storyboard; sourceTree = "<group>"; };
 		1206823A1CC2E685004A34BB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		1211FEFF1D5991BD00AD9591 /* AlertUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
+		1211FF011D5991C800AD9591 /* TimeUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeUtil.swift; sourceTree = "<group>"; };
+		1211FF031D5991D800AD9591 /* ActivityIndicatorUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorUtil.swift; sourceTree = "<group>"; };
+		1211FF061D5AEDA200AD9591 /* EarningsSummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EarningsSummaryViewController.swift; sourceTree = "<group>"; };
+		1211FF081D5AEDD000AD9591 /* Earnings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Earnings.storyboard; sourceTree = "<group>"; };
+		1211FF0A1D5EF95A00AD9591 /* DailyEarningsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyEarningsViewController.swift; sourceTree = "<group>"; };
+		1211FF0C1D604AC800AD9591 /* DayEarningsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayEarningsTableCell.swift; sourceTree = "<group>"; };
+		1211FF0E1D605E6B00AD9591 /* TripDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripDetailsViewController.swift; sourceTree = "<group>"; };
+		1211FF101D61260900AD9591 /* WeeklyEarningsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeeklyEarningsViewController.swift; sourceTree = "<group>"; };
 		123524951C89475D004307EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		12C21E221C7DADE7000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
 		12C21E241C7DAE23000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
@@ -162,6 +180,7 @@
 		1201B78E1D23B49000A7EEAF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1211FF051D5AED5A00AD9591 /* Earnings */,
 				1201B78F1D23B49000A7EEAF /* About */,
 				1201B7901D23B49000A7EEAF /* App */,
 				1201B7921D23B49000A7EEAF /* Destination */,
@@ -343,8 +362,11 @@
 			children = (
 				1201B7C91D23B4AB00A7EEAF /* KeychainWrapper.swift */,
 				1201B7CA1D23B4AC00A7EEAF /* LogFormatter.swift */,
-				1201B7CB1D23B4AC00A7EEAF /* Util.swift */,
+				1201B7CB1D23B4AC00A7EEAF /* AppUtil.swift */,
 				1201B7FD1D25102A00A7EEAF /* InterfaceString.swift */,
+				1211FEFF1D5991BD00AD9591 /* AlertUtil.swift */,
+				1211FF011D5991C800AD9591 /* TimeUtil.swift */,
+				1211FF031D5991D800AD9591 /* ActivityIndicatorUtil.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -354,6 +376,19 @@
 			children = (
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1211FF051D5AED5A00AD9591 /* Earnings */ = {
+			isa = PBXGroup;
+			children = (
+				1211FF061D5AEDA200AD9591 /* EarningsSummaryViewController.swift */,
+				1211FF0A1D5EF95A00AD9591 /* DailyEarningsViewController.swift */,
+				1211FF081D5AEDD000AD9591 /* Earnings.storyboard */,
+				1211FF0E1D605E6B00AD9591 /* TripDetailsViewController.swift */,
+				1211FF0C1D604AC800AD9591 /* DayEarningsTableCell.swift */,
+				1211FF101D61260900AD9591 /* WeeklyEarningsViewController.swift */,
+			);
+			path = Earnings;
 			sourceTree = "<group>";
 		};
 		12EB18131C59FA980037EB86 /* Supporting Files */ = {
@@ -457,12 +492,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 12F3CCEF1C41EFC800F79A26 /* Build configuration list for PBXNativeTarget "YibbyPartner" */;
 			buildPhases = (
-				E6F39E6AA71B9E64C2C8375A /* Check Pods Manifest.lock */,
+				E6F39E6AA71B9E64C2C8375A /* [CP] Check Pods Manifest.lock */,
 				12F3CCCE1C41EFC700F79A26 /* Sources */,
 				12F3CCCF1C41EFC700F79A26 /* Frameworks */,
 				12F3CCD01C41EFC700F79A26 /* Resources */,
-				8F2DAF073F92100A711F982C /* Embed Pods Frameworks */,
-				632842A4F4DD5124AA6962C4 /* Copy Pods Resources */,
+				8F2DAF073F92100A711F982C /* [CP] Embed Pods Frameworks */,
+				632842A4F4DD5124AA6962C4 /* [CP] Copy Pods Resources */,
 				120188251D094B7A005EF075 /* ShellScript */,
 			);
 			buildRules = (
@@ -478,12 +513,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 12F3CCF21C41EFC800F79A26 /* Build configuration list for PBXNativeTarget "YibbyPartnerTests" */;
 			buildPhases = (
-				CFD3E7C00E24EF457CE1A6A9 /* Check Pods Manifest.lock */,
+				CFD3E7C00E24EF457CE1A6A9 /* [CP] Check Pods Manifest.lock */,
 				12F3CCE21C41EFC800F79A26 /* Sources */,
 				12F3CCE31C41EFC800F79A26 /* Frameworks */,
 				12F3CCE41C41EFC800F79A26 /* Resources */,
-				B74F150CA032517E1E2EDF6C /* Embed Pods Frameworks */,
-				F1EA9702A2E692F1CBEC2489 /* Copy Pods Resources */,
+				B74F150CA032517E1E2EDF6C /* [CP] Embed Pods Frameworks */,
+				F1EA9702A2E692F1CBEC2489 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -556,6 +591,7 @@
 				12F3CCDD1C41EFC700F79A26 /* Assets.xcassets in Resources */,
 				1201B80A1D263DA600A7EEAF /* Drawer.storyboard in Resources */,
 				1201B8021D263BA300A7EEAF /* DriverEnRoute.storyboard in Resources */,
+				1211FF091D5AEDD000AD9591 /* Earnings.storyboard in Resources */,
 				1201B8121D263E8900A7EEAF /* App.storyboard in Resources */,
 				123524961C89475D004307EE /* GoogleService-Info.plist in Resources */,
 				1201B8101D263E7200A7EEAF /* Online.storyboard in Resources */,
@@ -593,14 +629,14 @@
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 2398a3e4bff596394b13cf60fa880f4297f56425 7a040c161b72d9611e9163b4c56944640e0c1c978a3eb18ff5de805bbe3c9687";
 		};
-		632842A4F4DD5124AA6962C4 /* Copy Pods Resources */ = {
+		632842A4F4DD5124AA6962C4 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -608,14 +644,14 @@
 			shellScript = "\"${SRCROOT}/YibbyPartner/Pods/Target Support Files/Pods-YibbyPartner/Pods-YibbyPartner-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8F2DAF073F92100A711F982C /* Embed Pods Frameworks */ = {
+		8F2DAF073F92100A711F982C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -623,14 +659,14 @@
 			shellScript = "\"${SRCROOT}/YibbyPartner/Pods/Target Support Files/Pods-YibbyPartner/Pods-YibbyPartner-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B74F150CA032517E1E2EDF6C /* Embed Pods Frameworks */ = {
+		B74F150CA032517E1E2EDF6C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -638,14 +674,14 @@
 			shellScript = "\"${SRCROOT}/YibbyPartner/Pods/Target Support Files/Pods-YibbyPartnerTests/Pods-YibbyPartnerTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CFD3E7C00E24EF457CE1A6A9 /* Check Pods Manifest.lock */ = {
+		CFD3E7C00E24EF457CE1A6A9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -653,14 +689,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		E6F39E6AA71B9E64C2C8375A /* Check Pods Manifest.lock */ = {
+		E6F39E6AA71B9E64C2C8375A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -668,14 +704,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F1EA9702A2E692F1CBEC2489 /* Copy Pods Resources */ = {
+		F1EA9702A2E692F1CBEC2489 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -696,24 +732,32 @@
 				1201B7CE1D23B4AC00A7EEAF /* BidState.swift in Sources */,
 				1201B7D11D23B4AC00A7EEAF /* WebInterface.swift in Sources */,
 				1201B7D51D23B4AC00A7EEAF /* LogFormatter.swift in Sources */,
+				1211FF071D5AEDA200AD9591 /* EarningsSummaryViewController.swift in Sources */,
 				1201B7AD1D23B49000A7EEAF /* DestinationPickerViewController.swift in Sources */,
+				1211FF111D61260900AD9591 /* WeeklyEarningsViewController.swift in Sources */,
 				1201B7AE1D23B49000A7EEAF /* LeftNavDrawerTableViewCell.swift in Sources */,
+				1211FF041D5991D800AD9591 /* ActivityIndicatorUtil.swift in Sources */,
+				1211FF0F1D605E6B00AD9591 /* TripDetailsViewController.swift in Sources */,
 				1201B7B51D23B49000A7EEAF /* PushController.swift in Sources */,
 				1201B7B11D23B49000A7EEAF /* LoginViewController.swift in Sources */,
 				1201B7AF1D23B49000A7EEAF /* LeftNavDrawerViewController.swift in Sources */,
 				1201B7CD1D23B4AC00A7EEAF /* Bid.swift in Sources */,
+				1211FF021D5991C800AD9591 /* TimeUtil.swift in Sources */,
+				1211FF0D1D604AC800AD9591 /* DayEarningsTableCell.swift in Sources */,
 				1201B7D01D23B4AC00A7EEAF /* Ride.swift in Sources */,
 				1201B7D31D23B4AC00A7EEAF /* MapService.swift in Sources */,
 				12F3CCD61C41EFC700F79A26 /* AppDelegate.swift in Sources */,
 				1201B7B81D23B49000A7EEAF /* SettingsViewController.swift in Sources */,
 				1201B7BB1D23B49000A7EEAF /* SplashViewController.swift in Sources */,
+				1211FF0B1D5EF95A00AD9591 /* DailyEarningsViewController.swift in Sources */,
 				1201B7D21D23B4AC00A7EEAF /* LocationService.swift in Sources */,
 				1201B7B01D23B49000A7EEAF /* DriverEnRouteViewController.swift in Sources */,
-				1201B7D61D23B4AC00A7EEAF /* Util.swift in Sources */,
+				1201B7D61D23B4AC00A7EEAF /* AppUtil.swift in Sources */,
 				1201B7AC1D23B49000A7EEAF /* MainViewController.swift in Sources */,
 				1201B7CF1D23B4AC00A7EEAF /* Offer.swift in Sources */,
 				1201B7D41D23B4AC00A7EEAF /* KeychainWrapper.swift in Sources */,
 				1201B7FE1D25102A00A7EEAF /* InterfaceString.swift in Sources */,
+				1211FF001D5991BD00AD9591 /* AlertUtil.swift in Sources */,
 				1201B7B41D23B49000A7EEAF /* DriverOnlineViewController.swift in Sources */,
 				1201B7B31D23B49000A7EEAF /* OfferViewController.swift in Sources */,
 				1201B7B71D23B49000A7EEAF /* RideStartViewController.swift in Sources */,

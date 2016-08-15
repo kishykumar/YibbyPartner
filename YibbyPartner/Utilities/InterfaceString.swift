@@ -26,6 +26,11 @@ public struct InterfaceString {
         static let Promotions = NSLocalizedString("Promotions", comment: "Promotions Storyboard")
         static let Ride = NSLocalizedString("Ride", comment: "Ride Storyboard")
         static let Offer = NSLocalizedString("Offer", comment: "Offer Storyboard")
+        static let Earnings = NSLocalizedString("Earnings", comment: "Earnings Storyboard")
+    }
+    
+    public struct TableSections {
+        static let Trips = NSLocalizedString("Trips", comment: "Trips")
     }
     
     public struct Notifications {
@@ -149,4 +154,6 @@ public struct InterfaceString {
     static let Next = NSLocalizedString("Next", comment: "Next button")
     static let Done = NSLocalizedString("Done", comment: "Done button title")
     static let Skip = NSLocalizedString("Skip", comment: "Skip action")
+    static let SettingsAction = NSLocalizedString("Settings", comment: "Settings")
+
 }

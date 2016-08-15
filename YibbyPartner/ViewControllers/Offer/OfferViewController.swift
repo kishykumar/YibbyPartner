@@ -102,7 +102,7 @@ class OfferViewController: UIViewController {
             webRequest: {(errorBlock: (BAAObjectResultBlock)) -> Void in
                 
                 // enable the loading activity indicator
-                Util.enableActivityIndicator(self.view)
+                ActivityIndicatorUtil.enableActivityIndicator(self.view)
                 
                 let client: BAAClient = BAAClient.sharedClient()
                 
@@ -112,7 +112,7 @@ class OfferViewController: UIViewController {
                     completion: {(success, error) -> Void in
 
                     // diable the loading activity indicator
-                    Util.disableActivityIndicator(self.view)
+                    ActivityIndicatorUtil.disableActivityIndicator(self.view)
                     self.stopOfferTimer()
 
                     if (error == nil) {
@@ -209,7 +209,7 @@ class OfferViewController: UIViewController {
 
             if let appBackgroundedTime = savedBgTimestamp {
 
-                let elapsedTime = NSTimeInterval(Int(Util.diffFromCurTime(appBackgroundedTime))) // seconds
+                let elapsedTime = NSTimeInterval(Int(TimeUtil.diffFromCurTime(appBackgroundedTime))) // seconds
 
                 DDLogDebug("bgtime \(appBackgroundedTime) bumpUpTime \(elapsedTime))")
                 
@@ -257,7 +257,7 @@ class OfferViewController: UIViewController {
                         // dismiss all view controllers till this view controller
                         driverOnlineController.dismissViewControllerAnimated(true, completion: nil)
                         
-                        Util.displayAlertOnVC(driverOnlineController, title: OfferViewController.OFFER_TIMER_EXPIRE_MSG_TITLE,
+                        AlertUtil.displayAlertOnVC(driverOnlineController, title: OfferViewController.OFFER_TIMER_EXPIRE_MSG_TITLE,
                                           message: OfferViewController.OFFER_TIMER_EXPIRE_MSG_CONTENT)
                     }
                 }
