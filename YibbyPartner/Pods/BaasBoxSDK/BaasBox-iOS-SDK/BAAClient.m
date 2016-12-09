@@ -412,6 +412,74 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
            }];
 }
 
+- (void)cancelRiderRide:(NSString *)bidId
+             completion:(BAAObjectResultBlock)completionBlock {
+    
+    NSString *path = [NSString stringWithFormat:@"ride/%@/r/cancel", bidId];
+
+    [self postPath:path
+        parameters:@{
+                     @"appcode" : self.appCode,
+                     @"X-BB-SESSION": self.currentUser.authenticationToken
+                     }
+           success:^(NSDictionary *responseObject) {
+               completionBlock(responseObject, nil);
+           } failure:^(NSError *error) {
+               completionBlock(nil, error);
+           }];
+}
+
+- (void)cancelDriverRide:(NSString *)bidId
+              completion:(BAAObjectResultBlock)completionBlock {
+    
+    NSString *path = [NSString stringWithFormat:@"ride/%@/d/cancel", bidId];
+    
+    [self postPath:path
+        parameters:@{
+                     @"appcode" : self.appCode,
+                     @"X-BB-SESSION": self.currentUser.authenticationToken
+                     }
+           success:^(NSDictionary *responseObject) {
+               completionBlock(responseObject, nil);
+           } failure:^(NSError *error) {
+               completionBlock(nil, error);
+           }];
+}
+
+- (void)startRide:(NSString *)bidId
+       completion:(BAAObjectResultBlock)completionBlock {
+    
+    NSString *path = [NSString stringWithFormat:@"ride/%@/start", bidId];
+    
+    [self postPath:path
+        parameters:@{
+                     @"appcode" : self.appCode,
+                     @"X-BB-SESSION": self.currentUser.authenticationToken
+                     }
+           success:^(NSDictionary *responseObject) {
+               completionBlock(responseObject, nil);
+           } failure:^(NSError *error) {
+               completionBlock(nil, error);
+           }];
+}
+
+- (void)endRide:(NSString *)bidId
+     completion:(BAAObjectResultBlock)completionBlock {
+    NSString *path = [NSString stringWithFormat:@"ride/%@/end", bidId];
+    
+    [self postPath:path
+        parameters:@{
+                     @"appcode" : self.appCode,
+                     @"X-BB-SESSION": self.currentUser.authenticationToken
+                     }
+           success:^(NSDictionary *responseObject) {
+               completionBlock(responseObject, nil);
+           } failure:^(NSError *error) {
+               completionBlock(nil, error);
+           }];
+}
+
+
 // Offer
 - (void)createOffer:(NSString *)bidId
          offerPrice:(NSNumber *)offerPrice
@@ -680,6 +748,32 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
           } failure:^(NSError *error) {
               
               completionBlock(nil, error);
+              
+          }];
+    
+}
+
+- (void) fetchCountForFiles:(BAAIntegerResultBlock)completionBlock {
+    
+    [self getPath:[NSString stringWithFormat:@"/file/details"]
+       parameters: @{
+                    @"appcode": self.appCode,
+                    @"X-BB-SESSION": self.currentUser.authenticationToken,
+                    @"count": @"true"
+                    }
+          success:^(id responseObject) {
+              
+              NSInteger result = [responseObject[@"data"][0][@"count"] intValue];
+              
+              if (completionBlock) {
+                  completionBlock(result, nil);
+              }
+              
+          } failure:^(NSError *error) {
+              
+              if (completionBlock) {
+                  completionBlock(-1, error);
+              }
               
           }];
     
@@ -1822,7 +1916,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
                                                                                     options:kNilOptions
                                                                                       error:nil];
                          
-                         if (httpResponse.statusCode >= 400) {
+                         if (httpResponse.statusCode == 401) {
                              
                              NSError *error = [BaasBox authenticationErrorForResponse:jsonObject];                            
                              failure(error);
@@ -1875,7 +1969,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
                                                                                     options:kNilOptions
                                                                                       error:nil];
                          
-                         if (r.statusCode >= 400) {
+                         if (r.statusCode == 401) {
                              
                              NSError *error = [BaasBox authenticationErrorForResponse:jsonObject];
                              failure(error);
@@ -1918,7 +2012,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
                                                                                     options:kNilOptions
                                                                                       error:nil];
                          
-                         if (r.statusCode >= 400) {
+                         if (r.statusCode == 401) {
                              
                              NSError *error = [BaasBox authenticationErrorForResponse:jsonObject];
                              failure(error);
@@ -1961,7 +2055,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
                                                                                     options:kNilOptions
                                                                                       error:nil];
                          
-                         if (r.statusCode >= 400) {
+                         if (r.statusCode == 401) {
                              
                              NSError *error = [BaasBox authenticationErrorForResponse:jsonObject];
                              failure(error);
@@ -2141,6 +2235,11 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
 
 
 - (void)dummyCall:(BAAObjectResultBlock)completionBlock {
+    
+    if (!self.currentUser) {
+        return;
+    }
+    
     [self getPath:@"/caber/dumb/hello"
        parameters:@{
                     @"appcode" : self.appCode,
@@ -2159,6 +2258,26 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
               }
               
           }];
+}
+
+- (NSURL *)getCompleteURLWithToken:(NSURL *)url {
+    
+    if (!self.currentUser) {
+        return nil;
+    }
+    
+    NSURLComponents *components = [[NSURLComponents alloc] initWithURL:url resolvingAgainstBaseURL:NO];
+    
+    NSURLQueryItem * queryItemAppCode = [[NSURLQueryItem alloc] initWithName:@"X-BAASBOX-APPCODE" value:self.appCode];
+    NSURLQueryItem * queryItemAuthToken = [[NSURLQueryItem alloc] initWithName:@"X-BB-SESSION" value:self.currentUser.authenticationToken];
+    
+    NSMutableArray *newQueryItems = [[NSMutableArray alloc] initWithArray:components.queryItems copyItems:YES];
+    
+    [newQueryItems addObject:queryItemAppCode];
+    [newQueryItems addObject:queryItemAuthToken];
+    [components setQueryItems:newQueryItems];
+    
+    return [components URL];
 }
 
 @end

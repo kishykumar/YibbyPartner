@@ -160,14 +160,14 @@ class SplashViewController: UIViewController {
         var syncSuccess = false
         let client: BAAClient = BAAClient.sharedClient()
         client.syncClient(BAASBOX_DRIVER_STRING, completion: {(success, error) -> Void in
-            if (error == nil) {
+            if (success != nil) {
                 
                 self.processSyncState(success)
                 
                 DDLogDebug("Sync successful: \(success))")
                 syncSuccess = true
             }
-            else {
+            else if (error != nil) {
                 DDLogDebug("Error in Sync: \(error)")
                 syncSuccess = false
             }

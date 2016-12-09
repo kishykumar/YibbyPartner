@@ -16,11 +16,10 @@ import Crashlytics
  
 // TODO: 
 // 1. Bug: The timer in offer view controller shows up less on one of the phones
-// 2. 
+// 2. Stop location updates in the background if no driver activity for the last 10 minutes
  
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GCMReceiverDelegate {
- //-- we have removed this because we are not sending upstream messages via GCM
 
     var window: UIWindow?
 
@@ -36,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
 
     let GOOGLE_API_KEY_IOS = "AIzaSyAg47Gp0GvI6myz-sZZfKJ1fPtx0wUBMjU"
     let BAASBOX_APPCODE = "1234567890"
-    let BAASBOX_URL = "http://sandbox1-env.us-west-1.elasticbeanstalk.com"
+    let BAASBOX_URL = "http://custom-env.cjamdz6ejx.us-west-1.elasticbeanstalk.com"
     
     var centerContainer: MMDrawerController?
     

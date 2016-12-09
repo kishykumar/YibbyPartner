@@ -82,6 +82,9 @@
 // dummy endpoint
 - (void)dummyCall:(BAAObjectResultBlock)completionBlock;
 
+// get the complete url including app token and appcode. Used to fetch files from url today.
+- (NSURL *)getCompleteURLWithToken:(NSURL *)url;
+
 // Loading
 - (void) loadObject:(BAAObject *)object completion:(BAAObjectResultBlock)completionBlock;
 - (void) loadCollection:(BAAObject *)object completion:(BAAArrayResultBlock)completionBlock;
@@ -109,6 +112,7 @@
 - (void) disableDriverPushNotificationsWithCompletion:(BAABooleanResultBlock)completionBlock;
 
 // Files
+- (void) fetchCountForFiles:(BAAIntegerResultBlock)completionBlock;
 - (void) loadFiles:(BAAFile *)file completion:(BAAArrayResultBlock)completionBlock;
 - (void) loadFiles:(BAAFile *)file withParams:(NSDictionary *) parameters completion:(BAAArrayResultBlock)completionBlock;
 - (NSURLSessionDataTask *) loadFileData:(BAAFile *)file completion:(void(^)(NSData *data, NSError *error))completionBlock;
@@ -130,6 +134,18 @@
                     dropoffLong:(NSNumber *)dropoffLong
                     dropoffLoc:(NSString *)dropoffLoc
                     completion:(BAAObjectResultBlock)completionBlock;
+
+- (void)cancelRiderRide:(NSString *)bidId
+       completion:(BAAObjectResultBlock)completionBlock;
+
+- (void)cancelDriverRide:(NSString *)bidId
+             completion:(BAAObjectResultBlock)completionBlock;
+
+- (void)startRide:(NSString *)bidId
+              completion:(BAAObjectResultBlock)completionBlock;
+
+- (void)endRide:(NSString *)bidId
+              completion:(BAAObjectResultBlock)completionBlock;
 
 // Offer
 - (void)createOffer:(NSString *)bidId

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import GoogleMaps
+import CocoaLumberjack
+import BaasBoxSDK
 
 class RideEndViewController: UIViewController {
 
@@ -14,31 +17,37 @@ class RideEndViewController: UIViewController {
 
     @IBOutlet weak var gmsMapViewOutlet: UIView!
 
+    var bid: Bid!
+
     // MARK: Actions
     
     @IBAction func goOfflineAction(sender: AnyObject) {
         // cleanup the state
         
         // let the webserver know
-        
+
+
             // pop all the view controllers and go back to MainViewController
-        
     }
     
     @IBAction func rideFinishAction(sender: AnyObject) {
         // cleanup the state
 
         // let the webserver know
-        
-            // pop all the view controllers and go back to DriverOnlineViewController
+
     }
     
     // MARK: Setup functions
+    
+    func initProperties() {
+        self.bid = (BidState.sharedInstance().getOngoingBid())!
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        initProperties()
     }
 
     override func didReceiveMemoryWarning() {

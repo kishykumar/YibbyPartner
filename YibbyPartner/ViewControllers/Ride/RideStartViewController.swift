@@ -13,9 +13,15 @@ import BaasBoxSDK
 
 class RideStartViewController: UIViewController {
 
+    // MARK: Properties
+    
+    var bid: Bid!
+    
+    // MARK: Actions
+    
     @IBAction func startNavAction(sender: AnyObject) {
-        let b: Bid = (BidState.sharedInstance().getOngoingBid())!
-        MapService.sharedInstance().openDirectionsInGoogleMaps(b.dropoffLat, lng: b.dropoffLong)
+        MapService.sharedInstance().openDirectionsInGoogleMaps(self.bid.dropoffLat,
+                                                               lng: self.bid.dropoffLong)
     }
     
     @IBAction func destArrivedAction(sender: AnyObject) {
@@ -28,30 +34,37 @@ class RideStartViewController: UIViewController {
                 
                 let client: BAAClient = BAAClient.sharedClient()
                 
-                client.dummyCall( {(success, error) -> Void in
+                client.endRide(self.bid.id, completion: {(success, error) -> Void in
                     
                     // diable the loading activity indicator
                     ActivityIndicatorUtil.disableActivityIndicator(self.view)
-                    //                    if (error == nil) {
+                    if (error == nil) {
                     
-                    let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
+                        let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
 
-                    let rideEndViewController = rideStoryboard.instantiateViewControllerWithIdentifier("RideEndViewControllerIdentifier") as! RideEndViewController
-                    
-                    // get the navigation VC and push the new VC
-                    self.navigationController!.pushViewController(rideEndViewController, animated: true)
-                    //                    }
-                    //                    else {
-                    //                        errorBlock(success, error)
-                    //                    }
+                        let rideEndViewController = rideStoryboard.instantiateViewControllerWithIdentifier("RideEndViewControllerIdentifier") as! RideEndViewController
+                        
+                        // get the navigation VC and push the new VC
+                        self.navigationController!.pushViewController(rideEndViewController, animated: true)
+                    }
+                    else {
+                        errorBlock(success, error)
+                    }
                 })
         })
+    }
+    
+    // MARK: Setup functions
+    
+    func initProperties() {
+        self.bid = (BidState.sharedInstance().getOngoingBid())!
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        initProperties()
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,7 +72,8 @@ class RideStartViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    // MARK: Helper functions
+    
     /*
     // MARK: - Navigation
 
