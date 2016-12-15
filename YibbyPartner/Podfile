@@ -1,24 +1,29 @@
 source 'https://github.com/CocoaPods/Specs.git'
-xcodeproj '/Users/kishykumar/Installs/xcodeworkspace/YibbyPartner/YibbyPartner.xcodeproj'
+project '../YibbyPartner'
 
 platform :ios, '8.0'
 use_frameworks!
 
+def testing_pods
+    pod 'Quick'
+    pod 'Nimble', '~> 5.0.0'
+    pod 'Nimble-Snapshots'
+end
+
 def shared_pods
     pod 'GoogleMaps'
     pod 'Google/CloudMessaging'
-    #pod 'BaasBoxSDK', '~> 0.9.0'
+    pod 'GooglePlaces'
+    pod 'GooglePlacePicker'
+    
     pod 'BaasBoxSDK’, :git => 'https://kishykumar@bitbucket.org/kishykumar/baasboxiossdk.git'
-    #pod 'BaasBoxSDK1’, :path => '/Users/kishykumar/Installs/baasboxiossdk/BaasBoxSDK.podspec'
-    #pod 'PKRevealController'
     pod 'SwiftyJSON'
-    #pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
-    #pod 'ECSlidingViewController', '~> 2.0.3'
     pod 'MMDrawerController', '~> 0.5.7'
     pod 'TTRangeSlider'
     pod 'BButton'
     pod 'SVProgressHUD'
-    pod 'CocoaLumberjack/Swift'
+
+    pod 'CocoaLumberjack/Swift', :git => 'https://github.com/CocoaLumberjack/CocoaLumberjack', :branch => 'swift_3'
     pod 'LaunchScreen'
     pod 'NVActivityIndicatorView'
     pod 'OpenInGoogleMaps'
@@ -28,11 +33,19 @@ def shared_pods
 
 end
 
-
 target 'YibbyPartner' do
     shared_pods
 end
 
 target 'YibbyPartnerTests' do
     shared_pods
+    testing_pods
 end
+
+#post_install do |installer|
+#    installer.pods_project.targets.each do |target|
+#        target.build_configurations.each do |config|
+#            config.build_settings['SWIFT_VERSION'] = '3.0'
+#        end
+#    end
+#end

@@ -40,11 +40,11 @@ class SplashViewController: UIViewController {
         initSplash()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         doSetup()
     }
@@ -58,7 +58,7 @@ class SplashViewController: UIViewController {
 
     func showLaunchScreen() {
         let v: UIView = self.launchScreenVC!.view!
-        let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         
         // add the view to window
         appDelegate.window?.addSubview(v)
@@ -74,7 +74,7 @@ class SplashViewController: UIViewController {
 
         // Instantiate a LaunchScreenViewController which will insert the UIView contained in our Launch Screen XIB
         // as a subview of it's view.
-        self.launchScreenVC = LaunchScreenViewController.init(fromStoryboard: self.storyboard)
+        self.launchScreenVC = LaunchScreenViewController.init(from: self.storyboard)
         
         // Take a snapshot of the launch screen. You could do this at any time you like.
 //        self.snapshot = self.launchScreenVC!.snapshot()
@@ -89,7 +89,7 @@ class SplashViewController: UIViewController {
     
     func removeSplash () {
         let v: UIView = self.launchScreenVC!.view!
-        UIView.animateWithDuration(1.0, delay: 1.0, options: .CurveEaseOut,
+        UIView.animate(withDuration: 1.0, delay: 1.0, options: .curveEaseOut,
                                    animations: {() -> Void in
                                     v.alpha = 0.0
             },
@@ -106,18 +106,24 @@ class SplashViewController: UIViewController {
         PushController.registerForPushNotifications()
     }
 
-    func processSyncState (responseData: AnyObject) {
+    func processSyncState (_ responseData: AnyObject) {
         
         return;
         
         let jsonStatus = responseData[STATUS_JSON_FIELD_NAME]
         
         let jsonBid = responseData[BID_JSON_FIELD_NAME]
-        if let data = jsonBid!!.dataUsingEncoding(NSUTF8StringEncoding) {
-            let topJson = JSON(data: data)
+        
+        guard let jsonBidString = jsonBid as? String else {
+            DDLogVerbose("Returning because of JSON bid string: \(jsonBid)")
+            return;
+        }
+        
+        if let dataFromString = jsonBidString.data(using: .utf8, allowLossyConversion: false) {
+            let topJson = JSON(data: dataFromString)
             if let topBidJson = topJson[BID_JSON_FIELD_NAME].string {
                 
-                if let bidData = topBidJson.dataUsingEncoding(NSUTF8StringEncoding) {
+                if let bidData = topBidJson.data(using: String.Encoding.utf8) {
                     let bidJson = JSON(data: bidData)
                     
                     switch bidJson[BID_JSON_FIELD_NAME] as! String {
@@ -140,15 +146,15 @@ class SplashViewController: UIViewController {
         ///////////////////////////////////////////////////////////////////////////
         
         // Do any additional setup after loading the view.
-        let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         
         // show the launch screen
         showLaunchScreen()
 //        dismissSplashSnapshot()
 
         // Clear keychain on first run in case of reinstallation
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        if userDefaults.objectForKey(APP_FIRST_RUN) == nil {
+        let userDefaults = UserDefaults.standard
+        if userDefaults.object(forKey: APP_FIRST_RUN) == nil {
             // Delete values from keychain here
             userDefaults.setValue(APP_FIRST_RUN, forKey: APP_FIRST_RUN)
             LoginViewController.removeKeyChainKeys()
@@ -158,11 +164,11 @@ class SplashViewController: UIViewController {
         registerForPushNotifications()
         
         var syncSuccess = false
-        let client: BAAClient = BAAClient.sharedClient()
+        let client: BAAClient = BAAClient.shared()
         client.syncClient(BAASBOX_DRIVER_STRING, completion: {(success, error) -> Void in
             if (success != nil) {
                 
-                self.processSyncState(success)
+                self.processSyncState(success as AnyObject)
                 
                 DDLogDebug("Sync successful: \(success))")
                 syncSuccess = true
@@ -175,13 +181,13 @@ class SplashViewController: UIViewController {
         })
         
         // wait for requests to finish
-        let timeoutDate: NSDate = NSDate(timeIntervalSinceNow: 10.0)
+        let timeoutDate: Date = Date(timeIntervalSinceNow: 10.0)
         
         while (self.syncAPIResponseArrived == false ||
                 SplashViewController.pushRegisterResponseArrived == false) &&
                 (timeoutDate.timeIntervalSinceNow > 0) {
                     
-            CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.1, false)
+            CFRunLoopRunInMode(CFRunLoopMode.defaultMode, 0.1, false)
         }
         
         DDLogDebug("Setup done")
@@ -200,14 +206,14 @@ class SplashViewController: UIViewController {
             DDLogVerbose("Driver already authenticated");
             // no need to do anything if user is already authenticated
             appDelegate.initializeMainViewController()
-            self.presentViewController(appDelegate.centerContainer!, animated: false, completion: nil)
+            self.present(appDelegate.centerContainer!, animated: false, completion: nil)
 
 //            self.performSegueWithIdentifier("mainFromSplashSegue", sender: nil)
             removeSplash()
         } else {
             DDLogVerbose("Driver NOT authenticated");
             
-            self.performSegueWithIdentifier("loginFromSplashSegue", sender: nil)
+            self.performSegue(withIdentifier: "loginFromSplashSegue", sender: nil)
             removeSplash()
         }
         

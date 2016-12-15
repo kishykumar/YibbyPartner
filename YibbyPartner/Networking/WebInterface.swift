@@ -12,26 +12,26 @@ import SVProgressHUD
 import BaasBoxSDK
 import CocoaLumberjack
 
-public class WebInterface {
+open class WebInterface {
     
     static let BAASBOX_AUTHENTICATION_ERROR = -22222
     
-    static func makeWebRequestAndHandleError (vc: UIViewController, webRequest:(errorBlock: (BAAObjectResultBlock)) -> Void) {
+    static func makeWebRequestAndHandleError (_ vc: UIViewController, webRequest:(_ errorBlock: @escaping (BAAObjectResultBlock)) -> Void) {
         
-        webRequest(errorBlock: { (success, error) -> Void in
+        webRequest({ (success, error) -> Void in
             
             DDLogVerbose("Error in webRequest: \(error)")
             
-            if (error.domain == BaasBox.errorDomain() && error.code ==
+            if ((error as! NSError).domain == BaasBox.errorDomain() && (error as! NSError).code ==
                 WebInterface.BAASBOX_AUTHENTICATION_ERROR) {
                 // check for authentication error and redirect the user to Login page
                 
                 let loginStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Login, bundle: nil)
 
-                if let loginViewController = loginStoryboard.instantiateViewControllerWithIdentifier("LoginViewControllerIdentifier") as? LoginViewController
+                if let loginViewController = loginStoryboard.instantiateViewController(withIdentifier: "LoginViewControllerIdentifier") as? LoginViewController
                 {
                     loginViewController.onStartup = false
-                    vc.presentViewController(loginViewController, animated: true, completion: nil)
+                    vc.present(loginViewController, animated: true, completion: nil)
                 }
             }
             else {
@@ -40,7 +40,7 @@ public class WebInterface {
         })
     }
     
-    static func makeWebRequestAndDiscardError (webRequest:() -> Void) {
+    static func makeWebRequestAndDiscardError (_ webRequest:() -> Void) {
         webRequest()
     }
 }

@@ -11,13 +11,13 @@ import GoogleMaps
 import SVProgressHUD
 import CocoaLumberjack
 
-public class Util {
+open class Util {
 
     static func getAppURLScheme () -> String {
-        var infoList: [NSObject : AnyObject] = NSBundle.mainBundle().infoDictionary!
+        var infoList: [AnyHashable: Any] = Bundle.main.infoDictionary!
         let urlScheme: NSArray = infoList["CFBundleURLTypes"] as! NSArray
         
-        let urlSchemeDict: [NSObject : AnyObject] = urlScheme[0] as! [NSObject : AnyObject]
+        let urlSchemeDict: [AnyHashable: Any] = urlScheme[0] as! [AnyHashable: Any]
         
         let urlSchemeStr: String = urlSchemeDict["CFBundleURLName"] as! String
         

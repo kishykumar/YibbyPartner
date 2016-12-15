@@ -8,10 +8,11 @@
 
 import UIKit
 import GoogleMaps
+import GooglePlaces
 import CocoaLumberjack
 
 protocol DestinationDelegate {
-    func choseDestination(location: String)
+    func choseDestination(_ location: String)
 }
 
 class DestinationPickerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -34,7 +35,7 @@ class DestinationPickerViewController: UIViewController, UITableViewDelegate, UI
         setupMapClient()
         
         // Register the call class. If a custom class is created, this code will most likely be removed and you can fill in the ReUseCellIdentifier in Storyboard
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
 
     func setupMapClient () {
@@ -46,28 +47,28 @@ class DestinationPickerViewController: UIViewController, UITableViewDelegate, UI
         // Dispose of any resources that can be recreated.
     }
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.items.count;
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "cell")! as UITableViewCell
         
         cell.textLabel?.text = self.items[indexPath.row]
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You selected cell #\(indexPath.row)!")
     }
     
     // MARK: actions
-    @IBAction func sendBack(sender: UIButton) {
+    @IBAction func sendBack(_ sender: UIButton) {
         delegate!.choseDestination("My name is Kishy");
         
         

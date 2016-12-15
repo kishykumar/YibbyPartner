@@ -19,7 +19,7 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var passwordOutlet: UITextField!
     
     // MARK: Actions
-    @IBAction func submitFormButton(sender: UIButton) {
+    @IBAction func submitFormButton(_ sender: UIButton) {
         if (emailAddressOutlet.text == "" || passwordOutlet.text == "") {
             AlertUtil.displayAlert("error in form", message: "Please enter email and password")
         } else {
@@ -54,20 +54,20 @@ class SignupViewController: UIViewController {
     // MARK: BaasBox Functions
     
     // BaasBox create user
-    func createDriver(usernamei: String, passwordi: String) {
+    func createDriver(_ usernamei: String, passwordi: String) {
         ActivityIndicatorUtil.enableActivityIndicator(self.view)
 
-        let client: BAAClient = BAAClient.sharedClient()
-        client.createCaberWithUsername("driver", username: usernamei, password: passwordi, completion: {(success, error) -> Void in
+        let client: BAAClient = BAAClient.shared()
+        client.createCaber(withUsername: "driver", username: usernamei, password: passwordi, completion: {(success, error) -> Void in
             if (success) {
                 DDLogVerbose("Success signing up: \(success)")
                 // if login is successful, save username, password, token in keychain
                 LoginViewController.setKeyChainKeys(usernamei, password: passwordi)
                 
-                let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.initializeMainViewController()
                 appDelegate.sendGCMTokenToServer()
-                self.presentViewController(appDelegate.centerContainer!, animated: true, completion: nil)
+                self.present(appDelegate.centerContainer!, animated: true, completion: nil)
             }
             else {
                 DDLogVerbose("Signup failed: \(error)")

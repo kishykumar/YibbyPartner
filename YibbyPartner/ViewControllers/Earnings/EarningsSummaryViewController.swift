@@ -22,17 +22,17 @@ class EarningsSummaryViewController: UIViewController, JTCalendarDelegate {
     @IBOutlet weak var summaryEarningsOutlet: UIView!
     
     var calendarManager: JTCalendarManager!
-    var dateSelected: NSDate?
-    var startOfTheWeek: NSDate?
-    var endOfWeek: NSDate?
+    var dateSelected: Date?
+    var startOfTheWeek: Date?
+    var endOfWeek: Date?
     
     // MARK: Actions
     
-    @IBAction func viewDetailedEarningsAction(sender: AnyObject) {
+    @IBAction func viewDetailedEarningsAction(_ sender: AnyObject) {
 
         let earningsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Earnings, bundle: nil)
         
-        let weeklyEarningsViewController = earningsStoryboard.instantiateViewControllerWithIdentifier("WeeklyEarningsViewControllerIdentifier") as! WeeklyEarningsViewController
+        let weeklyEarningsViewController = earningsStoryboard.instantiateViewController(withIdentifier: "WeeklyEarningsViewControllerIdentifier") as! WeeklyEarningsViewController
         
         weeklyEarningsViewController.startOfTheWeek = self.startOfTheWeek
         weeklyEarningsViewController.endOfWeek = self.endOfWeek
@@ -55,10 +55,12 @@ class EarningsSummaryViewController: UIViewController, JTCalendarDelegate {
         self.calendarManager.delegate = self
         self.calendarManager.menuView = calendarMenuOutlet
         self.calendarManager.contentView = calendarOutlet
-        self.calendarManager.setDate(NSDate())
-        self.calendarManager.dateHelper.calendar().firstWeekday = 4 // Wednesday
+        self.calendarManager.setDate(Date())
         
-        computeStartEndWeek(NSDate())
+        var calendar = self.calendarManager.dateHelper.calendar()
+        calendar?.firstWeekday = 4 // Wednesday
+        
+        computeStartEndWeek(Date())
         self.calendarManager.reload()
     }
     
@@ -78,9 +80,9 @@ class EarningsSummaryViewController: UIViewController, JTCalendarDelegate {
     
     // MARK: JTCalendarDelegate
 
-    func calendar(calendar: JTCalendarManager!, prepareDayView dayView: UIView!) {
+    func calendar(_ calendar: JTCalendarManager!, prepareDayView dayView: UIView!) {
 
-        dayView.hidden = false
+        dayView.isHidden = false
         
         if let dayView = dayView as? JTCalendarDayView {
             // Test if the dayView is from another month than the page
@@ -89,37 +91,37 @@ class EarningsSummaryViewController: UIViewController, JTCalendarDelegate {
             // Selected week
             if (self.startOfTheWeek != nil && self.endOfWeek != nil &&
                 calendarManager.dateHelper.date(dayView.date, isEqualOrAfter: self.startOfTheWeek!, andEqualOrBefore: self.endOfWeek!)) {
-                dayView.circleView.hidden = false
-                dayView.circleView.backgroundColor = UIColor.redColor()
-                dayView.dotView.backgroundColor = UIColor.whiteColor()
-                dayView.textLabel.textColor = UIColor.whiteColor()
+                dayView.circleView.isHidden = false
+                dayView.circleView.backgroundColor = UIColor.red
+                dayView.dotView.backgroundColor = UIColor.white
+                dayView.textLabel.textColor = UIColor.white
             }
             // Other month
             else if dayView.isFromAnotherMonth {
-                dayView.circleView.hidden = true
-                dayView.dotView.backgroundColor = UIColor.redColor()
-                dayView.textLabel.textColor = UIColor.lightGrayColor()
+                dayView.circleView.isHidden = true
+                dayView.dotView.backgroundColor = UIColor.red
+                dayView.textLabel.textColor = UIColor.lightGray
             }
             // Today
-            else if calendarManager.dateHelper.date(NSDate(), isTheSameDayThan: dayView.date) {
-                dayView.circleView.hidden = false
-                dayView.circleView.backgroundColor = UIColor.blueColor()
-                dayView.dotView.backgroundColor = UIColor.whiteColor()
-                dayView.textLabel.textColor = UIColor.whiteColor()
+            else if calendarManager.dateHelper.date(Date(), isTheSameDayThan: dayView.date) {
+                dayView.circleView.isHidden = false
+                dayView.circleView.backgroundColor = UIColor.blue
+                dayView.dotView.backgroundColor = UIColor.white
+                dayView.textLabel.textColor = UIColor.white
             }
             // Selected Day
             else if ((self.dateSelected != nil) &&
                         calendarManager.dateHelper.date(self.dateSelected, isTheSameDayThan: dayView.date)) {
-                dayView.circleView.hidden = false
-                dayView.circleView.backgroundColor = UIColor.redColor()
-                dayView.dotView.backgroundColor = UIColor.whiteColor()
-                dayView.textLabel.textColor = UIColor.whiteColor()
+                dayView.circleView.isHidden = false
+                dayView.circleView.backgroundColor = UIColor.red
+                dayView.dotView.backgroundColor = UIColor.white
+                dayView.textLabel.textColor = UIColor.white
             }
             // Another day of the current month
             else {
-                dayView.circleView.hidden = true
-                dayView.dotView.backgroundColor = UIColor.redColor()
-                dayView.textLabel.textColor = UIColor.blackColor()
+                dayView.circleView.isHidden = true
+                dayView.dotView.backgroundColor = UIColor.red
+                dayView.textLabel.textColor = UIColor.black
             }
             
             // Your method to test if a date have an event for example
@@ -132,19 +134,19 @@ class EarningsSummaryViewController: UIViewController, JTCalendarDelegate {
         }
     }
     
-    func calendar(calendar: JTCalendarManager!, prepareMenuItemView menuItemView: UIView!, date: NSDate!) {
+    func calendar(_ calendar: JTCalendarManager!, prepareMenuItemView menuItemView: UIView!, date: Date!) {
 
-        var dateFormatter: NSDateFormatter = NSDateFormatter()
+        var dateFormatter: DateFormatter = DateFormatter()
         
-        dateFormatter = NSDateFormatter()
+        dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM yyyy"
         dateFormatter.locale = calendarManager.dateHelper.calendar().locale
         dateFormatter.timeZone = calendarManager.dateHelper.calendar().timeZone
 
-        (menuItemView as? UILabel)!.text = dateFormatter.stringFromDate(date)
+        (menuItemView as? UILabel)!.text = dateFormatter.string(from: date)
     }
     
-    func calendar(calendar: JTCalendarManager, didTouchDayView dayView: UIView!) {
+    func calendar(_ calendar: JTCalendarManager, didTouchDayView dayView: UIView!) {
         
         if let dayView = dayView as? JTCalendarDayView {
 
@@ -153,10 +155,10 @@ class EarningsSummaryViewController: UIViewController, JTCalendarDelegate {
             computeStartEndWeek(dayView.date)
             
             // Animation for the circleView
-            dayView.circleView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.1, 0.1)
+            dayView.circleView.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
             
-            UIView.transitionWithView(dayView, duration: 0.3, options: [], animations: {() -> Void in
-                dayView.circleView.transform = CGAffineTransformIdentity
+            UIView.transition(with: dayView, duration: 0.3, options: [], animations: {() -> Void in
+                dayView.circleView.transform = CGAffineTransform.identity
                 
                 // Load the data for this week from the server
                 self.fetchWeeklyEarnings(self.startOfTheWeek!, weekEnd: self.endOfWeek!, successBlock: {() -> Void in
@@ -182,7 +184,7 @@ class EarningsSummaryViewController: UIViewController, JTCalendarDelegate {
         }
     }
 
-    func calendarBuildDayView(calendar: JTCalendarManager!) -> UIView! {
+    func calendarBuildDayView(_ calendar: JTCalendarManager!) -> UIView! {
         let view: JTCalendarDayView = JTCalendarDayView()
         
         view.textLabel.font = UIFont(name: "Avenir-Light", size: 13)
@@ -195,7 +197,7 @@ class EarningsSummaryViewController: UIViewController, JTCalendarDelegate {
     // MARK: Helpers
     
     
-    func fetchWeeklyEarnings(weekStart: NSDate, weekEnd: NSDate, successBlock: FetchEarningsSuccessBlock) {
+    func fetchWeeklyEarnings(_ weekStart: Date, weekEnd: Date, successBlock: @escaping FetchEarningsSuccessBlock) {
         WebInterface.makeWebRequestAndHandleError(
             self,
             webRequest: {(errorBlock: (BAAObjectResultBlock)) -> Void in
@@ -203,7 +205,7 @@ class EarningsSummaryViewController: UIViewController, JTCalendarDelegate {
                 // enable the loading activity indicator
                 ActivityIndicatorUtil.enableActivityIndicator(self.view)
                 
-                let client: BAAClient = BAAClient.sharedClient()
+                let client: BAAClient = BAAClient.shared()
                 
                 client.dummyCall( {(success, error) -> Void in
                     
@@ -219,12 +221,12 @@ class EarningsSummaryViewController: UIViewController, JTCalendarDelegate {
         })
     }
     
-    func computeStartEndWeek(inDate: NSDate) {
+    func computeStartEndWeek(_ inDate: Date) {
         let calendar = calendarManager.dateHelper.calendar()
-        var interval = NSTimeInterval(0)
+        var interval = TimeInterval(0)
         
-        calendar.rangeOfUnit(.WeekOfMonth, startDate: &self.startOfTheWeek, interval: &interval, forDate: inDate)
-        self.endOfWeek = self.startOfTheWeek!.dateByAddingTimeInterval(interval - 1)
+//        calendar?.range(of: .WeekOfMonth, start: &self.startOfTheWeek, interval: &interval, for: inDate)
+//        self.endOfWeek = self.startOfTheWeek!.addingTimeInterval(interval - 1)
     }
     
     /*

@@ -18,7 +18,7 @@ class OfferSentViewController: UIViewController {
         
         // hide the nav bar
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        activityIndicator.startAnimation();
+        activityIndicator.startAnimating();
     }
     
     override func viewDidLoad() {

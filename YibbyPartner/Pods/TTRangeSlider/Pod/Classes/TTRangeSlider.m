@@ -6,12 +6,12 @@
 #import "TTRangeSlider.h"
 
 const int HANDLE_TOUCH_AREA_EXPANSION = -30; //expand the touch area of the handle by this much (negative values increase size) so that you don't have to touch right on the handle to activate it.
-const float HANDLE_DIAMETER = 16;
 const float TEXT_HEIGHT = 14;
 
 @interface TTRangeSlider ()
 
 @property (nonatomic, strong) CALayer *sliderLine;
+@property (nonatomic, strong) CALayer *sliderLineBetweenHandles;
 
 @property (nonatomic, strong) CALayer *leftHandle;
 @property (nonatomic, assign) BOOL leftHandleSelected;
@@ -21,7 +21,14 @@ const float TEXT_HEIGHT = 14;
 @property (nonatomic, strong) CATextLayer *minLabel;
 @property (nonatomic, strong) CATextLayer *maxLabel;
 
+@property (nonatomic, assign) CGSize minLabelTextSize;
+@property (nonatomic, assign) CGSize maxLabelTextSize;
+
 @property (nonatomic, strong) NSNumberFormatter *decimalNumberFormatter; // Used to format values if formatType is YLRangeSliderFormatTypeDecimal
+
+// strong reference needed for UIAccessibilityContainer
+// see http://stackoverflow.com/questions/13462046/custom-uiview-not-showing-accessibility-on-voice-over
+@property (nonatomic, strong) NSMutableArray *accessibleElements;
 
 @end
 
@@ -43,25 +50,46 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _enableStep = NO;
     _step = 0.1f;
 
+    _hideLabels = NO;
+    
+    _handleDiameter = 16.0;
+    _selectedHandleDiameterMultiplier = 1.7;
+    
+    _lineHeight = 1.0;
+    
+    _handleBorderWidth = 0.0;
+    _handleBorderColor = self.tintColor;
+    
+    _labelPadding = 8.0;
+    
     //draw the slider line
     self.sliderLine = [CALayer layer];
     self.sliderLine.backgroundColor = self.tintColor.CGColor;
     [self.layer addSublayer:self.sliderLine];
+    
+    //draw the track distline
+    self.sliderLineBetweenHandles = [CALayer layer];
+    self.sliderLineBetweenHandles.backgroundColor = self.tintColor.CGColor;
+    [self.layer addSublayer:self.sliderLineBetweenHandles];
 
     //draw the minimum slider handle
     self.leftHandle = [CALayer layer];
-    self.leftHandle.cornerRadius = 8.0f;
+    self.leftHandle.cornerRadius = self.handleDiameter / 2;
     self.leftHandle.backgroundColor = self.tintColor.CGColor;
+    self.leftHandle.borderWidth = self.handleBorderWidth;
+    self.leftHandle.borderColor = self.handleBorderColor.CGColor;
     [self.layer addSublayer:self.leftHandle];
 
     //draw the maximum slider handle
     self.rightHandle = [CALayer layer];
-    self.rightHandle.cornerRadius = 8.0f;
+    self.rightHandle.cornerRadius = self.handleDiameter / 2;
     self.rightHandle.backgroundColor = self.tintColor.CGColor;
+    self.rightHandle.borderWidth = self.handleBorderWidth;
+    self.rightHandle.borderColor = self.handleBorderColor.CGColor;
     [self.layer addSublayer:self.rightHandle];
 
-    self.leftHandle.frame = CGRectMake(0, 0, HANDLE_DIAMETER, HANDLE_DIAMETER);
-    self.rightHandle.frame = CGRectMake(0, 0, HANDLE_DIAMETER, HANDLE_DIAMETER);
+    self.leftHandle.frame = CGRectMake(0, 0, self.handleDiameter, self.handleDiameter);
+    self.rightHandle.frame = CGRectMake(0, 0, self.handleDiameter, self.handleDiameter);
 
     //draw the text labels
     self.minLabel = [[CATextLayer alloc] init];
@@ -75,6 +103,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     } else {
         self.minLabel.foregroundColor = self.minLabelColour.CGColor;
     }
+    self.minLabelFont = [UIFont systemFontOfSize:kLabelsFontSize];
     [self.layer addSublayer:self.minLabel];
 
     self.maxLabel = [[CATextLayer alloc] init];
@@ -87,8 +116,26 @@ static const CGFloat kLabelsFontSize = 12.0f;
     } else {
         self.maxLabel.foregroundColor = self.maxLabelColour.CGColor;
     }
+    self.maxLabelFont = [UIFont systemFontOfSize:kLabelsFontSize];
     [self.layer addSublayer:self.maxLabel];
 
+    // TODO Create a bundle that allows localization of default accessibility labels and hints
+    if (!self.minLabelAccessibilityLabel || self.minLabelAccessibilityLabel.length == 0) {
+      self.minLabelAccessibilityLabel = @"Left Handle";
+    }
+  
+    if (!self.minLabelAccessibilityHint || self.minLabelAccessibilityHint.length == 0) {
+      self.minLabelAccessibilityHint = @"Minimum value in slider";
+    }
+  
+    if (!self.maxLabelAccessibilityLabel || self.maxLabelAccessibilityLabel.length == 0) {
+      self.maxLabelAccessibilityLabel = @"Right Handle";
+    }
+  
+    if (!self.maxLabelAccessibilityHint || self.maxLabelAccessibilityHint.length == 0) {
+      self.maxLabelAccessibilityHint = @"Maximum value in slider";
+    }
+  
     [self refresh];
 }
 
@@ -101,8 +148,11 @@ static const CGFloat kLabelsFontSize = 12.0f;
     float yMiddle = currentFrame.size.height/2.0;
     CGPoint lineLeftSide = CGPointMake(barSidePadding, yMiddle);
     CGPoint lineRightSide = CGPointMake(currentFrame.size.width-barSidePadding, yMiddle);
-    self.sliderLine.frame = CGRectMake(lineLeftSide.x, lineLeftSide.y, lineRightSide.x-lineLeftSide.x, 1);
+    self.sliderLine.frame = CGRectMake(lineLeftSide.x, lineLeftSide.y, lineRightSide.x-lineLeftSide.x, self.lineHeight);
+    
+    self.sliderLine.cornerRadius = self.lineHeight / 2.0;
 
+    [self updateLabelValues];
     [self updateHandlePositions];
     [self updateLabelPositions];
 }
@@ -135,6 +185,27 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 
+- (void)tintColorDidChange {
+    CGColorRef color = self.tintColor.CGColor;
+
+    [CATransaction begin];
+    [CATransaction setAnimationDuration:0.5];
+    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
+    self.sliderLine.backgroundColor = color;
+    if (self.handleColor == nil) {
+        self.leftHandle.backgroundColor = color;
+        self.rightHandle.backgroundColor = color;
+    }
+
+    if (self.minLabelColour == nil){
+        self.minLabel.foregroundColor = color;
+    }
+    if (self.maxLabelColour == nil){
+        self.maxLabel.foregroundColor = color;
+    }
+    [CATransaction commit];
+}
+
 - (float)getPercentageAlongLineForValue:(float) value {
     if (self.minValue == self.maxValue){
         return 0; //stops divide by zero errors where maxMinDif would be zero. If the min and max are the same the percentage has no point.
@@ -164,7 +235,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 - (void)updateLabelValues {
-    if ([self.numberFormatterOverride isEqual:[NSNull null]]){
+    if (self.hideLabels || [self.numberFormatterOverride isEqual:[NSNull null]]){
         self.minLabel.string = @"";
         self.maxLabel.string = @"";
         return;
@@ -174,6 +245,15 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
     self.minLabel.string = [formatter stringFromNumber:@(self.selectedMinimum)];
     self.maxLabel.string = [formatter stringFromNumber:@(self.selectedMaximum)];
+    
+    self.minLabelTextSize = [self.minLabel.string sizeWithAttributes:@{NSFontAttributeName:self.minLabelFont}];
+    self.maxLabelTextSize = [self.maxLabel.string sizeWithAttributes:@{NSFontAttributeName:self.maxLabelFont}];
+}
+
+- (void)updateAccessibilityElements {
+  [_accessibleElements removeAllObjects];
+  [_accessibleElements addObject:[self leftHandleAccessibilityElement]];
+  [_accessibleElements addObject:[self rightHandleAccessbilityElement]];
 }
 
 #pragma mark - Set Positions
@@ -183,11 +263,14 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
     CGPoint rightHandleCenter = CGPointMake([self getXPositionAlongLineForValue:self.selectedMaximum], CGRectGetMidY(self.sliderLine.frame));
     self.rightHandle.position= rightHandleCenter;
+    
+    //positioning for the dist slider line
+    self.sliderLineBetweenHandles.frame = CGRectMake(self.leftHandle.position.x, self.sliderLine.frame.origin.y, self.rightHandle.position.x-self.leftHandle.position.x, self.lineHeight);
 }
 
 - (void)updateLabelPositions {
     //the centre points for the labels are X = the same x position as the relevant handle. Y = the y position of the handle minus half the height of the text label, minus some padding.
-    int padding = 8;
+    float padding = self.labelPadding;
     float minSpacingBetweenLabels = 8.0f;
 
     CGPoint leftHandleCentre = [self getCentreOfRect:self.leftHandle.frame];
@@ -196,20 +279,25 @@ static const CGFloat kLabelsFontSize = 12.0f;
     CGPoint rightHandleCentre = [self getCentreOfRect:self.rightHandle.frame];
     CGPoint newMaxLabelCenter = CGPointMake(rightHandleCentre.x, self.rightHandle.frame.origin.y - (self.maxLabel.frame.size.height/2) - padding);
 
-    CGSize minLabelTextSize = [self.minLabel.string sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:kLabelsFontSize]}];
-    CGSize maxLabelTextSize = [self.maxLabel.string sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:kLabelsFontSize]}];
+    CGSize minLabelTextSize = self.minLabelTextSize;
+    CGSize maxLabelTextSize = self.maxLabelTextSize;
+    
+    
+    self.minLabel.frame = CGRectMake(0, 0, minLabelTextSize.width, minLabelTextSize.height);
+    self.maxLabel.frame = CGRectMake(0, 0, maxLabelTextSize.width, maxLabelTextSize.height);
 
     float newLeftMostXInMaxLabel = newMaxLabelCenter.x - maxLabelTextSize.width/2;
     float newRightMostXInMinLabel = newMinLabelCenter.x + minLabelTextSize.width/2;
     float newSpacingBetweenTextLabels = newLeftMostXInMaxLabel - newRightMostXInMinLabel;
 
-    if (newSpacingBetweenTextLabels > minSpacingBetweenLabels) {
+    if (self.disableRange == YES || newSpacingBetweenTextLabels > minSpacingBetweenLabels) {
         self.minLabel.position = newMinLabelCenter;
         self.maxLabel.position = newMaxLabelCenter;
     }
     else {
-        newMinLabelCenter = CGPointMake(self.minLabel.position.x, self.leftHandle.frame.origin.y - (self.minLabel.frame.size.height/2) - padding);
-        newMaxLabelCenter = CGPointMake(self.maxLabel.position.x, self.rightHandle.frame.origin.y - (self.maxLabel.frame.size.height/2) - padding);
+        float increaseAmount = minSpacingBetweenLabels - newSpacingBetweenTextLabels;
+        newMinLabelCenter = CGPointMake(newMinLabelCenter.x - increaseAmount/2, newMinLabelCenter.y);
+        newMaxLabelCenter = CGPointMake(newMaxLabelCenter.x + increaseAmount/2, newMaxLabelCenter.y);
         self.minLabel.position = newMinLabelCenter;
         self.maxLabel.position = newMaxLabelCenter;
 
@@ -245,6 +333,10 @@ static const CGFloat kLabelsFontSize = 12.0f;
                 self.rightHandleSelected = YES;
                 [self animateHandle:self.rightHandle withSelection:YES];
             }
+        }
+
+        if ([self.delegate respondsToSelector:@selector(didStartTouchesInRangeSlider:)]){
+            [self.delegate didStartTouchesInRangeSlider:self];
         }
 
         return YES;
@@ -292,6 +384,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [self updateLabelPositions];
     [CATransaction commit];
     [self updateLabelValues];
+    [self updateAccessibilityElements];
 
     //update the delegate
     if (self.delegate && (self.leftHandleSelected || self.rightHandleSelected)){
@@ -304,7 +397,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     CGPoint location = [touch locationInView:self];
 
     //find out the percentage along the line we are in x coordinate terms (subtracting half the frames width to account for moving the middle of the handle, not the left hand side)
-    float percentage = ((location.x-CGRectGetMinX(self.sliderLine.frame)) - HANDLE_DIAMETER/2) / (CGRectGetMaxX(self.sliderLine.frame) - CGRectGetMinX(self.sliderLine.frame));
+    float percentage = ((location.x-CGRectGetMinX(self.sliderLine.frame)) - self.handleDiameter/2) / (CGRectGetMaxX(self.sliderLine.frame) - CGRectGetMinX(self.sliderLine.frame));
 
     //multiply that percentage by self.maxValue to get the new selected minimum value
     float selectedValue = percentage * (self.maxValue - self.minValue) + self.minValue;
@@ -342,6 +435,9 @@ static const CGFloat kLabelsFontSize = 12.0f;
         self.rightHandleSelected = NO;
         [self animateHandle:self.rightHandle withSelection:NO];
     }
+    if ([self.delegate respondsToSelector:@selector(didEndTouchesInRangeSlider:)]) {
+        [self.delegate didEndTouchesInRangeSlider:self];
+    }
 }
 
 #pragma mark - Animation
@@ -350,7 +446,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
         [CATransaction begin];
         [CATransaction setAnimationDuration:0.3];
         [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
-        handle.transform = CATransform3DMakeScale(1.7, 1.7, 1);
+        handle.transform = CATransform3DMakeScale(self.selectedHandleDiameterMultiplier, self.selectedHandleDiameterMultiplier, 1);
 
         //the label above the handle will need to move too if the handle changes size
         [self updateLabelPositions];
@@ -396,8 +492,6 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [CATransaction setAnimationDuration:0.5];
     [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
     self.sliderLine.backgroundColor = color;
-    self.leftHandle.backgroundColor = color;
-    self.rightHandle.backgroundColor = color;
 
     if (self.minLabelColour == nil){
         self.minLabel.foregroundColor = color;
@@ -465,9 +559,141 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.maxLabel.foregroundColor = _maxLabelColour.CGColor;
 }
 
+-(void)setMinLabelFont:(UIFont *)minLabelFont{
+    _minLabelFont = minLabelFont;
+    self.minLabel.font = (__bridge CFTypeRef)_minLabelFont.fontName;
+    self.minLabel.fontSize = _minLabelFont.pointSize;
+}
+
+-(void)setMaxLabelFont:(UIFont *)maxLabelFont{
+    _maxLabelFont = maxLabelFont;
+    self.maxLabel.font = (__bridge CFTypeRef)_maxLabelFont.fontName;
+    self.maxLabel.fontSize = _maxLabelFont.pointSize;
+}
+
 -(void)setNumberFormatterOverride:(NSNumberFormatter *)numberFormatterOverride{
     _numberFormatterOverride = numberFormatterOverride;
     [self updateLabelValues];
+}
+
+-(void)setHandleImage:(UIImage *)handleImage{
+    _handleImage = handleImage;
+    
+    CGRect startFrame = CGRectMake(0.0, 0.0, 31, 32);
+    self.leftHandle.contents = (id)handleImage.CGImage;
+    self.leftHandle.frame = startFrame;
+    
+    self.rightHandle.contents = (id)handleImage.CGImage;
+    self.rightHandle.frame = startFrame;
+    
+    //Force layer background to transparant
+    self.leftHandle.backgroundColor = [[UIColor clearColor] CGColor];
+    self.rightHandle.backgroundColor = [[UIColor clearColor] CGColor];
+}
+
+-(void)setHandleColor:(UIColor *)handleColor{
+    _handleColor = handleColor;
+    self.leftHandle.backgroundColor = [handleColor CGColor];
+    self.rightHandle.backgroundColor = [handleColor CGColor];
+}
+
+-(void)setHandleBorderColor:(UIColor *)handleBorderColor{
+    _handleBorderColor = handleBorderColor;
+    self.leftHandle.borderColor = [handleBorderColor CGColor];
+    self.rightHandle.borderColor = [handleBorderColor CGColor];
+}
+
+-(void)setHandleBorderWidth:(CGFloat)handleBorderWidth{
+    _handleBorderWidth = handleBorderWidth;
+    self.leftHandle.borderWidth = handleBorderWidth;
+    self.rightHandle.borderWidth = handleBorderWidth;
+}
+
+-(void)setHandleDiameter:(CGFloat)handleDiameter{
+    _handleDiameter = handleDiameter;
+    
+    self.leftHandle.cornerRadius = self.handleDiameter / 2;
+    self.rightHandle.cornerRadius = self.handleDiameter / 2;
+    
+    self.leftHandle.frame = CGRectMake(0, 0, self.handleDiameter, self.handleDiameter);
+    self.rightHandle.frame = CGRectMake(0, 0, self.handleDiameter, self.handleDiameter);
+
+}
+
+-(void)setTintColorBetweenHandles:(UIColor *)tintColorBetweenHandles{
+    _tintColorBetweenHandles = tintColorBetweenHandles;
+    self.sliderLineBetweenHandles.backgroundColor = [tintColorBetweenHandles CGColor];
+}
+
+-(void)setLineHeight:(CGFloat)lineHeight{
+    _lineHeight = lineHeight;
+    [self setNeedsLayout];
+}
+
+-(void)setLabelPadding:(CGFloat)labelPadding {
+    _labelPadding = labelPadding;
+    [self updateLabelPositions];
+}
+
+#pragma mark - UIAccessibility
+
+- (BOOL)isAccessibilityElement
+{
+  return NO;
+}
+
+#pragma mark - UIAccessibilityContainer Protocol
+
+- (NSArray *)accessibleElements
+{
+  if(_accessibleElements != nil) {
+    return _accessibleElements;
+  }
+  
+  _accessibleElements = [[NSMutableArray alloc] init];
+  [_accessibleElements addObject:[self leftHandleAccessibilityElement]];
+  [_accessibleElements addObject:[self rightHandleAccessbilityElement]];
+  
+  return _accessibleElements;
+}
+
+- (NSInteger)accessibilityElementCount
+{
+  return [[self accessibleElements] count];
+}
+
+- (id)accessibilityElementAtIndex:(NSInteger)index
+{
+  return [[self accessibleElements] objectAtIndex:index];
+}
+
+- (NSInteger)indexOfAccessibilityElement:(id)element
+{
+  return [[self accessibleElements] indexOfObject:element];
+}
+
+- (UIAccessibilityElement *)leftHandleAccessibilityElement
+{
+  UIAccessibilityElement *element = [[UIAccessibilityElement alloc] initWithAccessibilityContainer:self];
+  element.isAccessibilityElement = YES;
+  element.accessibilityLabel = self.minLabelAccessibilityLabel;
+  element.accessibilityHint = self.minLabelAccessibilityHint;
+  element.accessibilityValue = self.minLabel.string;
+  element.accessibilityFrame = [self convertRect:self.leftHandle.frame toView:nil];
+  element.accessibilityTraits = UIAccessibilityTraitAdjustable;
+  return element;
+}
+
+- (UIAccessibilityElement *)rightHandleAccessbilityElement
+{
+  UIAccessibilityElement *element = [[UIAccessibilityElement alloc] initWithAccessibilityContainer:self];
+  element.isAccessibilityElement = YES;
+  element.accessibilityLabel = self.maxLabelAccessibilityLabel;
+  element.accessibilityHint = self.maxLabelAccessibilityHint;
+  element.accessibilityValue = self.maxLabel.string;
+  element.accessibilityFrame = [self convertRect:self.rightHandle.frame toView:nil];
+  element.accessibilityTraits = UIAccessibilityTraitAdjustable;
+  return element;
 }
 
 @end

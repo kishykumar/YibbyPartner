@@ -19,20 +19,20 @@ class RideStartViewController: UIViewController {
     
     // MARK: Actions
     
-    @IBAction func startNavAction(sender: AnyObject) {
+    @IBAction func startNavAction(_ sender: AnyObject) {
         MapService.sharedInstance().openDirectionsInGoogleMaps(self.bid.dropoffLat,
                                                                lng: self.bid.dropoffLong)
     }
     
-    @IBAction func destArrivedAction(sender: AnyObject) {
+    @IBAction func destArrivedAction(_ sender: AnyObject) {
         WebInterface.makeWebRequestAndHandleError(
             self,
-            webRequest: {(errorBlock: (BAAObjectResultBlock)) -> Void in
+            webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
                 
                 // enable the loading activity indicator
                 ActivityIndicatorUtil.enableActivityIndicator(self.view)
                 
-                let client: BAAClient = BAAClient.sharedClient()
+                let client: BAAClient = BAAClient.shared()
                 
                 client.endRide(self.bid.id, completion: {(success, error) -> Void in
                     
@@ -42,7 +42,7 @@ class RideStartViewController: UIViewController {
                     
                         let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
 
-                        let rideEndViewController = rideStoryboard.instantiateViewControllerWithIdentifier("RideEndViewControllerIdentifier") as! RideEndViewController
+                        let rideEndViewController = rideStoryboard.instantiateViewController(withIdentifier: "RideEndViewControllerIdentifier") as! RideEndViewController
                         
                         // get the navigation VC and push the new VC
                         self.navigationController!.pushViewController(rideEndViewController, animated: true)

@@ -10,19 +10,19 @@ import Foundation
 import CocoaLumberjack.DDDispatchQueueLogFormatter
 
 class LogFormatter: DDDispatchQueueLogFormatter {
-    let dateFormatter: NSDateFormatter
+    let dateFormatter: DateFormatter
     
     override init() {
-        dateFormatter = NSDateFormatter()
+        dateFormatter = DateFormatter()
 //        dateFormatter.formatterBehavior = .Behavior10_4
-        dateFormatter.timeZone = NSTimeZone.localTimeZone()
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        dateFormatter.timeZone = NSTimeZone.local
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss:SSS"
         super.init()
     }
     
-    override func formatLogMessage(logMessage: DDLogMessage!) -> String {
-        let dateAndTime = dateFormatter.stringFromDate(logMessage.timestamp)
+    override func format(message logMessage: DDLogMessage!) -> String {
+        let dateAndTime = dateFormatter.string(from: logMessage.timestamp)
         return "\(dateAndTime) [\(logMessage.fileName):\(logMessage.function):\(logMessage.line)]: \(logMessage.message)"
 //        return "\(logMessage.timestamp) [\(logMessage.fileName):\(logMessage.line)]: \(logMessage.message)"
     }

@@ -21,7 +21,7 @@ class RideEndViewController: UIViewController {
 
     // MARK: Actions
     
-    @IBAction func goOfflineAction(sender: AnyObject) {
+    @IBAction func goOfflineAction(_ sender: AnyObject) {
         // cleanup the state
         
         // let the webserver know
@@ -30,7 +30,7 @@ class RideEndViewController: UIViewController {
             // pop all the view controllers and go back to MainViewController
     }
     
-    @IBAction func rideFinishAction(sender: AnyObject) {
+    @IBAction func rideFinishAction(_ sender: AnyObject) {
         // cleanup the state
 
         // let the webserver know

@@ -19,10 +19,10 @@ class WeeklyEarningsViewController: UIViewController, JTCalendarDelegate {
     @IBOutlet weak var calendarOutlet: JTHorizontalCalendarView!
     
     var calendarManager: JTCalendarManager!
-    var dateSelected: NSDate?
+    var dateSelected: Date?
     
-    var startOfTheWeek: NSDate!
-    var endOfWeek: NSDate!
+    var startOfTheWeek: Date!
+    var endOfWeek: Date!
 
     // MARK: Actions
     
@@ -43,7 +43,10 @@ class WeeklyEarningsViewController: UIViewController, JTCalendarDelegate {
         self.calendarManager.delegate = self
         self.calendarManager.menuView = calendarMenuOutlet
         self.calendarManager.contentView = calendarOutlet
-        self.calendarManager.dateHelper.calendar().firstWeekday = 4 // Wednesday
+        
+        var calendar = self.calendarManager.dateHelper.calendar()
+        calendar?.firstWeekday = 4 // Wednesday
+        
         self.calendarManager.setDate(startOfTheWeek)
         self.calendarManager.settings.weekModeEnabled = true
 
@@ -67,9 +70,9 @@ class WeeklyEarningsViewController: UIViewController, JTCalendarDelegate {
     
     // MARK: JTCalendarDelegate
     
-    func calendar(calendar: JTCalendarManager!, prepareDayView dayView: UIView!) {
+    func calendar(_ calendar: JTCalendarManager!, prepareDayView dayView: UIView!) {
         
-        dayView.hidden = false
+        dayView.isHidden = false
         
         if let dayView = dayView as? JTCalendarDayView {
             // Test if the dayView is from another month than the page
@@ -77,67 +80,67 @@ class WeeklyEarningsViewController: UIViewController, JTCalendarDelegate {
             
             // Selected Day
             // Today
-            if calendarManager.dateHelper.date(NSDate(), isTheSameDayThan: dayView.date) {
-                dayView.circleView.hidden = false
-                dayView.circleView.backgroundColor = UIColor.blueColor()
-                dayView.dotView.backgroundColor = UIColor.whiteColor()
-                dayView.textLabel.textColor = UIColor.whiteColor()
+            if calendarManager.dateHelper.date(Date(), isTheSameDayThan: dayView.date) {
+                dayView.circleView.isHidden = false
+                dayView.circleView.backgroundColor = UIColor.blue
+                dayView.dotView.backgroundColor = UIColor.white
+                dayView.textLabel.textColor = UIColor.white
             }
             else if ((self.dateSelected != nil) &&
                 calendarManager.dateHelper.date(self.dateSelected, isTheSameDayThan: dayView.date)) {
-                dayView.circleView.hidden = false
-                dayView.circleView.backgroundColor = UIColor.redColor()
-                dayView.dotView.backgroundColor = UIColor.whiteColor()
-                dayView.textLabel.textColor = UIColor.whiteColor()
+                dayView.circleView.isHidden = false
+                dayView.circleView.backgroundColor = UIColor.red
+                dayView.dotView.backgroundColor = UIColor.white
+                dayView.textLabel.textColor = UIColor.white
             }
             // Other month
             else if dayView.isFromAnotherMonth {
-                dayView.circleView.hidden = true
-                dayView.dotView.backgroundColor = UIColor.redColor()
-                dayView.textLabel.textColor = UIColor.lightGrayColor()
+                dayView.circleView.isHidden = true
+                dayView.dotView.backgroundColor = UIColor.red
+                dayView.textLabel.textColor = UIColor.lightGray
             }
             // Another day of the current month
             else {
-                dayView.circleView.hidden = true
-                dayView.dotView.backgroundColor = UIColor.redColor()
-                dayView.textLabel.textColor = UIColor.blackColor()
+                dayView.circleView.isHidden = true
+                dayView.dotView.backgroundColor = UIColor.red
+                dayView.textLabel.textColor = UIColor.black
             }
         }
     }
     
-    func calendar(calendar: JTCalendarManager!, prepareMenuItemView menuItemView: UIView!, date: NSDate!) {
+    func calendar(_ calendar: JTCalendarManager!, prepareMenuItemView menuItemView: UIView!, date: Date!) {
         
-        var dateFormatter: NSDateFormatter = NSDateFormatter()
+        var dateFormatter: DateFormatter = DateFormatter()
         
-        dateFormatter = NSDateFormatter()
+        dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM yyyy"
         dateFormatter.locale = calendarManager.dateHelper.calendar().locale
         dateFormatter.timeZone = calendarManager.dateHelper.calendar().timeZone
         
-        (menuItemView as? UILabel)!.text = dateFormatter.stringFromDate(date)
+        (menuItemView as? UILabel)!.text = dateFormatter.string(from: date)
     }
     
-    func calendar(calendar: JTCalendarManager, didTouchDayView dayView: UIView!) {
+    func calendar(_ calendar: JTCalendarManager, didTouchDayView dayView: UIView!) {
         
         if let dayView = dayView as? JTCalendarDayView {
             
             self.dateSelected = dayView.date
             
             // Animation for the circleView
-            dayView.circleView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.1, 0.1)
+            dayView.circleView.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
             
-            UIView.transitionWithView(dayView, duration: 0.3,
+            UIView.transition(with: dayView, duration: 0.3,
                                       options: [],
                                       animations: {() -> Void in
                 
-                    dayView.circleView.transform = CGAffineTransformIdentity
+                    dayView.circleView.transform = CGAffineTransform.identity
                     self.calendarManager.reload()
                 
                 }, completion: { _ in
                     
                     let earningsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Earnings, bundle: nil)
                     
-                    let dailyEarningsViewController = earningsStoryboard.instantiateViewControllerWithIdentifier("DailyEarningsViewControllerIdentifier") as! DailyEarningsViewController
+                    let dailyEarningsViewController = earningsStoryboard.instantiateViewController(withIdentifier: "DailyEarningsViewControllerIdentifier") as! DailyEarningsViewController
                     
                     dailyEarningsViewController.selectedDate = self.dateSelected
                     

@@ -12,17 +12,17 @@ import BaasBoxSDK
 import CocoaLumberjack
 
 // LocationService singleton
-public class LocationService: NSObject, CLLocationManagerDelegate {
+open class LocationService: NSObject, CLLocationManagerDelegate {
     
-    private static let myInstance = LocationService()
-    private var locationManager:CLLocationManager!
+    fileprivate static let myInstance = LocationService()
+    fileprivate var locationManager:CLLocationManager!
     
-    private var lastLocUpdateTS = 0.0
-    private var curLocation: CLLocation!
+    fileprivate var lastLocUpdateTS = 0.0
+    fileprivate var curLocation: CLLocation!
 
-    private let UPDATES_AGE_TIME: NSTimeInterval = 120
-    private let DESIRED_HORIZONTAL_ACCURACY = 200.0
-    private let LOCATION_UPDATE_TIME_INTERVAL = 4.0 // seconds
+    fileprivate let UPDATES_AGE_TIME: TimeInterval = 120
+    fileprivate let DESIRED_HORIZONTAL_ACCURACY = 200.0
+    fileprivate let LOCATION_UPDATE_TIME_INTERVAL = 4.0 // seconds
 
     override init() {
         
@@ -53,9 +53,14 @@ public class LocationService: NSObject, CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
     }
     
-    public func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+    open func locationManager(_ manager: CLLocationManager,
+                              didUpdateLocations locations: [CLLocation]) {
         
-        let curTime = NSDate().timeIntervalSince1970
+        guard let newLocation = locations.last else {
+            return;
+        }
+        
+        let curTime = Date().timeIntervalSince1970
         
         if ((lastLocUpdateTS == 0.0) || ((curTime > lastLocUpdateTS) &&
             (curTime - lastLocUpdateTS > LOCATION_UPDATE_TIME_INTERVAL))) {
@@ -67,7 +72,7 @@ public class LocationService: NSObject, CLLocationManagerDelegate {
         }
         
         // how old is this newLocation?
-        let age: NSTimeInterval = -newLocation.timestamp.timeIntervalSinceNow
+        let age: TimeInterval = -newLocation.timestamp.timeIntervalSinceNow
         if (age > UPDATES_AGE_TIME) {
             return
         }
@@ -90,12 +95,12 @@ public class LocationService: NSObject, CLLocationManagerDelegate {
             WebInterface.makeWebRequestAndDiscardError(
                 {() -> Void in
                     
-                    let client: BAAClient = BAAClient.sharedClient()
+                    let client: BAAClient = BAAClient.shared()
                     
                     client.updateLocation(
                         "driver", 
-                        latitude: userLocation.coordinate.latitude,
-                        longitude: userLocation.coordinate.longitude,
+                        latitude: userLocation.coordinate.latitude as NSNumber!,
+                        longitude: userLocation.coordinate.longitude as NSNumber!,
                         completion: {(success, error) -> Void in
                             
                             // TODO: FIX error

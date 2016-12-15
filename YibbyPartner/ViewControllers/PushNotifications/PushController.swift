@@ -12,10 +12,10 @@ import MMDrawerController
 import CocoaLumberjack
 
 @objc public protocol PushControllerProtocol {
-    func receiveRemoteNotification(application: UIApplication, notification:[NSObject:AnyObject])
+    func receiveRemoteNotification(_ application: UIApplication, notification:[AnyHashable: Any])
 }
 
-public class PushController: NSObject, PushControllerProtocol {
+open class PushController: NSObject, PushControllerProtocol {
     
     let BID_MESSAGE_TYPE = "BID"
     let RIDE_START_MESSAGE_TYPE = "RIDE_START"
@@ -30,9 +30,9 @@ public class PushController: NSObject, PushControllerProtocol {
     let BID_ID_JSON_FIELD_NAME = "bidId"
     let GCM_MSG_ID_JSON_FIELD_NAME = "gcm.message_id"
     
-    var savedNotification: [NSObject : AnyObject]?
+    var savedNotification: [AnyHashable: Any]?
     
-    let BID_NOTIFICATION_EXPIRE_TIME: NSTimeInterval = 30 // seconds
+    let BID_NOTIFICATION_EXPIRE_TIME: TimeInterval = 30 // seconds
     
     var mLastGCMMsgId: String?
     
@@ -41,24 +41,24 @@ public class PushController: NSObject, PushControllerProtocol {
     }
 
     //MARK: Receiving remote notification
-    public func receiveRemoteNotification(application: UIApplication, notification: [NSObject : AnyObject]) {
+    open func receiveRemoteNotification(_ application: UIApplication, notification: [AnyHashable: Any]) {
         
 // TODO: Add this code
 //        if (DRIVER IS OFFLINE) {
 //          return;
 //        }
     
-        let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         if (!appDelegate.initialized) {
             return;
         }
         
-        if application.applicationState == .Background {
+        if application.applicationState == .background {
             //opened from a push notification when the app was on background
             DDLogDebug("App in BG")
             handleBgNotification(notification)
         }
-        else if (application.applicationState == .Inactive) {
+        else if (application.applicationState == .inactive) {
             // ignore the BID message
             DDLogDebug ("App in inactive state")
             handleBgNotification(notification)
@@ -69,16 +69,16 @@ public class PushController: NSObject, PushControllerProtocol {
         }
     }
 
-    func handleBgNotification (notification: [NSObject : AnyObject]) {
+    func handleBgNotification (_ notification: [AnyHashable: Any]) {
         
         // save the most recent push message
         DDLogDebug("Save push message in BG from \(savedNotification) to \(notification)")
         
-        savedNotification = [NSObject : AnyObject]()
+        savedNotification = [AnyHashable: Any]()
         savedNotification = notification
     }
     
-    func handleFgNotification (notification: [NSObject : AnyObject]) {
+    func handleFgNotification (_ notification: [AnyHashable: Any]) {
         // show the message if it's not late
         processNotification(notification)
     }
@@ -99,12 +99,12 @@ public class PushController: NSObject, PushControllerProtocol {
         }
     }
     
-    func processNotification (notification: [NSObject : AnyObject]) {
+    func processNotification (_ notification: [AnyHashable: Any]) {
         
         DDLogVerbose("Called")
         
         // handle bid
-        let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         
         if notification[MESSAGE_JSON_FIELD_NAME] == nil {
             DDLogDebug("No notification message found")
@@ -128,11 +128,18 @@ public class PushController: NSObject, PushControllerProtocol {
         if let mmnvc = appDelegate.centerContainer!.centerViewController as? UINavigationController {
             
             let jsonCustom = notification[CUSTOM_JSON_FIELD_NAME]
-            if let data = jsonCustom!.dataUsingEncoding(NSUTF8StringEncoding) {
-                let topJson = JSON(data: data)
+            
+            guard let jsonCustomString = jsonCustom as? String else {
+                DDLogVerbose("Returning because of JSON custom string: \(jsonCustom)")
+                return;
+            }
+            
+            if let dataFromString = jsonCustomString.data(using: .utf8, allowLossyConversion: false) {
+                
+                let topJson = JSON(data: dataFromString)
                 if let topBidJson = topJson[BID_JSON_FIELD_NAME].string {
                 
-                    if let bidData = topBidJson.dataUsingEncoding(NSUTF8StringEncoding) {
+                    if let bidData = topBidJson.data(using: String.Encoding.utf8) {
                         let bidJson = JSON(data: bidData)
                         
                         switch notification[MESSAGE_JSON_FIELD_NAME] as! String {
@@ -141,7 +148,7 @@ public class PushController: NSObject, PushControllerProtocol {
 
                             let bidElapsedTime = TimeUtil.diffFromCurTimeISO(bidJson["_creation_date"].stringValue)
                             if (bidElapsedTime > BID_NOTIFICATION_EXPIRE_TIME) {
-                                DDLogDebug("Bid Discarded CurrentTime: \(NSDate()) bidTime: \(bidJson["_creation_date"].stringValue) bidElapsedTime: \(bidElapsedTime)")
+                                DDLogDebug("Bid Discarded CurrentTime: \(Date()) bidTime: \(bidJson["_creation_date"].stringValue) bidElapsedTime: \(bidElapsedTime)")
                                 
                                 // The driver missed responding to the bid
                                 AlertUtil.displayAlert("Bid missed.",
@@ -155,12 +162,12 @@ public class PushController: NSObject, PushControllerProtocol {
 
                             let offerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Offer, bundle: nil)
 
-                            let offerViewController = offerStoryboard.instantiateViewControllerWithIdentifier("OfferViewControllerIdentifier") as! OfferViewController
+                            let offerViewController = offerStoryboard.instantiateViewController(withIdentifier: "OfferViewControllerIdentifier") as! OfferViewController
 
                             navController.pushViewController(offerViewController, animated: false)
 
                             // start the timer by accouting the time elapsed since the user actually created the bid
-                            offerViewController.timerStart = NSTimeInterval(Int(OfferViewController.OFFER_TIMER_EXPIRE_PERIOD - bidElapsedTime))
+                            offerViewController.timerStart = TimeInterval(Int(OfferViewController.OFFER_TIMER_EXPIRE_PERIOD - bidElapsedTime))
                             
                             offerViewController.userBid = Bid(id: bidJson["id"].stringValue,
                                                               bidHigh: bidJson["bidHigh"].intValue,
@@ -179,12 +186,12 @@ public class PushController: NSObject, PushControllerProtocol {
                             // if an alert was already displayed, dismiss it
                             if let vvc = appDelegate.window!.visibleViewController as? UIAlertController {
                                 DDLogDebug("Alert is up \(vvc)")
-                                vvc.dismissViewControllerAnimated(false, completion: nil)
+                                vvc.dismiss(animated: false, completion: nil)
                             } else {
                                 DDLogDebug("Alert is NOT up \(appDelegate.window!.visibleViewController)")
                             }
                             
-                            mmnvc.presentViewController(navController, animated: true, completion: nil)
+                            mmnvc.present(navController, animated: true, completion: nil)
 
                             break
 
@@ -199,7 +206,7 @@ public class PushController: NSObject, PushControllerProtocol {
                                     let driverOnlineController: DriverOnlineViewController = (viewController as! DriverOnlineViewController)
                                     
                                     // dismiss all view controllers till this view controller
-                                    driverOnlineController.dismissViewControllerAnimated(true, completion: nil)
+                                    driverOnlineController.dismiss(animated: true, completion: nil)
                                     
                                     AlertUtil.displayAlertOnVC(driverOnlineController,
                                                                title: "Offer Rejected.",
@@ -214,7 +221,7 @@ public class PushController: NSObject, PushControllerProtocol {
                     }
                 }
                 else if let topRideJson = topJson[RIDE_JSON_FIELD_NAME].string {
-                    if let rideData = topRideJson.dataUsingEncoding(NSUTF8StringEncoding) {
+                    if let rideData = topRideJson.data(using: String.Encoding.utf8) {
                         let rideJson = JSON(data: rideData)
                         
                         switch notification[MESSAGE_JSON_FIELD_NAME] as! String {
@@ -244,13 +251,13 @@ public class PushController: NSObject, PushControllerProtocol {
                                     
                                     // dismiss all view controllers till this view controller
                                     DDLogDebug("driverOnlineController dismissed")
-                                    driverOnlineController.dismissViewControllerAnimated(true, completion: nil)
+                                    driverOnlineController.dismiss(animated: true, completion: nil)
                                 }
                             }
                             
                             let driverEnRouteStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.DriverEnRoute, bundle: nil)
 
-                            let driverEnRouteViewController = driverEnRouteStoryboard.instantiateViewControllerWithIdentifier("DriverEnRouteViewControllerIdentifier") as! DriverEnRouteViewController
+                            let driverEnRouteViewController = driverEnRouteStoryboard.instantiateViewController(withIdentifier: "DriverEnRouteViewControllerIdentifier") as! DriverEnRouteViewController
                             DDLogDebug("driverEnRouteViewController shown")
                             mmnvc.pushViewController(driverEnRouteViewController, animated: true)
                             
@@ -270,25 +277,25 @@ public class PushController: NSObject, PushControllerProtocol {
     }
     
     //MARK: APNS Token
-    public func didRegisterForRemoteNotificationsWithDeviceToken(data:NSData) {
+    open func didRegisterForRemoteNotificationsWithDeviceToken(_ data:Data) {
         
     }
 
     //MARK: Utility
     
-    public static func registerForPushNotifications() {
+    open static func registerForPushNotifications() {
         
-        let application: UIApplication = UIApplication.sharedApplication()
+        let application: UIApplication = UIApplication.shared
         
         if #available(iOS 8.0, *) {
             let settings: UIUserNotificationSettings =
-            UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
         } else {
             // Fallback
-            let types: UIRemoteNotificationType = [.Alert, .Badge, .Sound]
-            application.registerForRemoteNotificationTypes(types)
+            let types: UIRemoteNotificationType = [.alert, .badge, .sound]
+            application.registerForRemoteNotifications(matching: types)
         }
     }
 }

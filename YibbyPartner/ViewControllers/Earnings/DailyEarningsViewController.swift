@@ -19,7 +19,7 @@ class DailyEarningsViewController: UIViewController, UITableViewDelegate, UITabl
     let tripsSection: Int = 0
     
     let textCellIdentifier = "DayEarningsCellIdentifier"
-    var selectedDate: NSDate!
+    var selectedDate: Date!
     
     // MARK: Actions
     
@@ -32,7 +32,7 @@ class DailyEarningsViewController: UIViewController, UITableViewDelegate, UITabl
         // Do any additional setup after loading the view.
         initProperties()
         setupUI()
-        self.performSelector(#selector(afterViewLoadOps), withObject: nil, afterDelay: 0.0)
+        self.perform(#selector(afterViewLoadOps), with: nil, afterDelay: 0.0)
     }
     
     func initProperties() {
@@ -46,40 +46,40 @@ class DailyEarningsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func setupUI() {
-        self.navigationController!.navigationBarHidden = false
+        self.navigationController!.isNavigationBarHidden = false
     }
     
     // MARK: UITableViewDelegate
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let earningsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Earnings, bundle: nil)
 
-        let tripDetailsViewController = earningsStoryboard.instantiateViewControllerWithIdentifier("TripDetailsViewControllerIdentifier") as! TripDetailsViewController
+        let tripDetailsViewController = earningsStoryboard.instantiateViewController(withIdentifier: "TripDetailsViewControllerIdentifier") as! TripDetailsViewController
 
         self.navigationController!.pushViewController(tripDetailsViewController, animated: true)
     }
     
     // MARK: UITableViewDataSource
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
         
 //        cell.textLabel?.text = swiftBlogs[row]
         
         return cell
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10;
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1;
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if (section == tripsSection) {
             return InterfaceString.TableSections.Trips;
         }
@@ -88,7 +88,7 @@ class DailyEarningsViewController: UIViewController, UITableViewDelegate, UITabl
     
     // MARK: Helper functions
     
-    func afterViewLoadOps(sender: AnyObject) {
+    func afterViewLoadOps(_ sender: AnyObject) {
         loadEarningsData()
     }
     
@@ -96,13 +96,13 @@ class DailyEarningsViewController: UIViewController, UITableViewDelegate, UITabl
         ActivityIndicatorUtil.enableActivityIndicator(self.view)
         fetchDailyEarningsDetails(selectedDate, successBlock: { () -> Void in
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3 * Int64(Double(NSEC_PER_SEC))), dispatch_get_main_queue(), {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(3 * Int64(Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
                 ActivityIndicatorUtil.disableActivityIndicator(self.view)
             });
         })
     }
     
-    func fetchDailyEarningsDetails(day: NSDate, successBlock: FetchDailyEarningsSuccessBlock) {
+    func fetchDailyEarningsDetails(_ day: Date, successBlock: @escaping FetchDailyEarningsSuccessBlock) {
         WebInterface.makeWebRequestAndHandleError(
             self,
             webRequest: {(errorBlock: (BAAObjectResultBlock)) -> Void in
@@ -110,7 +110,7 @@ class DailyEarningsViewController: UIViewController, UITableViewDelegate, UITabl
                 // enable the loading activity indicator
                 ActivityIndicatorUtil.enableActivityIndicator(self.view)
                 
-                let client: BAAClient = BAAClient.sharedClient()
+                let client: BAAClient = BAAClient.shared()
                 
                 client.dummyCall( {(success, error) -> Void in
                     

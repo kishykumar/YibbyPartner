@@ -32,17 +32,17 @@ class OfferViewController: UIViewController {
 
     let GMS_DEFAULT_CAMERA_ZOOM: Float = 14.0
 
-    var offerTimer = NSTimer()
+    var offerTimer = Timer()
     
     static let OFFER_TIMER_INTERVAL = 1.0
     static let OFFER_TIMER_EXPIRE_PERIOD = 25.0 // 25 seconds
     static let OFFER_TIMER_EXPIRE_MSG_TITLE = "Time expired."
     static let OFFER_TIMER_EXPIRE_MSG_CONTENT = "Reason: You were given 30 seconds to respond to the ride request."
     
-    var timerCount: NSTimeInterval = 0.0
-    var timerStart: NSTimeInterval!
+    var timerCount: TimeInterval = 0.0
+    var timerStart: TimeInterval!
     
-    var savedBgTimestamp: NSDate?
+    var savedBgTimestamp: Date?
 
     // MARK: Setup Functions
     func setupUI () {
@@ -94,21 +94,21 @@ class OfferViewController: UIViewController {
 
     // MARK: Actions
     
-    @IBAction func acceptRequestAction(sender: UIButton) {
+    @IBAction func acceptRequestAction(_ sender: UIButton) {
         
         DDLogInfo("Called: \(self.offerPriceOutlet.text)")
         WebInterface.makeWebRequestAndHandleError(
             self,
-            webRequest: {(errorBlock: (BAAObjectResultBlock)) -> Void in
+            webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
                 
                 // enable the loading activity indicator
                 ActivityIndicatorUtil.enableActivityIndicator(self.view)
                 
-                let client: BAAClient = BAAClient.sharedClient()
+                let client: BAAClient = BAAClient.shared()
                 
                 client.createOffer(
                     self.userBid.id,
-                    offerPrice: Int(self.offerPriceOutlet.text!),
+                    offerPrice: Int(self.offerPriceOutlet.text!) as NSNumber!,
                     completion: {(success, error) -> Void in
 
                     // diable the loading activity indicator
@@ -117,7 +117,7 @@ class OfferViewController: UIViewController {
 
                     if (error == nil) {
                         DDLogVerbose("created offer \(success)")
-                        self.performSegueWithIdentifier("offerSentSegue", sender: nil)
+                        self.performSegue(withIdentifier: "offerSentSegue", sender: nil)
                     }
                     else {
                         errorBlock(success, error)
@@ -130,12 +130,12 @@ class OfferViewController: UIViewController {
         
         let bounds = GMSCoordinateBounds(coordinate: (pickupMarker?.position)!, coordinate: (dropoffMarker?.position)!)
         let insets = UIEdgeInsets(top: 30.0, left: 40.0, bottom: 30.0, right: 40.0)
-        let update = GMSCameraUpdate.fitBounds(bounds, withEdgeInsets: insets)
+        let update = GMSCameraUpdate.fit(bounds, with: insets)
         gmsMapViewOutlet.moveCamera(update)
-        gmsMapViewOutlet.animateToZoom(GMS_DEFAULT_CAMERA_ZOOM)
+        gmsMapViewOutlet.animate(toZoom: GMS_DEFAULT_CAMERA_ZOOM)
     }
     
-    func setPickupDetails (address: String, loc: CLLocationCoordinate2D) {
+    func setPickupDetails (_ address: String, loc: CLLocationCoordinate2D) {
         
         pickupMarker?.map = nil
         
@@ -149,7 +149,7 @@ class OfferViewController: UIViewController {
         gmsMapViewOutlet.selectedMarker = pickupMarker
     }
     
-    func setDropoffDetails (address: String, loc: CLLocationCoordinate2D) {
+    func setDropoffDetails (_ address: String, loc: CLLocationCoordinate2D) {
         
         dropoffMarker?.map = nil
         
@@ -163,15 +163,15 @@ class OfferViewController: UIViewController {
         gmsMapViewOutlet.selectedMarker = dropoffMarker
     }
     
-    @IBAction func declineRequestAction(sender: UIButton) {
+    @IBAction func declineRequestAction(_ sender: UIButton) {
         
     }
     
-    @IBAction func incrementOfferPriceAction(sender: AnyObject) {
+    @IBAction func incrementOfferPriceAction(_ sender: AnyObject) {
         offerPriceOutlet.text = String(Int(offerPriceOutlet.text!)! + 1)
     }
     
-    @IBAction func decrementOfferPriceAction(sender: AnyObject) {
+    @IBAction func decrementOfferPriceAction(_ sender: AnyObject) {
         if (Int(offerPriceOutlet.text!) != 0) {
             offerPriceOutlet.text = String(Int(offerPriceOutlet.text!)! - 1)
         }
@@ -180,7 +180,7 @@ class OfferViewController: UIViewController {
     // MARK: Helpers
     
     func startOfferTimer() {
-        offerTimer = NSTimer.scheduledTimerWithTimeInterval(OfferViewController.OFFER_TIMER_INTERVAL,
+        offerTimer = Timer.scheduledTimer(timeInterval: OfferViewController.OFFER_TIMER_INTERVAL,
                                                             target: self,
                                                             selector: #selector(OfferViewController.updateTimer),
                                                             userInfo: nil,
@@ -196,7 +196,7 @@ class OfferViewController: UIViewController {
         
         // if there is an active bid, save the current time
         if (BidState.sharedInstance().isOngoingBid()) {
-            let curTime = NSDate()
+            let curTime = Date()
             DDLogDebug("Setting bgtime \(curTime))")
             savedBgTimestamp = curTime
         }
@@ -209,7 +209,7 @@ class OfferViewController: UIViewController {
 
             if let appBackgroundedTime = savedBgTimestamp {
 
-                let elapsedTime = NSTimeInterval(Int(TimeUtil.diffFromCurTime(appBackgroundedTime))) // seconds
+                let elapsedTime = TimeInterval(Int(TimeUtil.diffFromCurTime(appBackgroundedTime))) // seconds
 
                 DDLogDebug("bgtime \(appBackgroundedTime) bumpUpTime \(elapsedTime))")
                 
@@ -243,7 +243,7 @@ class OfferViewController: UIViewController {
             // delete the saved state bid
             BidState.sharedInstance().resetOngoingBid()
 
-            let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 
             if let mmnvc = appDelegate.centerContainer!.centerViewController as? UINavigationController {
  
@@ -255,7 +255,7 @@ class OfferViewController: UIViewController {
                         let driverOnlineController: DriverOnlineViewController = (viewController as! DriverOnlineViewController)
                         
                         // dismiss all view controllers till this view controller
-                        driverOnlineController.dismissViewControllerAnimated(true, completion: nil)
+                        driverOnlineController.dismiss(animated: true, completion: nil)
                         
                         AlertUtil.displayAlertOnVC(driverOnlineController, title: OfferViewController.OFFER_TIMER_EXPIRE_MSG_TITLE,
                                           message: OfferViewController.OFFER_TIMER_EXPIRE_MSG_CONTENT)

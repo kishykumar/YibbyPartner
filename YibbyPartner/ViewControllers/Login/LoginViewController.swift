@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
     var onStartup = true
 
     // MARK: functions
-    @IBAction func loginAction(sender: AnyObject) {
+    @IBAction func loginAction(_ sender: AnyObject) {
         
         
         if (emailAddress.text == "" || password.text == "") {
@@ -33,7 +33,7 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: KeyChain functions
-    static func setKeyChainKeys (username: String, password: String) {
+    static func setKeyChainKeys (_ username: String, password: String) {
         KeychainWrapper.setString(username, forKey: LoginViewController.EMAIL_ADDRESS_KEY_NAME)
         KeychainWrapper.setString(password, forKey: LoginViewController.PASSWORD_KEY_NAME)
     }
@@ -50,10 +50,10 @@ class LoginViewController: UIViewController {
     }
     
     // BaasBox login user
-    func loginDriver(usernamei: String, passwordi: String) {
+    func loginDriver(_ usernamei: String, passwordi: String) {
         ActivityIndicatorUtil.enableActivityIndicator(self.view)
 
-        let client: BAAClient = BAAClient.sharedClient()
+        let client: BAAClient = BAAClient.shared()
         client.authenticateCaber(BAASBOX_DRIVER_STRING, username: usernamei, password: passwordi, completion: {(success, error) -> Void in
             ActivityIndicatorUtil.disableActivityIndicator(self.view)
             
@@ -63,21 +63,21 @@ class LoginViewController: UIViewController {
                 // if login is successful, save username, password, token in keychain
                 LoginViewController.setKeyChainKeys(usernamei, password: passwordi)
                 
-                let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.initializeMainViewController()
                 appDelegate.sendGCMTokenToServer()
                 
                 if (self.onStartup) {
                     // switch to Main View Controller
                     appDelegate.initializeMainViewController()
-                    self.presentViewController(appDelegate.centerContainer!, animated: true, completion: nil)
+                    self.present(appDelegate.centerContainer!, animated: true, completion: nil)
                 } else {
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
                 }
             }
             else {
                 DDLogVerbose("Error logging in: \(error)")
-                if (error.domain == BaasBox.errorDomain() && error.code ==
+                if ((error as! NSError).domain == BaasBox.errorDomain() && (error as! NSError).code ==
                     WebInterface.BAASBOX_AUTHENTICATION_ERROR) {
                     
                     // check for authentication error and redirect the user to Login page
@@ -90,7 +90,7 @@ class LoginViewController: UIViewController {
         })
     }
     
-    @IBAction func signUpAction(sender: AnyObject) {
+    @IBAction func signUpAction(_ sender: AnyObject) {
         
     }
     

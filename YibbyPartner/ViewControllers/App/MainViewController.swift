@@ -23,15 +23,15 @@ class MainViewController: UIViewController {
     // MARK: Properties
     let BAASBOX_AUTHENTICATION_ERROR = -22222
 
-    let ddLogLevel: DDLogLevel = DDLogLevel.Verbose
+    let ddLogLevel: DDLogLevel = DDLogLevel.verbose
     
     // MARK: Actions
-    @IBAction func leftSlideButtonTapped(sender: AnyObject) {
-        let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.centerContainer!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+    @IBAction func leftSlideButtonTapped(_ sender: AnyObject) {
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.centerContainer!.toggle(MMDrawerSide.left, animated: true, completion: nil)
     }
     
-    @IBAction func onOnlineButtonClick(sender: UIButton) {
+    @IBAction func onOnlineButtonClick(_ sender: UIButton) {
         
         // Check for location
         if (!AlertUtil.displayLocationAlert()) {
@@ -44,11 +44,11 @@ class MainViewController: UIViewController {
         
         WebInterface.makeWebRequestAndHandleError(
             self,
-            webRequest: {(errorBlock: (BAAObjectResultBlock)) -> Void in
+            webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
                 
                 // enable the loading activity indicator
                 ActivityIndicatorUtil.enableActivityIndicator(self.view)
-                let client: BAAClient = BAAClient.sharedClient()
+                let client: BAAClient = BAAClient.shared()
                 
                 client.updateDriverStatus(BAASBOX_DRIVER_STATUS_ONLINE, completion: {(success, error) -> Void in
                     
@@ -57,7 +57,7 @@ class MainViewController: UIViewController {
                     if (error == nil) {
                         let onlineStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Online, bundle: nil)
 
-                        let driverOnlineViewController = onlineStoryboard.instantiateViewControllerWithIdentifier("DriverOnlineViewControllerIdentifier") as! DriverOnlineViewController
+                        let driverOnlineViewController = onlineStoryboard.instantiateViewController(withIdentifier: "DriverOnlineViewControllerIdentifier") as! DriverOnlineViewController
                         
                         // get the navigation VC and push the new VC
                         self.navigationController!.pushViewController(driverOnlineViewController, animated: true)
@@ -69,7 +69,7 @@ class MainViewController: UIViewController {
         })
     }
     
-    @IBAction func unwindToMainViewController(segue:UIStoryboardSegue) {
+    @IBAction func unwindToMainViewController(_ segue:UIStoryboardSegue) {
         
     }
     
@@ -78,7 +78,7 @@ class MainViewController: UIViewController {
  
     }
     
-    func afterViewLoadOps(sender: AnyObject) {
+    func afterViewLoadOps(_ sender: AnyObject) {
         
 //        let client: BAAClient = BAAClient.sharedClient()
 //        if (client.isDriverOnline()) {
@@ -86,7 +86,7 @@ class MainViewController: UIViewController {
 //        }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
     }
@@ -96,10 +96,10 @@ class MainViewController: UIViewController {
         
         // Do any additional setup after loading the view, typically from a nib.
         setupUI()
-        self.performSelector(#selector(afterViewLoadOps), withObject: nil, afterDelay: 0.0)
+        self.perform(#selector(afterViewLoadOps), with: nil, afterDelay: 0.0)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)        
     }
     

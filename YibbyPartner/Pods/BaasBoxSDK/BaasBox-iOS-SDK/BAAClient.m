@@ -2260,6 +2260,53 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
           }];
 }
 
+- (void)getDriverLocation: (NSString *)bidId
+               completion: (BAAObjectResultBlock)completionBlock {
+    
+    NSString *path = [NSString stringWithFormat:@"/location/d/%@", bidId];
+
+    [self getPath:path
+       parameters:@{
+                    @"appcode" : self.appCode,
+                    @"X-BB-SESSION": self.currentUser.authenticationToken
+                    }
+          success:^(NSDictionary *responseObject) {
+              
+              if (completionBlock) {
+                  completionBlock(responseObject[@"data"], nil);
+              }
+              
+          } failure:^(NSError *error) {
+              
+              if (completionBlock) {
+                  completionBlock(nil, error);
+              }
+          }];
+}
+
+- (void)getRiderLocation: (NSString *)bidId
+              completion: (BAAObjectResultBlock)completionBlock {
+    NSString *path = [NSString stringWithFormat:@"/location/r/%@", bidId];
+    
+    [self getPath:path
+       parameters:@{
+                    @"appcode" : self.appCode,
+                    @"X-BB-SESSION": self.currentUser.authenticationToken
+                    }
+          success:^(NSDictionary *responseObject) {
+              
+              if (completionBlock) {
+                  completionBlock(responseObject[@"data"], nil);
+              }
+              
+          } failure:^(NSError *error) {
+              
+              if (completionBlock) {
+                  completionBlock(nil, error);
+              }
+          }];
+}
+
 - (NSURL *)getCompleteURLWithToken:(NSURL *)url {
     
     if (!self.currentUser) {

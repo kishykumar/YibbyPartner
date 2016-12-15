@@ -21,21 +21,21 @@ class DriverEnRouteViewController: UIViewController {
 
     // MARK: Actions
     
-    @IBAction func startNavAction(sender: AnyObject) {
+    @IBAction func startNavAction(_ sender: AnyObject) {
         MapService.sharedInstance().openDirectionsInGoogleMaps(self.bid.dropoffLat,
                                                                lng: self.bid.dropoffLong)
     }
     
-    @IBAction func arrivedAction(sender: AnyObject) {
+    @IBAction func arrivedAction(_ sender: AnyObject) {
 
         WebInterface.makeWebRequestAndHandleError(
             self,
-            webRequest: {(errorBlock: (BAAObjectResultBlock)) -> Void in
+            webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
                 
                 // enable the loading activity indicator
                 ActivityIndicatorUtil.enableActivityIndicator(self.view)
                 
-                let client: BAAClient = BAAClient.sharedClient()
+                let client: BAAClient = BAAClient.shared()
                 
                 client.startRide(self.bid.id, completion: {(success, error) -> Void in
                     
@@ -45,7 +45,7 @@ class DriverEnRouteViewController: UIViewController {
                         
                         let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
                         
-                        let rideStartViewController = rideStoryboard.instantiateViewControllerWithIdentifier("RideStartViewControllerIdentifier") as! RideStartViewController
+                        let rideStartViewController = rideStoryboard.instantiateViewController(withIdentifier: "RideStartViewControllerIdentifier") as! RideStartViewController
                         
                         // get the navigation VC and push the new VC
                         self.navigationController!.pushViewController(rideStartViewController, animated: true)

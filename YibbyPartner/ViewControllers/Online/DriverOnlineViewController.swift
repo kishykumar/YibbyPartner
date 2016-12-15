@@ -17,12 +17,12 @@ class DriverOnlineViewController: UIViewController {
     // MARK: Properties
     @IBOutlet weak var gmsMapViewOutlet: GMSMapView!
     
-    @IBAction func onOfflineButtonClick(sender: UIButton) {
+    @IBAction func onOfflineButtonClick(_ sender: UIButton) {
     
         // enable the loading activity indicator
         ActivityIndicatorUtil.enableActivityIndicator(self.view)
 
-        let client: BAAClient = BAAClient.sharedClient()
+        let client: BAAClient = BAAClient.shared()
         client.updateDriverStatus(BAASBOX_DRIVER_STATUS_OFFLINE, completion: {(success, error) -> Void in
 
             // diable the loading activity indicator
@@ -30,7 +30,7 @@ class DriverOnlineViewController: UIViewController {
 
             // whether success or error, just pop the view controller. 
             // Webserver will automatically take the driver offline in case of error.
-            self.navigationController!.popViewControllerAnimated(true)
+            self.navigationController!.popViewController(animated: true)
         })
         
         // close down all active driver operations
@@ -40,7 +40,7 @@ class DriverOnlineViewController: UIViewController {
     }
     
     func setupMap () {
-        gmsMapViewOutlet.myLocationEnabled = true
+        gmsMapViewOutlet.isMyLocationEnabled = true
         gmsMapViewOutlet.settings.myLocationButton = true
         
         // Very Important: DONT disable consume all gestures, needed for nav drawer with a map
@@ -53,7 +53,7 @@ class DriverOnlineViewController: UIViewController {
         self.navigationItem.setHidesBackButton(true, animated: false)
         
         
-        gmsMapViewOutlet.myLocationEnabled = true
+        gmsMapViewOutlet.isMyLocationEnabled = true
         gmsMapViewOutlet.settings.myLocationButton = true
         
         // Very Important: DONT disable consume all gestures, needed for nav drawer with a map
@@ -69,7 +69,7 @@ class DriverOnlineViewController: UIViewController {
         LocationService.sharedInstance().startLocationUpdates()
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
@@ -79,7 +79,7 @@ class DriverOnlineViewController: UIViewController {
     }
     
     // MARK: Actions
-    @IBAction func unwindToDriverOnlineViewController(segue:UIStoryboardSegue) {
+    @IBAction func unwindToDriverOnlineViewController(_ segue:UIStoryboardSegue) {
         
     }
     

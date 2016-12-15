@@ -10,14 +10,14 @@ import UIKit
 import SVProgressHUD
 import CocoaLumberjack
 
-public class ActivityIndicatorUtil {
+open class ActivityIndicatorUtil {
     
-    static func enableActivityIndicator (view: UIView) {
-        ActivityIndicatorUtil.enableActivityIndicator(view, status: nil, mask: SVProgressHUDMaskType.Black,
-                                                      maskColor: nil, style: SVProgressHUDStyle.Dark)
+    static func enableActivityIndicator (_ view: UIView) {
+        ActivityIndicatorUtil.enableActivityIndicator(view, status: nil, mask: SVProgressHUDMaskType.black,
+                                                      maskColor: nil, style: SVProgressHUDStyle.dark)
     }
     
-    static func enableActivityIndicator (view: UIView, status: String?,
+    static func enableActivityIndicator (_ view: UIView, status: String?,
                                          mask: SVProgressHUDMaskType?, maskColor: UIColor?,
                                          style: SVProgressHUDStyle?) {
         
@@ -34,13 +34,13 @@ public class ActivityIndicatorUtil {
         }
         
         if let status = status {
-            SVProgressHUD.showWithStatus(status);
+            SVProgressHUD.show(withStatus: status);
         } else {
             SVProgressHUD.show()
         }
     }
     
-    static func disableActivityIndicator (view: UIView) {
+    static func disableActivityIndicator (_ view: UIView) {
         SVProgressHUD.dismiss();
     }
 }

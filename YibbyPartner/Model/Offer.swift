@@ -49,7 +49,7 @@ class Offer: NSObject, NSCopying {
         //        }
     }
     
-    func copyWithZone(zone: NSZone) -> AnyObject {
+    func copy(with zone: NSZone?) -> Any {
         let copy = Bid(id: id, bidHigh: bidHigh, bidLow: bidLow,
                        etaHigh: etaHigh, etaLow: etaLow, pickupLat: pickupLat,
                        pickupLong: pickupLong, pickupLoc: pickupLoc, dropoffLat: dropoffLat,

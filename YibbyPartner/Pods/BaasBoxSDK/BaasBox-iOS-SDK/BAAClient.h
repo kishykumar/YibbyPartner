@@ -79,6 +79,13 @@
                 longitude:(NSNumber *)longitude
                 completion:(BAABooleanResultBlock)completionBlock;
 
+// get location
+- (void)getDriverLocation: (NSString *)bidId
+        completion: (BAAObjectResultBlock)completionBlock;
+
+- (void)getRiderLocation: (NSString *)bidId
+               completion: (BAAObjectResultBlock)completionBlock;
+
 // dummy endpoint
 - (void)dummyCall:(BAAObjectResultBlock)completionBlock;
 

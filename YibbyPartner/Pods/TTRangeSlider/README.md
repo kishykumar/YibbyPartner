@@ -14,10 +14,10 @@ it, simply add the following line to your Podfile:
 pod "TTRangeSlider"
 ```
 
-Note that this control uses IB_DESIGNABLE, so for it to work well and not get warnings in Interface Builder, you should use the latest version of cocoa pods, and add the `use_frameworks!` line. So your podfile may look something like
+Note that this control uses IB_DESIGNABLE, so for it to work well and not get warnings in Interface Builder, you should use the latest version of CocoaPods, and add the `use_frameworks!` line. So your podfile may look something like
 
 ```ruby
-source ‘https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 pod “TTRangeSlider”
@@ -42,6 +42,8 @@ Other customisation of the control is done using the following properties:
 The tintColor property (which you can also set in Interface Builder) sets the overall colour of the control, including the colour of the line, the two handles, and the labels.
 
 It is safe to change the `tintColor` at any time, if the control is currently visible the colour change will be animated into the new colour.
+#### `tintColorBetweenHandles`
+The tintColorBetweenHandles property sets the color of the line between the two handles.
 #### `minValue`
 The minimum possible value to select in the range
 #### `maxValue`
@@ -52,6 +54,8 @@ The preselected minumum value (note: This should be less than the selectedMaximu
 The preselected maximum value (note: This should be greater than the selectedMinimum)
 #### `numberFormatterOverride`
 Each handle in the slider has a label above it showing the current selected value. By default, this is displayed as a decimal format.
+#### `hideLabels`
+When set to `YES` the labesl above the slider controls will be hidden. Default is NO.
 #### `minDistance`
 The minimum distance the two selected slider values must be apart. -1 for no minimum. Default is -1.
 #### `maxDistance`
@@ -72,6 +76,22 @@ In this case, the selectedMinValue will be not functional anymore. Use selectedM
 If true the control will snap to point at each `step` (property) between minValue and maxValue. Default value is disabled.
 #### `step`
 If `enableStep` is true, this controls the value of each step. E.g. if this value is 20, the control will snap to values 20,40,60...etc. Set this is you enable the `enableStep` property.
+#### `handleImage`
+If set the image passed will be used for the handles.
+#### `handleColor`
+If set it will update the color of the handles. Default is `tintColor`.
+#### `handleDiameter`
+If set it will update the size of the handles. Default is `16.0`.
+#### `selectedHandleDiameterMultiplier`
+If set it update the scaling factor of the handle when selected. Default is `1.7`. If you don't want any scaling, set it to `1.0`.
+#### `lineHeight`
+Set the height of the line. It will automatically round the corners. If not specified, the default value will be `1.0`.
+#### `handleBorderColor`
+If set it will update the color of the handle borders. Default is `tintColor`.
+#### `handleBorderWidth`
+If set it will update the size of the handle borders. Default is `0.0`
+#### `labelPadding`
+If set it will update the size of the padding between label and handle. Default is `8.0`
 
 ## Author
 
