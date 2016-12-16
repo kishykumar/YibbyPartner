@@ -222,11 +222,14 @@ class EarningsSummaryViewController: UIViewController, JTCalendarDelegate {
     }
     
     func computeStartEndWeek(_ inDate: Date) {
-        let calendar = calendarManager.dateHelper.calendar()
+//        let calendar = calendarManager.dateHelper.calendar()
         var interval = TimeInterval(0)
         
-//        calendar?.range(of: .WeekOfMonth, start: &self.startOfTheWeek, interval: &interval, for: inDate)
-//        self.endOfWeek = self.startOfTheWeek!.addingTimeInterval(interval - 1)
+        var date: Date = Date()
+        Calendar.current.dateInterval(of: .weekOfMonth, start: &date, interval: &interval, for: inDate)
+        
+        self.startOfTheWeek = date
+        self.endOfWeek = self.startOfTheWeek!.addingTimeInterval(interval - 1)
     }
     
     /*
