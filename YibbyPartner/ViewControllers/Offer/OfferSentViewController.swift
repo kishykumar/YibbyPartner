@@ -10,7 +10,7 @@ import UIKit
 import CocoaLumberjack
 import NVActivityIndicatorView
 
-class OfferSentViewController: UIViewController {
+class OfferSentViewController: BaseYibbyViewController {
 
     @IBOutlet weak var activityIndicator: NVActivityIndicatorView!
     

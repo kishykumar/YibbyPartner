@@ -11,7 +11,7 @@ import GoogleMaps
 import CocoaLumberjack
 import BaasBoxSDK
 
-class RideEndViewController: UIViewController {
+class RideEndViewController: BaseYibbyViewController {
 
     // MARK: Properties
 

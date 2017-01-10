@@ -13,7 +13,7 @@ import BaasBoxSDK
 import MMDrawerController
 import SwiftyJSON
 
-class SplashViewController: UIViewController {
+class SplashViewController: BaseYibbyViewController {
 
     // MARK: Properties
     
@@ -157,7 +157,7 @@ class SplashViewController: UIViewController {
         if userDefaults.object(forKey: APP_FIRST_RUN) == nil {
             // Delete values from keychain here
             userDefaults.setValue(APP_FIRST_RUN, forKey: APP_FIRST_RUN)
-            LoginViewController.removeKeyChainKeys()
+            LoginViewController.removeLoginKeyChainKeys()
         }
 
         // register for push notification
@@ -203,17 +203,29 @@ class SplashViewController: UIViewController {
         
         // Setup is complete, we should move on and show our first screen
         if client.isDriverAuthenticated() {
-            DDLogVerbose("Driver already authenticated");
+            DDLogVerbose("Driver already authenticated")
+            
+            // Sync the client
+            // async_call {
+            //   if (!finishedRegistration)
+            //     show the registration initial controller
+            //   else if (!registrationApproved)
+            //     show the approvalPending controller
+            //   else {
+            //     Depending upon the client show the appropriate controller
+            //       (show the main view controller, driverEnRoute, Ride...)
+            //   }
+            // }
+            
             // no need to do anything if user is already authenticated
-            appDelegate.initializeMainViewController()
-            self.present(appDelegate.centerContainer!, animated: false, completion: nil)
-
-//            self.performSegueWithIdentifier("mainFromSplashSegue", sender: nil)
+            MainViewController.initMainViewController(self, animated: false)
             removeSplash()
         } else {
             DDLogVerbose("Driver NOT authenticated");
             
-            self.performSegue(withIdentifier: "loginFromSplashSegue", sender: nil)
+            let signupStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.SignUp, bundle: nil)
+            self.present(signupStoryboard.instantiateInitialViewController()!, animated: false, completion: nil)
+            
             removeSplash()
         }
         

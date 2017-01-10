@@ -11,7 +11,7 @@ import GoogleMaps
 import CocoaLumberjack
 import BaasBoxSDK
 
-class RideStartViewController: UIViewController {
+class RideStartViewController: BaseYibbyViewController {
 
     // MARK: Properties
     

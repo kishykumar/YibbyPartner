@@ -25,8 +25,26 @@ public struct InterfaceString {
         static let Online = NSLocalizedString("Online", comment: "Online Storyboard")
         static let Promotions = NSLocalizedString("Promotions", comment: "Promotions Storyboard")
         static let Ride = NSLocalizedString("Ride", comment: "Ride Storyboard")
+        static let Register = NSLocalizedString("Register", comment: "Register Storyboard")
         static let Offer = NSLocalizedString("Offer", comment: "Offer Storyboard")
         static let Earnings = NSLocalizedString("Earnings", comment: "Earnings Storyboard")
+    }
+    
+    public struct Button {
+        static let TANDC = NSLocalizedString("TERMS OF SERVICE AND PRIVACY POLICY", comment: "TANDC")
+    }
+    
+    public struct Ride {
+        static let Pickup = NSLocalizedString("Pickup", comment: "Pickup")
+        static let Dropoff = NSLocalizedString("Dropoff", comment: "Dropoff")
+    }
+    
+    public struct ActionSheet {
+        static let VehicleYear = NSLocalizedString("Vehicle Year", comment: "Vehicle Year")
+        static let VehicleMake = NSLocalizedString("Vehicle Make", comment: "Vehicle Make")
+        static let VehicleModel = NSLocalizedString("Vehicle Model", comment: "Vehicle Model")
+        static let VehicleColor = NSLocalizedString("Vehicle Color", comment: "Vehicle Color")
+        static let VehicleCapacity = NSLocalizedString("Vehicle Capacity", comment: "Vehicle Capacity")
     }
     
     public struct TableSections {
@@ -128,6 +146,9 @@ public struct InterfaceString {
     }
     
     public struct Join {
+        static let Login = NSLocalizedString("Login", comment: "Login")
+        static let Signup = NSLocalizedString("Signup", comment: "Signup")
+
         static let SignInAfterJoinError = NSLocalizedString("Your account has been created, but there was an error logging in, please try again", comment: "After successfully joining, there was an error signing in")
         static let Email = NSLocalizedString("Email", comment: "email key")
         static let EmailRequired = NSLocalizedString("Email is required.", comment: "email is required message")

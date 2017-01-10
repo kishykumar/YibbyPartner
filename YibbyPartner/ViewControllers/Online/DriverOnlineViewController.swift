@@ -12,10 +12,16 @@ import BaasBoxSDK
 import CocoaLumberjack
 
 
-class DriverOnlineViewController: UIViewController {
+class DriverOnlineViewController: BaseYibbyViewController {
 
     // MARK: Properties
     @IBOutlet weak var gmsMapViewOutlet: GMSMapView!
+    
+    
+    // MARK: Actions
+    @IBAction func unwindToDriverOnlineViewController(_ segue:UIStoryboardSegue) {
+        
+    }
     
     @IBAction func onOfflineButtonClick(_ sender: UIButton) {
     
@@ -76,11 +82,6 @@ class DriverOnlineViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: Actions
-    @IBAction func unwindToDriverOnlineViewController(_ segue:UIStoryboardSegue) {
-        
     }
     
     /*

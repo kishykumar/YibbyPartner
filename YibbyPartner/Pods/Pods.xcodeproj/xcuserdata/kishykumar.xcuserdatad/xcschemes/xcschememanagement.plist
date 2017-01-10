@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ActionSheetPicker-3.0.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>BButton.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -20,6 +25,21 @@
 			<false/>
 		</dict>
 		<key>FBSnapshotTestCase.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FDStackView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>IQKeyboardManagerSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ISHPullUp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -84,6 +104,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftKeychainWrapper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -94,15 +119,35 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>XLPagerTabStrip-XLPagerTabStrip.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>XLPagerTabStrip.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>106EFB4E1DB9D8B9EBE469A4A8F39A09</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1234C76AA29FAFA54270CBCC8BEF8CD6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2386A7B5BFADB635D54FA79229E4648B</key>
+		<key>1F1409F9ECD4669F49720D89716FD24D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>30CE52C8B1E0F5CE940B973AEF41F6EB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,7 +167,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>495DFFFE4EAFC0864AFD0D0510B91D79</key>
+		<key>4D3E05B520FBC850864D49830E827A96</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4DC059E04CBA98AEDDB5C34E02D551E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,12 +187,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>91272223AF96E8FC18D74C611C4E7BA8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>91D0AFD51BF2D04784321D0DCD086326</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>95C65B36001D179E59B88A22EAED4A1A</key>
+		<key>965699190112DDBD9B7864D091660DBC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9AC4CA8431E180791DE30ED378792EF8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9C375F6800FE5124F2B2FDCF9A0D70A2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -167,7 +232,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D5B31519D7A9E012556287C889DFA015</key>
+		<key>D30835CE50B489FEA69352260F54C976</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D3AF52C9BAC7A07DF0DB2E6727B72234</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -182,7 +252,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F7CF40884BB0E4055413C94BC1329CF4</key>
+		<key>E3A66031D4E1821A871C7F784C93C3DC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

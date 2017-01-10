@@ -11,7 +11,7 @@ import BaasBoxSDK
 
 public typealias FetchDailyEarningsSuccessBlock = () -> Void
 
-class DailyEarningsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DailyEarningsViewController: BaseYibbyViewController, UITableViewDelegate, UITableViewDataSource {
 
     // MARK: Properties
     @IBOutlet weak var dayEarningsTableView: UITableView!

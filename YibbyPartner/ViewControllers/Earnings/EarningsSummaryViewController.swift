@@ -13,7 +13,7 @@ import BaasBoxSDK
 
 public typealias FetchEarningsSuccessBlock = () -> Void
 
-class EarningsSummaryViewController: UIViewController, JTCalendarDelegate {
+class EarningsSummaryViewController: BaseYibbyViewController, JTCalendarDelegate {
 
     // MARK: Properties
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TripDetailsViewController: UIViewController {
+class TripDetailsViewController: BaseYibbyViewController {
 
     // MARK: Properties
 

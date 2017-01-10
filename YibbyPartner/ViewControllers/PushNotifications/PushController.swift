@@ -158,13 +158,11 @@ open class PushController: NSObject, PushControllerProtocol {
                             }
                             
                             // prepare the offerViewController
-                            let navController: UINavigationController = UINavigationController()
-
                             let offerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Offer, bundle: nil)
 
                             let offerViewController = offerStoryboard.instantiateViewController(withIdentifier: "OfferViewControllerIdentifier") as! OfferViewController
 
-                            navController.pushViewController(offerViewController, animated: false)
+                            let navController = UINavigationController(rootViewController: offerViewController)
 
                             // start the timer by accouting the time elapsed since the user actually created the bid
                             offerViewController.timerStart = TimeInterval(Int(OfferViewController.OFFER_TIMER_EXPIRE_PERIOD - bidElapsedTime))

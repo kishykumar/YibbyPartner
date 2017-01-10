@@ -11,7 +11,7 @@ import GoogleMaps
 import BaasBoxSDK
 import CocoaLumberjack
 
-class OfferViewController: UIViewController {
+class OfferViewController: BaseYibbyViewController {
 
     // MARK: Properties
     @IBOutlet weak var lowBidPriceOutlet: UILabel!

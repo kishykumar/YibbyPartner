@@ -15,7 +15,7 @@ protocol DestinationDelegate {
     func choseDestination(_ location: String)
 }
 
-class DestinationPickerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DestinationPickerViewController: BaseYibbyViewController, UITableViewDelegate, UITableViewDataSource {
 
     // MARK: Properties
     var delegate : DestinationDelegate?

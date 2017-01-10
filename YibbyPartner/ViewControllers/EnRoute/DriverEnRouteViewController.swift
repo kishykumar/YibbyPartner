@@ -11,7 +11,7 @@ import GoogleMaps
 import CocoaLumberjack
 import BaasBoxSDK
 
-class DriverEnRouteViewController: UIViewController {
+class DriverEnRouteViewController: BaseYibbyViewController {
 
     // MARK: Properties
     

@@ -11,7 +11,7 @@ import JTCalendar
 import CocoaLumberjack
 import BaasBoxSDK
 
-class WeeklyEarningsViewController: UIViewController, JTCalendarDelegate {
+class WeeklyEarningsViewController: BaseYibbyViewController, JTCalendarDelegate {
 
     // MARK: Properties
     

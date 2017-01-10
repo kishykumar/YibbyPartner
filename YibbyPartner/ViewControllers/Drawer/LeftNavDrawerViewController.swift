@@ -11,7 +11,7 @@ import MMDrawerController
 import BaasBoxSDK
 import CocoaLumberjack
 
-class LeftNavDrawerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class LeftNavDrawerViewController: BaseYibbyViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: Properties
     @IBOutlet weak var tableView: UITableView!
@@ -129,38 +129,35 @@ class LeftNavDrawerViewController: UIViewController, UITableViewDataSource, UITa
         ActivityIndicatorUtil.enableActivityIndicator(self.view)
         
         let client: BAAClient = BAAClient.shared()
-        client.logoutCaber(withCompletion: "driver", completion: {(success, error) -> Void in
+        client.logoutCaber(withCompletion: BAASBOX_DRIVER_STRING, completion: {(success, error) -> Void in
             
             ActivityIndicatorUtil.disableActivityIndicator(self.view)
             
             if (success || ((error as! NSError).domain == BaasBox.errorDomain() && (error as! NSError).code ==
                 WebInterface.BAASBOX_AUTHENTICATION_ERROR)) {
                 
-                DDLogInfo("User logged out successfully success: \(success) error: \(error)")
-
                 // pop all the view controllers so that user starts fresh :)
                 let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
                 if let mmnvc = appDelegate.centerContainer!.centerViewController as? UINavigationController {
                     mmnvc.popToRootViewController(animated: false)
                 }
                 
+                DDLogInfo("user logged out successfully \(success)")
                 // if logout is successful, remove username, password from keychain
-                LoginViewController.removeKeyChainKeys()
+                LoginViewController.removeLoginKeyChainKeys()
                 
-                let loginStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Login, bundle: nil)
-
-                // Show the LoginViewController View
-                if let loginViewController = loginStoryboard.instantiateViewController(withIdentifier: "LoginViewControllerIdentifier") as? LoginViewController
-                {
-                    loginViewController.onStartup = true
-                    self.present(loginViewController, animated: true, completion: nil)
-                }
+                // Show the Signup/LoginViewController View
+                
+                let signupStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.SignUp,
+                                                                  bundle: nil)
+                
+                self.present(signupStoryboard.instantiateInitialViewController()!, animated: false, completion: nil)
             }
             else {
-                DDLogInfo("Error in logout \(error)")
                 // We continue the user session if Logout hits an error
                 if ((error as! NSError).domain == BaasBox.errorDomain()) {
-                    AlertUtil.displayAlert("Error Logging out. ", message: "This is...weird. \((error as! NSError).description)")
+                    DDLogError("Error in logout: \(error)")
+                    AlertUtil.displayAlert("Error Logging out. ", message: "This is...weird.")
                 }
                 else {
                     AlertUtil.displayAlert("Connectivity or Server Issues.", message: "Please check your internet connection or wait for some time.")
@@ -168,7 +165,7 @@ class LeftNavDrawerViewController: UIViewController, UITableViewDataSource, UITa
             }
         })
     }
-    
+
     /*
      // MARK: - Navigation
      

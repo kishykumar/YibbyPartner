@@ -13,7 +13,8 @@ import BaasBoxSDK
 import CocoaLumberjack
 import Fabric
 import Crashlytics
- 
+import IQKeyboardManagerSwift
+
 // TODO: 
 // 1. Bug: The timer in offer view controller shows up less on one of the phones
 // 2. Stop location updates in the background if no driver activity for the last 10 minutes
@@ -53,26 +54,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         // Configure Baasbox
         BaasBox.setBaseURL(BAASBOX_URL, appCode: BAASBOX_APPCODE)
         
-        // setup logger
-        DDLog.add(DDTTYLogger.sharedInstance, with: .all) // TTY = Xcode console
-        DDLog.add(DDASLLogger.sharedInstance, with: .all) // ASL = Apple System Logs
-        DDTTYLogger.sharedInstance.logFormatter = LogFormatter() // print filename, line#
-        DDASLLogger.sharedInstance.logFormatter = LogFormatter() // print filename, line#
-
-        let fileLogger: DDFileLogger = DDFileLogger() // File Logger
-        fileLogger.logFormatter = LogFormatter() // print filename, line#
-        fileLogger.rollingFrequency = TimeInterval(60*60*24)  // 24 hours
-        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
-        DDLog.add(fileLogger)
-
-        // setup LocationService
-        LocationService.sharedInstance().setupLocationManager()
-
-        // setup MapService
-        MapService.sharedInstance().setupMapService()
+        setupLogger()
+        setupLocationService()
+        setupKeyboardManager()
+        setupMapService()
         
         DDLogDebug("LaunchOptions \(launchOptions)");
-        
+
         // Override point for customization after application launch.
         GMSServices.provideAPIKey(GOOGLE_API_KEY_IOS)
         
@@ -92,6 +80,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         // [END start_gcm_service]
         
         return true
+    }
+    
+    func setupLogger() {
+        
+        // setup logger
+        DDLog.add(DDTTYLogger.sharedInstance, with: .all) // TTY = Xcode console
+        DDLog.add(DDASLLogger.sharedInstance, with: .all) // ASL = Apple System Logs
+        DDTTYLogger.sharedInstance.logFormatter = LogFormatter() // print filename, line#
+        DDASLLogger.sharedInstance.logFormatter = LogFormatter() // print filename, line#
+        
+        let fileLogger: DDFileLogger = DDFileLogger() // File Logger
+        fileLogger.logFormatter = LogFormatter() // print filename, line#
+        fileLogger.rollingFrequency = TimeInterval(60*60*24)  // 24 hours
+        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
+        DDLog.add(fileLogger)
+    }
+    
+    func setupLocationService() {
+        // setup LocationService
+        LocationService.sharedInstance().setupLocationManager()
+    }
+    
+    func setupKeyboardManager() {
+        
+        // Setup IQKeyboardManager
+        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+    }
+    
+    func setupMapService() {
+        
+        // setup MapService
+        MapService.sharedInstance().setupMapService()
+        
     }
     
     func initializeMainViewController () {
@@ -388,9 +411,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
  // used to dismiss keyboard when user taps anywhere on the screen
  extension UIViewController {
     func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
-                                                                 action: #selector(UIViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+//                                                                 action: #selector(UIViewController.dismissKeyboard))
+//        view.addGestureRecognizer(tap)
     }
     
     func dismissKeyboard() {

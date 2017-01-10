@@ -18,7 +18,7 @@ import CocoaLumberjack
 // 1. Enable push notifications for Google needs to retry with exponential backoffs
 // 2. Push notifications 
 
-class MainViewController: UIViewController {
+class MainViewController: BaseYibbyViewController {
 
     // MARK: Properties
     let BAASBOX_AUTHENTICATION_ERROR = -22222
@@ -73,7 +73,17 @@ class MainViewController: UIViewController {
         
     }
     
-    // MARK: Setup Functions
+    // MARK: Setup
+    
+    static func initMainViewController(_ vc: UIViewController, animated anim: Bool) {
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        appDelegate.sendGCMTokenToServer()
+        
+        appDelegate.initializeMainViewController()
+        vc.present(appDelegate.centerContainer!, animated: anim, completion: nil)
+    }
+    
     func setupUI () {
  
     }
