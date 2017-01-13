@@ -55,6 +55,11 @@
 		1211FF111D61260900AD9591 /* WeeklyEarningsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211FF101D61260900AD9591 /* WeeklyEarningsViewController.swift */; };
 		123524961C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
 		123524971C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
+		1284914C1E260B10002D047B /* VehicleDataAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1284914B1E260B10002D047B /* VehicleDataAPI.swift */; };
+		1284914E1E262DA2002D047B /* VehicleMake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1284914D1E262DA2002D047B /* VehicleMake.swift */; };
+		128491501E262DAD002D047B /* VehicleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1284914F1E262DAD002D047B /* VehicleModel.swift */; };
+		128491521E263026002D047B /* VehicleMakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128491511E263026002D047B /* VehicleMakes.swift */; };
+		128491541E263E44002D047B /* VehicleModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128491531E263E44002D047B /* VehicleModels.swift */; };
 		129AAE3E1E2268FB006F6CE5 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129AAE3D1E2268FB006F6CE5 /* JoinViewController.swift */; };
 		129AAE451E226ABE006F6CE5 /* BaseYibbyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129AAE421E226ABE006F6CE5 /* BaseYibbyTableViewController.swift */; };
 		129AAE461E226ABE006F6CE5 /* BaseYibbyTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129AAE431E226ABE006F6CE5 /* BaseYibbyTabViewController.swift */; };
@@ -77,6 +82,7 @@
 		129AAE731E238E57006F6CE5 /* YBPickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129AAE721E238E57006F6CE5 /* YBPickerTextField.swift */; };
 		129AAE751E238F3B006F6CE5 /* InterfaceImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129AAE741E238F3B006F6CE5 /* InterfaceImage.swift */; };
 		129AAE771E24D648006F6CE5 /* YBFloatLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129AAE761E24D648006F6CE5 /* YBFloatLabelTextField.swift */; };
+		12C38CF61E28830B0003DCB5 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12C38CF51E28830B0003DCB5 /* FontAwesome.ttf */; };
 		12F3CCD61C41EFC700F79A26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F3CCD51C41EFC700F79A26 /* AppDelegate.swift */; };
 		12F3CCDB1C41EFC700F79A26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3CCD91C41EFC700F79A26 /* Main.storyboard */; };
 		12F3CCDD1C41EFC700F79A26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12F3CCDC1C41EFC700F79A26 /* Assets.xcassets */; };
@@ -147,6 +153,11 @@
 		1211FF101D61260900AD9591 /* WeeklyEarningsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeeklyEarningsViewController.swift; sourceTree = "<group>"; };
 		123524951C89475D004307EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		12814FBA1E0EFBF600F08CFF /* YibbyPartner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YibbyPartner.entitlements; sourceTree = "<group>"; };
+		1284914B1E260B10002D047B /* VehicleDataAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleDataAPI.swift; sourceTree = "<group>"; };
+		1284914D1E262DA2002D047B /* VehicleMake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleMake.swift; sourceTree = "<group>"; };
+		1284914F1E262DAD002D047B /* VehicleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleModel.swift; sourceTree = "<group>"; };
+		128491511E263026002D047B /* VehicleMakes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleMakes.swift; sourceTree = "<group>"; };
+		128491531E263E44002D047B /* VehicleModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleModels.swift; sourceTree = "<group>"; };
 		129AAE3D1E2268FB006F6CE5 /* JoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		129AAE421E226ABE006F6CE5 /* BaseYibbyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseYibbyTableViewController.swift; sourceTree = "<group>"; };
 		129AAE431E226ABE006F6CE5 /* BaseYibbyTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseYibbyTabViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +186,7 @@
 		12C21E241C7DAE23000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
 		12C21E261C7DB0A0000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
 		12C21E281C7DB0CB000AAFFC /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
+		12C38CF51E28830B0003DCB5 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		12EB18161C5A00780037EB86 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		12F3CCD21C41EFC700F79A26 /* YibbyPartner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YibbyPartner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12F3CCD51C41EFC700F79A26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -376,6 +388,10 @@
 			children = (
 				1201B7BE1D23B4AB00A7EEAF /* Bid.swift */,
 				1201B7BF1D23B4AB00A7EEAF /* BidState.swift */,
+				1284914D1E262DA2002D047B /* VehicleMake.swift */,
+				128491511E263026002D047B /* VehicleMakes.swift */,
+				1284914F1E262DAD002D047B /* VehicleModel.swift */,
+				128491531E263E44002D047B /* VehicleModels.swift */,
 				1201B7C01D23B4AB00A7EEAF /* Offer.swift */,
 				1201B7C11D23B4AB00A7EEAF /* Ride.swift */,
 			);
@@ -386,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				1201B7C31D23B4AB00A7EEAF /* WebInterface.swift */,
+				1284914B1E260B10002D047B /* VehicleDataAPI.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -490,6 +507,14 @@
 			path = Register;
 			sourceTree = "<group>";
 		};
+		12C38CF41E28830B0003DCB5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				12C38CF51E28830B0003DCB5 /* FontAwesome.ttf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		12EB18131C59FA980037EB86 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -528,6 +553,7 @@
 				12814FBA1E0EFBF600F08CFF /* YibbyPartner.entitlements */,
 				12F3CCD51C41EFC700F79A26 /* AppDelegate.swift */,
 				12F3CCDC1C41EFC700F79A26 /* Assets.xcassets */,
+				12C38CF41E28830B0003DCB5 /* Resources */,
 				129AAE481E226B72006F6CE5 /* Style */,
 				1201B7BC1D23B4AB00A7EEAF /* Extensions */,
 				12F3CCE11C41EFC800F79A26 /* Info.plist */,
@@ -688,6 +714,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12C38CF61E28830B0003DCB5 /* FontAwesome.ttf in Resources */,
 				12F3CCF61C4B9C0C00F79A26 /* Podfile in Resources */,
 				12F3CCE01C41EFC800F79A26 /* LaunchScreen.storyboard in Resources */,
 				1201B80E1D263E3500A7EEAF /* Login.storyboard in Resources */,
@@ -833,11 +860,14 @@
 				1201B7B91D23B49000A7EEAF /* SignupViewController.swift in Sources */,
 				129AAE541E226C76006F6CE5 /* UITableViewController+ENFooterActivityIndicatorView.m in Sources */,
 				129AAE771E24D648006F6CE5 /* YBFloatLabelTextField.swift in Sources */,
+				1284914C1E260B10002D047B /* VehicleDataAPI.swift in Sources */,
 				129AAE4A1E226B72006F6CE5 /* Colors.swift in Sources */,
 				1201B7B21D23B49000A7EEAF /* OfferSentViewController.swift in Sources */,
+				128491541E263E44002D047B /* VehicleModels.swift in Sources */,
 				1201B7B61D23B49000A7EEAF /* RideEndViewController.swift in Sources */,
 				129AAE751E238F3B006F6CE5 /* InterfaceImage.swift in Sources */,
 				129AAE731E238E57006F6CE5 /* YBPickerTextField.swift in Sources */,
+				1284914E1E262DA2002D047B /* VehicleMake.swift in Sources */,
 				1201B7CE1D23B4AC00A7EEAF /* BidState.swift in Sources */,
 				1201B7D11D23B4AC00A7EEAF /* WebInterface.swift in Sources */,
 				129AAE471E226ABE006F6CE5 /* BaseYibbyViewController.swift in Sources */,
@@ -867,6 +897,7 @@
 				129AAE3E1E2268FB006F6CE5 /* JoinViewController.swift in Sources */,
 				1201B7BB1D23B49000A7EEAF /* SplashViewController.swift in Sources */,
 				1211FF0B1D5EF95A00AD9591 /* DailyEarningsViewController.swift in Sources */,
+				128491521E263026002D047B /* VehicleMakes.swift in Sources */,
 				1201B7D21D23B4AC00A7EEAF /* LocationService.swift in Sources */,
 				1201B7B01D23B49000A7EEAF /* DriverEnRouteViewController.swift in Sources */,
 				1201B7D61D23B4AC00A7EEAF /* AppUtil.swift in Sources */,
@@ -876,6 +907,7 @@
 				129AAE551E226C76006F6CE5 /* FloatLabelTextField.swift in Sources */,
 				129AAE681E233980006F6CE5 /* DocumentUploadViewController.swift in Sources */,
 				1201B7FE1D25102A00A7EEAF /* InterfaceString.swift in Sources */,
+				128491501E262DAD002D047B /* VehicleModel.swift in Sources */,
 				1211FF001D5991BD00AD9591 /* AlertUtil.swift in Sources */,
 				1201B7B41D23B49000A7EEAF /* DriverOnlineViewController.swift in Sources */,
 				1201B7B31D23B49000A7EEAF /* OfferViewController.swift in Sources */,

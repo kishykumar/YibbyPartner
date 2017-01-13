@@ -8,12 +8,26 @@
 
 import UIKit
 import ActionSheetPicker_3_0
+import CocoaLumberjack
 
 class VehicleViewController: BaseYibbyViewController {
 
     // MARK: - Properties
     var vehicleYearsRange = [String]()
+    
     var vehicleCapacityRange = ["3", "4", "5", "6", "7"]
+    var DEFAULT_VEHICLE_CAPACITY = "4"
+    
+    var vehicleMakeRange = [String]()
+    var vehicleModelRange = [String]()
+    var vehicleColorRange = ["Aluminum", "Beige", "Black", "Blue", "Bronze", "Brown", "Claret", "Copper", "Cream", "Gold", "Gray", "Green", "Maroon", "Metallic", "Navy", "Orange", "Pink", "Purple", "Red", "Rose", "Rust", "Silver", "Tan", "Turquoise", "White", "Yellow"]
+    
+    var selectedYear: String?
+    var selectedMake: String?
+    var selectedModel: String?
+    var selectedColor: String?
+    var selectedCapacity: String?
+    var licensePlateNumber: String?
     
     @IBOutlet var vehicleMakeTapGestureRecognizerOutlet: UITapGestureRecognizer!
     @IBOutlet var vehicleModelTapGestureRecognizerOutlet: UITapGestureRecognizer!
@@ -34,39 +48,99 @@ class VehicleViewController: BaseYibbyViewController {
     
     @IBAction func vehicleMakeClicked(_ sender: UITapGestureRecognizer) {
         
-        print("vehicleMakeClicked called")
+        // dismiss the keyboard if it's visible
+        self.view.endEditing(true)
+        
+        if (self.vehicleMakeRange.count == 0) {
+            return;
+        }
+        
+        ActionSheetStringPicker.show(withTitle: InterfaceString.ActionSheet.VehicleMake, rows: self.vehicleMakeRange, initialSelection: 0, doneBlock: {
+            picker, value, index in
+            
+            self.selectedMake = (index as? String)!
+            self.vehicleMakeTextFieldOutlet.text = self.selectedMake
+            
+            self.loadVehicleModels(make: self.selectedMake!, year: self.selectedYear!)
+            
+            return
+        }, cancel: { ActionStringCancelBlock in return }, origin: vehicleMakeTextFieldOutlet)
     }
     
     @IBAction func onVehicleYearClick(_ sender: UITapGestureRecognizer) {
         
-        print("onVehicleYearClick called")
-
+        // dismiss the keyboard if it's visible
+        self.view.endEditing(true)
+        
         ActionSheetStringPicker.show(withTitle: InterfaceString.ActionSheet.VehicleYear, rows: self.vehicleYearsRange, initialSelection: self.vehicleYearsRange.count - 1, doneBlock: {
             picker, value, index in
+
+            if let year = index as? String {
+                self.selectedYear = year
+                self.vehicleYearTextFieldOutlet.text = year
             
-            self.vehicleYearTextFieldOutlet.text = index as? String
+                self.loadVehicleMakes(year: self.selectedYear!)
+            }
+
             return
         }, cancel: { ActionStringCancelBlock in return }, origin: vehicleYearTextFieldOutlet)
     }
     
     @IBAction func onVehicleModelClick(_ sender: UITapGestureRecognizer) {
-        print("onVehicleModelClick called")
         
+        // dismiss the keyboard if it's visible
+        self.view.endEditing(true)
+        
+        if (self.vehicleModelRange.count == 0) {
+            return;
+        }
+        
+        ActionSheetStringPicker.show(withTitle: InterfaceString.ActionSheet.VehicleModel, rows: self.vehicleModelRange, initialSelection: 0, doneBlock: {
+            picker, value, index in
+            
+            if let model = index as? String {
+                self.selectedModel = model
+                self.vehicleModelTextFieldOutlet.text = model
+                
+                self.vehicleColorTextFieldOutlet.text = self.vehicleColorRange.first
+            }
+            
+            return
+        }, cancel: { ActionStringCancelBlock in return }, origin: vehicleModelTextFieldOutlet)
     }
     
     @IBAction func onVehicleColorClick(_ sender: UITapGestureRecognizer) {
-        print("onVehicleColorClick called")
+
+        // dismiss the keyboard if it's visible
+        self.view.endEditing(true)
         
+        ActionSheetStringPicker.show(withTitle: InterfaceString.ActionSheet.VehicleColor, rows: self.vehicleColorRange, initialSelection: 0, doneBlock: {
+            picker, value, index in
+            
+            if let color = index as? String {
+                self.selectedColor = color
+                self.vehicleColorTextFieldOutlet.text = color
+                
+                self.vehicleCapacityTextFieldOutlet.text = self.DEFAULT_VEHICLE_CAPACITY
+                self.selectedCapacity = self.DEFAULT_VEHICLE_CAPACITY
+            }
+            
+            return
+        }, cancel: { ActionStringCancelBlock in return }, origin: vehicleModelTextFieldOutlet)
     }
     
     @IBAction func onVehicleCapacityClick(_ sender: UITapGestureRecognizer) {
-        print("onVehicleCapacityClick called")
+        
+        // dismiss the keyboard if it's visible
+        self.view.endEditing(true)
         
         ActionSheetStringPicker.show(withTitle: InterfaceString.ActionSheet.VehicleYear, rows: self.vehicleCapacityRange, initialSelection: 1, doneBlock: {
             picker, value, index in
             
-            print("onVehicleCapacityClick \(index)")
-            self.vehicleCapacityTextFieldOutlet.text = index as? String
+            if let capacity = index as? String {
+                self.vehicleCapacityTextFieldOutlet.text = capacity
+                self.selectedCapacity = capacity
+            }
             return
         }, cancel: { ActionStringCancelBlock in return }, origin: vehicleYearTextFieldOutlet)
     }
@@ -93,6 +167,9 @@ class VehicleViewController: BaseYibbyViewController {
         
         // hide the back button
         self.navigationItem.setHidesBackButton(true, animated: false)
+        
+        // while nav bar tint
+        self.navigationController?.navigationBar.tintColor = .white
     }
 
     func setupActionSheets() {
@@ -126,6 +203,58 @@ class VehicleViewController: BaseYibbyViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    // MARK: - Helpers
+    
+    func loadVehicleMakes(year: String) {
+        
+        ActivityIndicatorUtil.enableActivityIndicator(self.view)
+        
+        VehicleDataAPI.sharedClient.getMakes(forYear: year, completion: { (_ makes: [VehicleMake]?, _ error: Error?) -> Void in
+            
+            ActivityIndicatorUtil.disableActivityIndicator(self.view)
+            
+            if (error == nil) {
+                self.vehicleMakeRange.removeAll()
+                if let makesArr = makes {
+                    for make in makesArr {
+                        if let makeDisplay = make.makeDisplay {
+                            self.vehicleMakeRange.append(makeDisplay)
+                        }
+                    }
+                }
+                
+                self.vehicleMakeTextFieldOutlet.text = self.vehicleMakeRange.first
+
+            } else {
+                // TODO: show error alert
+            }
+        })
+    }
+    
+    func loadVehicleModels(make: String, year: String) {
+        
+        ActivityIndicatorUtil.enableActivityIndicator(self.view)
+        
+        VehicleDataAPI.sharedClient.getModels(forMakeAndYear: make, year: year, completion: { (_ models: [VehicleModel]?, _ error: Error?) -> Void in
+            
+            ActivityIndicatorUtil.disableActivityIndicator(self.view)
+            
+            if (error == nil) {
+                self.vehicleModelRange.removeAll()
+                if let modelsArr = models {
+                    for model in modelsArr {
+                        if let modelDisplay = model.modelName {
+                            self.vehicleModelRange.append(modelDisplay)
+                        }
+                    }
+                }
+                self.vehicleModelTextFieldOutlet.text = self.vehicleModelRange.first
+            } else {
+                // TODO: show error alert
+            }
+        })
+    }
     
     /*
     // MARK: - Navigation
@@ -138,6 +267,7 @@ class VehicleViewController: BaseYibbyViewController {
     */
 
 }
+
 extension VehicleViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
@@ -153,5 +283,15 @@ extension VehicleViewController: UITextFieldDelegate {
             return true
         }
         return false
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == vehicleLicensePlateTextFieldOutlet {
+            vehicleLicensePlateTextFieldOutlet.resignFirstResponder()
+            return false
+        }
+        
+        return true
     }
 }

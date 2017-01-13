@@ -4,7 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AIFlatSwitch.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ActionSheetPicker-3.0.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Alamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>AlamofireObjectMapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -79,6 +94,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ObjectMapper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>OpenInGoogleMaps.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -132,17 +152,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>106EFB4E1DB9D8B9EBE469A4A8F39A09</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>1234C76AA29FAFA54270CBCC8BEF8CD6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1F1409F9ECD4669F49720D89716FD24D</key>
+		<key>1D7F5695111A02D10FF36008B36BCF03</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>24A9758E19B3F26486B3657289F63D51</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2688518E620D24C822BA5D51C3978CB0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2F5622F3B18DF497981AB58C6D1FC72F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -157,6 +187,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>3649FDDC9A8AA0D20265834988BD6CDE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3A550B121C74E21F1B5B745BCCEE754A</key>
 		<dict>
 			<key>primary</key>
@@ -167,12 +202,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4D3E05B520FBC850864D49830E827A96</key>
+		<key>4DC059E04CBA98AEDDB5C34E02D551E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4DC059E04CBA98AEDDB5C34E02D551E9</key>
+		<key>53212E0D0ED27353A77585CCAA16B10B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -182,7 +217,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>5BFE51FE02544E6ACBC481B15538A903</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>763B034B1E8516BB26F076733D899890</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>83809A38136027B4284EC111C802F7B0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -197,22 +247,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>9502FB01641FBABB78522037E882757B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>965699190112DDBD9B7864D091660DBC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9AC4CA8431E180791DE30ED378792EF8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9C375F6800FE5124F2B2FDCF9A0D70A2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>9EF8E2CB03A6BA0320C14D2E87A45921</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A03AA49970DA1CFDD9E48D38CC11D39A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -227,17 +277,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>ABFB5B3C0389FB3B83A97AF40AEC9787</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B8D0EB45470D6E626D7FE439E8DD717E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D30835CE50B489FEA69352260F54C976</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D3AF52C9BAC7A07DF0DB2E6727B72234</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -248,11 +293,6 @@
 			<true/>
 		</dict>
 		<key>D8167FC80FB75998FEB9BCF29455230B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E3A66031D4E1821A871C7F784C93C3DC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

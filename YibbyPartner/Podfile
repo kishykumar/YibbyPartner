@@ -11,6 +11,7 @@ def testing_pods
 end
 
 def shared_pods
+    pod 'Alamofire', '~> 4.0'
     pod 'GoogleMaps'
     pod 'Google/CloudMessaging'
     pod 'GooglePlaces'
@@ -36,7 +37,9 @@ def shared_pods
     pod 'SwiftKeychainWrapper'
     pod 'ActionSheetPicker-3.0', '~> 2.2.0'
     pod 'IQKeyboardManagerSwift'
-    
+    pod 'AlamofireObjectMapper', '~> 4.0'
+    pod 'AIFlatSwitch', '~> 1.0.1'
+
 end
 
 target 'YibbyPartner' do

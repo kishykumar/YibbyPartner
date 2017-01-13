@@ -45,6 +45,8 @@ public struct InterfaceString {
         static let VehicleModel = NSLocalizedString("Vehicle Model", comment: "Vehicle Model")
         static let VehicleColor = NSLocalizedString("Vehicle Color", comment: "Vehicle Color")
         static let VehicleCapacity = NSLocalizedString("Vehicle Capacity", comment: "Vehicle Capacity")
+        static let DriverLicenseState = NSLocalizedString("Driver License State", comment: "Driver License State")
+        static let BirthDate = NSLocalizedString("Birth Date", comment: "Birth Date")
     }
     
     public struct TableSections {
