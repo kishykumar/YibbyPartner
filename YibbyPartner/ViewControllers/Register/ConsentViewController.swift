@@ -7,14 +7,34 @@
 //
 
 import UIKit
+import CocoaLumberjack
+import AIFlatSwitch
 
 class ConsentViewController: BaseYibbyViewController {
 
     // MARK: - Properties
     
+    @IBOutlet weak var consentSwitchOutlet: AIFlatSwitch!
     
     // MARK: - Actions
+    @IBAction func onNextBarButtonClick(_ sender: UIBarButtonItem) {
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        // conduct error checks
+        
+        let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
+        
+        let duViewController = registerStoryboard.instantiateViewController(withIdentifier: "DocumentUploadViewControllerIdentifier") as! DocumentUploadViewController
+        
+        // get the navigation VC and push the new VC
+        self.navigationController!.pushViewController(duViewController, animated: true)
+        
+//        UIApplication.shared.endIgnoringInteractionEvents()
+    }
     
+    @IBAction func onConsentClick(_ sender: AIFlatSwitch) {
+        
+    }
     
     // MARK: - Setup
     

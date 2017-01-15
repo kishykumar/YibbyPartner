@@ -20,7 +20,6 @@ class VehicleViewController: BaseYibbyViewController {
     
     var vehicleMakeRange = [String]()
     var vehicleModelRange = [String]()
-    var vehicleColorRange = ["Aluminum", "Beige", "Black", "Blue", "Bronze", "Brown", "Claret", "Copper", "Cream", "Gold", "Gray", "Green", "Maroon", "Metallic", "Navy", "Orange", "Pink", "Purple", "Red", "Rose", "Rust", "Silver", "Tan", "Turquoise", "White", "Yellow"]
     
     var selectedYear: String?
     var selectedMake: String?
@@ -45,6 +44,20 @@ class VehicleViewController: BaseYibbyViewController {
     let MINIMUM_VEHICLE_YEAR = "2001"
     
     // MARK: - Actions
+    
+    @IBAction func onNextBarButtonClick(_ sender: UIBarButtonItem) {
+        
+        UIApplication.shared.beginIgnoringInteractionEvents()
+
+        // conduct error checks
+        
+        let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
+        
+        let dlViewController = registerStoryboard.instantiateViewController(withIdentifier: "DriverLicenseViewControllerIdentifier") as! DriverLicenseViewController
+        
+        // get the navigation VC and push the new VC
+        self.navigationController!.pushViewController(dlViewController, animated: true)
+    }
     
     @IBAction func vehicleMakeClicked(_ sender: UITapGestureRecognizer) {
         
@@ -102,7 +115,7 @@ class VehicleViewController: BaseYibbyViewController {
                 self.selectedModel = model
                 self.vehicleModelTextFieldOutlet.text = model
                 
-                self.vehicleColorTextFieldOutlet.text = self.vehicleColorRange.first
+                self.vehicleColorTextFieldOutlet.text = InterfaceString.Resource.VehicleColorsList.first
             }
             
             return
@@ -114,7 +127,7 @@ class VehicleViewController: BaseYibbyViewController {
         // dismiss the keyboard if it's visible
         self.view.endEditing(true)
         
-        ActionSheetStringPicker.show(withTitle: InterfaceString.ActionSheet.VehicleColor, rows: self.vehicleColorRange, initialSelection: 0, doneBlock: {
+        ActionSheetStringPicker.show(withTitle: InterfaceString.ActionSheet.VehicleColor, rows: InterfaceString.Resource.VehicleColorsList, initialSelection: 0, doneBlock: {
             picker, value, index in
             
             if let color = index as? String {
@@ -148,6 +161,8 @@ class VehicleViewController: BaseYibbyViewController {
     // MARK: - Setup
     
     func setupDelegates() {
+        
+        self.navigationController?.delegate = self
         
         self.vehicleMakeTapGestureRecognizerOutlet.delegate = self
         self.vehicleModelTapGestureRecognizerOutlet.delegate = self
@@ -269,6 +284,8 @@ class VehicleViewController: BaseYibbyViewController {
 }
 
 extension VehicleViewController: UIGestureRecognizerDelegate {
+    // MARK: - UIGestureRecognizerDelegate
+
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
@@ -293,5 +310,12 @@ extension VehicleViewController: UITextFieldDelegate {
         }
         
         return true
+    }
+}
+
+extension VehicleViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        DDLogVerbose("New controller showed up")
+        UIApplication.shared.endIgnoringInteractionEvents()
     }
 }

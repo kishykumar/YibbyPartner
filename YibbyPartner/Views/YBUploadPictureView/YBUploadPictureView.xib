@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment version="2304" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="FontAwesome.ttf">
+            <string>FontAwesome</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YBUploadPictureView" customModule="YibbyPartner" customModuleProvider="target">
+            <connections>
+                <outlet property="cameraLabelOutlet" destination="ojg-5J-OKB" id="1nW-st-Ubm"/>
+                <outlet property="uploadLabelOutlet" destination="yCM-yZ-Dyp" id="kKi-UJ-zuh"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="167" height="133"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oYf-Ad-kNS" userLabel="MainView">
+                    <rect key="frame" x="0.0" y="0.0" width="166.5" height="133"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="yOE-nY-RiI" userLabel="MainSV">
+                            <rect key="frame" x="0.0" y="0.0" width="166.5" height="133"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dr3-Ko-kkF" userLabel="DummyView">
+                                    <rect key="frame" x="0.0" y="0.0" width="166.5" height="1"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="5f7-wg-hhg"/>
+                                    </constraints>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojg-5J-OKB">
+                                    <rect key="frame" x="0.0" y="27" width="166.5" height="35"/>
+                                    <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="34"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload License" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCM-yZ-Dyp">
+                                    <rect key="frame" x="0.0" y="88" width="166.5" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KV7-IA-KJh" userLabel="DummyView">
+                                    <rect key="frame" x="0.0" y="132" width="166.5" height="1"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="XSs-m7-3N1"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="oYf-Ad-kNS" secondAttribute="height" multiplier="1.25" id="4qq-Da-MpG"/>
+                        <constraint firstAttribute="trailing" secondItem="yOE-nY-RiI" secondAttribute="trailing" id="eJ5-lf-MwO"/>
+                        <constraint firstItem="yOE-nY-RiI" firstAttribute="leading" secondItem="oYf-Ad-kNS" secondAttribute="leading" id="kxE-nE-msN"/>
+                        <constraint firstItem="yOE-nY-RiI" firstAttribute="top" secondItem="oYf-Ad-kNS" secondAttribute="top" id="lJ2-l3-aWc"/>
+                        <constraint firstAttribute="bottom" secondItem="yOE-nY-RiI" secondAttribute="bottom" id="nQc-vW-4ZN"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="oYf-Ad-kNS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0Ch-re-I5Q"/>
+                <constraint firstAttribute="trailing" secondItem="oYf-Ad-kNS" secondAttribute="trailing" id="1hO-Jv-ePx"/>
+                <constraint firstAttribute="bottom" secondItem="oYf-Ad-kNS" secondAttribute="bottom" id="G6e-qe-dSM"/>
+                <constraint firstItem="oYf-Ad-kNS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QRa-s2-cmr"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-77.5" y="-100.5"/>
+        </view>
+    </objects>
+</document>

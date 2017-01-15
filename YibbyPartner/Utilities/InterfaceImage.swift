@@ -23,6 +23,8 @@ public enum InterfaceImage: String {
     
     case DropdownArrow = "dropdown_arrow"
     
+    case Lock = "lock"
+    
     // Postbar Icons
     case Eye = "eye"
     case Heart = "hearts"

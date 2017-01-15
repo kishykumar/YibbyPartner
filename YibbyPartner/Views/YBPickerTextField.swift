@@ -11,6 +11,8 @@ import UIKit
 @IBDesignable
 class YBPickerTextField: YBFloatLabelTextField {
     
+    let displacement: CGFloat = 10
+    
     required override public init(frame: CGRect) {
         super.init(frame: frame)
         sharedSetup()
@@ -28,7 +30,7 @@ class YBPickerTextField: YBFloatLabelTextField {
     
     override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
         var textRect = super.rightViewRect(forBounds: bounds)
-        textRect.origin.x -= 10
+        textRect.origin.x -= displacement
         return textRect
     }
 }

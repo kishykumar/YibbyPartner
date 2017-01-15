@@ -39,14 +39,28 @@ public struct InterfaceString {
         static let Dropoff = NSLocalizedString("Dropoff", comment: "Dropoff")
     }
     
+    
+    public struct Upload {
+        static let License = NSLocalizedString("Upload License", comment: "Upload License")
+        static let Insurance = NSLocalizedString("Upload Insurance", comment: "Upload Insurance")
+        static let ProfilePicture = NSLocalizedString("Upload Profile Picture", comment: "Upload Profile Picture")
+        static let VehicleInspectionForm = NSLocalizedString("Upload Vehicle Inspection Form", comment: "Upload Vehicle Inspection Form")
+    }
+    
     public struct ActionSheet {
         static let VehicleYear = NSLocalizedString("Vehicle Year", comment: "Vehicle Year")
         static let VehicleMake = NSLocalizedString("Vehicle Make", comment: "Vehicle Make")
         static let VehicleModel = NSLocalizedString("Vehicle Model", comment: "Vehicle Model")
         static let VehicleColor = NSLocalizedString("Vehicle Color", comment: "Vehicle Color")
         static let VehicleCapacity = NSLocalizedString("Vehicle Capacity", comment: "Vehicle Capacity")
+        
         static let DriverLicenseState = NSLocalizedString("Driver License State", comment: "Driver License State")
         static let BirthDate = NSLocalizedString("Birth Date", comment: "Birth Date")
+        
+        static let AddressState = NSLocalizedString("Address State", comment: "Address State")
+
+        static let InsuranceState = NSLocalizedString("Insurance State", comment: "Insurance State")
+        static let InsuranceExpirationDate = NSLocalizedString("Insurance Expiration Date", comment: "Insurance Expiration Date")
     }
     
     public struct TableSections {
@@ -161,6 +175,12 @@ public struct InterfaceString {
         static let UsernameSuggestionTemplate = NSLocalizedString("Here are some available usernames -\n%@", comment: "username suggestions showmes")
         static let Password = NSLocalizedString("Password", comment: "password key")
         static let PasswordInvalid = NSLocalizedString("Password must be at least 8\ncharacters long.", comment: "password length error message")
+    }
+    
+    public struct Resource {
+        static let USStatesList = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
+        
+        static let VehicleColorsList = ["Aluminum", "Beige", "Black", "Blue", "Bronze", "Brown", "Claret", "Copper", "Cream", "Gold", "Gray", "Green", "Maroon", "Metallic", "Navy", "Orange", "Pink", "Purple", "Red", "Rose", "Rust", "Silver", "Tan", "Turquoise", "White", "Yellow"]
     }
     
     static let GenericError = NSLocalizedString("Something went wrong. Thank you for your patience with Yibby Beta!", comment: "Generic error message")

@@ -14,8 +14,6 @@ import AIFlatSwitch
 class DriverLicenseViewController: BaseYibbyViewController {
 
     // MARK: - Properties
-    var usStates = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
-    
     @IBOutlet weak var firstNameTextFieldOutlet: YBFloatLabelTextField!
     @IBOutlet weak var middleNameTextFieldOutlet: YBFloatLabelTextField!
     @IBOutlet weak var lastNameTextFieldOutlet: YBFloatLabelTextField!
@@ -34,6 +32,20 @@ class DriverLicenseViewController: BaseYibbyViewController {
     
     // MARK: - Actions
     
+    @IBAction func onNextBarButtonClick(_ sender: UIBarButtonItem) {
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        // conduct error checks
+        
+        let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
+        
+        let insuranceViewController = registerStoryboard.instantiateViewController(withIdentifier: "InsuranceViewControllerIdentifier") as! InsuranceViewController
+        
+        // get the navigation VC and push the new VC
+        self.navigationController!.pushViewController(insuranceViewController, animated: true)
+        
+//        UIApplication.shared.endIgnoringInteractionEvents()
+    }
     
     @IBAction func onCommercialLicenseSwitchValueChange(_ sender: AIFlatSwitch) {
         isCommercialLicense = commercialLicenseSwitchOutlet.isSelected
@@ -44,7 +56,7 @@ class DriverLicenseViewController: BaseYibbyViewController {
         // dismiss the keyboard if it's visible
         self.view.endEditing(true)
         
-        ActionSheetStringPicker.show(withTitle: InterfaceString.ActionSheet.DriverLicenseState, rows: self.usStates, initialSelection: 0, doneBlock: {
+        ActionSheetStringPicker.show(withTitle: InterfaceString.ActionSheet.DriverLicenseState, rows: InterfaceString.Resource.USStatesList, initialSelection: 0, doneBlock: {
             picker, value, index in
             
             if let state = index as? String {
@@ -126,6 +138,8 @@ class DriverLicenseViewController: BaseYibbyViewController {
 }
 
 extension DriverLicenseViewController: UIGestureRecognizerDelegate {
+    // MARK: - UIGestureRecognizerDelegate
+
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
