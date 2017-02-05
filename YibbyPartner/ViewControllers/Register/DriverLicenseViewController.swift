@@ -14,6 +14,7 @@ import AIFlatSwitch
 class DriverLicenseViewController: BaseYibbyViewController {
 
     // MARK: - Properties
+    
     @IBOutlet weak var firstNameTextFieldOutlet: YBFloatLabelTextField!
     @IBOutlet weak var middleNameTextFieldOutlet: YBFloatLabelTextField!
     @IBOutlet weak var lastNameTextFieldOutlet: YBFloatLabelTextField!
@@ -30,6 +31,8 @@ class DriverLicenseViewController: BaseYibbyViewController {
     var selectedBirthDate: Date?
     var isCommercialLicense: Bool?
     
+    let testMode = true
+    
     // MARK: - Actions
     
     @IBAction func onNextBarButtonClick(_ sender: UIBarButtonItem) {
@@ -37,14 +40,23 @@ class DriverLicenseViewController: BaseYibbyViewController {
         
         // conduct error checks
         
+        let driverLicenseDetails = YBClient.sharedInstance().registrationDetails.driverLicense
+        driverLicenseDetails.dob = TimeUtil.getISODate(inDate: self.selectedBirthDate!)
+// TODO:       driverLicenseDetails.expiration = TimeUtil.getISODate(inDate: self.selectedBirthDate!)
+        driverLicenseDetails.firstName = self.firstNameTextFieldOutlet.text
+        driverLicenseDetails.lastName = self.lastNameTextFieldOutlet.text
+        driverLicenseDetails.middleName = self.middleNameTextFieldOutlet.text
+        driverLicenseDetails.number = self.driverLicenseTextFieldOutlet.text
+        driverLicenseDetails.state = self.selectedState
+
+        YBClient.sharedInstance().registrationDetails.driving.hasCommercialLicense = self.isCommercialLicense
+        
         let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
         
         let insuranceViewController = registerStoryboard.instantiateViewController(withIdentifier: "InsuranceViewControllerIdentifier") as! InsuranceViewController
         
         // get the navigation VC and push the new VC
         self.navigationController!.pushViewController(insuranceViewController, animated: true)
-        
-//        UIApplication.shared.endIgnoringInteractionEvents()
     }
     
     @IBAction func onCommercialLicenseSwitchValueChange(_ sender: AIFlatSwitch) {
@@ -111,14 +123,35 @@ class DriverLicenseViewController: BaseYibbyViewController {
         
     }
 
+    func initProperties() {
+        
+        if (testMode) {
+            selectedState = "California"
+            selectedBirthDate = Date()
+            isCommercialLicense = true
+            self.firstNameTextFieldOutlet.text = "We"
+            self.lastNameTextFieldOutlet.text = "People"
+            self.middleNameTextFieldOutlet.text = "The"
+            self.driverLicenseTextFieldOutlet.text = "F1234567"
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         setupUI()
         setupDelegates()
+        initProperties()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if (UIApplication.shared.isIgnoringInteractionEvents) {
+            UIApplication.shared.endIgnoringInteractionEvents()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

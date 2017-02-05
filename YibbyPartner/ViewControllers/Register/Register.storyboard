@@ -6,6 +6,7 @@
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1081,7 +1082,7 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Iq-Tn-tCI" userLabel="AgreementTextView">
                                         <rect key="frame" x="15" y="50.5" width="313" height="391.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textView>
@@ -1249,7 +1250,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="5 of 5" id="OwA-F5-7HJ">
-                        <barButtonItem key="backBarButtonItem" title=" " id="bQB-T7-Eyq"/>
                         <barButtonItem key="rightBarButtonItem" title="Submit" id="hvn-bl-zqN">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -1266,12 +1266,77 @@
             </objects>
             <point key="canvasLocation" x="4929" y="118"/>
         </scene>
+        <!--Pending Approval View Controller-->
+        <scene sceneID="bIe-Bs-UGt">
+            <objects>
+                <viewController storyboardIdentifier="PendingApprovalViewControllerIdentifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mXs-IB-Z08" customClass="PendingApprovalViewController" customModule="YibbyPartner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dw1-va-atQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="f4m-IE-7w4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="t6Q-ss-OUa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car_with_steering" translatesAutoresizingMaskIntoConstraints="NO" id="DZB-PJ-6eY">
+                                <rect key="frame" x="16" y="269.5" width="343" height="128"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending Approval" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXn-UM-XHP">
+                                <rect key="frame" x="16" y="116" width="343" height="27.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Please be patient while your application is being processed. We will email you as soon as it's done. " textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUU-dg-mXW">
+                                <rect key="frame" x="16" y="423" width="343" height="122"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.098039215686274508" green="0.098039215686274508" blue="0.098039215686274508" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hourglass" translatesAutoresizingMaskIntoConstraints="NO" id="eEI-25-YPz">
+                                <rect key="frame" x="16" y="84" width="343" height="22"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BRR-nR-mVA">
+                                <rect key="frame" x="112" y="575" width="151" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="BRR-nR-mVA" secondAttribute="height" multiplier="71:15" id="f0V-eC-d3r"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Learn more about us"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hUU-dg-mXW" firstAttribute="leading" secondItem="t6Q-ss-OUa" secondAttribute="leadingMargin" id="0Lm-Pr-1e7"/>
+                            <constraint firstItem="DZB-PJ-6eY" firstAttribute="trailing" secondItem="t6Q-ss-OUa" secondAttribute="trailingMargin" id="6Mf-yQ-q0E"/>
+                            <constraint firstItem="hUU-dg-mXW" firstAttribute="top" secondItem="DZB-PJ-6eY" secondAttribute="bottom" constant="25" id="BS4-aL-HFE"/>
+                            <constraint firstItem="eEI-25-YPz" firstAttribute="trailing" secondItem="t6Q-ss-OUa" secondAttribute="trailingMargin" id="COE-FI-VVl"/>
+                            <constraint firstItem="pXn-UM-XHP" firstAttribute="top" secondItem="eEI-25-YPz" secondAttribute="bottom" constant="10" id="JnH-Cw-YxM"/>
+                            <constraint firstItem="pXn-UM-XHP" firstAttribute="leading" secondItem="t6Q-ss-OUa" secondAttribute="leadingMargin" id="LUe-aE-M6g"/>
+                            <constraint firstItem="DZB-PJ-6eY" firstAttribute="centerY" secondItem="t6Q-ss-OUa" secondAttribute="centerY" id="QhE-K0-nru"/>
+                            <constraint firstItem="f4m-IE-7w4" firstAttribute="top" secondItem="BRR-nR-mVA" secondAttribute="bottom" constant="60" id="cXN-IG-k5Y"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pXn-UM-XHP" secondAttribute="trailing" id="cyD-b3-Y1s"/>
+                            <constraint firstItem="DZB-PJ-6eY" firstAttribute="leading" secondItem="t6Q-ss-OUa" secondAttribute="leadingMargin" id="i27-KM-T47"/>
+                            <constraint firstItem="BRR-nR-mVA" firstAttribute="centerX" secondItem="t6Q-ss-OUa" secondAttribute="centerX" id="inH-Js-fu9"/>
+                            <constraint firstItem="eEI-25-YPz" firstAttribute="top" secondItem="Dw1-va-atQ" secondAttribute="bottom" constant="20" id="mdv-R7-7k1"/>
+                            <constraint firstItem="hUU-dg-mXW" firstAttribute="trailing" secondItem="t6Q-ss-OUa" secondAttribute="trailingMargin" id="pXY-pk-KBB"/>
+                            <constraint firstItem="BRR-nR-mVA" firstAttribute="top" secondItem="hUU-dg-mXW" secondAttribute="bottom" constant="30" id="qRK-nv-F3n"/>
+                            <constraint firstItem="eEI-25-YPz" firstAttribute="leading" secondItem="t6Q-ss-OUa" secondAttribute="leadingMargin" id="sZy-ZN-OdV"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qfc-1w-qCj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5688.8000000000002" y="115.59220389805098"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="eEe-ba-zvG">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oia-gq-6wB" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="v8q-d0-zkm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="v8q-d0-zkm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1290,7 +1355,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5aK-UC-B10" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oi4-ls-4sj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Oi4-ls-4sj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1309,7 +1374,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rmp-zT-1eP" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8YH-vE-XhB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8YH-vE-XhB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1327,7 +1392,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="W9u-83-Nk8" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="a1Z-Lm-lYe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="a1Z-Lm-lYe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1345,7 +1410,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Eel-cA-oAo" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GVQ-Fm-6mb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GVQ-Fm-6mb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1363,7 +1428,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7ku-NU-1YV" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="O4U-J9-ytq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="O4U-J9-ytq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1378,6 +1443,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="car_with_steering" width="128" height="128"/>
+        <image name="hourglass" width="17" height="22"/>
         <image name="steering_wheel" width="64" height="64"/>
     </resources>
 </document>

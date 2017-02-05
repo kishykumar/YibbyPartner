@@ -39,6 +39,8 @@ def shared_pods
     pod 'IQKeyboardManagerSwift'
     pod 'AlamofireObjectMapper', '~> 4.0'
     pod 'AIFlatSwitch', '~> 1.0.1'
+    pod 'ImagePicker'
+    pod 'Lightbox'
 
 end
 

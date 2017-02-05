@@ -20,8 +20,8 @@ class RideStartViewController: BaseYibbyViewController {
     // MARK: Actions
     
     @IBAction func startNavAction(_ sender: AnyObject) {
-        MapService.sharedInstance().openDirectionsInGoogleMaps(self.bid.dropoffLat,
-                                                               lng: self.bid.dropoffLong)
+        MapService.sharedInstance().openDirectionsInGoogleMaps((self.bid.dropoffLocation?.latitude)!,
+                                                               lng: (self.bid.dropoffLocation?.longitude)!)
     }
     
     @IBAction func destArrivedAction(_ sender: AnyObject) {
@@ -57,7 +57,7 @@ class RideStartViewController: BaseYibbyViewController {
     // MARK: Setup functions
     
     func initProperties() {
-        self.bid = (BidState.sharedInstance().getOngoingBid())!
+        self.bid = (YBClient.sharedInstance().getBid())!
     }
     
     override func viewDidLoad() {

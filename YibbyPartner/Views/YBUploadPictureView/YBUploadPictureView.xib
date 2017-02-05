@@ -40,13 +40,13 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojg-5J-OKB">
-                                    <rect key="frame" x="0.0" y="27" width="166.5" height="35"/>
+                                    <rect key="frame" x="0.0" y="27.5" width="166.5" height="34"/>
                                     <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="34"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload License" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCM-yZ-Dyp">
-                                    <rect key="frame" x="0.0" y="88" width="166.5" height="18"/>
+                                    <rect key="frame" x="0.0" y="87.5" width="166.5" height="18"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -59,6 +59,10 @@
                                     </constraints>
                                 </view>
                             </subviews>
+                            <gestureRecognizers/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="QkO-By-eFg" appends="YES" id="gKx-wZ-l54"/>
+                            </connections>
                         </stackView>
                     </subviews>
                     <constraints>
@@ -79,5 +83,10 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-77.5" y="-100.5"/>
         </view>
+        <tapGestureRecognizer id="QkO-By-eFg" userLabel="OnViewClick Tap Gesture Recognizer">
+            <connections>
+                <action selector="onClick:" destination="-1" id="zHN-gy-KZw"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>

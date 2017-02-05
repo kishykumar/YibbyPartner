@@ -40,7 +40,7 @@ class RideEndViewController: BaseYibbyViewController {
     // MARK: Setup functions
     
     func initProperties() {
-        self.bid = (BidState.sharedInstance().getOngoingBid())!
+        self.bid = (YBClient.sharedInstance().getBid())!
     }
     
     override func viewDidLoad() {

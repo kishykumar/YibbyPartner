@@ -10,6 +10,8 @@ import UIKit
 import ActionSheetPicker_3_0
 import CocoaLumberjack
 import AIFlatSwitch
+import ImagePicker
+import Lightbox
 
 class InsuranceViewController: BaseYibbyViewController {
 
@@ -31,15 +33,27 @@ class InsuranceViewController: BaseYibbyViewController {
     var selectedInsuranceState: String?
     var selectedInsuranceExpDate: Date?
     
+    var insuranceCardPictureFileId: String?
+    var driverLicensePictureFileId: String?
+    
     private let MINIMUM_INSURANCE_EXPIRATION_MONTHS = 1
+    
+    let testMode = true
     
     // MARK: - Actions
 
-    
     @IBAction func onNextBarButtonClick(_ sender: UIBarButtonItem) {
         UIApplication.shared.beginIgnoringInteractionEvents()
         
         // conduct error checks
+        
+        let insuranceDetails = YBClient.sharedInstance().registrationDetails.insurance
+        insuranceDetails.insuranceExpiration = TimeUtil.getISODate(inDate: self.selectedInsuranceExpDate!)
+        insuranceDetails.insuranceState = selectedInsuranceState
+        insuranceDetails.insuranceCardPicture = self.insuranceCardPictureFileId
+        
+        let driverLicenseDetails = YBClient.sharedInstance().registrationDetails.driverLicense
+        driverLicenseDetails.licensePicture = driverLicensePictureFileId
         
         let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
         
@@ -47,8 +61,6 @@ class InsuranceViewController: BaseYibbyViewController {
         
         // get the navigation VC and push the new VC
         self.navigationController!.pushViewController(piViewController, animated: true)
-        
-//        UIApplication.shared.endIgnoringInteractionEvents()
     }
     
     @IBAction func onCarOnInsuranceClick(_ sender: AIFlatSwitch) {
@@ -104,6 +116,15 @@ class InsuranceViewController: BaseYibbyViewController {
     
     // MARK: - Setup
     
+    func initProperties() {
+        if (self.testMode) {
+            self.selectedInsuranceExpDate = Date()
+            selectedInsuranceState = "California"
+            self.insuranceCardPictureFileId = ""
+            self.driverLicensePictureFileId = ""
+        }
+    }
+    
     func setupUI () {
         self.uploadLicenseViewOutlet.uploadLabelOutlet.text = InterfaceString.Upload.License
         self.uploadInsuranceViewOutlet.uploadLabelOutlet.text = InterfaceString.Upload.Insurance
@@ -116,6 +137,9 @@ class InsuranceViewController: BaseYibbyViewController {
         
         self.insuranceExpirationTextFieldOutlet.delegate = self
         self.insuranceStateTextFieldOutlet.delegate = self
+        
+        self.uploadLicenseViewOutlet.delegate = self
+        self.uploadInsuranceViewOutlet.delegate = self
     }
     
     override func viewDidLoad() {
@@ -124,8 +148,20 @@ class InsuranceViewController: BaseYibbyViewController {
         // Do any additional setup after loading the view.
         setupUI()
         setupDelegates()
+        initProperties()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // TODO: bug in ImagePicker: they remove the status bar :(
+        UIApplication.shared.setStatusBarHidden(false, with: .fade)
+        
+        if (UIApplication.shared.isIgnoringInteractionEvents) {
+            UIApplication.shared.endIgnoringInteractionEvents()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -146,5 +182,46 @@ extension InsuranceViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         DDLogVerbose("textFieldShouldBeginEditing")
         return false
+    }
+}
+
+extension InsuranceViewController: YBUploadPictureViewDelegate {
+    func pictureTaken(_ uploadPictureView: YBUploadPictureView, images: [UIImage], completionBlock: @escaping UploadViewCompletionBlock) {
+        if (uploadPictureView == self.uploadInsuranceViewOutlet) {
+            
+            if let image = images.first {
+                ActivityIndicatorUtil.enableActivityIndicator(self.view)
+                ImageService.sharedInstance().uploadImage(image,
+                    cacheKey: .insurancePicture,
+                    success: { (url, fileId) in
+                        ActivityIndicatorUtil.disableActivityIndicator(self.view)
+                        self.insuranceCardPictureFileId = fileId
+                        completionBlock(true, nil)
+                    },
+                    failure: { error in
+                        DDLogError("Failure in uploading insurance picture: \(error.description)")
+                        ActivityIndicatorUtil.disableActivityIndicator(self.view)
+                        completionBlock(false, error)
+                })
+            }
+            
+        } else if (uploadPictureView == self.uploadLicenseViewOutlet) {
+            
+            if let image = images.first {
+                ActivityIndicatorUtil.enableActivityIndicator(self.view)
+                ImageService.sharedInstance().uploadImage(image,
+                    cacheKey: .licensePicture,
+                    success: { (url, fileId) in
+                        ActivityIndicatorUtil.disableActivityIndicator(self.view)
+                        self.driverLicensePictureFileId = fileId
+                        completionBlock(true, nil)
+                    },
+                    failure: { error in
+                        DDLogError("Failure in uploading driverLicense picture: \(error.description)")
+                        ActivityIndicatorUtil.disableActivityIndicator(self.view)
+                        completionBlock(false, error)
+                })
+            }
+        }
     }
 }

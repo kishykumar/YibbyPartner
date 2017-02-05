@@ -26,6 +26,10 @@ class PersonalInformationViewController: BaseYibbyViewController {
     
     var selectedState: String?
     
+    var profilePictureFileId: String?
+    
+    let testMode = true
+    
     // MARK: - Actions
     
     @IBAction func onNextBarButtonClick(_ sender: UIBarButtonItem) {
@@ -33,14 +37,25 @@ class PersonalInformationViewController: BaseYibbyViewController {
         
         // conduct error checks
         
+        let licenseDetails = YBClient.sharedInstance().registrationDetails.driverLicense
+        
+        let personalDetails = YBClient.sharedInstance().registrationDetails.personal
+        personalDetails.ssn = self.ssnTextFieldOutlet.text
+        personalDetails.city = self.cityTextFieldOutlet.text
+        personalDetails.country = "United States"
+        personalDetails.dob = licenseDetails.dob
+        personalDetails.emailId = self.emailTextFieldOutlet.text
+// TODO:       personalDetails.phoneNumber = self.insuranceCardPictureFileId
+        personalDetails.profilePicture = self.profilePictureFileId
+        personalDetails.state = self.stateTextFieldOutlet.text
+        personalDetails.streetAddress = self.streetAddressTextFieldOutlet.text
+        
         let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
         
         let consentViewController = registerStoryboard.instantiateViewController(withIdentifier: "ConsentViewControllerIdentifier") as! ConsentViewController
         
         // get the navigation VC and push the new VC
         self.navigationController!.pushViewController(consentViewController, animated: true)
-        
-//        UIApplication.shared.endIgnoringInteractionEvents()
     }
     
     @IBAction func onStateClick(_ sender: UITapGestureRecognizer) {
@@ -51,7 +66,6 @@ class PersonalInformationViewController: BaseYibbyViewController {
             picker, value, index in
             
             if let state = index as? String {
-                self.selectedState = state
                 self.stateTextFieldOutlet.text = state
             }
             
@@ -60,6 +74,17 @@ class PersonalInformationViewController: BaseYibbyViewController {
     }
     
     // MARK: - Setup
+    
+    func initProperties() {
+        if (self.testMode) {
+            ssnTextFieldOutlet.text = "12345"
+            emailTextFieldOutlet.text = "k.k@gmail.com"
+            streetAddressTextFieldOutlet.text = "801 Foster City Blvd"
+            cityTextFieldOutlet.text = "Foster City"
+            stateTextFieldOutlet.text = "California"
+            zipcodeTextFieldOutlet.text = "94404"
+        }
+    }
     
     func setupUI () {
         
@@ -83,8 +108,16 @@ class PersonalInformationViewController: BaseYibbyViewController {
         // Do any additional setup after loading the view.
         setupUI()
         setupDelegates()
+        initProperties()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if (UIApplication.shared.isIgnoringInteractionEvents) {
+            UIApplication.shared.endIgnoringInteractionEvents()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

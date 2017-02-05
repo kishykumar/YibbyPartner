@@ -167,18 +167,20 @@ open class PushController: NSObject, PushControllerProtocol {
                             // start the timer by accouting the time elapsed since the user actually created the bid
                             offerViewController.timerStart = TimeInterval(Int(OfferViewController.OFFER_TIMER_EXPIRE_PERIOD - bidElapsedTime))
                             
-                            offerViewController.userBid = Bid(id: bidJson["id"].stringValue,
-                                                              bidHigh: bidJson["bidHigh"].intValue,
-                                                              bidLow: bidJson["bidLow"].intValue,
-                                                              etaHigh: bidJson["etaHigh"].intValue,
-                                                              etaLow: bidJson["etaLow"].intValue,
-                                                              pickupLat: bidJson["pickupLat"].doubleValue,
-                                                              pickupLong: bidJson["pickupLong"].doubleValue,
-                                                              pickupLoc: bidJson["pickupLoc"].stringValue,
-                                                              dropoffLat: bidJson["dropoffLat"].doubleValue,
-                                                              dropoffLong: bidJson["dropoffLong"].doubleValue,
-                                                              dropoffLoc: bidJson["dropoffLoc"].stringValue)
+                            let inBid = Bid()
+                            inBid.bidHigh = bidJson["bidHigh"].intValue
+                            inBid.id = bidJson["id"].stringValue
                             
+                            let pickupLocationBid = YBLocation(lat: bidJson["pickupLat"].doubleValue, long: bidJson["pickupLong"].doubleValue, name: bidJson["pickupLoc"].stringValue)
+                            
+                            let dropoffLocationBid = YBLocation(lat: bidJson["dropoffLat"].doubleValue, long: bidJson["dropoffLong"].doubleValue, name: bidJson["dropoffLoc"].stringValue)
+                            
+                            inBid.pickupLocation = pickupLocationBid
+                            inBid.dropoffLocation = dropoffLocationBid
+//                            inBid.people = bidJson["bidHigh"].intValue
+                            
+                            offerViewController.userBid = inBid
+
                             DDLogDebug("userBid: \(offerViewController.userBid)")
                             
                             // if an alert was already displayed, dismiss it
@@ -228,10 +230,10 @@ open class PushController: NSObject, PushControllerProtocol {
                             
                             DDLogDebug("DRIVER EN ROUTE")
                             
-                            if (!BidState.sharedInstance().isSameAsOngoingBid(rideJson[BID_ID_JSON_FIELD_NAME].string)) {
+                            if (!YBClient.sharedInstance().isSameAsOngoingBid(bidId: rideJson[BID_ID_JSON_FIELD_NAME].string)) {
                                 DDLogDebug("Not same as ongoingBid. Discarded: \(notification[MESSAGE_JSON_FIELD_NAME] as! String)")
                                 
-                                if let ongoingBid = BidState.sharedInstance().getOngoingBid() {
+                                if let ongoingBid = YBClient.sharedInstance().getBid() {
                                     DDLogDebug("Ongoingbid is: \(ongoingBid.id). Incoming is \(rideJson[BID_ID_JSON_FIELD_NAME].string)")
                                 } else {
                                     DDLogDebug("Ongoingbid is: nil. Incoming is \(rideJson[BID_ID_JSON_FIELD_NAME].string)")

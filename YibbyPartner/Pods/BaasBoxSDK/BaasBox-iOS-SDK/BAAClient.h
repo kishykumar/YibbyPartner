@@ -56,6 +56,10 @@
                       password:(NSString *)password
                       completion:(BAABooleanResultBlock)completionBlock;
 
+
+- (void)completeDriverRegistration: (NSDictionary *)parameters
+                  completion:(BAABooleanResultBlock)completionHandler;
+    
 // Caber Authentication
 - (void)authenticateCaber: (NSString *)type
                   username: (NSString *)username

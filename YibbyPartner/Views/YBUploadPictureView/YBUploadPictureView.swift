@@ -6,7 +6,17 @@
 //  Copyright © 2017 MyComp. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import CocoaLumberjack
+import ImagePicker
+import Lightbox
+
+public typealias UploadViewCompletionBlock = (_ success: Bool, _ error: Error?) -> Void
+
+public protocol YBUploadPictureViewDelegate {
+    func pictureTaken(_ uploadPictureView: YBUploadPictureView, images: [UIImage], completionBlock: @escaping UploadViewCompletionBlock)
+}
+
 @IBDesignable
 public class YBUploadPictureView: UIView {
     
@@ -14,6 +24,21 @@ public class YBUploadPictureView: UIView {
 
     @IBOutlet weak var cameraLabelOutlet: UILabel!
     @IBOutlet weak var uploadLabelOutlet: UILabel!
+
+    let imagePicker = ImagePickerController()
+    var delegate: YBUploadPictureViewDelegate?
+    
+    // MARK: Actions
+    
+    @IBAction func onClick(_ sender: UITapGestureRecognizer) {
+        
+        self.imagePicker.delegate = self
+        self.imagePicker.imageLimit = 1
+        
+        if let parentController = self.delegate as? UIViewController {
+            parentController.present(imagePicker, animated: true, completion: nil)
+        }
+    }
     
     /**
      Changes to this parameter draw the border of `self` in the given width.
@@ -77,9 +102,7 @@ public class YBUploadPictureView: UIView {
         guard let nib = getNibBundle().loadNibNamed(getNibName(), owner: self, options: nil), let firstObjectInNib = nib.first as? UIView else {
             fatalError("The nib is expected to contain a UIView as root element.")
         }
-        
-//        numberInputTextField.contentMode = UIViewContentMode.redraw
-        
+                
         clipsToBounds = true
         
         firstObjectInNib.autoresizesSubviews = true
@@ -111,5 +134,51 @@ public class YBUploadPictureView: UIView {
      */
     public func getNibBundle() -> Bundle {
         return Bundle(for: YBUploadPictureView.self)
+    }
+}
+
+extension YBUploadPictureView: ImagePickerDelegate {
+    
+    public func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
+    public func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+
+        guard images.count > 0 else { return }
+        
+        let lightboxImages = images.map {
+            return LightboxImage(image: $0)
+        }
+        
+        let lightbox = LightboxController(images: lightboxImages, startIndex: 0)
+        imagePicker.present(lightbox, animated: true, completion: nil)
+    }
+    
+    public func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        
+        guard images.count > 0 else { return }
+        
+        // call view controller delegate
+        self.delegate?.pictureTaken(self, images: images, completionBlock: { (success, error) -> Void in
+            if (success) {
+                
+                // replace with check icon on success
+                self.cameraLabelOutlet.text = ""
+                
+                // replace "Upload" with "Uploaded"
+                let newString = (self.uploadLabelOutlet.text)?.replacingOccurrences(of: "Upload ", with: "Uploaded ")
+                self.uploadLabelOutlet.text = newString
+                
+                self.cameraLabelOutlet.textColor = UIColor.appDarkGreen1()
+                
+            } else {
+                self.cameraLabelOutlet.text = ""
+                self.cameraLabelOutlet.textColor = UIColor.red
+                self.uploadLabelOutlet.text = "Upload Error"
+            }
+        })
+        
+        imagePicker.dismiss(animated: true, completion: nil)
     }
 }

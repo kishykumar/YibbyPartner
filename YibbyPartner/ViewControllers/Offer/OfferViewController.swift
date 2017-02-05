@@ -57,23 +57,24 @@ class OfferViewController: BaseYibbyViewController {
         // Do any additional setup after loading the view.
         setupUI()
         
-        lowBidPriceOutlet.text = String(userBid.bidLow)
-        highBidPriceOutlet.text = String(userBid.bidHigh)
+//        lowBidPriceOutlet.text = String(userBid.bidLow)
+        highBidPriceOutlet.text = String(describing: userBid.bidHigh)
         currentTimerValueOutlet.text = String(Int(timerStart))
         
         // set pickup and dropoff
-        let puLatLng: CLLocationCoordinate2D = CLLocationCoordinate2DMake(userBid.pickupLat,userBid.pickupLong)
-        setPickupDetails(userBid.pickupLoc, loc: puLatLng)
+        let puLatLng: CLLocationCoordinate2D = CLLocationCoordinate2DMake((userBid.pickupLocation?.latitude)!, (userBid.pickupLocation?.longitude)!)
         
-        let doLatLng: CLLocationCoordinate2D = CLLocationCoordinate2DMake(userBid.dropoffLat,userBid.dropoffLong)
-        setDropoffDetails(userBid.dropoffLoc, loc: doLatLng)
+        setPickupDetails((userBid.pickupLocation?.name)!, loc: puLatLng)
+        
+        let doLatLng: CLLocationCoordinate2D = CLLocationCoordinate2DMake((userBid.dropoffLocation?.latitude)!, (userBid.dropoffLocation?.longitude)!)
+        setDropoffDetails((userBid.dropoffLocation?.name)!, loc: doLatLng)
 
         adjustGMSCameraFocus()
 
         DDLogVerbose("TimerStart: \(timerStart)")
         startOfferTimer()
         
-        BidState.sharedInstance().setOngoingBid(userBid)
+        YBClient.sharedInstance().setBid(userBid)
     }
 
     override func didReceiveMemoryWarning() {
@@ -195,7 +196,7 @@ class OfferViewController: BaseYibbyViewController {
         DDLogVerbose("Called")
         
         // if there is an active bid, save the current time
-        if (BidState.sharedInstance().isOngoingBid()) {
+        if (YBClient.sharedInstance().isOngoingBid()) {
             let curTime = Date()
             DDLogDebug("Setting bgtime \(curTime))")
             savedBgTimestamp = curTime
@@ -205,7 +206,7 @@ class OfferViewController: BaseYibbyViewController {
     func restoreOfferTimer () {
         DDLogVerbose("Called")
         
-        if (BidState.sharedInstance().isOngoingBid()) {
+        if (YBClient.sharedInstance().isOngoingBid()) {
 
             if let appBackgroundedTime = savedBgTimestamp {
 
@@ -241,7 +242,7 @@ class OfferViewController: BaseYibbyViewController {
             stopOfferTimer()
             
             // delete the saved state bid
-            BidState.sharedInstance().resetOngoingBid()
+            YBClient.sharedInstance().resetBid()
 
             let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 

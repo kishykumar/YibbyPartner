@@ -8,12 +8,21 @@
 
 open class TimeUtil {
     
-    static func diffFromCurTimeISO (_ fromIsoTime: String) -> TimeInterval {
-        
+    static let shared = TimeUtil()
+    
+    static let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.autoupdatingCurrent
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SZ"
+        return formatter
+    }()
+    
+    static func getISODate(inDate: Date) -> String {
+        return formatter.string(from: inDate)
+    }
+    
+    static func diffFromCurTimeISO (_ fromIsoTime: String) -> TimeInterval {
         
         let isoNSDate: Date = formatter.date(from: fromIsoTime)!
         

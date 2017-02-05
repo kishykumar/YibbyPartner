@@ -24,7 +24,6 @@
 		1201B7BA1D23B49000A7EEAF /* SplashScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1201B7AA1D23B49000A7EEAF /* SplashScreen.xib */; };
 		1201B7BB1D23B49000A7EEAF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7AB1D23B49000A7EEAF /* SplashViewController.swift */; };
 		1201B7CD1D23B4AC00A7EEAF /* Bid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7BE1D23B4AB00A7EEAF /* Bid.swift */; };
-		1201B7CE1D23B4AC00A7EEAF /* BidState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7BF1D23B4AB00A7EEAF /* BidState.swift */; };
 		1201B7CF1D23B4AC00A7EEAF /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7C01D23B4AB00A7EEAF /* Offer.swift */; };
 		1201B7D01D23B4AC00A7EEAF /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7C11D23B4AB00A7EEAF /* Ride.swift */; };
 		1201B7D11D23B4AC00A7EEAF /* WebInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7C31D23B4AB00A7EEAF /* WebInterface.swift */; };
@@ -55,6 +54,16 @@
 		1211FF111D61260900AD9591 /* WeeklyEarningsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211FF101D61260900AD9591 /* WeeklyEarningsViewController.swift */; };
 		123524961C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
 		123524971C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
+		125B0C041E2C4B2D00534359 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C031E2C4B2D00534359 /* ImageService.swift */; };
+		125B0C081E2CDFDC00534359 /* TemporaryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C071E2CDFDC00534359 /* TemporaryCache.swift */; };
+		125B0C0A1E2DCFF400534359 /* DrivingDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C091E2DCFF400534359 /* DrivingDetails.swift */; };
+		125B0C0C1E2DD04D00534359 /* PersonalDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C0B1E2DD04D00534359 /* PersonalDetails.swift */; };
+		125B0C0E1E2DE10500534359 /* VehicleDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C0D1E2DE10500534359 /* VehicleDetails.swift */; };
+		125B0C101E2DE1B000534359 /* DriverLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C0F1E2DE1B000534359 /* DriverLicense.swift */; };
+		125B0C121E2DE25600534359 /* InsuranceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C111E2DE25600534359 /* InsuranceDetails.swift */; };
+		125B0C141E2DE39C00534359 /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C131E2DE39C00534359 /* Registration.swift */; };
+		125B0C161E2DE77500534359 /* YBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C151E2DE77500534359 /* YBClient.swift */; };
+		125B0C1A1E308E3B00534359 /* PendingApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C191E308E3B00534359 /* PendingApprovalViewController.swift */; };
 		1284914C1E260B10002D047B /* VehicleDataAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1284914B1E260B10002D047B /* VehicleDataAPI.swift */; };
 		1284914E1E262DA2002D047B /* VehicleMake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1284914D1E262DA2002D047B /* VehicleMake.swift */; };
 		128491501E262DAD002D047B /* VehicleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1284914F1E262DAD002D047B /* VehicleModel.swift */; };
@@ -94,6 +103,8 @@
 		12F3CCEB1C41EFC800F79A26 /* YibbyPartnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F3CCEA1C41EFC800F79A26 /* YibbyPartnerTests.swift */; };
 		12F3CCF61C4B9C0C00F79A26 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 12F3CCF51C4B9C0B00F79A26 /* Podfile */; };
 		12F3CCF81C4CF16D00F79A26 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F3CCF71C4CF16D00F79A26 /* CoreLocation.framework */; };
+		12FAC28A1E34768B00D77486 /* YBLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FAC2891E34768B00D77486 /* YBLocation.swift */; };
+		12FAC28C1E34863A00D77486 /* YBRider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FAC28B1E34863900D77486 /* YBRider.swift */; };
 		6B9369FC30AAD797CF0D9B31 /* Pods_YibbyPartner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF052090573D5AD3602BC58 /* Pods_YibbyPartner.framework */; };
 		BB26D7E74528EB7DCDEA5742 /* Pods_YibbyPartnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F447C138937DCD881B26690E /* Pods_YibbyPartnerTests.framework */; };
 /* End PBXBuildFile section */
@@ -126,7 +137,6 @@
 		1201B7AA1D23B49000A7EEAF /* SplashScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashScreen.xib; sourceTree = "<group>"; };
 		1201B7AB1D23B49000A7EEAF /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		1201B7BE1D23B4AB00A7EEAF /* Bid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bid.swift; sourceTree = "<group>"; };
-		1201B7BF1D23B4AB00A7EEAF /* BidState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidState.swift; sourceTree = "<group>"; };
 		1201B7C01D23B4AB00A7EEAF /* Offer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
 		1201B7C11D23B4AB00A7EEAF /* Ride.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
 		1201B7C31D23B4AB00A7EEAF /* WebInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebInterface.swift; sourceTree = "<group>"; };
@@ -156,6 +166,16 @@
 		1211FF0E1D605E6B00AD9591 /* TripDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripDetailsViewController.swift; sourceTree = "<group>"; };
 		1211FF101D61260900AD9591 /* WeeklyEarningsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeeklyEarningsViewController.swift; sourceTree = "<group>"; };
 		123524951C89475D004307EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		125B0C031E2C4B2D00534359 /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		125B0C071E2CDFDC00534359 /* TemporaryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporaryCache.swift; sourceTree = "<group>"; };
+		125B0C091E2DCFF400534359 /* DrivingDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrivingDetails.swift; sourceTree = "<group>"; };
+		125B0C0B1E2DD04D00534359 /* PersonalDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalDetails.swift; sourceTree = "<group>"; };
+		125B0C0D1E2DE10500534359 /* VehicleDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleDetails.swift; sourceTree = "<group>"; };
+		125B0C0F1E2DE1B000534359 /* DriverLicense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverLicense.swift; sourceTree = "<group>"; };
+		125B0C111E2DE25600534359 /* InsuranceDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsuranceDetails.swift; sourceTree = "<group>"; };
+		125B0C131E2DE39C00534359 /* Registration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
+		125B0C151E2DE77500534359 /* YBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBClient.swift; sourceTree = "<group>"; };
+		125B0C191E308E3B00534359 /* PendingApprovalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingApprovalViewController.swift; sourceTree = "<group>"; };
 		12814FBA1E0EFBF600F08CFF /* YibbyPartner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YibbyPartner.entitlements; sourceTree = "<group>"; };
 		1284914B1E260B10002D047B /* VehicleDataAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleDataAPI.swift; sourceTree = "<group>"; };
 		1284914D1E262DA2002D047B /* VehicleMake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleMake.swift; sourceTree = "<group>"; };
@@ -186,7 +206,7 @@
 		129AAE671E233980006F6CE5 /* DocumentUploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentUploadViewController.swift; sourceTree = "<group>"; };
 		129AAE701E238E2B006F6CE5 /* YBBorderedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBBorderedTextField.swift; sourceTree = "<group>"; };
 		129AAE721E238E57006F6CE5 /* YBPickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBPickerTextField.swift; sourceTree = "<group>"; };
-		129AAE741E238F3B006F6CE5 /* InterfaceImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceImage.swift; sourceTree = "<group>"; };
+		129AAE741E238F3B006F6CE5 /* InterfaceImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InterfaceImage.swift; path = ../Utilities/InterfaceImage.swift; sourceTree = "<group>"; };
 		129AAE761E24D648006F6CE5 /* YBFloatLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBFloatLabelTextField.swift; sourceTree = "<group>"; };
 		12C21E221C7DADE7000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
 		12C21E241C7DAE23000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
@@ -207,6 +227,8 @@
 		12F3CCEC1C41EFC800F79A26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12F3CCF51C4B9C0B00F79A26 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		12F3CCF71C4CF16D00F79A26 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		12FAC2891E34768B00D77486 /* YBLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBLocation.swift; sourceTree = "<group>"; };
+		12FAC28B1E34863900D77486 /* YBRider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBRider.swift; sourceTree = "<group>"; };
 		1AF052090573D5AD3602BC58 /* Pods_YibbyPartner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YibbyPartner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C40CC8C8B06A96C08FD964C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "YibbyPartner/Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3C666022AA9B796A1F7D9370 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "YibbyPartner/Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -395,13 +417,21 @@
 			isa = PBXGroup;
 			children = (
 				1201B7BE1D23B4AB00A7EEAF /* Bid.swift */,
-				1201B7BF1D23B4AB00A7EEAF /* BidState.swift */,
+				125B0C151E2DE77500534359 /* YBClient.swift */,
+				125B0C0F1E2DE1B000534359 /* DriverLicense.swift */,
+				12FAC28B1E34863900D77486 /* YBRider.swift */,
+				125B0C091E2DCFF400534359 /* DrivingDetails.swift */,
+				125B0C111E2DE25600534359 /* InsuranceDetails.swift */,
+				1201B7C01D23B4AB00A7EEAF /* Offer.swift */,
+				125B0C0B1E2DD04D00534359 /* PersonalDetails.swift */,
+				125B0C131E2DE39C00534359 /* Registration.swift */,
+				1201B7C11D23B4AB00A7EEAF /* Ride.swift */,
+				125B0C0D1E2DE10500534359 /* VehicleDetails.swift */,
 				1284914D1E262DA2002D047B /* VehicleMake.swift */,
 				128491511E263026002D047B /* VehicleMakes.swift */,
 				1284914F1E262DAD002D047B /* VehicleModel.swift */,
 				128491531E263E44002D047B /* VehicleModels.swift */,
-				1201B7C01D23B4AB00A7EEAF /* Offer.swift */,
-				1201B7C11D23B4AB00A7EEAF /* Ride.swift */,
+				12FAC2891E34768B00D77486 /* YBLocation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -419,7 +449,9 @@
 			isa = PBXGroup;
 			children = (
 				1201B7C51D23B4AB00A7EEAF /* LocationService.swift */,
+				125B0C031E2C4B2D00534359 /* ImageService.swift */,
 				1201B7C61D23B4AB00A7EEAF /* MapService.swift */,
+				129AAE741E238F3B006F6CE5 /* InterfaceImage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -437,10 +469,10 @@
 				1201B7CA1D23B4AC00A7EEAF /* LogFormatter.swift */,
 				1201B7CB1D23B4AC00A7EEAF /* AppUtil.swift */,
 				1201B7FD1D25102A00A7EEAF /* InterfaceString.swift */,
-				129AAE741E238F3B006F6CE5 /* InterfaceImage.swift */,
 				1211FEFF1D5991BD00AD9591 /* AlertUtil.swift */,
 				1211FF011D5991C800AD9591 /* TimeUtil.swift */,
 				1211FF031D5991D800AD9591 /* ActivityIndicatorUtil.swift */,
+				125B0C071E2CDFDC00534359 /* TemporaryCache.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -514,6 +546,7 @@
 				129AAE631E233949006F6CE5 /* PersonalInformationViewController.swift */,
 				129AAE651E233974006F6CE5 /* ConsentViewController.swift */,
 				129AAE671E233980006F6CE5 /* DocumentUploadViewController.swift */,
+				125B0C191E308E3B00534359 /* PendingApprovalViewController.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -883,39 +916,48 @@
 				129AAE771E24D648006F6CE5 /* YBFloatLabelTextField.swift in Sources */,
 				1284914C1E260B10002D047B /* VehicleDataAPI.swift in Sources */,
 				129AAE4A1E226B72006F6CE5 /* Colors.swift in Sources */,
+				125B0C101E2DE1B000534359 /* DriverLicense.swift in Sources */,
 				1201B7B21D23B49000A7EEAF /* OfferSentViewController.swift in Sources */,
 				128491541E263E44002D047B /* VehicleModels.swift in Sources */,
 				1201B7B61D23B49000A7EEAF /* RideEndViewController.swift in Sources */,
+				12FAC28C1E34863A00D77486 /* YBRider.swift in Sources */,
 				129AAE751E238F3B006F6CE5 /* InterfaceImage.swift in Sources */,
 				129AAE731E238E57006F6CE5 /* YBPickerTextField.swift in Sources */,
+				125B0C0C1E2DD04D00534359 /* PersonalDetails.swift in Sources */,
 				1284914E1E262DA2002D047B /* VehicleMake.swift in Sources */,
-				1201B7CE1D23B4AC00A7EEAF /* BidState.swift in Sources */,
 				1201B7D11D23B4AC00A7EEAF /* WebInterface.swift in Sources */,
 				129AAE471E226ABE006F6CE5 /* BaseYibbyViewController.swift in Sources */,
 				1201B7D51D23B4AC00A7EEAF /* LogFormatter.swift in Sources */,
 				1211FF071D5AEDA200AD9591 /* EarningsSummaryViewController.swift in Sources */,
 				1201B7AD1D23B49000A7EEAF /* DestinationPickerViewController.swift in Sources */,
+				125B0C161E2DE77500534359 /* YBClient.swift in Sources */,
 				129AAE5E1E233910006F6CE5 /* VehicleViewController.swift in Sources */,
 				1211FF111D61260900AD9591 /* WeeklyEarningsViewController.swift in Sources */,
 				1201B7AE1D23B49000A7EEAF /* LeftNavDrawerTableViewCell.swift in Sources */,
 				1211FF041D5991D800AD9591 /* ActivityIndicatorUtil.swift in Sources */,
 				129AAE711E238E2B006F6CE5 /* YBBorderedTextField.swift in Sources */,
+				125B0C081E2CDFDC00534359 /* TemporaryCache.swift in Sources */,
 				129AAE621E23393B006F6CE5 /* InsuranceViewController.swift in Sources */,
 				1211FF0F1D605E6B00AD9591 /* TripDetailsViewController.swift in Sources */,
 				129AAE591E226CE2006F6CE5 /* UIColorExtensions.swift in Sources */,
 				129AAE451E226ABE006F6CE5 /* BaseYibbyTableViewController.swift in Sources */,
+				125B0C121E2DE25600534359 /* InsuranceDetails.swift in Sources */,
 				1201B7B51D23B49000A7EEAF /* PushController.swift in Sources */,
 				1201B7B11D23B49000A7EEAF /* LoginViewController.swift in Sources */,
 				1201B7AF1D23B49000A7EEAF /* LeftNavDrawerViewController.swift in Sources */,
 				1201B7CD1D23B4AC00A7EEAF /* Bid.swift in Sources */,
 				129AAE601E233920006F6CE5 /* DriverLicenseViewController.swift in Sources */,
+				125B0C0E1E2DE10500534359 /* VehicleDetails.swift in Sources */,
 				1211FF021D5991C800AD9591 /* TimeUtil.swift in Sources */,
 				1211FF0D1D604AC800AD9591 /* DayEarningsTableCell.swift in Sources */,
+				125B0C041E2C4B2D00534359 /* ImageService.swift in Sources */,
 				1201B7D01D23B4AC00A7EEAF /* Ride.swift in Sources */,
 				1201B7D31D23B4AC00A7EEAF /* MapService.swift in Sources */,
 				12F3CCD61C41EFC700F79A26 /* AppDelegate.swift in Sources */,
 				128C0B101E2B14E70063FD91 /* YBBorderedUIView.swift in Sources */,
 				1201B7B81D23B49000A7EEAF /* SettingsViewController.swift in Sources */,
+				12FAC28A1E34768B00D77486 /* YBLocation.swift in Sources */,
+				125B0C141E2DE39C00534359 /* Registration.swift in Sources */,
 				129AAE3E1E2268FB006F6CE5 /* JoinViewController.swift in Sources */,
 				1201B7BB1D23B49000A7EEAF /* SplashViewController.swift in Sources */,
 				12C38CFC1E2A14490003DCB5 /* YBUploadPictureView.swift in Sources */,
@@ -930,9 +972,11 @@
 				129AAE551E226C76006F6CE5 /* FloatLabelTextField.swift in Sources */,
 				129AAE681E233980006F6CE5 /* DocumentUploadViewController.swift in Sources */,
 				1201B7FE1D25102A00A7EEAF /* InterfaceString.swift in Sources */,
+				125B0C0A1E2DCFF400534359 /* DrivingDetails.swift in Sources */,
 				128491501E262DAD002D047B /* VehicleModel.swift in Sources */,
 				1211FF001D5991BD00AD9591 /* AlertUtil.swift in Sources */,
 				128C0B0E1E2AEA0E0063FD91 /* YBLeftImageTextField.swift in Sources */,
+				125B0C1A1E308E3B00534359 /* PendingApprovalViewController.swift in Sources */,
 				1201B7B41D23B49000A7EEAF /* DriverOnlineViewController.swift in Sources */,
 				1201B7B31D23B49000A7EEAF /* OfferViewController.swift in Sources */,
 				129AAE561E226C76006F6CE5 /* YibbyButton1.swift in Sources */,
@@ -1074,6 +1118,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 9ESLPLTZVR;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1187,6 +1232,7 @@
 				CODE_SIGN_ENTITLEMENTS = YibbyPartner/YibbyPartner.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 9ESLPLTZVR;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

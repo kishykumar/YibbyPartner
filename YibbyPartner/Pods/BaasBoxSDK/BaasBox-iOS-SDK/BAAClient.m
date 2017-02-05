@@ -334,6 +334,23 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
     
 }
 
+- (void)completeDriverRegistration: (NSDictionary *)parameters
+                        completion:(BAABooleanResultBlock)completionHandler {
+    
+    [self postPath:@"caber/complete"
+        parameters: parameters
+           success:^(NSDictionary *responseObject) {
+
+               NSLog(@"responseObject is: %@", responseObject);
+               completionHandler(YES, nil);
+                   
+           } failure:^(NSError *error) {
+               
+               completionHandler(NO, error);
+               
+           }];
+
+}
 
 - (void)authenticateCaber: (NSString *)type
                  username: (NSString *)username

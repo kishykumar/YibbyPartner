@@ -21,6 +21,7 @@ class ConsentViewController: BaseYibbyViewController {
         UIApplication.shared.beginIgnoringInteractionEvents()
         
         // conduct error checks
+        // Make sure Agree Button is checked
         
         let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
         
@@ -28,8 +29,6 @@ class ConsentViewController: BaseYibbyViewController {
         
         // get the navigation VC and push the new VC
         self.navigationController!.pushViewController(duViewController, animated: true)
-        
-//        UIApplication.shared.endIgnoringInteractionEvents()
     }
     
     @IBAction func onConsentClick(_ sender: AIFlatSwitch) {
@@ -48,6 +47,13 @@ class ConsentViewController: BaseYibbyViewController {
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if (UIApplication.shared.isIgnoringInteractionEvents) {
+            UIApplication.shared.endIgnoringInteractionEvents()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

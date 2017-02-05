@@ -43,13 +43,25 @@ class VehicleViewController: BaseYibbyViewController {
     
     let MINIMUM_VEHICLE_YEAR = "2001"
     
+    let testMode = true
+    
     // MARK: - Actions
     
     @IBAction func onNextBarButtonClick(_ sender: UIBarButtonItem) {
         
         UIApplication.shared.beginIgnoringInteractionEvents()
 
-        // conduct error checks
+        // TODO: conduct error checks
+        
+        
+        // on successful error checks, fill in the client registration data structure
+        let clientVehicle = YBClient.sharedInstance().registrationDetails.vehicle
+        clientVehicle.licensePlate = licensePlateNumber
+        clientVehicle.capacity = Int(selectedCapacity!)
+        clientVehicle.year = Int(selectedYear!)
+        clientVehicle.make = selectedMake
+        clientVehicle.model = selectedModel
+        clientVehicle.exteriorColor = selectedColor
         
         let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
         
@@ -162,8 +174,6 @@ class VehicleViewController: BaseYibbyViewController {
     
     func setupDelegates() {
         
-        self.navigationController?.delegate = self
-        
         self.vehicleMakeTapGestureRecognizerOutlet.delegate = self
         self.vehicleModelTapGestureRecognizerOutlet.delegate = self
         self.vehicleYearTapGestureRecognizerOutlet.delegate = self
@@ -187,6 +197,17 @@ class VehicleViewController: BaseYibbyViewController {
         self.navigationController?.navigationBar.tintColor = .white
     }
 
+    func initProperties() {
+        if (self.testMode) {
+            selectedYear = "2014"
+            selectedMake = "Chevrolet"
+            selectedModel = "Camaro"
+            selectedColor = "Black"
+            selectedCapacity = "4"
+            licensePlateNumber = "KTU7083"
+        }
+    }
+    
     func setupActionSheets() {
     
         let calendar = NSCalendar.current
@@ -212,8 +233,16 @@ class VehicleViewController: BaseYibbyViewController {
         setupUI()
         setupDelegates()
         setupActionSheets()
+        initProperties()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if (UIApplication.shared.isIgnoringInteractionEvents) {
+            UIApplication.shared.endIgnoringInteractionEvents()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -310,12 +339,5 @@ extension VehicleViewController: UITextFieldDelegate {
         }
         
         return true
-    }
-}
-
-extension VehicleViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        DDLogVerbose("New controller showed up")
-        UIApplication.shared.endIgnoringInteractionEvents()
     }
 }
