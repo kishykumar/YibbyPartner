@@ -21,16 +21,21 @@ class DriverLicenseViewController: BaseYibbyViewController {
     @IBOutlet weak var driverLicenseTextFieldOutlet: YBFloatLabelTextField!
     @IBOutlet weak var stateTextFieldOutlet: YBPickerTextField!
     @IBOutlet weak var birthDateTextFieldOutlet: YBPickerTextField!
+    @IBOutlet weak var expirationDateTextFieldOutlet: YBPickerTextField!
     
     @IBOutlet weak var commercialLicenseSwitchOutlet: AIFlatSwitch!
     
     @IBOutlet var stateTapGestureRecognizerOutlet: UITapGestureRecognizer!
     @IBOutlet var birthDateTapGestureRecognizerOutlet: UITapGestureRecognizer!
+    @IBOutlet var expirationDateTapGestureRecognizerOutlet: UITapGestureRecognizer!
     
     var selectedState: String?
     var selectedBirthDate: Date?
+    var selectedExpirationDate: Date?
     var isCommercialLicense: Bool?
     
+    private let MINIMUM_LICENSE_EXPIRATION_MONTHS = 1
+
     let testMode = true
     
     // MARK: - Actions
@@ -42,7 +47,7 @@ class DriverLicenseViewController: BaseYibbyViewController {
         
         let driverLicenseDetails = YBClient.sharedInstance().registrationDetails.driverLicense
         driverLicenseDetails.dob = TimeUtil.getISODate(inDate: self.selectedBirthDate!)
-// TODO:       driverLicenseDetails.expiration = TimeUtil.getISODate(inDate: self.selectedBirthDate!)
+        driverLicenseDetails.expiration = TimeUtil.getISODate(inDate: self.selectedExpirationDate!)
         driverLicenseDetails.firstName = self.firstNameTextFieldOutlet.text
         driverLicenseDetails.lastName = self.lastNameTextFieldOutlet.text
         driverLicenseDetails.middleName = self.middleNameTextFieldOutlet.text
@@ -104,12 +109,38 @@ class DriverLicenseViewController: BaseYibbyViewController {
         datePicker?.show()
     }
     
+    @IBAction func onExpirationDateTextFieldClick(_ sender: UITapGestureRecognizer) {
+        
+        // dismiss the keyboard if it's visible
+        self.view.endEditing(true)
+        
+        let datePicker = ActionSheetDatePicker(title: InterfaceString.ActionSheet.LicenseExpirationDate, datePickerMode: UIDatePickerMode.date, selectedDate: Date(), doneBlock: {
+            picker, value, index in
+            
+            if let date = value as? Date {
+                self.selectedExpirationDate = date
+                
+                let formatter = DateFormatter()
+                formatter.dateStyle = DateFormatter.Style.long
+                self.expirationDateTextFieldOutlet.text = formatter.string(from: date)
+            }
+            
+            return
+        }, cancel: { ActionStringCancelBlock in return }, origin: expirationDateTextFieldOutlet);
+        
+        let minimumInsuranceExpDate = Calendar.current.date(byAdding: .month, value: MINIMUM_LICENSE_EXPIRATION_MONTHS, to: Date())
+        datePicker?.minimumDate = minimumInsuranceExpDate
+        
+        datePicker?.show()
+    }
+    
     // MARK: - Setup
     
     func setupDelegates() {
         
         self.stateTapGestureRecognizerOutlet.delegate = self
         self.birthDateTapGestureRecognizerOutlet.delegate = self
+        self.expirationDateTapGestureRecognizerOutlet.delegate = self
         
         self.firstNameTextFieldOutlet.delegate = self
         self.middleNameTextFieldOutlet.delegate = self
@@ -117,6 +148,7 @@ class DriverLicenseViewController: BaseYibbyViewController {
         self.driverLicenseTextFieldOutlet.delegate = self
         self.stateTextFieldOutlet.delegate = self
         self.birthDateTextFieldOutlet.delegate = self
+        self.expirationDateTextFieldOutlet.delegate = self
     }
     
     func setupUI() {
@@ -128,6 +160,7 @@ class DriverLicenseViewController: BaseYibbyViewController {
         if (testMode) {
             selectedState = "California"
             selectedBirthDate = Date()
+            selectedExpirationDate = Date()
             isCommercialLicense = true
             self.firstNameTextFieldOutlet.text = "We"
             self.lastNameTextFieldOutlet.text = "People"

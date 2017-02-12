@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import ObjectMapper
 
-class YBLocation: NSObject {
+class YBLocation: Mappable {
     
     // MARK: - Properties
     var latitude: CLLocationDegrees?

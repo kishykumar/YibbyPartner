@@ -45,7 +45,10 @@ class PersonalInformationViewController: BaseYibbyViewController {
         personalDetails.country = "United States"
         personalDetails.dob = licenseDetails.dob
         personalDetails.emailId = self.emailTextFieldOutlet.text
-// TODO:       personalDetails.phoneNumber = self.insuranceCardPictureFileId
+        
+        // TODO: REMOVE, and fill it with real values based on discussions
+        personalDetails.phoneNumber = "4124876666"
+        
         personalDetails.profilePicture = self.profilePictureFileId
         personalDetails.state = self.stateTextFieldOutlet.text
         personalDetails.streetAddress = self.streetAddressTextFieldOutlet.text

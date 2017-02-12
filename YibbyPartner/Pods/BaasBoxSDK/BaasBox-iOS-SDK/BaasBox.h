@@ -38,6 +38,7 @@
 + (NSString *) errorDomain;
 + (NSInteger) errorCode;
 + (NSError *)authenticationErrorForResponse:(NSDictionary *)response;
++ (NSError *)badRequestErrorForResponse:(NSDictionary *)response;
 + (NSDateFormatter *)dateFormatter;
 
 @end

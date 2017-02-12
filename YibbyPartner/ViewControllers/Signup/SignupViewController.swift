@@ -22,7 +22,7 @@ class SignupViewController: BaseYibbyViewController, IndicatorInfoProvider {
     @IBOutlet weak var tandcButtonOutlet: UIButton!
     
     // flag to test creating the same user without calling the webserver.
-    let testMode = true
+    let testMode = false
     
     // MARK: - Actions
     

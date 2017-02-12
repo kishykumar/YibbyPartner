@@ -68,6 +68,26 @@
     
 }
 
++ (NSError *)badRequestErrorForResponse:(NSDictionary *)response {
+    
+    if (response == nil) {
+        NSDictionary *errorDetail = @{NSLocalizedDescriptionKey:@"Server returned an empty response.",
+                                      @"iOS SDK Version" : VERSION};
+        return [NSError errorWithDomain:[BaasBox errorDomain]
+                                        code:-22223
+                                        userInfo:errorDetail];
+    }
+    
+    NSDictionary *errorDetail = @{NSLocalizedDescriptionKey:response[@"message"],
+                                  @"BaasBox_API_version": @[response[@"API_version"]],
+                                  @"iOS SDK Version" : VERSION};
+    NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
+                                            code:-22223
+                                            userInfo:errorDetail];
+    return error;
+    
+}
+
 + (NSDateFormatter *)dateFormatter {
     
     static NSDateFormatter *_dateFormatter = nil;

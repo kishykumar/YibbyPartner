@@ -21,6 +21,7 @@ open class PushController: NSObject, PushControllerProtocol {
     let RIDE_START_MESSAGE_TYPE = "RIDE_START"
     let DRIVER_EN_ROUTE_MESSAGE_TYPE = "DRIVER_EN_ROUTE"
     let OFFER_REJECTED_MESSAGE_TYPE = "OFFER_REJECTED"
+    let RIDE_CANCELLED_MESSAGE_TYPE = "RIDE_CANCELLED"
     
     let MESSAGE_JSON_FIELD_NAME = "message"
     let CUSTOM_JSON_FIELD_NAME = "custom"
@@ -134,144 +135,122 @@ open class PushController: NSObject, PushControllerProtocol {
                 return;
             }
             
-            if let dataFromString = jsonCustomString.data(using: .utf8, allowLossyConversion: false) {
+            switch notification[MESSAGE_JSON_FIELD_NAME] as! String {
                 
-                let topJson = JSON(data: dataFromString)
-                if let topBidJson = topJson[BID_JSON_FIELD_NAME].string {
+            case BID_MESSAGE_TYPE:
+                DDLogVerbose("BID message RCVD")
+
+                let bid = Bid(JSONString: jsonCustomString)!
+
+                let bidElapsedTime = TimeUtil.diffFromCurTimeISO(bid.creationTime!)
                 
-                    if let bidData = topBidJson.data(using: String.Encoding.utf8) {
-                        let bidJson = JSON(data: bidData)
+                if (bidElapsedTime > BID_NOTIFICATION_EXPIRE_TIME) {
+                    DDLogDebug("Bid Discarded CurrentTime: \(Date()) bidTime: \(bid.creationTime) bidElapsedTime: \(bidElapsedTime)")
+                    
+                    // The driver missed responding to the bid
+                    AlertUtil.displayAlert("Bid missed.",
+                                      message: "Reason: You missed sending the bid. Missing a lot of bids would bring you offline.")
+                    
+                    return;
+                }
+                
+                // prepare the offerViewController
+                let offerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Offer, bundle: nil)
+
+                let offerViewController = offerStoryboard.instantiateViewController(withIdentifier: "OfferViewControllerIdentifier") as! OfferViewController
+
+                let navController = UINavigationController(rootViewController: offerViewController)
+
+                // start the timer by accouting the time elapsed since the user actually created the bid
+                offerViewController.timerStart = TimeInterval(Int(OfferViewController.OFFER_TIMER_EXPIRE_PERIOD - bidElapsedTime))
+                
+                offerViewController.userBid = bid
+
+                DDLogDebug("userBid: \(offerViewController.userBid.toJSONString(prettyPrint: true))")
+                
+                // if an alert was already displayed, dismiss it
+                if let vvc = appDelegate.window!.visibleViewController as? UIAlertController {
+                    DDLogDebug("Alert is up \(vvc)")
+                    vvc.dismiss(animated: false, completion: nil)
+                } else {
+                    DDLogDebug("Alert is NOT up \(appDelegate.window!.visibleViewController)")
+                }
+                
+                mmnvc.present(navController, animated: true, completion: nil)
+
+                break
+
+            case OFFER_REJECTED_MESSAGE_TYPE:
+                DDLogDebug("REJECT RCVD")
+                
+                let bid = Bid(JSONString: jsonCustomString)!
+                
+                // find the DriverOnlineViewController and pop till that
+                for viewController: UIViewController in mmnvc.viewControllers {
+                    
+                    if (viewController is DriverOnlineViewController) {
                         
-                        switch notification[MESSAGE_JSON_FIELD_NAME] as! String {
-                        case BID_MESSAGE_TYPE:
-                            DDLogDebug("BID message RCVD")
-
-                            let bidElapsedTime = TimeUtil.diffFromCurTimeISO(bidJson["_creation_date"].stringValue)
-                            if (bidElapsedTime > BID_NOTIFICATION_EXPIRE_TIME) {
-                                DDLogDebug("Bid Discarded CurrentTime: \(Date()) bidTime: \(bidJson["_creation_date"].stringValue) bidElapsedTime: \(bidElapsedTime)")
-                                
-                                // The driver missed responding to the bid
-                                AlertUtil.displayAlert("Bid missed.",
-                                                  message: "Reason: You missed sending the bid. Missing a lot of bids would bring you offline.")
-                                
-                                return;
-                            }
-                            
-                            // prepare the offerViewController
-                            let offerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Offer, bundle: nil)
-
-                            let offerViewController = offerStoryboard.instantiateViewController(withIdentifier: "OfferViewControllerIdentifier") as! OfferViewController
-
-                            let navController = UINavigationController(rootViewController: offerViewController)
-
-                            // start the timer by accouting the time elapsed since the user actually created the bid
-                            offerViewController.timerStart = TimeInterval(Int(OfferViewController.OFFER_TIMER_EXPIRE_PERIOD - bidElapsedTime))
-                            
-                            let inBid = Bid()
-                            inBid.bidHigh = bidJson["bidHigh"].intValue
-                            inBid.id = bidJson["id"].stringValue
-                            
-                            let pickupLocationBid = YBLocation(lat: bidJson["pickupLat"].doubleValue, long: bidJson["pickupLong"].doubleValue, name: bidJson["pickupLoc"].stringValue)
-                            
-                            let dropoffLocationBid = YBLocation(lat: bidJson["dropoffLat"].doubleValue, long: bidJson["dropoffLong"].doubleValue, name: bidJson["dropoffLoc"].stringValue)
-                            
-                            inBid.pickupLocation = pickupLocationBid
-                            inBid.dropoffLocation = dropoffLocationBid
-//                            inBid.people = bidJson["bidHigh"].intValue
-                            
-                            offerViewController.userBid = inBid
-
-                            DDLogDebug("userBid: \(offerViewController.userBid)")
-                            
-                            // if an alert was already displayed, dismiss it
-                            if let vvc = appDelegate.window!.visibleViewController as? UIAlertController {
-                                DDLogDebug("Alert is up \(vvc)")
-                                vvc.dismiss(animated: false, completion: nil)
-                            } else {
-                                DDLogDebug("Alert is NOT up \(appDelegate.window!.visibleViewController)")
-                            }
-                            
-                            mmnvc.present(navController, animated: true, completion: nil)
-
-                            break
-
-                        case OFFER_REJECTED_MESSAGE_TYPE:
-                            DDLogDebug("REJECT RCVD")
-                            
-                            // find the DriverOnlineViewController and pop till that
-                            for viewController: UIViewController in mmnvc.viewControllers {
-                                
-                                if (viewController is DriverOnlineViewController) {
-                                    
-                                    let driverOnlineController: DriverOnlineViewController = (viewController as! DriverOnlineViewController)
-                                    
-                                    // dismiss all view controllers till this view controller
-                                    driverOnlineController.dismiss(animated: true, completion: nil)
-                                    
-                                    AlertUtil.displayAlertOnVC(driverOnlineController,
-                                                               title: "Offer Rejected.",
-                                                               message: "Reason: Your offer was not the lowest.")
-                                }
-                            }
-                            
-                            break
-                            
-                        default: break
-                        }
+                        let driverOnlineController: DriverOnlineViewController = (viewController as! DriverOnlineViewController)
+                        
+                        // dismiss all view controllers till this view controller
+                        driverOnlineController.dismiss(animated: true, completion: nil)
+                        
+                        AlertUtil.displayAlertOnVC(driverOnlineController,
+                                                   title: "Offer Rejected.",
+                                                   message: "Reason: Your offer was not the lowest.")
                     }
                 }
-                else if let topRideJson = topJson[RIDE_JSON_FIELD_NAME].string {
-                    if let rideData = topRideJson.data(using: String.Encoding.utf8) {
-                        let rideJson = JSON(data: rideData)
-                        
-                        switch notification[MESSAGE_JSON_FIELD_NAME] as! String {
-
-                        case DRIVER_EN_ROUTE_MESSAGE_TYPE:
-                            
-                            DDLogDebug("DRIVER EN ROUTE")
-                            
-                            if (!YBClient.sharedInstance().isSameAsOngoingBid(bidId: rideJson[BID_ID_JSON_FIELD_NAME].string)) {
-                                DDLogDebug("Not same as ongoingBid. Discarded: \(notification[MESSAGE_JSON_FIELD_NAME] as! String)")
-                                
-                                if let ongoingBid = YBClient.sharedInstance().getBid() {
-                                    DDLogDebug("Ongoingbid is: \(ongoingBid.id). Incoming is \(rideJson[BID_ID_JSON_FIELD_NAME].string)")
-                                } else {
-                                    DDLogDebug("Ongoingbid is: nil. Incoming is \(rideJson[BID_ID_JSON_FIELD_NAME].string)")
-                                }
-                                
-                                return;
-                            }
-                            
-                            // find the DriverOnlineViewController and pop till that
-                            for viewController: UIViewController in mmnvc.viewControllers {
-                                
-                                if (viewController is DriverOnlineViewController) {
-                                    
-                                    let driverOnlineController: DriverOnlineViewController = (viewController as! DriverOnlineViewController)
-                                    
-                                    // dismiss all view controllers till this view controller
-                                    DDLogDebug("driverOnlineController dismissed")
-                                    driverOnlineController.dismiss(animated: true, completion: nil)
-                                }
-                            }
-                            
-                            let driverEnRouteStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.DriverEnRoute, bundle: nil)
-
-                            let driverEnRouteViewController = driverEnRouteStoryboard.instantiateViewController(withIdentifier: "DriverEnRouteViewControllerIdentifier") as! DriverEnRouteViewController
-                            DDLogDebug("driverEnRouteViewController shown")
-                            mmnvc.pushViewController(driverEnRouteViewController, animated: true)
-                            
-                            break
-                            
-                        case RIDE_START_MESSAGE_TYPE:
-                            DDLogDebug("RIDE START MESSAGE RCVD")
-                            break
-                            
-                        default: break
-                        }
+                
+                break
+                
+            case DRIVER_EN_ROUTE_MESSAGE_TYPE:
+                
+                DDLogDebug("DRIVER EN ROUTE")
+                
+                let ride = Ride(JSONString: jsonCustomString)!
+                
+                if (!YBClient.sharedInstance().isSameAsOngoingBid(bidId: ride.bidId)) {
+                    DDLogDebug("Not same as ongoingBid. Discarded: \(notification[MESSAGE_JSON_FIELD_NAME] as! String)")
+                    
+                    if let ongoingBid = YBClient.sharedInstance().getBid() {
+                        DDLogDebug("Ongoingbid is: \(ongoingBid.id). Incoming is \(ride.bidId)")
+                    } else {
+                        DDLogDebug("Ongoingbid is: nil. Incoming is \(ride.bidId)")
                     }
-
+                    
+                    return;
                 }
+                
+                // find the DriverOnlineViewController and pop till that
+                for viewController: UIViewController in mmnvc.viewControllers {
+                    
+                    if (viewController is DriverOnlineViewController) {
+                        
+                        let driverOnlineController: DriverOnlineViewController = (viewController as! DriverOnlineViewController)
+                        
+                        // dismiss all view controllers till this view controller
+                        DDLogDebug("driverOnlineController dismissed")
+                        driverOnlineController.dismiss(animated: true, completion: nil)
+                    }
+                }
+                
+                let driverEnRouteStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.DriverEnRoute, bundle: nil)
+
+                let driverEnRouteViewController = driverEnRouteStoryboard.instantiateViewController(withIdentifier: "DriverEnRouteViewControllerIdentifier") as! DriverEnRouteViewController
+                DDLogDebug("driverEnRouteViewController shown")
+                mmnvc.pushViewController(driverEnRouteViewController, animated: true)
+                
+                break
+                
+            case RIDE_START_MESSAGE_TYPE:
+                DDLogDebug("RIDE START MESSAGE RCVD")
+                break
+                
+            case RIDE_CANCELLED_MESSAGE_TYPE:
+                DDLogDebug("RIDE CANCELLED MESSAGE RCVD")
+                break
+                
+            default: break
             }
         }
     }

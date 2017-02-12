@@ -55,6 +55,7 @@ public struct InterfaceString {
         static let VehicleCapacity = NSLocalizedString("Vehicle Capacity", comment: "Vehicle Capacity")
         
         static let DriverLicenseState = NSLocalizedString("Driver License State", comment: "Driver License State")
+        static let LicenseExpirationDate = NSLocalizedString("License Expiration Date", comment: "License Expiration Date")
         static let BirthDate = NSLocalizedString("Birth Date", comment: "Birth Date")
         
         static let AddressState = NSLocalizedString("Address State", comment: "Address State")

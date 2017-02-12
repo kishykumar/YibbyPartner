@@ -120,8 +120,8 @@ class InsuranceViewController: BaseYibbyViewController {
         if (self.testMode) {
             self.selectedInsuranceExpDate = Date()
             selectedInsuranceState = "California"
-            self.insuranceCardPictureFileId = ""
-            self.driverLicensePictureFileId = ""
+            self.insuranceCardPictureFileId = "61de2e4b-cb6a-4f97-89a9-1018de3c5bf5"
+            self.driverLicensePictureFileId = "61de2e4b-cb6a-4f97-89a9-1018de3c5bf5"
         }
     }
     

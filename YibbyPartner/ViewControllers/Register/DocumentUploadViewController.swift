@@ -22,7 +22,7 @@ class DocumentUploadViewController: BaseYibbyViewController {
     var profilePictureFileId: String?
     var vehicleInspFormFileId: String?
     
-    let testMode = true
+    let testMode = false
     
     // MARK: - Actions
     
@@ -51,8 +51,8 @@ class DocumentUploadViewController: BaseYibbyViewController {
     
     func initProperties() {
         if (self.testMode) {
-            profilePictureFileId = ""
-            vehicleInspFormFileId = ""
+            profilePictureFileId = "61de2e4b-cb6a-4f97-89a9-1018de3c5bf5"
+            vehicleInspFormFileId = "61de2e4b-cb6a-4f97-89a9-1018de3c5bf5"
         }
     }
     
@@ -112,7 +112,7 @@ class DocumentUploadViewController: BaseYibbyViewController {
                 completionBlock()
             }
             else {
-                DDLogVerbose("registration details sent FAILED")
+                DDLogVerbose("registration details sent FAILED \(error))")
                 
                 if ((error as! NSError).domain == BaasBox.errorDomain() && (error as! NSError).code ==
                     WebInterface.BAASBOX_AUTHENTICATION_ERROR) {

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import GoogleMaps
 import ObjectMapper
 
 class Ride: Mappable {
@@ -26,6 +25,7 @@ class Ride: Mappable {
     var riderLocation: YBLocation?
     
     var rider: YBRider?
+    var bidId: String?
     
     // MARK: Initialization
     
@@ -44,5 +44,6 @@ class Ride: Mappable {
         dropoffLocation     <- map["dropoffLocation"]
         riderLocation       <- map["riderLocation"]
         rider               <- map["rider"]
+        bidId               <- map["bidId"]
     }
 }

@@ -7,19 +7,20 @@
 //
 
 import UIKit
-import GoogleMaps
 import ObjectMapper
 
 class Bid: Mappable {
     
     // MARK: - Properties
     var id: String?
-    var bidHigh: Int?
+    var bidHigh: Double?
     
     var pickupLocation: YBLocation?
     var dropoffLocation: YBLocation?
     
     var people: Int?
+    
+    var creationTime: String?
     
     // MARK: Initialization
     
@@ -33,10 +34,11 @@ class Bid: Mappable {
     
     // Mappable
     func mapping(map: Map) {
-        id         <- map["id"]
-        bidHigh    <- map["bidHigh"]
-        pickupLocation     <- map["pickupLocation"]
+        id                  <- map["id"]
+        bidHigh             <- map["bidHigh"]
+        pickupLocation      <- map["pickupLocation"]
         dropoffLocation     <- map["dropoffLocation"]
-        people <- map["people"]
+        people              <- map["people"]
+        creationTime        <- map["creationTime"]
     }
 }
