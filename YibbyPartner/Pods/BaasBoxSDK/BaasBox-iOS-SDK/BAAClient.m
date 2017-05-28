@@ -289,14 +289,18 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
 }
 
 
-- (void)createCaberWithUsername:(NSString *)type
-                       username: (NSString *)username
-                       password:(NSString *)password
-                     completion:(BAABooleanResultBlock)completionHandler {
-    
+- (void)createCaber:(NSString *)type
+                    name: (NSString *)name
+                    email: (NSString *)email
+                    phoneNumber: (NSString *)phoneNumber
+                    password:(NSString *)password
+                    completion:(BAABooleanResultBlock)completionBlock {
+
     [self postPath:@"caber"
         parameters:@{
-                     @"username" : username,
+                     @"name" : name,
+                     @"email" : email,
+                     @"phoneNumber" : phoneNumber,
                      @"password": password,
                      @"appcode" : self.appCode,
                      @"type" : type
@@ -312,7 +316,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
                    self.currentUser = user;
                    [self saveUserToDisk:user];
                    
-                   completionHandler(YES, nil);
+                   completionBlock(YES, nil);
                    
                } else {
                    
@@ -322,13 +326,13 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
                    NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
                                                         code:[BaasBox errorCode]
                                                     userInfo:errorDetail];
-                   completionHandler(NO, error);
+                   completionBlock(NO, error);
                    
                }
                
            } failure:^(NSError *error) {
                
-               completionHandler(NO, error);
+               completionBlock(NO, error);
                
            }];
     
@@ -396,15 +400,16 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
 
 
 - (void)createBid:(NSNumber *)bidHigh
-           bidLow:(NSNumber *)bidLow
-          etaHigh:(NSNumber *)etaHigh
-           etaLow:(NSNumber *)etaLow
-        pickupLat:(NSNumber *)pickupLat
+       bidLow:(NSNumber *)bidLow
+       etaHigh:(NSNumber *)etaHigh
+       etaLow:(NSNumber *)etaLow
+       pickupLat:(NSNumber *)pickupLat
        pickupLong:(NSNumber *)pickupLong
-        pickupLoc:(NSString *)pickupLoc
+       pickupLoc:(NSString *)pickupLoc
        dropoffLat:(NSNumber *)dropoffLat
-      dropoffLong:(NSNumber *)dropoffLong
+       dropoffLong:(NSNumber *)dropoffLong
        dropoffLoc:(NSString *)dropoffLoc
+       paymentMethodToken:(NSString *)paymentMethodToken
        completion:(BAAObjectResultBlock)completionBlock {
     
     [self postPath:@"bid"
@@ -419,6 +424,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
                      @"dropoffLat": dropoffLat,
                      @"dropoffLong": dropoffLong,
                      @"dropoffLoc": dropoffLoc,
+                     @"paymentMethodToken": paymentMethodToken,
                      @"appcode" : self.appCode,
                      @"X-BB-SESSION": self.currentUser.authenticationToken
                      }
@@ -429,15 +435,56 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
            }];
 }
 
-- (void)cancelRiderRide:(NSString *)bidId
-             completion:(BAAObjectResultBlock)completionBlock {
+- (void)getRides: (NSString *)type
+        completion: (BAAObjectResultBlock)completionBlock {
     
-    NSString *path = [NSString stringWithFormat:@"ride/%@/r/cancel", bidId];
+    if (!self.currentUser) {
+        if (completionBlock) {
+            
+            NSMutableDictionary* details = [NSMutableDictionary dictionary];
+            details[@"NSLocalizedDescriptionKey"] = @"GetRides can't be called for a non logged-in user.";
+            NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
+                                                 code:[BaasBox errorCode]
+                                             userInfo:details];
+            completionBlock(NO, error);
+            
+        }
+        return;
+    }
+    
+    [self getPath:@"rides"
+       parameters:@{
+                    @"type" : type,
+                    @"appcode" : self.appCode,
+                    @"X-BB-SESSION": self.currentUser.authenticationToken
+                    }
+          success:^(NSDictionary *responseObject) {
+              
+              if (completionBlock) {
+                  completionBlock(responseObject[@"data"], nil);
+              }
+              
+          } failure:^(NSError *error) {
+              
+              if (completionBlock) {
+                  completionBlock(nil, error);
+              }
+              
+          }];
+}
+
+- (void)cancelRiderRide:(NSString *)bidId
+                message:(NSString *)message
+                completion:(BAAObjectResultBlock)completionBlock {
+    
+    NSString *path = @"ride/r/cancel";
 
     [self postPath:path
         parameters:@{
                      @"appcode" : self.appCode,
-                     @"X-BB-SESSION": self.currentUser.authenticationToken
+                     @"X-BB-SESSION": self.currentUser.authenticationToken,
+                     @"bidId": bidId,
+                     @"message": message
                      }
            success:^(NSDictionary *responseObject) {
                completionBlock(responseObject, nil);
@@ -447,14 +494,17 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
 }
 
 - (void)cancelDriverRide:(NSString *)bidId
-              completion:(BAAObjectResultBlock)completionBlock {
+                 message:(NSString *)message
+                 completion:(BAAObjectResultBlock)completionBlock {
     
-    NSString *path = [NSString stringWithFormat:@"ride/%@/d/cancel", bidId];
+    NSString *path = [NSString stringWithFormat:@"ride/d/cancel"];
     
     [self postPath:path
         parameters:@{
                      @"appcode" : self.appCode,
-                     @"X-BB-SESSION": self.currentUser.authenticationToken
+                     @"X-BB-SESSION": self.currentUser.authenticationToken,
+                     @"bidId": bidId,
+                     @"message": message
                      }
            success:^(NSDictionary *responseObject) {
                completionBlock(responseObject, nil);
@@ -494,6 +544,24 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
            } failure:^(NSError *error) {
                completionBlock(nil, error);
            }];
+}
+
+- (void)postReview: (NSString *)type
+          jsonBody:(NSDictionary *)jsonBody
+        completion: (BAAObjectResultBlock)completionBlock {
+    
+    [self postPath:[NSString stringWithFormat:@"ride/review"]
+       parameters:jsonBody
+          success:^(NSDictionary *responseObject) {
+              
+              if (completionBlock) {
+                  completionBlock(responseObject[@"data"], nil);
+              }
+          } failure:^(NSError *error) {
+              if (completionBlock) {
+                  completionBlock(nil, error);
+              }
+          }];
 }
 
 
@@ -577,6 +645,226 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
     
 }
 
+- (void)getProfile: (NSString *)type
+        completion: (BAAObjectResultBlock)completionBlock {
+    
+    if (!self.currentUser) {
+        if (completionBlock) {
+            
+            NSMutableDictionary* details = [NSMutableDictionary dictionary];
+            details[@"NSLocalizedDescriptionKey"] = @"User not logged-in.";
+            NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
+                                                 code:[BaasBox errorCode]
+                                                userInfo:details];
+            completionBlock(NO, error);
+        }
+        return;
+    }
+    
+    [self getPath:@"caber"
+       parameters:@{
+                    @"type" : type,
+                    @"appcode" : self.appCode,
+                    @"X-BB-SESSION": self.currentUser.authenticationToken
+                    }
+          success:^(NSDictionary *responseObject) {
+              
+              if (completionBlock) {
+                  completionBlock(responseObject[@"data"], nil);
+              }
+              
+          } failure:^(NSError *error) {
+              
+              if (completionBlock) {
+                  completionBlock(nil, error);
+              }
+              
+          }];
+}
+
+- (void)updateProfile: (NSString *)type
+        jsonBody:(NSDictionary *)jsonBody
+        completion: (BAAObjectResultBlock)completionBlock {
+    
+    [self putPath:[NSString stringWithFormat:@"caber"]
+        parameters:jsonBody
+           success:^(NSDictionary *responseObject) {
+               
+               if (completionBlock) {
+                   completionBlock(responseObject[@"data"], nil);
+               }
+           } failure:^(NSError *error) {
+               if (completionBlock) {
+                   completionBlock(nil, error);
+               }
+           }];
+}
+
+- (void)getPaymentClientToken: (NSString *)type
+                   completion: (BAAObjectResultBlock)completionBlock {
+    
+    if (!self.currentUser) {
+        if (completionBlock) {
+            
+            NSMutableDictionary* details = [NSMutableDictionary dictionary];
+            details[@"NSLocalizedDescriptionKey"] = @"getPaymentClientToken shouldn't be called without checking isAuthenticated().";
+            NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
+                                                 code:[BaasBox errorCode]
+                                             userInfo:details];
+            completionBlock(nil, error);
+            
+        }
+        return;
+    }
+ 
+    [self postPath:@"client_token"
+       parameters:@{
+                    @"type" : type,
+                    @"appcode" : self.appCode,
+                    @"X-BB-SESSION": self.currentUser.authenticationToken
+                    }
+          success:^(NSDictionary *responseObject) {
+              
+              if (completionBlock) {
+                  completionBlock(responseObject[@"data"], nil);
+              }
+              
+          } failure:^(NSError *error) {
+              
+              if (completionBlock) {
+                  completionBlock(nil, error);
+              }
+              
+          }];
+}
+
+- (void)makeDefaultPaymentMethod: (NSString *)type
+              paymentMethodToken:(NSString *)paymentMethodToken
+                      completion: (BAAObjectResultBlock)completionBlock {
+    
+    [self postPath:[NSString stringWithFormat:@"payment/default/%@", paymentMethodToken]
+        parameters:@{
+                     @"type" : type,
+                     @"appcode" : self.appCode,
+                     @"X-BB-SESSION": self.currentUser.authenticationToken
+                     }
+           success:^(NSDictionary *responseObject) {
+               
+               if (completionBlock) {
+                   completionBlock(responseObject[@"data"], nil);
+               }
+               
+           } failure:^(NSError *error) {
+               
+               if (completionBlock) {
+                   completionBlock(nil, error);
+               }
+               
+           }];
+}
+
+- (void)addPaymentMethod: (NSString *)type
+      paymentMethodNonce:(NSString *)paymentMethodNonce
+              completion: (BAAObjectResultBlock)completionBlock {
+
+    [self postPath:[NSString stringWithFormat:@"payment/%@", paymentMethodNonce]
+        parameters:@{
+                     @"type" : type,
+                     @"appcode" : self.appCode,
+                     @"X-BB-SESSION": self.currentUser.authenticationToken
+                     }
+           success:^(NSDictionary *responseObject) {
+               
+               if (completionBlock) {
+                   completionBlock(responseObject[@"data"], nil);
+               }
+               
+           } failure:^(NSError *error) {
+               
+               if (completionBlock) {
+                   completionBlock(nil, error);
+               }
+               
+           }];
+}
+
+- (void)deletePaymentMethod: (NSString *)type
+         paymentMethodToken:(NSString *)paymentMethodToken
+                 completion: (BAAObjectResultBlock)completionBlock {
+    
+    [self deletePath:[NSString stringWithFormat:@"payment/%@", paymentMethodToken]
+        parameters:@{
+                     @"type" : type,
+                     @"appcode" : self.appCode,
+                     @"X-BB-SESSION": self.currentUser.authenticationToken
+                     }
+           success:^(NSDictionary *responseObject) {
+               
+               if (completionBlock) {
+                   completionBlock(responseObject[@"data"], nil);
+               }
+               
+           } failure:^(NSError *error) {
+               
+               if (completionBlock) {
+                   completionBlock(nil, error);
+               }
+               
+           }];
+    
+}
+
+- (void)updatePaymentMethod: (NSString *)type
+                    paymentMethodToken:(NSString *)paymentMethodToken
+                    paymentMethodNonce:(NSString *)paymentMethodNonce
+                    completion: (BAAObjectResultBlock)completionBlock {
+    
+    [self putPath:@"payment"
+        parameters:@{
+                     @"type" : type,
+                     @"appcode" : self.appCode,
+                     @"X-BB-SESSION": self.currentUser.authenticationToken,
+                     @"paymentMethodToken": paymentMethodToken,
+                     @"paymentMethodNonce": paymentMethodNonce
+                     }
+           success:^(NSDictionary *responseObject) {
+               
+               if (completionBlock) {
+                   completionBlock(responseObject[@"data"], nil);
+               }
+               
+           } failure:^(NSError *error) {
+               
+               if (completionBlock) {
+                   completionBlock(nil, error);
+               }
+               
+           }];
+}
+
+- (void)getPaymentMethods: (NSString *)type
+               completion: (BAAObjectResultBlock)completionBlock {
+    
+    [self getPath:@"payment"
+       parameters:@{
+                    @"type" : type,
+                    @"appcode" : self.appCode,
+                    @"X-BB-SESSION": self.currentUser.authenticationToken
+                    }
+          success:^(NSDictionary *responseObject) {
+              
+              if (completionBlock) {
+                  completionBlock(responseObject[@"data"], nil);
+              }
+              
+          } failure:^(NSError *error) {
+              
+              if (completionBlock) {
+                  completionBlock(nil, error);
+              }
+              
+          }];
+}
 
 #pragma mark - Objects
 
@@ -1896,12 +2184,14 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
               forHTTPHeaderField:@"Content-Type"];
         
     } else {
-        
-        [mutableRequest setValue:[NSString stringWithFormat:@"application/json; charset=%@", charset]
-              forHTTPHeaderField:@"Content-Type"];
+
         if ([mutableRequest.HTTPMethod isEqualToString:@"POST"] || [mutableRequest.HTTPMethod isEqualToString:@"PUT"]) {
+            [mutableRequest setValue:[NSString stringWithFormat:@"application/json; charset=%@", charset]
+                  forHTTPHeaderField:@"Content-Type"];
+
             [mutableRequest setHTTPBody:[NSJSONSerialization dataWithJSONObject:parameters options:0 error:error]];
         }
+
         if ([mutableRequest.HTTPMethod isEqualToString:@"GET"]) {
             mutableRequest.URL = [NSURL URLWithString:[[mutableRequest.URL absoluteString] stringByAppendingFormat:mutableRequest.URL.query ? @"&%@" : @"?%@", query]];
         }

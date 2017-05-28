@@ -31,6 +31,9 @@
 
 + (void) getFilesWithCompletion:(BAAArrayResultBlock)completionBlock;
 - (NSURL *) fileURL;
+
++ (NSURL *) getFileURLFromId:(NSString *)fileId;
+
 + (void) loadFileWithId:(NSString *)fileId completion:(void(^)(NSData *data, NSError *error))completionBlock;
 - (void) loadFileWithCompletion:(void(^)(NSData *data, NSError *error))completionBlock;
 - (void) loadFileWithParameters:(NSDictionary *)parameters completion:(void(^)(NSData *data, NSError *error))completionBlock;

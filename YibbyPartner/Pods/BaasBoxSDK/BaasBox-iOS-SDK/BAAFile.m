@@ -93,6 +93,16 @@
     
 }
 
++ (NSURL *) getFileURLFromId:(NSString *)fileId {
+    if (fileId == nil)
+        return nil;
+    
+    BAAClient *client = [BAAClient sharedClient];
+    
+    NSString *URLString = [NSString stringWithFormat:@"%@/file/%@", client.baseURL, fileId];
+    return [NSURL URLWithString:URLString];
+}
+
 + (void) loadFileWithId:(NSString *)fileId completion:(void(^)(NSData *data, NSError *error))completionBlock {
     
     if (fileId && completionBlock) {

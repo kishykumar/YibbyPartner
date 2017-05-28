@@ -10,6 +10,7 @@ import UIKit
 import BaasBoxSDK
 import CocoaLumberjack
 import XLPagerTabStrip
+//import DigitsKit
 
 class SignupViewController: BaseYibbyViewController, IndicatorInfoProvider {
     
@@ -87,19 +88,81 @@ class SignupViewController: BaseYibbyViewController, IndicatorInfoProvider {
     // MARK: - Helper Functions
     
     func submitForm() {
-        if (emailAddressOutlet.text == "" || passwordOutlet.text == "") {
-            AlertUtil.displayAlert("error in form", message: "Please enter email and password")
-        } else {
-            createUser(emailAddressOutlet.text!, passwordi: passwordOutlet.text!)
+        if nameOutlet.text == ""{
+            
+            AlertUtil.displayAlert("error in form", message: "Enter name")
+        }
+            
+        else if emailAddressOutlet.text! == "" {
+            
+            AlertUtil.displayAlert("error in form", message: "Enter email address")
+        }
+//        else if !isValidEmail(testStr: emailAddressOutlet.text!){
+//            
+//            AlertUtil.displayAlert("error in form", message: "Enter valid email address")
+//        }
+        else if passwordOutlet.text == "" {
+            
+            AlertUtil.displayAlert("error in form", message: "Enter password")
+        }
+            /*  else if  !isValidPassword(testStr: passwordOutlet.text!){
+             
+             
+             AlertUtil.displayAlert("error in form", message: "Password must be more than six characters with minimum one numeric and special character")
+             
+             }*/
+        else if phoneNumberOutlet.text! == ""{
+            
+            AlertUtil.displayAlert("error in form", message: "Enter phone no")
+        }
+            /* else if  !isValidPhoneNo(testStr: phoneNumberOutlet.text!){
+             
+             AlertUtil.displayAlert("error in form", message: "Enter valid phone no")
+             
+             }*/
+        else{
+            
+            
+//            let digits = Digits.sharedInstance()
+//            let configuration = DGTAuthenticationConfiguration(accountFields: .defaultOptionMask)
+//            // configuration?.phoneNumber = self.txtPhone.text!
+//            
+//            let digitsAppearance = DGTAppearance()
+//            
+//            digitsAppearance.accentColor = UIColor.red
+//            digitsAppearance.applyUIAppearanceColors()
+//            configuration?.appearance = digitsAppearance
+//            digits.authenticate(with: nil, configuration: configuration!) { session, error in
+//                
+//                if((error?.localizedDescription) != nil)
+//                {
+//                    digits.logOut()
+//                    
+//                    self.phoneNumberOutlet.text = ""
+//                }
+//                else
+//                {
+//                    digits.logOut()
+//                    
+//                    self.phoneNumberOutlet.text =  (session?.phoneNumber)!
+//                    
+//                    self.createUser(self.nameOutlet.text!, emaili: self.emailAddressOutlet.text!, phoneNumberi: self.phoneNumberOutlet.text!, passwordi: self.passwordOutlet.text!)
+//                    
+//                }
+//                // Country selector will be set to Spain and phone number field will be set to 5555555555
+//            }
+            
+            self.createUser(self.nameOutlet.text!, emaili: self.emailAddressOutlet.text!, phoneNumberi: self.phoneNumberOutlet.text!, passwordi: self.passwordOutlet.text!)
         }
     }
     
     // BaasBox create user
-    func createUser(_ usernamei: String, passwordi: String) {
+    func createUser(_ usernamei: String, emaili: String, phoneNumberi: String, passwordi: String) {
         ActivityIndicatorUtil.enableActivityIndicator(self.view)
         
         let client: BAAClient = BAAClient.shared()
-        client.createCaber(withUsername: BAASBOX_DRIVER_STRING, username: usernamei, password: passwordi, completion: {(success, error) -> Void in
+        
+        client.createCaber(BAASBOX_DRIVER_STRING, name: usernamei, email: emaili, phoneNumber: phoneNumberi, password: passwordi, completion:{(success, error) -> Void in
             if (success || self.testMode) {
                 DDLogVerbose("Success signing up: \(success)")
                 

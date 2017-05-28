@@ -5,7 +5,7 @@ PODS:
   - AlamofireObjectMapper (4.0.1):
     - Alamofire (~> 4.1)
     - ObjectMapper (~> 2.0)
-  - BaasBoxSDK (0.9.0)
+  - BaasBoxSDK (0.9.7)
   - BButton (4.0.2)
   - CocoaLumberjack/Default (3.0.0)
   - CocoaLumberjack/Extensions (3.0.0):
@@ -97,7 +97,7 @@ DEPENDENCIES:
   - AIFlatSwitch (~> 1.0.1)
   - Alamofire (~> 4.0)
   - AlamofireObjectMapper (~> 4.0)
-  - BaasBoxSDK (from `https://kishykumar@bitbucket.org/kishykumar/baasboxiossdk.git`)
+  - BaasBoxSDK
   - BButton
   - CocoaLumberjack/Swift (from `https://github.com/CocoaLumberjack/CocoaLumberjack`, branch `swift_3`)
   - Crashlytics
@@ -126,16 +126,11 @@ DEPENDENCIES:
   - XLPagerTabStrip (~> 6.0)
 
 EXTERNAL SOURCES:
-  BaasBoxSDK:
-    :git: https://kishykumar@bitbucket.org/kishykumar/baasboxiossdk.git
   CocoaLumberjack:
     :branch: swift_3
     :git: https://github.com/CocoaLumberjack/CocoaLumberjack
 
 CHECKOUT OPTIONS:
-  BaasBoxSDK:
-    :commit: 49db0b017e69f93e2867b697852af127bece8ee3
-    :git: https://kishykumar@bitbucket.org/kishykumar/baasboxiossdk.git
   CocoaLumberjack:
     :commit: 17936dcf48f858933bd791a05aff911be8bb68ba
     :git: https://github.com/CocoaLumberjack/CocoaLumberjack
@@ -145,7 +140,7 @@ SPEC CHECKSUMS:
   AIFlatSwitch: 5b121a4a90a06f0fbd72e9f1fe9bb30e64d67177
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   AlamofireObjectMapper: 842d2eed43a4d0593ff0110d54ac86a170c4519c
-  BaasBoxSDK: 8a68396af4eb48137da238109d114eccac04739d
+  BaasBoxSDK: 9df8447c6bf31b2d04d5fd4b7cc38c0b3b6fe1e4
   BButton: ab0f2ed3b998ae73c5188b57d270d81e4a1eeb27
   CocoaLumberjack: 0d0a04bbec1e5d9c58d311750e42c85fc51a84ef
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
@@ -183,6 +178,6 @@ SPEC CHECKSUMS:
   TTRangeSlider: 2f2ce4a33b32bb323c6575b9f5161c4664459c58
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: 8aa59d51f7870d2c95fc33bd6178cdb9f0c76e46
+PODFILE CHECKSUM: 74d6822f4e4165e44c91221605a89217fd4206a8
 
 COCOAPODS: 1.2.0.beta.1

@@ -51,10 +51,12 @@
 - (void) logoutWithCompletion:(BAABooleanResultBlock)completionBlock;
 
 // Caber APIs
-- (void)createCaberWithUsername:(NSString *)type
-                      username: (NSString *)username
-                      password:(NSString *)password
-                      completion:(BAABooleanResultBlock)completionBlock;
+- (void)createCaber:(NSString *)type
+                    name: (NSString *)name
+                    email: (NSString *)email
+                    phoneNumber: (NSString *)phoneNumber
+                    password:(NSString *)password
+                    completion:(BAABooleanResultBlock)completionBlock;
 
 
 - (void)completeDriverRegistration: (NSDictionary *)parameters
@@ -70,6 +72,38 @@
 
 - (void) logoutCaberWithCompletion: (NSString *)type
                         completion: (BAABooleanResultBlock)completionHandler;
+
+// Caber Profile
+- (void)getProfile: (NSString *)type
+                    completion: (BAAObjectResultBlock)completionBlock;
+
+- (void)updateProfile: (NSString *)type
+             jsonBody:(NSDictionary *)jsonBody
+           completion: (BAAObjectResultBlock)completionBlock;
+
+// Payments
+- (void)getPaymentClientToken: (NSString *)type
+        completion: (BAAObjectResultBlock)completionBlock;
+
+- (void)makeDefaultPaymentMethod: (NSString *)type
+                            paymentMethodToken:(NSString *)paymentMethodToken
+                            completion: (BAAObjectResultBlock)completionBlock;
+
+- (void)addPaymentMethod: (NSString *)type
+                        paymentMethodNonce:(NSString *)paymentMethodNonce
+                        completion: (BAAObjectResultBlock)completionBlock;
+
+- (void)deletePaymentMethod: (NSString *)type
+                        paymentMethodToken:(NSString *)paymentMethodToken
+                        completion: (BAAObjectResultBlock)completionBlock;
+
+- (void)updatePaymentMethod: (NSString *)type
+         paymentMethodToken:(NSString *)paymentMethodToken
+         paymentMethodNonce:(NSString *)paymentMethodNonce
+                 completion: (BAAObjectResultBlock)completionBlock;
+
+- (void)getPaymentMethods: (NSString *)type
+                      completion: (BAAObjectResultBlock)completionBlock;
 
 // driver status
 - (void)updateDriverStatus:(NSString *)status
@@ -144,19 +178,29 @@
                     dropoffLat:(NSNumber *)dropoffLat
                     dropoffLong:(NSNumber *)dropoffLong
                     dropoffLoc:(NSString *)dropoffLoc
+                    paymentMethodToken:(NSString *)paymentMethodToken
                     completion:(BAAObjectResultBlock)completionBlock;
 
+- (void) getRides:(NSString *)type
+                completion: (BAAObjectResultBlock)completionBlock;
+
 - (void)cancelRiderRide:(NSString *)bidId
-       completion:(BAAObjectResultBlock)completionBlock;
+                message:(NSString *)message
+                completion:(BAAObjectResultBlock)completionBlock;
 
 - (void)cancelDriverRide:(NSString *)bidId
-             completion:(BAAObjectResultBlock)completionBlock;
+                message:(NSString *)message
+                completion:(BAAObjectResultBlock)completionBlock;
 
 - (void)startRide:(NSString *)bidId
               completion:(BAAObjectResultBlock)completionBlock;
 
 - (void)endRide:(NSString *)bidId
               completion:(BAAObjectResultBlock)completionBlock;
+
+- (void)postReview: (NSString *)type
+                jsonBody:(NSDictionary *)jsonBody
+                completion: (BAAObjectResultBlock)completionBlock;
 
 // Offer
 - (void)createOffer:(NSString *)bidId
