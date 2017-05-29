@@ -84,6 +84,8 @@ class LoginViewController: BaseYibbyViewController, IndicatorInfoProvider {
     // MARK: - Helper functions
     
     func submitLoginForm() {
+        emailAddress.text = "2222222222"
+        password.text = "2"
         if (emailAddress.text == "" || password.text == "") {
             AlertUtil.displayAlert("error in form", message: "Please enter email and password")
         } else {

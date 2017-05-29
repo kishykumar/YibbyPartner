@@ -50,7 +50,10 @@ class MainViewController: BaseYibbyViewController {
                 ActivityIndicatorUtil.enableActivityIndicator(self.view)
                 let client: BAAClient = BAAClient.shared()
                 
-                client.updateDriverStatus(BAASBOX_DRIVER_STATUS_ONLINE, completion: {(success, error) -> Void in
+                client.updateDriverStatus(BAASBOX_DRIVER_STATUS_ONLINE,
+                                          latitude: 18.5,
+                                          longitude: 16.3,
+                                          completion: {(success, error) -> Void in
                     
                     // diable the loading activity indicator
                     ActivityIndicatorUtil.disableActivityIndicator(self.view)

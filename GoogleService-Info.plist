@@ -8,6 +8,8 @@
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.yibby.app.partner</string>
+	<key>PROJECT_ID</key>
+	<string>yibbypartnerapp</string>
 	<key>IS_ADS_ENABLED</key>
 	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -20,7 +22,5 @@
 	<false/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:383118677842:ios:28240fdeacb171ad</string>
-	<key>PROJECT_ID</key>
-	<string>yibbypartnerapp</string>
 </dict>
 </plist>

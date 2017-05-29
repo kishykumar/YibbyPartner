@@ -574,7 +574,6 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
         parameters:@{
                      @"bidId" : bidId,
                      @"offerPrice": offerPrice,
-                     @"driverUsername": self.currentUser.username,
                      @"appcode" : self.appCode,
                      @"X-BB-SESSION": self.currentUser.authenticationToken
                      }
@@ -2482,11 +2481,15 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
     
 }
 
-- (BOOL) updateDriverStatus:(NSString *)status
-                 completion: (BAABooleanResultBlock)completionBlock {
-    
+- (void)updateDriverStatus:(NSString *)status
+                latitude: (NSNumber *)latitude
+                longitude:(NSNumber *)longitude
+                completion: (BAABooleanResultBlock)completionBlock {
+
     [self postPath:[NSString stringWithFormat:@"caber/status"]
         parameters:@{@"status" : status,
+                     @"latitude" : latitude,
+                     @"longitude": longitude,
                      @"X-BB-SESSION": self.currentUser.authenticationToken,
                      @"appcode" : self.appCode}
         success:^(NSDictionary *responseObject) {
@@ -2499,30 +2502,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
                 completionBlock(NO, error);
             }
         }];
-    
-    
 }
-
-- (void) updateLocation: (NSString *)type
-                          latitude: (NSNumber *)latitude
-                          longitude:(NSNumber *)longitude
-                   completion:(BAABooleanResultBlock)completionBlock {
-    
-    [self postPath:@"location"
-        parameters:@{
-                     @"type" : type,
-                     @"latitude" : latitude,
-                     @"longitude": longitude,
-                     @"appcode" : self.appCode,
-                     @"X-BB-SESSION": self.currentUser.authenticationToken
-                     }
-           success:^(NSDictionary *responseObject) {
-               completionBlock(YES, nil);
-           } failure:^(NSError *error) {
-               completionBlock(nil, error);
-           }];
-}
-
 
 - (void)syncClient: (NSString *)type
         completion: (BAAObjectResultBlock)completionBlock {

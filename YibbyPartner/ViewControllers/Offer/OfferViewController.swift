@@ -106,7 +106,6 @@ class OfferViewController: BaseYibbyViewController {
                 ActivityIndicatorUtil.enableActivityIndicator(self.view)
                 
                 let client: BAAClient = BAAClient.shared()
-                
                 client.createOffer(
                     self.userBid.id,
                     offerPrice: Int(self.offerPriceOutlet.text!) as NSNumber!,

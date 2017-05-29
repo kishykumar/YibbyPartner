@@ -97,8 +97,8 @@ open class LocationService: NSObject, CLLocationManagerDelegate {
                     
                     let client: BAAClient = BAAClient.shared()
                     
-                    client.updateLocation(
-                        "driver", 
+                    client.updateDriverStatus(
+                        BAASBOX_DRIVER_STATUS_ONLINE, 
                         latitude: userLocation.coordinate.latitude as NSNumber!,
                         longitude: userLocation.coordinate.longitude as NSNumber!,
                         completion: {(success, error) -> Void in

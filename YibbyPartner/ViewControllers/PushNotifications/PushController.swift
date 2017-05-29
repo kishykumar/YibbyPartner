@@ -113,11 +113,16 @@ open class PushController: NSObject, PushControllerProtocol {
         }
         
         // check if we have already processed this push message
-        let lastGCMMsgId: String = notification[GCM_MSG_ID_JSON_FIELD_NAME] as! String
+        guard let lastGCMMsgId = notification[GCM_MSG_ID_JSON_FIELD_NAME] as? String else {
+            DDLogDebug("Exiting because lastGCMMsgId is nil: \(notification)")
+            return;
+        }
+        
         if (mLastGCMMsgId != nil) && (mLastGCMMsgId == lastGCMMsgId) {
             DDLogDebug("Already processed the push message: \(notification)")
             return;
         }
+        
         mLastGCMMsgId = notification[GCM_MSG_ID_JSON_FIELD_NAME] as? String
         
         if (appDelegate.centerContainer == nil) {

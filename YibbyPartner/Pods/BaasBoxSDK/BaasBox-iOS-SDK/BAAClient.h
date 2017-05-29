@@ -107,15 +107,12 @@
 
 // driver status
 - (void)updateDriverStatus:(NSString *)status
+                latitude: (NSNumber *)latitude
+                longitude:(NSNumber *)longitude
                 completion: (BAABooleanResultBlock)completionBlock;
 
 - (void)syncClient: (NSString *)type
                     completion: (BAAObjectResultBlock)completionBlock;
-
-- (void) updateLocation: (NSString *)type
-                latitude: (NSNumber *)latitude
-                longitude:(NSNumber *)longitude
-                completion:(BAABooleanResultBlock)completionBlock;
 
 // get location
 - (void)getDriverLocation: (NSString *)bidId
