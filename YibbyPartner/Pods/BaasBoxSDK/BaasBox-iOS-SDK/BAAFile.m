@@ -93,14 +93,16 @@
     
 }
 
-+ (NSURL *) getFileURLFromId:(NSString *)fileId {
-    if (fileId == nil)
++ (NSURL *)getCompleteFileURLWithToken:(NSString *)fileId {
+    
+    if (fileId == nil) {
         return nil;
+    }
     
     BAAClient *client = [BAAClient sharedClient];
-    
     NSString *URLString = [NSString stringWithFormat:@"%@/file/%@", client.baseURL, fileId];
-    return [NSURL URLWithString:URLString];
+    NSURL *url = [NSURL URLWithString:URLString];
+    return [client getCompleteURLWithToken: url];
 }
 
 + (void) loadFileWithId:(NSString *)fileId completion:(void(^)(NSData *data, NSError *error))completionBlock {

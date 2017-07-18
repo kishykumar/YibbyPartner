@@ -95,7 +95,7 @@
 
 - (void)deletePaymentMethod: (NSString *)type
                         paymentMethodToken:(NSString *)paymentMethodToken
-                        completion: (BAAObjectResultBlock)completionBlock;
+                        completion: (BAABooleanResultBlock)completionBlock;
 
 - (void)updatePaymentMethod: (NSString *)type
          paymentMethodToken:(NSString *)paymentMethodToken

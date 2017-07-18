@@ -789,7 +789,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
 
 - (void)deletePaymentMethod: (NSString *)type
          paymentMethodToken:(NSString *)paymentMethodToken
-                 completion: (BAAObjectResultBlock)completionBlock {
+                 completion: (BAABooleanResultBlock)completionBlock {
     
     [self deletePath:[NSString stringWithFormat:@"payment/%@", paymentMethodToken]
         parameters:@{
@@ -800,13 +800,13 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
            success:^(NSDictionary *responseObject) {
                
                if (completionBlock) {
-                   completionBlock(responseObject[@"data"], nil);
+                   completionBlock(YES, nil);
                }
                
            } failure:^(NSError *error) {
                
                if (completionBlock) {
-                   completionBlock(nil, error);
+                   completionBlock(NO, error);
                }
                
            }];
