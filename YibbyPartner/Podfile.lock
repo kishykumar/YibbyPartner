@@ -5,7 +5,7 @@ PODS:
   - AlamofireObjectMapper (4.0.1):
     - Alamofire (~> 4.1)
     - ObjectMapper (~> 2.0)
-  - BaasBoxSDK (0.9.9)
+  - BaasBoxSDK (0.9.11)
   - BButton (4.0.2)
   - CocoaLumberjack/Default (3.0.0)
   - CocoaLumberjack/Extensions (3.0.0):
@@ -142,7 +142,7 @@ SPEC CHECKSUMS:
   AIFlatSwitch: 5b121a4a90a06f0fbd72e9f1fe9bb30e64d67177
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   AlamofireObjectMapper: 842d2eed43a4d0593ff0110d54ac86a170c4519c
-  BaasBoxSDK: bb813cc8d943fdc7af204a76c81b68127bcec8dd
+  BaasBoxSDK: 1a885b4762159b4a0a1b712c8f232e56b493220f
   BButton: ab0f2ed3b998ae73c5188b57d270d81e4a1eeb27
   CocoaLumberjack: 0d0a04bbec1e5d9c58d311750e42c85fc51a84ef
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e

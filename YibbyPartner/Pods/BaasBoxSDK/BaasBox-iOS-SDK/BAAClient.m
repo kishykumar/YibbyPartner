@@ -410,6 +410,9 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
        dropoffLong:(NSNumber *)dropoffLong
        dropoffLoc:(NSString *)dropoffLoc
        paymentMethodToken:(NSString *)paymentMethodToken
+       paymentMethodBrand:(NSString *)paymentMethodBrand
+       paymentMethodLast4:(NSString *)paymentMethodLast4
+       numPeople:(NSNumber *)numPeople
        completion:(BAAObjectResultBlock)completionBlock {
     
     [self postPath:@"bid"
@@ -425,8 +428,9 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
                      @"dropoffLong": dropoffLong,
                      @"dropoffLoc": dropoffLoc,
                      @"paymentMethodToken": paymentMethodToken,
-                     @"appcode" : self.appCode,
-                     @"X-BB-SESSION": self.currentUser.authenticationToken
+                     @"paymentMethodBrand": paymentMethodBrand,
+                     @"paymentMethodLast4": paymentMethodLast4,
+                     @"numPeople": numPeople
                      }
            success:^(NSDictionary *responseObject) {
                completionBlock(responseObject, nil);
@@ -435,9 +439,48 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
            }];
 }
 
-- (void)getRides: (NSString *)type
-        completion: (BAAObjectResultBlock)completionBlock {
+- (void) fetchCountForRides:(BAAIntegerResultBlock)completionBlock {
     
+    if (!self.currentUser) {
+        if (completionBlock) {
+            
+            NSMutableDictionary* details = [NSMutableDictionary dictionary];
+            details[@"NSLocalizedDescriptionKey"] = @"fetchCountForRides can't be called for a non logged-in user.";
+            NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
+                                                 code:[BaasBox errorCode]
+                                             userInfo:details];
+            completionBlock(-1, error);
+        }
+        return;
+    }
+    
+    [self getPath:@"rides"
+       parameters: @{
+                     @"appcode": self.appCode,
+                     @"X-BB-SESSION": self.currentUser.authenticationToken,
+                     @"count": @"true"
+                     }
+          success:^(id responseObject) {
+              
+              NSInteger result = [responseObject[@"data"][0][@"count"] intValue];
+              
+              if (completionBlock) {
+                  completionBlock(result, nil);
+              }
+              
+          } failure:^(NSError *error) {
+              
+              if (completionBlock) {
+                  completionBlock(-1, error);
+              }
+              
+          }];
+}
+
+- (void)getRides: (NSString *)type
+        withParams:(NSDictionary *) parameters
+        completion: (BAAObjectResultBlock)completionBlock {
+
     if (!self.currentUser) {
         if (completionBlock) {
             
@@ -446,18 +489,14 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
             NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
                                                  code:[BaasBox errorCode]
                                              userInfo:details];
-            completionBlock(NO, error);
+            completionBlock(nil, error);
             
         }
         return;
     }
     
     [self getPath:@"rides"
-       parameters:@{
-                    @"type" : type,
-                    @"appcode" : self.appCode,
-                    @"X-BB-SESSION": self.currentUser.authenticationToken
-                    }
+       parameters: parameters
           success:^(NSDictionary *responseObject) {
               
               if (completionBlock) {
@@ -517,6 +556,23 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
        completion:(BAAObjectResultBlock)completionBlock {
     
     NSString *path = [NSString stringWithFormat:@"ride/%@/start", bidId];
+    
+    [self postPath:path
+        parameters:@{
+                     @"appcode" : self.appCode,
+                     @"X-BB-SESSION": self.currentUser.authenticationToken
+                     }
+           success:^(NSDictionary *responseObject) {
+               completionBlock(responseObject, nil);
+           } failure:^(NSError *error) {
+               completionBlock(nil, error);
+           }];
+}
+
+- (void)arrivedAtPickup:(NSString *)bidId
+       completion:(BAAObjectResultBlock)completionBlock {
+    
+    NSString *path = [NSString stringWithFormat:@"ride/%@/driver-arrived", bidId];
     
     [self postPath:path
         parameters:@{
@@ -2505,8 +2561,9 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
 }
 
 - (void)syncClient: (NSString *)type
-        completion: (BAAObjectResultBlock)completionBlock {
-    
+                    bidId: (NSString *)bidId
+                    completion: (BAAObjectResultBlock)completionBlock {
+
     if (!self.currentUser) {
         if (completionBlock) {
             
@@ -2516,16 +2573,21 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
                                                  code:[BaasBox errorCode]
                                              userInfo:details];
             completionBlock(NO, error);
-            
         }
         return;
+    }
+    
+    NSString *tempBidId = @"";
+    if (bidId != nil) {
+        tempBidId = bidId;
     }
     
     [self getPath:@"/caber/sync"
        parameters:@{
                     @"type" : type,
                     @"appcode" : self.appCode,
-                    @"X-BB-SESSION": self.currentUser.authenticationToken
+                    @"X-BB-SESSION": self.currentUser.authenticationToken,
+                    @"bidId": tempBidId
                     }
         success:^(NSDictionary *responseObject) {
             
