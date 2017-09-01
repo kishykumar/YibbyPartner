@@ -45,7 +45,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Tpu-QH-Eqe" secondAttribute="height" multiplier="72:13" id="6aX-dO-v7w"/>
                                 </constraints>
-                                <state key="normal" title="Arrived at Destination"/>
+                                <state key="normal" title="Arrived at Pickup Location"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="type">
                                         <integer key="value" value="3"/>
@@ -83,6 +83,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Tpu-QH-Eqe" secondAttribute="trailing" id="xfe-vP-4g5"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="rideActionButton" destination="Tpu-QH-Eqe" id="SrK-Lm-Nql"/>
+                        <outlet property="startNavigationButton" destination="M56-FA-e9O" id="XxT-UX-hmF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vei-sw-4Bi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

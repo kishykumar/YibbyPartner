@@ -2634,7 +2634,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
 - (void)getDriverLocation: (NSString *)bidId
                completion: (BAAObjectResultBlock)completionBlock {
     
-    NSString *path = [NSString stringWithFormat:@"/location/d/%@", bidId];
+    NSString *path = [NSString stringWithFormat:@"/location/d/bid/%@", bidId];
 
     [self getPath:path
        parameters:@{

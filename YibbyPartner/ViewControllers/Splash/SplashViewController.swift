@@ -162,14 +162,14 @@ class SplashViewController: BaseYibbyViewController {
 
         // register for push notification
         registerForPushNotifications()
-        
+
         var syncSuccess = false
         let client: BAAClient = BAAClient.shared()
-        client.syncClient(BAASBOX_DRIVER_STRING, completion: {(success, error) -> Void in
+        client.syncClient(BAASBOX_DRIVER_STRING, bidId: "", completion: {(success, error) -> Void in
             if (success != nil) {
-                
+
                 self.processSyncState(success as AnyObject)
-                
+
                 DDLogDebug("Sync successful: \(success))")
                 syncSuccess = true
             }
@@ -179,7 +179,7 @@ class SplashViewController: BaseYibbyViewController {
             }
             self.syncAPIResponseArrived = true
         })
-        
+
         // wait for requests to finish
         let timeoutDate: Date = Date(timeIntervalSinceNow: 10.0)
         

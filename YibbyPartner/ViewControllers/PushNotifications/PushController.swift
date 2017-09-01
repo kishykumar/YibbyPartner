@@ -218,9 +218,9 @@ open class PushController: NSObject, PushControllerProtocol {
                     DDLogDebug("Not same as ongoingBid. Discarded: \(notification[MESSAGE_JSON_FIELD_NAME] as! String)")
                     
                     if let ongoingBid = YBClient.sharedInstance().getBid() {
-                        DDLogDebug("Ongoingbid is: \(ongoingBid.id). Incoming is \(ride.bidId)")
+                        DDLogDebug("Ongoingbid is: \(String(describing: ongoingBid.id)). Incoming is \(String(describing: ride.bidId))")
                     } else {
-                        DDLogDebug("Ongoingbid is: nil. Incoming is \(ride.bidId)")
+                        DDLogDebug("Ongoingbid is: nil. Incoming is \(String(describing: ride.bidId))")
                     }
                     
                     return;
@@ -239,11 +239,15 @@ open class PushController: NSObject, PushControllerProtocol {
                     }
                 }
                 
-                let driverEnRouteStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.DriverEnRoute, bundle: nil)
+                let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
+                
+                let rideStartViewController = rideStoryboard.instantiateViewController(withIdentifier: "RideStartViewControllerIdentifier") as! RideStartViewController
+                mmnvc.pushViewController(rideStartViewController, animated: true)
 
-                let driverEnRouteViewController = driverEnRouteStoryboard.instantiateViewController(withIdentifier: "DriverEnRouteViewControllerIdentifier") as! DriverEnRouteViewController
-                DDLogDebug("driverEnRouteViewController shown")
-                mmnvc.pushViewController(driverEnRouteViewController, animated: true)
+//                let driverEnRouteStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.DriverEnRoute, bundle: nil)
+//
+//                let driverEnRouteViewController = driverEnRouteStoryboard.instantiateViewController(withIdentifier: "DriverEnRouteViewControllerIdentifier") as! DriverEnRouteViewController
+//                mmnvc.pushViewController(driverEnRouteViewController, animated: true)
                 
                 break
                 
