@@ -45,7 +45,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -81,6 +81,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome.ttf</string>
+		<string>fontello.ttf</string>
+		<string>ionicons.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

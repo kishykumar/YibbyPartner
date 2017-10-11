@@ -22,6 +22,10 @@ open class TimeUtil {
         return formatter.string(from: inDate)
     }
     
+    static func getDateFromISOTime (_ isoTime: String) -> Date? {
+        return formatter.date(from: isoTime)
+    }
+    
     static func diffFromCurTimeISO (_ fromIsoTime: String) -> TimeInterval {
         
         let isoNSDate: Date = formatter.date(from: fromIsoTime)!
@@ -40,5 +44,13 @@ open class TimeUtil {
         
         let secondsBetween: TimeInterval = curTime.timeIntervalSince(fromTime)
         return secondsBetween
+    }
+    
+    static func prettyPrintDate1 (_ date: Date) -> String? {
+        
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        
+        return formatter.string(from: date)
     }
 }

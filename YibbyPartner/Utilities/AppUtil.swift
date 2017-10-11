@@ -8,7 +8,7 @@
 
 import UIKit
 import GoogleMaps
-import SVProgressHUD
+import MBProgressHUD
 import CocoaLumberjack
 
 open class Util {

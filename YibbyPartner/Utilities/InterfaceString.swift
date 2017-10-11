@@ -14,6 +14,7 @@ public struct InterfaceString {
         static let Main = NSLocalizedString("Main", comment: "Main Storyboard")
         static let About = NSLocalizedString("About", comment: "About Storyboard")
         static let Settings = NSLocalizedString("Settings", comment: "Settings Storyboard")
+        static let Notifications = NSLocalizedString("Notifications", comment: "Notifications Storyboard")
         static let App = NSLocalizedString("App", comment: "App Storyboard")
         static let Destination = NSLocalizedString("Destination", comment: "Destination Storyboard")
         static let Login = NSLocalizedString("Login", comment: "Login Storyboard")
@@ -30,6 +31,22 @@ public struct InterfaceString {
         static let Earnings = NSLocalizedString("Earnings", comment: "Earnings Storyboard")
     }
     
+    public struct EmptyDataMsg {
+        static let NotRiddenYetTitle = NSLocalizedString("Bummer! No rides.", comment: "NotRiddenYet Title")
+        static let NotRiddenYetDescription = NSLocalizedString("Save money by driving with Yibby.", comment: "NotRiddenYet Description")
+        
+    }
+    
+    public struct ActivityIndicator {
+        static let Loading = NSLocalizedString("Loading...", comment: "Loading...")
+    }
+    
+    public struct SignOut {
+        static let SignOut = NSLocalizedString("Sign Out", comment: "SignOut")
+        static let ConfirmSignOutTitle = NSLocalizedString("Are you sure", comment: "Are you sure?")
+        static let ConfirmSignOutMessage = NSLocalizedString("You want to sign out?", comment: "You want to sign out?")
+    }
+    
     public struct Button {
         static let TANDC = NSLocalizedString("TERMS OF SERVICE AND PRIVACY POLICY", comment: "TANDC")
     }
@@ -37,6 +54,10 @@ public struct InterfaceString {
     public struct Ride {
         static let Pickup = NSLocalizedString("Pickup", comment: "Pickup")
         static let Dropoff = NSLocalizedString("Dropoff", comment: "Dropoff")
+        static let Driver = NSLocalizedString("Driver", comment: "Driver")
+        static let ArrivedAtPickup = NSLocalizedString("Arrived at Pickup", comment: "ArrivedAtPickup")
+        static let StartRide = NSLocalizedString("Start Ride", comment: "StartRide")
+        static let EndRide = NSLocalizedString("End Ride", comment: "EndRide")
     }
     
     

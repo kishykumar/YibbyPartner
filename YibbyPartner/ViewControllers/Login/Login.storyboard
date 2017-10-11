@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,8 +23,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O6H-09-Ff5" customClass="YibbyButton1" customModule="YibbyPartner" customModuleProvider="target">
-                                <rect key="frame" x="16" y="254" width="288" height="48"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O6H-09-Ff5" customClass="YibbyButton1" customModule="YibbyPartner" customModuleProvider="target">
+                                <rect key="frame" x="16" y="278" width="343" height="57"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="O6H-09-Ff5" secondAttribute="height" multiplier="6" id="lE7-2P-K4o"/>
                                 </constraints>
@@ -36,13 +36,13 @@
                                     <action selector="loginAction:" destination="5WA-Fd-nAG" eventType="touchUpInside" id="eMc-vX-4g8"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xAU-Cb-yk0" userLabel="Container View">
-                                <rect key="frame" x="16" y="104" width="288" height="125"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xAU-Cb-yk0" userLabel="Container View">
+                                <rect key="frame" x="16" y="104" width="343" height="149"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="80t-rg-fql">
                                         <rect key="frame" x="10" y="10" width="323" height="129"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="john.smith@gmail.com" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LPK-W1-og6">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="925-521-4585" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LPK-W1-og6" userLabel="PhoneNumberTextfield" customClass="PhoneNumberTextField" customModule="PhoneNumberKit">
                                                 <rect key="frame" x="0.0" y="0.0" width="323" height="59.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
@@ -64,20 +64,20 @@
                                     <constraint firstItem="80t-rg-fql" firstAttribute="top" secondItem="xAU-Cb-yk0" secondAttribute="top" constant="10" id="db2-Vh-KZ3"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Or login with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAT-5g-WCs">
-                                <rect key="frame" x="16" y="439" width="288" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Or login with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAT-5g-WCs">
+                                <rect key="frame" x="16" y="529.5" width="343" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXV-Us-9ti">
-                                <rect key="frame" x="16" y="327" width="288" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXV-Us-9ti">
+                                <rect key="frame" x="16" y="360" width="343" height="30"/>
                                 <state key="normal" title="Forgot your password?">
                                     <color key="titleColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lR9-Td-FVe" userLabel="OtherLoginSV">
-                                <rect key="frame" x="16" y="490" width="343" height="57"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lR9-Td-FVe" userLabel="OtherLoginSV">
+                                <rect key="frame" x="16" y="580" width="343" height="57"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgm-HC-v4X">
                                         <rect key="frame" x="0.0" y="0.0" width="161.5" height="57"/>
@@ -86,6 +86,9 @@
                                         <state key="normal" title="Facebook">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="facebookAction:" destination="5WA-Fd-nAG" eventType="touchUpInside" id="sUs-ab-TBC"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UW8-ob-cPh">
                                         <rect key="frame" x="181.5" y="0.0" width="161.5" height="57"/>
@@ -94,24 +97,37 @@
                                         <state key="normal" title="Google">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="googleAction:" destination="5WA-Fd-nAG" eventType="touchUpInside" id="WHQ-uS-o7a"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lR9-Td-FVe" secondAttribute="height" multiplier="6" id="Umk-EL-0qd"/>
                                 </constraints>
                             </stackView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFh-hk-lWX">
+                                <rect key="frame" x="16" y="74" width="343" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="O6H-09-Ff5" firstAttribute="leading" secondItem="JLa-Aq-2Fr" secondAttribute="leadingMargin" id="47m-ca-WyH"/>
                             <constraint firstItem="MAT-5g-WCs" firstAttribute="leading" secondItem="JLa-Aq-2Fr" secondAttribute="leadingMargin" id="4v5-XE-nlM"/>
+                            <constraint firstItem="aFh-hk-lWX" firstAttribute="leading" secondItem="JLa-Aq-2Fr" secondAttribute="leadingMargin" id="5rl-4g-MEj"/>
                             <constraint firstItem="MAT-5g-WCs" firstAttribute="trailing" secondItem="JLa-Aq-2Fr" secondAttribute="trailingMargin" id="F1k-Jf-k6s"/>
                             <constraint firstItem="lR9-Td-FVe" firstAttribute="top" secondItem="MAT-5g-WCs" secondAttribute="bottom" constant="30" id="KO3-Ox-zZl"/>
                             <constraint firstItem="O6H-09-Ff5" firstAttribute="trailing" secondItem="JLa-Aq-2Fr" secondAttribute="trailingMargin" id="KYf-Qt-0fK"/>
                             <constraint firstItem="dx4-W9-UXO" firstAttribute="top" secondItem="lR9-Td-FVe" secondAttribute="bottom" constant="30" id="S9N-Kv-pgd"/>
+                            <constraint firstItem="aFh-hk-lWX" firstAttribute="top" secondItem="akE-7j-2aL" secondAttribute="bottom" constant="10" id="Usa-2k-pUU"/>
                             <constraint firstItem="PXV-Us-9ti" firstAttribute="top" secondItem="O6H-09-Ff5" secondAttribute="bottom" constant="25" id="Xp8-r5-Cxj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aFh-hk-lWX" secondAttribute="trailing" id="anl-sw-std"/>
                             <constraint firstItem="xAU-Cb-yk0" firstAttribute="leading" secondItem="JLa-Aq-2Fr" secondAttribute="leadingMargin" id="dbV-4f-h8n"/>
                             <constraint firstItem="PXV-Us-9ti" firstAttribute="trailing" secondItem="JLa-Aq-2Fr" secondAttribute="trailingMargin" id="gCF-My-tAB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xAU-Cb-yk0" secondAttribute="trailing" id="kvx-Sz-a9g"/>
+                            <constraint firstItem="xAU-Cb-yk0" firstAttribute="top" secondItem="aFh-hk-lWX" secondAttribute="bottom" constant="10" id="m0U-mB-73m"/>
                             <constraint firstItem="lR9-Td-FVe" firstAttribute="leading" secondItem="JLa-Aq-2Fr" secondAttribute="leadingMargin" id="pJl-ch-VnY"/>
                             <constraint firstItem="O6H-09-Ff5" firstAttribute="top" secondItem="xAU-Cb-yk0" secondAttribute="bottom" constant="25" id="r1s-h8-q50"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lR9-Td-FVe" secondAttribute="trailing" id="tqt-3W-1qs"/>
@@ -121,9 +137,10 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="emailAddress" destination="LPK-W1-og6" id="kVG-gI-fJU"/>
+                        <outlet property="errorLabelOutlet" destination="aFh-hk-lWX" id="61U-MG-dRS"/>
                         <outlet property="loginButtonOutlet" destination="O6H-09-Ff5" id="v7K-ZX-WE2"/>
                         <outlet property="password" destination="asN-OP-qBQ" id="zZj-mZ-Kd3"/>
+                        <outlet property="phoneNumberTextFieldOutlet" destination="LPK-W1-og6" id="FBU-WM-GZ7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cLk-zv-0FS" userLabel="First Responder" sceneMemberID="firstResponder"/>

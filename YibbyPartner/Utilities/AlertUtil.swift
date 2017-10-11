@@ -8,7 +8,7 @@
 
 import UIKit
 import GoogleMaps
-import SVProgressHUD
+import MBProgressHUD
 import BaasBoxSDK
 import CocoaLumberjack
 
@@ -16,11 +16,29 @@ public typealias AlertUtilCompletionCallback = () -> Void
 
 open class AlertUtil {
     
-    static func displayAlert(_ title: String, message: String) {
+    static func displayAlert(_ title: String,
+                             message: String) {
+        
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         
         alert.addAction(UIAlertAction(title: InterfaceString.OK, style: .default, handler: { (action) -> Void in
+        }))
+        
+        if let vvc = appDelegate.window?.visibleViewController {
+            vvc.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    static func displayAlert(_ title: String,
+                             message: String,
+                             completionBlock: @escaping AlertUtilCompletionCallback) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        alert.addAction(UIAlertAction(title: InterfaceString.OK, style: .default, handler: { (action) -> Void in
+            completionBlock()
         }))
         
         if let vvc = appDelegate.window?.visibleViewController {

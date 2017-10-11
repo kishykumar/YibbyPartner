@@ -18,7 +18,6 @@ import CocoaLumberjack
 open class PushController: NSObject, PushControllerProtocol {
     
     let BID_MESSAGE_TYPE = "BID"
-    let RIDE_START_MESSAGE_TYPE = "RIDE_START"
     let DRIVER_EN_ROUTE_MESSAGE_TYPE = "DRIVER_EN_ROUTE"
     let OFFER_REJECTED_MESSAGE_TYPE = "OFFER_REJECTED"
     let RIDE_CANCELLED_MESSAGE_TYPE = "RIDE_CANCELLED"
@@ -32,8 +31,6 @@ open class PushController: NSObject, PushControllerProtocol {
     let GCM_MSG_ID_JSON_FIELD_NAME = "gcm.message_id"
     
     var savedNotification: [AnyHashable: Any]?
-    
-    let BID_NOTIFICATION_EXPIRE_TIME: TimeInterval = 30 // seconds
     
     var mLastGCMMsgId: String?
     
@@ -144,44 +141,8 @@ open class PushController: NSObject, PushControllerProtocol {
                 
             case BID_MESSAGE_TYPE:
                 DDLogVerbose("BID message RCVD")
-
                 let bid = Bid(JSONString: jsonCustomString)!
-
-                let bidElapsedTime = TimeUtil.diffFromCurTimeISO(bid.creationTime!)
-                
-                if (bidElapsedTime > BID_NOTIFICATION_EXPIRE_TIME) {
-                    DDLogDebug("Bid Discarded CurrentTime: \(Date()) bidTime: \(bid.creationTime) bidElapsedTime: \(bidElapsedTime)")
-                    
-                    // The driver missed responding to the bid
-                    AlertUtil.displayAlert("Bid missed.",
-                                      message: "Reason: You missed sending the bid. Missing a lot of bids would bring you offline.")
-                    
-                    return;
-                }
-                
-                // prepare the offerViewController
-                let offerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Offer, bundle: nil)
-
-                let offerViewController = offerStoryboard.instantiateViewController(withIdentifier: "OfferViewControllerIdentifier") as! OfferViewController
-
-                let navController = UINavigationController(rootViewController: offerViewController)
-
-                // start the timer by accouting the time elapsed since the user actually created the bid
-                offerViewController.timerStart = TimeInterval(Int(OfferViewController.OFFER_TIMER_EXPIRE_PERIOD - bidElapsedTime))
-                
-                offerViewController.userBid = bid
-
-                DDLogDebug("userBid: \(offerViewController.userBid.toJSONString(prettyPrint: true))")
-                
-                // if an alert was already displayed, dismiss it
-                if let vvc = appDelegate.window!.visibleViewController as? UIAlertController {
-                    DDLogDebug("Alert is up \(vvc)")
-                    vvc.dismiss(animated: false, completion: nil)
-                } else {
-                    DDLogDebug("Alert is NOT up \(appDelegate.window!.visibleViewController)")
-                }
-                
-                mmnvc.present(navController, animated: true, completion: nil)
+                postNotification(BidNotifications.bidReceived, value: bid)
 
                 break
 
@@ -189,22 +150,7 @@ open class PushController: NSObject, PushControllerProtocol {
                 DDLogDebug("REJECT RCVD")
                 
                 let bid = Bid(JSONString: jsonCustomString)!
-                
-                // find the DriverOnlineViewController and pop till that
-                for viewController: UIViewController in mmnvc.viewControllers {
-                    
-                    if (viewController is DriverOnlineViewController) {
-                        
-                        let driverOnlineController: DriverOnlineViewController = (viewController as! DriverOnlineViewController)
-                        
-                        // dismiss all view controllers till this view controller
-                        driverOnlineController.dismiss(animated: true, completion: nil)
-                        
-                        AlertUtil.displayAlertOnVC(driverOnlineController,
-                                                   title: "Offer Rejected.",
-                                                   message: "Reason: Your offer was not the lowest.")
-                    }
-                }
+                postNotification(BidNotifications.offerRejected, value: bid)
                 
                 break
                 
@@ -213,46 +159,8 @@ open class PushController: NSObject, PushControllerProtocol {
                 DDLogDebug("DRIVER EN ROUTE")
                 
                 let ride = Ride(JSONString: jsonCustomString)!
-                
-                if (!YBClient.sharedInstance().isSameAsOngoingBid(bidId: ride.bidId)) {
-                    DDLogDebug("Not same as ongoingBid. Discarded: \(notification[MESSAGE_JSON_FIELD_NAME] as! String)")
-                    
-                    if let ongoingBid = YBClient.sharedInstance().getBid() {
-                        DDLogDebug("Ongoingbid is: \(String(describing: ongoingBid.id)). Incoming is \(String(describing: ride.bidId))")
-                    } else {
-                        DDLogDebug("Ongoingbid is: nil. Incoming is \(String(describing: ride.bidId))")
-                    }
-                    
-                    return;
-                }
-                
-                // find the DriverOnlineViewController and pop till that
-                for viewController: UIViewController in mmnvc.viewControllers {
-                    
-                    if (viewController is DriverOnlineViewController) {
-                        
-                        let driverOnlineController: DriverOnlineViewController = (viewController as! DriverOnlineViewController)
-                        
-                        // dismiss all view controllers till this view controller
-                        DDLogDebug("driverOnlineController dismissed")
-                        driverOnlineController.dismiss(animated: true, completion: nil)
-                    }
-                }
-                
-                let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
-                
-                let rideStartViewController = rideStoryboard.instantiateViewController(withIdentifier: "RideStartViewControllerIdentifier") as! RideStartViewController
-                mmnvc.pushViewController(rideStartViewController, animated: true)
+                postNotification(RideNotifications.driverEnRoute, value: ride)
 
-//                let driverEnRouteStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.DriverEnRoute, bundle: nil)
-//
-//                let driverEnRouteViewController = driverEnRouteStoryboard.instantiateViewController(withIdentifier: "DriverEnRouteViewControllerIdentifier") as! DriverEnRouteViewController
-//                mmnvc.pushViewController(driverEnRouteViewController, animated: true)
-                
-                break
-                
-            case RIDE_START_MESSAGE_TYPE:
-                DDLogDebug("RIDE START MESSAGE RCVD")
                 break
                 
             case RIDE_CANCELLED_MESSAGE_TYPE:

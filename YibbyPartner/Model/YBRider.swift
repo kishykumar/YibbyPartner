@@ -16,9 +16,9 @@ class YBRider: NSObject {
     var id: String?
     var firstName: String?
     var location: YBLocation?
-    var photoUrl: String?
+    var profilePictureFileId: String?
     var rating: String?
-    var mobile: String?
+    var phoneNumber: String?
     
     // MARK: Initialization
     
@@ -31,17 +31,20 @@ class YBRider: NSObject {
         id         <- map["id"]
         firstName    <- map["firstName"]
         location     <- map["location"]
-        photoUrl     <- map["photoUrl"]
+        profilePictureFileId     <- map["profilePictureFileId"]
         rating <- map["rating"]
-        mobile <- map["mobile"]
+        phoneNumber <- map["phoneNumber"]
     }
 }
 
 extension YBRider {
     
     func call() {
-        let phoneURLString = "tel:\(self.mobile)"
-        let phoneURL = URL(string: phoneURLString)!
-        UIApplication.shared.openURL(phoneURL)
+        
+        if let phoneNumber = self.phoneNumber {
+            let phoneURLString = "tel:\(phoneNumber)"
+            let phoneURL = URL(string: phoneURLString)!
+            UIApplication.shared.openURL(phoneURL)
+        }
     }
 }

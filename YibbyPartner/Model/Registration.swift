@@ -13,11 +13,11 @@ import ObjectMapper
 class Registration: Mappable {
     
     // MARK: - Properties
-    var driving: DrivingDetails = DrivingDetails()
-    var personal: PersonalDetails = PersonalDetails()
-    var vehicle: VehicleDetails = VehicleDetails()
-    var driverLicense: DriverLicense = DriverLicense()
-    var insurance: InsuranceDetails = InsuranceDetails()
+    var driving: YBDriving = YBDriving()
+    var personal: YBPersonal = YBPersonal()
+    var vehicle: YBVehicle = YBVehicle()
+    var driverLicense: YBDriverLicense = YBDriverLicense()
+    var insurance: YBInsurance = YBInsurance()
     
     // MARK: Initialization
     

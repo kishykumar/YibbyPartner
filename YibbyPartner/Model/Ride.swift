@@ -12,22 +12,29 @@ import ObjectMapper
 class Ride: Mappable {
     
     // MARK: - Properties
-    var id: String?
     
+    var id: String?
     var riderBidPrice: Float?
     var driverBidPrice: Float?
     var fare: Float?
-    
     var people: Int?
-    
     var pickupLocation: YBLocation?
     var dropoffLocation: YBLocation?
     var riderLocation: YBLocation?
-    
     var rider: YBRider?
     var bidId: String?
+    var datetime: String?
+    var miles: Float?
+    var rideTime: Int?
+    var tip: Float?
+    var totalCharge: Float?
+    var vehicle: YBVehicle?
     
     // MARK: Initialization
+    
+    init() {
+        
+    }
     
     required init?(map: Map) {
         
@@ -45,5 +52,11 @@ class Ride: Mappable {
         riderLocation       <- map["riderLocation"]
         rider               <- map["rider"]
         bidId               <- map["bidId"]
+        datetime            <- map["datetime"]
+        miles            <- map["miles"]
+        rideTime            <- map["rideTime"]
+        tip            <- map["tip"]
+        totalCharge            <- map["totalCharge"]
+        vehicle                 <- map["vehicle"]
     }
 }

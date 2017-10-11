@@ -61,7 +61,7 @@ class DriverEnRouteViewController: BaseYibbyViewController {
     // MARK: Setup functions
     
     func initProperties() {
-        self.bid = (YBClient.sharedInstance().getBid())!
+        self.bid = (YBClient.sharedInstance().bid)!
     }
     
     func setupUI () {

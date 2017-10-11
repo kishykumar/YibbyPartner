@@ -7,6 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12000C7B1F5CF57B004B6078 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C6D1F5CF57B004B6078 /* Array.swift */; };
+		12000C7C1F5CF57B004B6078 /* CGRectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C6E1F5CF57B004B6078 /* CGRectExtensions.swift */; };
+		12000C7D1F5CF57B004B6078 /* CGSizeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C6F1F5CF57B004B6078 /* CGSizeExtensions.swift */; };
+		12000C7E1F5CF57B004B6078 /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C701F5CF57B004B6078 /* ImageExtensions.swift */; };
+		12000C7F1F5CF57B004B6078 /* NSObjectClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C711F5CF57B004B6078 /* NSObjectClassName.swift */; };
+		12000C801F5CF57B004B6078 /* NSStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C721F5CF57B004B6078 /* NSStringExtensions.swift */; };
+		12000C811F5CF57B004B6078 /* ScreenExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C731F5CF57B004B6078 /* ScreenExtensions.swift */; };
+		12000C821F5CF57B004B6078 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C741F5CF57B004B6078 /* UIButtonExtensions.swift */; };
+		12000C831F5CF57B004B6078 /* UIImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C751F5CF57B004B6078 /* UIImagePickerController.swift */; };
+		12000C841F5CF57B004B6078 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C761F5CF57B004B6078 /* UIImageViewExtensions.swift */; };
+		12000C851F5CF57B004B6078 /* UITextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C771F5CF57B004B6078 /* UITextFieldExtensions.swift */; };
+		12000C861F5CF57B004B6078 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C781F5CF57B004B6078 /* UIViewControllerExtensions.swift */; };
+		12000C871F5CF57B004B6078 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C791F5CF57B004B6078 /* UIViewExtensions.swift */; };
+		12000C881F5CF57B004B6078 /* UIViewNibLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C7A1F5CF57B004B6078 /* UIViewNibLoading.swift */; };
+		12000C8A1F5CFE11004B6078 /* YBPasswordRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C891F5CFE11004B6078 /* YBPasswordRule.swift */; };
+		12000C8C1F5CFE6D004B6078 /* FreeMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C8B1F5CFE6D004B6078 /* FreeMethods.swift */; };
+		12000C8E1F5CFECD004B6078 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12000C8D1F5CFECD004B6078 /* MobileCoreServices.framework */; };
+		12000C901F5CFEEB004B6078 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12000C8F1F5CFEEB004B6078 /* MessageUI.framework */; };
+		12000C921F5CFEFA004B6078 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12000C911F5CFEFA004B6078 /* SystemConfiguration.framework */; };
+		12000C941F5CFF30004B6078 /* YBMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12000C931F5CFF30004B6078 /* YBMenuButton.swift */; };
 		1201B7AC1D23B49000A7EEAF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7911D23B49000A7EEAF /* MainViewController.swift */; };
 		1201B7AD1D23B49000A7EEAF /* DestinationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7931D23B49000A7EEAF /* DestinationPickerViewController.swift */; };
 		1201B7AE1D23B49000A7EEAF /* LeftNavDrawerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7951D23B49000A7EEAF /* LeftNavDrawerTableViewCell.swift */; };
@@ -43,6 +63,17 @@
 		1201B8101D263E7200A7EEAF /* Online.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1201B80F1D263E7200A7EEAF /* Online.storyboard */; };
 		1201B8121D263E8900A7EEAF /* App.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1201B8111D263E8900A7EEAF /* App.storyboard */; };
 		1206823B1CC2E685004A34BB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1206823A1CC2E685004A34BB /* MapKit.framework */; };
+		120826571F5D3B1B00BA38E9 /* TypedNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120826561F5D3B1B00BA38E9 /* TypedNotifications.swift */; };
+		120826591F5D3E9300BA38E9 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 120826581F5D3E9300BA38E9 /* About.storyboard */; };
+		1208265B1F5D3EBB00BA38E9 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1208265A1F5D3EBB00BA38E9 /* AboutViewController.swift */; };
+		120826621F5D3F5500BA38E9 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1208265E1F5D3F5500BA38E9 /* Box.swift */; };
+		120826631F5D3F5500BA38E9 /* BoxType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1208265F1F5D3F5500BA38E9 /* BoxType.swift */; };
+		120826641F5D3F5500BA38E9 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 120826601F5D3F5500BA38E9 /* LICENSE.txt */; };
+		120826651F5D3F5500BA38E9 /* MutableBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120826611F5D3F5500BA38E9 /* MutableBox.swift */; };
+		120826671F5D406900BA38E9 /* YBProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120826661F5D406900BA38E9 /* YBProfile.swift */; };
+		120826861F62863E00BA38E9 /* YBSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120826851F62863E00BA38E9 /* YBSync.swift */; };
+		1208268F1F6BC12B00BA38E9 /* YibbyMapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1208268D1F6BC12B00BA38E9 /* YibbyMapMarker.swift */; };
+		120826901F6BC12B00BA38E9 /* YibbyMapMarker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1208268E1F6BC12B00BA38E9 /* YibbyMapMarker.xib */; };
 		1211FF001D5991BD00AD9591 /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211FEFF1D5991BD00AD9591 /* AlertUtil.swift */; };
 		1211FF021D5991C800AD9591 /* TimeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211FF011D5991C800AD9591 /* TimeUtil.swift */; };
 		1211FF041D5991D800AD9591 /* ActivityIndicatorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211FF031D5991D800AD9591 /* ActivityIndicatorUtil.swift */; };
@@ -56,14 +87,28 @@
 		123524971C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
 		125B0C041E2C4B2D00534359 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C031E2C4B2D00534359 /* ImageService.swift */; };
 		125B0C081E2CDFDC00534359 /* TemporaryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C071E2CDFDC00534359 /* TemporaryCache.swift */; };
-		125B0C0A1E2DCFF400534359 /* DrivingDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C091E2DCFF400534359 /* DrivingDetails.swift */; };
-		125B0C0C1E2DD04D00534359 /* PersonalDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C0B1E2DD04D00534359 /* PersonalDetails.swift */; };
-		125B0C0E1E2DE10500534359 /* VehicleDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C0D1E2DE10500534359 /* VehicleDetails.swift */; };
-		125B0C101E2DE1B000534359 /* DriverLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C0F1E2DE1B000534359 /* DriverLicense.swift */; };
-		125B0C121E2DE25600534359 /* InsuranceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C111E2DE25600534359 /* InsuranceDetails.swift */; };
+		125B0C0A1E2DCFF400534359 /* YBDriving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C091E2DCFF400534359 /* YBDriving.swift */; };
+		125B0C0C1E2DD04D00534359 /* YBPersonal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C0B1E2DD04D00534359 /* YBPersonal.swift */; };
+		125B0C0E1E2DE10500534359 /* YBVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C0D1E2DE10500534359 /* YBVehicle.swift */; };
+		125B0C101E2DE1B000534359 /* YBDriverLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C0F1E2DE1B000534359 /* YBDriverLicense.swift */; };
+		125B0C121E2DE25600534359 /* YBInsurance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C111E2DE25600534359 /* YBInsurance.swift */; };
 		125B0C141E2DE39C00534359 /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C131E2DE39C00534359 /* Registration.swift */; };
 		125B0C161E2DE77500534359 /* YBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C151E2DE77500534359 /* YBClient.swift */; };
 		125B0C1A1E308E3B00534359 /* PendingApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C191E308E3B00534359 /* PendingApprovalViewController.swift */; };
+		126EC5541F73A67F0040704F /* MessageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126EC5531F73A67F0040704F /* MessageComposer.swift */; };
+		126EC5561F7CCAF40040704F /* YBNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126EC5551F7CCAF40040704F /* YBNotifications.swift */; };
+		126EC5591F7E2D590040704F /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 126EC5581F7E2D590040704F /* Notifications.storyboard */; };
+		126EC55B1F7E2D6A0040704F /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126EC55A1F7E2D6A0040704F /* NotificationsViewController.swift */; };
+		126EC5611F7E31720040704F /* Help.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 126EC55D1F7E31710040704F /* Help.storyboard */; };
+		126EC5621F7E31720040704F /* HelpCenterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126EC55E1F7E31710040704F /* HelpCenterVC.swift */; };
+		126EC5631F7E31720040704F /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126EC55F1F7E31710040704F /* HelpViewController.swift */; };
+		126EC5641F7E31720040704F /* LegalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126EC5601F7E31720040704F /* LegalVC.swift */; };
+		126EC5661F7E38A70040704F /* ReportIssuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126EC5651F7E38A70040704F /* ReportIssuesViewController.swift */; };
+		126EC5701F7E3F440040704F /* CarDetailsChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126EC5681F7E3F440040704F /* CarDetailsChildView.swift */; };
+		126EC5711F7E3F440040704F /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 126EC5691F7E3F440040704F /* History.storyboard */; };
+		126EC5721F7E3F440040704F /* HistoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126EC56A1F7E3F440040704F /* HistoryTableCell.swift */; };
+		126EC5731F7E3F440040704F /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126EC56B1F7E3F440040704F /* HistoryViewController.swift */; };
+		126EC5751F7E3F440040704F /* RideDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126EC56D1F7E3F440040704F /* RideDetailViewController.swift */; };
 		1284914C1E260B10002D047B /* VehicleDataAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1284914B1E260B10002D047B /* VehicleDataAPI.swift */; };
 		1284914E1E262DA2002D047B /* VehicleMake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1284914D1E262DA2002D047B /* VehicleMake.swift */; };
 		128491501E262DAD002D047B /* VehicleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1284914F1E262DAD002D047B /* VehicleModel.swift */; };
@@ -120,6 +165,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		12000C6D1F5CF57B004B6078 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		12000C6E1F5CF57B004B6078 /* CGRectExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRectExtensions.swift; sourceTree = "<group>"; };
+		12000C6F1F5CF57B004B6078 /* CGSizeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSizeExtensions.swift; sourceTree = "<group>"; };
+		12000C701F5CF57B004B6078 /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
+		12000C711F5CF57B004B6078 /* NSObjectClassName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectClassName.swift; sourceTree = "<group>"; };
+		12000C721F5CF57B004B6078 /* NSStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSStringExtensions.swift; sourceTree = "<group>"; };
+		12000C731F5CF57B004B6078 /* ScreenExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenExtensions.swift; sourceTree = "<group>"; };
+		12000C741F5CF57B004B6078 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
+		12000C751F5CF57B004B6078 /* UIImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImagePickerController.swift; sourceTree = "<group>"; };
+		12000C761F5CF57B004B6078 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
+		12000C771F5CF57B004B6078 /* UITextFieldExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldExtensions.swift; sourceTree = "<group>"; };
+		12000C781F5CF57B004B6078 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		12000C791F5CF57B004B6078 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		12000C7A1F5CF57B004B6078 /* UIViewNibLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewNibLoading.swift; sourceTree = "<group>"; };
+		12000C891F5CFE11004B6078 /* YBPasswordRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBPasswordRule.swift; sourceTree = "<group>"; };
+		12000C8B1F5CFE6D004B6078 /* FreeMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeMethods.swift; sourceTree = "<group>"; };
+		12000C8D1F5CFECD004B6078 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		12000C8F1F5CFEEB004B6078 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		12000C911F5CFEFA004B6078 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		12000C931F5CFF30004B6078 /* YBMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBMenuButton.swift; sourceTree = "<group>"; };
 		1201B7911D23B49000A7EEAF /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		1201B7931D23B49000A7EEAF /* DestinationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationPickerViewController.swift; sourceTree = "<group>"; };
 		1201B7951D23B49000A7EEAF /* LeftNavDrawerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftNavDrawerTableViewCell.swift; sourceTree = "<group>"; };
@@ -156,6 +221,17 @@
 		1201B80F1D263E7200A7EEAF /* Online.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Online.storyboard; sourceTree = "<group>"; };
 		1201B8111D263E8900A7EEAF /* App.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = App.storyboard; sourceTree = "<group>"; };
 		1206823A1CC2E685004A34BB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		120826561F5D3B1B00BA38E9 /* TypedNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypedNotifications.swift; sourceTree = "<group>"; };
+		120826581F5D3E9300BA38E9 /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
+		1208265A1F5D3EBB00BA38E9 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		1208265E1F5D3F5500BA38E9 /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		1208265F1F5D3F5500BA38E9 /* BoxType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxType.swift; sourceTree = "<group>"; };
+		120826601F5D3F5500BA38E9 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		120826611F5D3F5500BA38E9 /* MutableBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableBox.swift; sourceTree = "<group>"; };
+		120826661F5D406900BA38E9 /* YBProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBProfile.swift; sourceTree = "<group>"; };
+		120826851F62863E00BA38E9 /* YBSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBSync.swift; sourceTree = "<group>"; };
+		1208268D1F6BC12B00BA38E9 /* YibbyMapMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YibbyMapMarker.swift; sourceTree = "<group>"; };
+		1208268E1F6BC12B00BA38E9 /* YibbyMapMarker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YibbyMapMarker.xib; sourceTree = "<group>"; };
 		1211FEFF1D5991BD00AD9591 /* AlertUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
 		1211FF011D5991C800AD9591 /* TimeUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeUtil.swift; sourceTree = "<group>"; };
 		1211FF031D5991D800AD9591 /* ActivityIndicatorUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorUtil.swift; sourceTree = "<group>"; };
@@ -168,14 +244,30 @@
 		123524951C89475D004307EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		125B0C031E2C4B2D00534359 /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		125B0C071E2CDFDC00534359 /* TemporaryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporaryCache.swift; sourceTree = "<group>"; };
-		125B0C091E2DCFF400534359 /* DrivingDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrivingDetails.swift; sourceTree = "<group>"; };
-		125B0C0B1E2DD04D00534359 /* PersonalDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalDetails.swift; sourceTree = "<group>"; };
-		125B0C0D1E2DE10500534359 /* VehicleDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleDetails.swift; sourceTree = "<group>"; };
-		125B0C0F1E2DE1B000534359 /* DriverLicense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverLicense.swift; sourceTree = "<group>"; };
-		125B0C111E2DE25600534359 /* InsuranceDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsuranceDetails.swift; sourceTree = "<group>"; };
+		125B0C091E2DCFF400534359 /* YBDriving.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBDriving.swift; sourceTree = "<group>"; };
+		125B0C0B1E2DD04D00534359 /* YBPersonal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBPersonal.swift; sourceTree = "<group>"; };
+		125B0C0D1E2DE10500534359 /* YBVehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBVehicle.swift; sourceTree = "<group>"; };
+		125B0C0F1E2DE1B000534359 /* YBDriverLicense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBDriverLicense.swift; sourceTree = "<group>"; };
+		125B0C111E2DE25600534359 /* YBInsurance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBInsurance.swift; sourceTree = "<group>"; };
 		125B0C131E2DE39C00534359 /* Registration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		125B0C151E2DE77500534359 /* YBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBClient.swift; sourceTree = "<group>"; };
 		125B0C191E308E3B00534359 /* PendingApprovalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingApprovalViewController.swift; sourceTree = "<group>"; };
+		126EC5531F73A67F0040704F /* MessageComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageComposer.swift; sourceTree = "<group>"; };
+		126EC5551F7CCAF40040704F /* YBNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBNotifications.swift; sourceTree = "<group>"; };
+		126EC5581F7E2D590040704F /* Notifications.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
+		126EC55A1F7E2D6A0040704F /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		126EC55D1F7E31710040704F /* Help.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Help.storyboard; sourceTree = "<group>"; };
+		126EC55E1F7E31710040704F /* HelpCenterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpCenterVC.swift; sourceTree = "<group>"; };
+		126EC55F1F7E31710040704F /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		126EC5601F7E31720040704F /* LegalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalVC.swift; sourceTree = "<group>"; };
+		126EC5651F7E38A70040704F /* ReportIssuesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportIssuesViewController.swift; sourceTree = "<group>"; };
+		126EC5681F7E3F440040704F /* CarDetailsChildView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarDetailsChildView.swift; sourceTree = "<group>"; };
+		126EC5691F7E3F440040704F /* History.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
+		126EC56A1F7E3F440040704F /* HistoryTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableCell.swift; sourceTree = "<group>"; };
+		126EC56B1F7E3F440040704F /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		126EC56D1F7E3F440040704F /* RideDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideDetailViewController.swift; sourceTree = "<group>"; };
+		126EC5781F8A0BCA0040704F /* fontello.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontello.ttf; sourceTree = "<group>"; };
+		126EC5791F8A0BCA0040704F /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
 		12814FBA1E0EFBF600F08CFF /* YibbyPartner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YibbyPartner.entitlements; sourceTree = "<group>"; };
 		1284914B1E260B10002D047B /* VehicleDataAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleDataAPI.swift; sourceTree = "<group>"; };
 		1284914D1E262DA2002D047B /* VehicleMake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleMake.swift; sourceTree = "<group>"; };
@@ -247,6 +339,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12000C921F5CFEFA004B6078 /* SystemConfiguration.framework in Frameworks */,
+				12000C901F5CFEEB004B6078 /* MessageUI.framework in Frameworks */,
+				12000C8E1F5CFECD004B6078 /* MobileCoreServices.framework in Frameworks */,
 				12F3CCF81C4CF16D00F79A26 /* CoreLocation.framework in Frameworks */,
 				1206823B1CC2E685004A34BB /* MapKit.framework in Frameworks */,
 				6B9369FC30AAD797CF0D9B31 /* Pods_YibbyPartner.framework in Frameworks */,
@@ -267,6 +362,9 @@
 		1201B78E1D23B49000A7EEAF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				126EC5671F7E3F440040704F /* History */,
+				126EC55C1F7E31710040704F /* Help */,
+				126EC5571F7E2D490040704F /* Notifications */,
 				129AAE5A1E23380A006F6CE5 /* Register */,
 				129AAE411E226A78006F6CE5 /* Base */,
 				1211FF051D5AED5A00AD9591 /* Earnings */,
@@ -290,6 +388,8 @@
 		1201B78F1D23B49000A7EEAF /* About */ = {
 			isa = PBXGroup;
 			children = (
+				120826581F5D3E9300BA38E9 /* About.storyboard */,
+				1208265A1F5D3EBB00BA38E9 /* AboutViewController.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -408,6 +508,20 @@
 		1201B7BC1D23B4AB00A7EEAF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				12000C6D1F5CF57B004B6078 /* Array.swift */,
+				12000C6E1F5CF57B004B6078 /* CGRectExtensions.swift */,
+				12000C6F1F5CF57B004B6078 /* CGSizeExtensions.swift */,
+				12000C701F5CF57B004B6078 /* ImageExtensions.swift */,
+				12000C711F5CF57B004B6078 /* NSObjectClassName.swift */,
+				12000C721F5CF57B004B6078 /* NSStringExtensions.swift */,
+				12000C731F5CF57B004B6078 /* ScreenExtensions.swift */,
+				12000C741F5CF57B004B6078 /* UIButtonExtensions.swift */,
+				12000C751F5CF57B004B6078 /* UIImagePickerController.swift */,
+				12000C761F5CF57B004B6078 /* UIImageViewExtensions.swift */,
+				12000C771F5CF57B004B6078 /* UITextFieldExtensions.swift */,
+				12000C781F5CF57B004B6078 /* UIViewControllerExtensions.swift */,
+				12000C791F5CF57B004B6078 /* UIViewExtensions.swift */,
+				12000C7A1F5CF57B004B6078 /* UIViewNibLoading.swift */,
 				129AAE581E226CE2006F6CE5 /* UIColorExtensions.swift */,
 			);
 			path = Extensions;
@@ -418,15 +532,17 @@
 			children = (
 				1201B7BE1D23B4AB00A7EEAF /* Bid.swift */,
 				125B0C151E2DE77500534359 /* YBClient.swift */,
-				125B0C0F1E2DE1B000534359 /* DriverLicense.swift */,
+				120826851F62863E00BA38E9 /* YBSync.swift */,
+				125B0C0F1E2DE1B000534359 /* YBDriverLicense.swift */,
 				12FAC28B1E34863900D77486 /* YBRider.swift */,
-				125B0C091E2DCFF400534359 /* DrivingDetails.swift */,
-				125B0C111E2DE25600534359 /* InsuranceDetails.swift */,
+				120826661F5D406900BA38E9 /* YBProfile.swift */,
+				125B0C091E2DCFF400534359 /* YBDriving.swift */,
+				125B0C111E2DE25600534359 /* YBInsurance.swift */,
 				1201B7C01D23B4AB00A7EEAF /* Offer.swift */,
-				125B0C0B1E2DD04D00534359 /* PersonalDetails.swift */,
+				125B0C0B1E2DD04D00534359 /* YBPersonal.swift */,
 				125B0C131E2DE39C00534359 /* Registration.swift */,
 				1201B7C11D23B4AB00A7EEAF /* Ride.swift */,
-				125B0C0D1E2DE10500534359 /* VehicleDetails.swift */,
+				125B0C0D1E2DE10500534359 /* YBVehicle.swift */,
 				1284914D1E262DA2002D047B /* VehicleMake.swift */,
 				128491511E263026002D047B /* VehicleMakes.swift */,
 				1284914F1E262DAD002D047B /* VehicleModel.swift */,
@@ -466,13 +582,18 @@
 		1201B7C81D23B4AB00A7EEAF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				12000C8B1F5CFE6D004B6078 /* FreeMethods.swift */,
 				1201B7CA1D23B4AC00A7EEAF /* LogFormatter.swift */,
+				12000C891F5CFE11004B6078 /* YBPasswordRule.swift */,
 				1201B7CB1D23B4AC00A7EEAF /* AppUtil.swift */,
 				1201B7FD1D25102A00A7EEAF /* InterfaceString.swift */,
 				1211FEFF1D5991BD00AD9591 /* AlertUtil.swift */,
 				1211FF011D5991C800AD9591 /* TimeUtil.swift */,
+				120826561F5D3B1B00BA38E9 /* TypedNotifications.swift */,
+				126EC5551F7CCAF40040704F /* YBNotifications.swift */,
 				1211FF031D5991D800AD9591 /* ActivityIndicatorUtil.swift */,
 				125B0C071E2CDFDC00534359 /* TemporaryCache.swift */,
+				126EC5531F73A67F0040704F /* MessageComposer.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -480,6 +601,7 @@
 		1201B7CC1D23B4AC00A7EEAF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1208268C1F6BC10B00BA38E9 /* MapMarker */,
 				12C38CF81E2A13F40003DCB5 /* YBUploadPictureView */,
 				129AAE4B1E226C76006F6CE5 /* ENFooterActivityIndicatorView */,
 				129AAE501E226C76006F6CE5 /* FloatLabelTextField.swift */,
@@ -489,9 +611,38 @@
 				128C0B0F1E2B14E70063FD91 /* YBBorderedUIView.swift */,
 				128C0B0D1E2AEA0E0063FD91 /* YBLeftImageTextField.swift */,
 				129AAE521E226C76006F6CE5 /* YibbyPaddingLabel.swift */,
+				12000C931F5CFF30004B6078 /* YBMenuButton.swift */,
 				129AAE761E24D648006F6CE5 /* YBFloatLabelTextField.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1208265C1F5D3F5500BA38E9 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				1208265D1F5D3F5500BA38E9 /* Box */,
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		1208265D1F5D3F5500BA38E9 /* Box */ = {
+			isa = PBXGroup;
+			children = (
+				1208265E1F5D3F5500BA38E9 /* Box.swift */,
+				1208265F1F5D3F5500BA38E9 /* BoxType.swift */,
+				120826601F5D3F5500BA38E9 /* LICENSE.txt */,
+				120826611F5D3F5500BA38E9 /* MutableBox.swift */,
+			);
+			path = Box;
+			sourceTree = "<group>";
+		};
+		1208268C1F6BC10B00BA38E9 /* MapMarker */ = {
+			isa = PBXGroup;
+			children = (
+				1208268D1F6BC12B00BA38E9 /* YibbyMapMarker.swift */,
+				1208268E1F6BC12B00BA38E9 /* YibbyMapMarker.xib */,
+			);
+			path = MapMarker;
 			sourceTree = "<group>";
 		};
 		1211FF051D5AED5A00AD9591 /* Earnings */ = {
@@ -505,6 +656,39 @@
 				1211FF101D61260900AD9591 /* WeeklyEarningsViewController.swift */,
 			);
 			path = Earnings;
+			sourceTree = "<group>";
+		};
+		126EC5571F7E2D490040704F /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				126EC5581F7E2D590040704F /* Notifications.storyboard */,
+				126EC55A1F7E2D6A0040704F /* NotificationsViewController.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		126EC55C1F7E31710040704F /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				126EC55D1F7E31710040704F /* Help.storyboard */,
+				126EC5651F7E38A70040704F /* ReportIssuesViewController.swift */,
+				126EC55E1F7E31710040704F /* HelpCenterVC.swift */,
+				126EC55F1F7E31710040704F /* HelpViewController.swift */,
+				126EC5601F7E31720040704F /* LegalVC.swift */,
+			);
+			path = Help;
+			sourceTree = "<group>";
+		};
+		126EC5671F7E3F440040704F /* History */ = {
+			isa = PBXGroup;
+			children = (
+				126EC5681F7E3F440040704F /* CarDetailsChildView.swift */,
+				126EC5691F7E3F440040704F /* History.storyboard */,
+				126EC56A1F7E3F440040704F /* HistoryTableCell.swift */,
+				126EC56B1F7E3F440040704F /* HistoryViewController.swift */,
+				126EC56D1F7E3F440040704F /* RideDetailViewController.swift */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 		129AAE411E226A78006F6CE5 /* Base */ = {
@@ -554,6 +738,8 @@
 		12C38CF41E28830B0003DCB5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				126EC5781F8A0BCA0040704F /* fontello.ttf */,
+				126EC5791F8A0BCA0040704F /* ionicons.ttf */,
 				12C38CF51E28830B0003DCB5 /* FontAwesome.ttf */,
 			);
 			path = Resources;
@@ -606,15 +792,16 @@
 				12814FBA1E0EFBF600F08CFF /* YibbyPartner.entitlements */,
 				12F3CCD51C41EFC700F79A26 /* AppDelegate.swift */,
 				12F3CCDC1C41EFC700F79A26 /* Assets.xcassets */,
+				1208265C1F5D3F5500BA38E9 /* ThirdParty */,
 				12C38CF41E28830B0003DCB5 /* Resources */,
 				129AAE481E226B72006F6CE5 /* Style */,
 				1201B7BC1D23B4AB00A7EEAF /* Extensions */,
 				12F3CCE11C41EFC800F79A26 /* Info.plist */,
+				12F3CCF51C4B9C0B00F79A26 /* Podfile */,
 				12F3CCDE1C41EFC800F79A26 /* LaunchScreen.storyboard */,
 				12F3CCD91C41EFC700F79A26 /* Main.storyboard */,
 				1201B7BD1D23B4AB00A7EEAF /* Model */,
 				1201B7C21D23B4AB00A7EEAF /* Networking */,
-				12F3CCF51C4B9C0B00F79A26 /* Podfile */,
 				1201B7C41D23B4AB00A7EEAF /* Services */,
 				1201B7C71D23B4AB00A7EEAF /* Storyboards */,
 				12EB18131C59FA980037EB86 /* Supporting Files */,
@@ -652,6 +839,9 @@
 		655A3CB4424C6BF7AFEE185A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				12000C911F5CFEFA004B6078 /* SystemConfiguration.framework */,
+				12000C8F1F5CFEEB004B6078 /* MessageUI.framework */,
+				12000C8D1F5CFECD004B6078 /* MobileCoreServices.framework */,
 				1206823A1CC2E685004A34BB /* MapKit.framework */,
 				12C21E281C7DB0CB000AAFFC /* Pods.framework */,
 				12C21E261C7DB0A0000AAFFC /* BaasBoxSDK1.framework */,
@@ -767,6 +957,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				120826641F5D3F5500BA38E9 /* LICENSE.txt in Resources */,
+				120826901F6BC12B00BA38E9 /* YibbyMapMarker.xib in Resources */,
 				12C38CF61E28830B0003DCB5 /* FontAwesome.ttf in Resources */,
 				12F3CCF61C4B9C0C00F79A26 /* Podfile in Resources */,
 				12F3CCE01C41EFC800F79A26 /* LaunchScreen.storyboard in Resources */,
@@ -774,12 +966,16 @@
 				1201B80E1D263E3500A7EEAF /* Login.storyboard in Resources */,
 				12F3CCDD1C41EFC700F79A26 /* Assets.xcassets in Resources */,
 				1201B80A1D263DA600A7EEAF /* Drawer.storyboard in Resources */,
+				126EC5591F7E2D590040704F /* Notifications.storyboard in Resources */,
 				129AAE5C1E233829006F6CE5 /* Register.storyboard in Resources */,
+				126EC5711F7E3F440040704F /* History.storyboard in Resources */,
+				120826591F5D3E9300BA38E9 /* About.storyboard in Resources */,
 				1201B8021D263BA300A7EEAF /* DriverEnRoute.storyboard in Resources */,
 				1211FF091D5AEDD000AD9591 /* Earnings.storyboard in Resources */,
 				1201B8121D263E8900A7EEAF /* App.storyboard in Resources */,
 				123524961C89475D004307EE /* GoogleService-Info.plist in Resources */,
 				1201B8101D263E7200A7EEAF /* Online.storyboard in Resources */,
+				126EC5611F7E31720040704F /* Help.storyboard in Resources */,
 				1201B8081D263D7600A7EEAF /* Settings.storyboard in Resources */,
 				1201B80C1D263E1A00A7EEAF /* SignUp.storyboard in Resources */,
 				1201B8001D263B5D00A7EEAF /* Ride.storyboard in Resources */,
@@ -912,45 +1108,66 @@
 			buildActionMask = 2147483647;
 			files = (
 				1201B7B91D23B49000A7EEAF /* SignupViewController.swift in Sources */,
+				126EC5621F7E31720040704F /* HelpCenterVC.swift in Sources */,
 				129AAE541E226C76006F6CE5 /* UITableViewController+ENFooterActivityIndicatorView.m in Sources */,
+				126EC5631F7E31720040704F /* HelpViewController.swift in Sources */,
 				129AAE771E24D648006F6CE5 /* YBFloatLabelTextField.swift in Sources */,
 				1284914C1E260B10002D047B /* VehicleDataAPI.swift in Sources */,
+				120826631F5D3F5500BA38E9 /* BoxType.swift in Sources */,
 				129AAE4A1E226B72006F6CE5 /* Colors.swift in Sources */,
-				125B0C101E2DE1B000534359 /* DriverLicense.swift in Sources */,
+				125B0C101E2DE1B000534359 /* YBDriverLicense.swift in Sources */,
 				1201B7B21D23B49000A7EEAF /* OfferSentViewController.swift in Sources */,
 				128491541E263E44002D047B /* VehicleModels.swift in Sources */,
+				126EC55B1F7E2D6A0040704F /* NotificationsViewController.swift in Sources */,
 				1201B7B61D23B49000A7EEAF /* RideEndViewController.swift in Sources */,
+				12000C7E1F5CF57B004B6078 /* ImageExtensions.swift in Sources */,
 				12FAC28C1E34863A00D77486 /* YBRider.swift in Sources */,
 				129AAE751E238F3B006F6CE5 /* InterfaceImage.swift in Sources */,
 				129AAE731E238E57006F6CE5 /* YBPickerTextField.swift in Sources */,
-				125B0C0C1E2DD04D00534359 /* PersonalDetails.swift in Sources */,
+				125B0C0C1E2DD04D00534359 /* YBPersonal.swift in Sources */,
 				1284914E1E262DA2002D047B /* VehicleMake.swift in Sources */,
 				1201B7D11D23B4AC00A7EEAF /* WebInterface.swift in Sources */,
 				129AAE471E226ABE006F6CE5 /* BaseYibbyViewController.swift in Sources */,
 				1201B7D51D23B4AC00A7EEAF /* LogFormatter.swift in Sources */,
 				1211FF071D5AEDA200AD9591 /* EarningsSummaryViewController.swift in Sources */,
+				126EC5661F7E38A70040704F /* ReportIssuesViewController.swift in Sources */,
 				1201B7AD1D23B49000A7EEAF /* DestinationPickerViewController.swift in Sources */,
+				126EC5751F7E3F440040704F /* RideDetailViewController.swift in Sources */,
 				125B0C161E2DE77500534359 /* YBClient.swift in Sources */,
 				129AAE5E1E233910006F6CE5 /* VehicleViewController.swift in Sources */,
+				126EC5721F7E3F440040704F /* HistoryTableCell.swift in Sources */,
+				120826861F62863E00BA38E9 /* YBSync.swift in Sources */,
+				12000C871F5CF57B004B6078 /* UIViewExtensions.swift in Sources */,
+				12000C7B1F5CF57B004B6078 /* Array.swift in Sources */,
 				1211FF111D61260900AD9591 /* WeeklyEarningsViewController.swift in Sources */,
+				12000C881F5CF57B004B6078 /* UIViewNibLoading.swift in Sources */,
 				1201B7AE1D23B49000A7EEAF /* LeftNavDrawerTableViewCell.swift in Sources */,
+				120826571F5D3B1B00BA38E9 /* TypedNotifications.swift in Sources */,
+				126EC5561F7CCAF40040704F /* YBNotifications.swift in Sources */,
 				1211FF041D5991D800AD9591 /* ActivityIndicatorUtil.swift in Sources */,
+				12000C7C1F5CF57B004B6078 /* CGRectExtensions.swift in Sources */,
+				12000C801F5CF57B004B6078 /* NSStringExtensions.swift in Sources */,
 				129AAE711E238E2B006F6CE5 /* YBBorderedTextField.swift in Sources */,
 				125B0C081E2CDFDC00534359 /* TemporaryCache.swift in Sources */,
 				129AAE621E23393B006F6CE5 /* InsuranceViewController.swift in Sources */,
 				1211FF0F1D605E6B00AD9591 /* TripDetailsViewController.swift in Sources */,
+				12000C851F5CF57B004B6078 /* UITextFieldExtensions.swift in Sources */,
 				129AAE591E226CE2006F6CE5 /* UIColorExtensions.swift in Sources */,
 				129AAE451E226ABE006F6CE5 /* BaseYibbyTableViewController.swift in Sources */,
-				125B0C121E2DE25600534359 /* InsuranceDetails.swift in Sources */,
+				125B0C121E2DE25600534359 /* YBInsurance.swift in Sources */,
+				1208265B1F5D3EBB00BA38E9 /* AboutViewController.swift in Sources */,
 				1201B7B51D23B49000A7EEAF /* PushController.swift in Sources */,
 				1201B7B11D23B49000A7EEAF /* LoginViewController.swift in Sources */,
 				1201B7AF1D23B49000A7EEAF /* LeftNavDrawerViewController.swift in Sources */,
 				1201B7CD1D23B4AC00A7EEAF /* Bid.swift in Sources */,
 				129AAE601E233920006F6CE5 /* DriverLicenseViewController.swift in Sources */,
-				125B0C0E1E2DE10500534359 /* VehicleDetails.swift in Sources */,
+				125B0C0E1E2DE10500534359 /* YBVehicle.swift in Sources */,
 				1211FF021D5991C800AD9591 /* TimeUtil.swift in Sources */,
 				1211FF0D1D604AC800AD9591 /* DayEarningsTableCell.swift in Sources */,
+				12000C811F5CF57B004B6078 /* ScreenExtensions.swift in Sources */,
+				12000C941F5CFF30004B6078 /* YBMenuButton.swift in Sources */,
 				125B0C041E2C4B2D00534359 /* ImageService.swift in Sources */,
+				12000C7F1F5CF57B004B6078 /* NSObjectClassName.swift in Sources */,
 				1201B7D01D23B4AC00A7EEAF /* Ride.swift in Sources */,
 				1201B7D31D23B4AC00A7EEAF /* MapService.swift in Sources */,
 				12F3CCD61C41EFC700F79A26 /* AppDelegate.swift in Sources */,
@@ -959,32 +1176,47 @@
 				12FAC28A1E34768B00D77486 /* YBLocation.swift in Sources */,
 				125B0C141E2DE39C00534359 /* Registration.swift in Sources */,
 				129AAE3E1E2268FB006F6CE5 /* JoinViewController.swift in Sources */,
+				12000C831F5CF57B004B6078 /* UIImagePickerController.swift in Sources */,
+				120826651F5D3F5500BA38E9 /* MutableBox.swift in Sources */,
 				1201B7BB1D23B49000A7EEAF /* SplashViewController.swift in Sources */,
 				12C38CFC1E2A14490003DCB5 /* YBUploadPictureView.swift in Sources */,
 				1211FF0B1D5EF95A00AD9591 /* DailyEarningsViewController.swift in Sources */,
 				128491521E263026002D047B /* VehicleMakes.swift in Sources */,
 				1201B7D21D23B4AC00A7EEAF /* LocationService.swift in Sources */,
+				126EC5541F73A67F0040704F /* MessageComposer.swift in Sources */,
+				12000C7D1F5CF57B004B6078 /* CGSizeExtensions.swift in Sources */,
 				1201B7B01D23B49000A7EEAF /* DriverEnRouteViewController.swift in Sources */,
 				1201B7D61D23B4AC00A7EEAF /* AppUtil.swift in Sources */,
 				1201B7AC1D23B49000A7EEAF /* MainViewController.swift in Sources */,
+				12000C8A1F5CFE11004B6078 /* YBPasswordRule.swift in Sources */,
+				126EC5731F7E3F440040704F /* HistoryViewController.swift in Sources */,
+				126EC5641F7E31720040704F /* LegalVC.swift in Sources */,
 				1201B7CF1D23B4AC00A7EEAF /* Offer.swift in Sources */,
 				129AAE461E226ABE006F6CE5 /* BaseYibbyTabViewController.swift in Sources */,
 				129AAE551E226C76006F6CE5 /* FloatLabelTextField.swift in Sources */,
+				12000C861F5CF57B004B6078 /* UIViewControllerExtensions.swift in Sources */,
 				129AAE681E233980006F6CE5 /* DocumentUploadViewController.swift in Sources */,
 				1201B7FE1D25102A00A7EEAF /* InterfaceString.swift in Sources */,
-				125B0C0A1E2DCFF400534359 /* DrivingDetails.swift in Sources */,
+				125B0C0A1E2DCFF400534359 /* YBDriving.swift in Sources */,
+				12000C841F5CF57B004B6078 /* UIImageViewExtensions.swift in Sources */,
 				128491501E262DAD002D047B /* VehicleModel.swift in Sources */,
 				1211FF001D5991BD00AD9591 /* AlertUtil.swift in Sources */,
+				12000C8C1F5CFE6D004B6078 /* FreeMethods.swift in Sources */,
+				120826671F5D406900BA38E9 /* YBProfile.swift in Sources */,
 				128C0B0E1E2AEA0E0063FD91 /* YBLeftImageTextField.swift in Sources */,
+				126EC5701F7E3F440040704F /* CarDetailsChildView.swift in Sources */,
 				125B0C1A1E308E3B00534359 /* PendingApprovalViewController.swift in Sources */,
 				1201B7B41D23B49000A7EEAF /* DriverOnlineViewController.swift in Sources */,
+				120826621F5D3F5500BA38E9 /* Box.swift in Sources */,
 				1201B7B31D23B49000A7EEAF /* OfferViewController.swift in Sources */,
 				129AAE561E226C76006F6CE5 /* YibbyButton1.swift in Sources */,
 				129AAE641E233949006F6CE5 /* PersonalInformationViewController.swift in Sources */,
 				1201B7B71D23B49000A7EEAF /* RideStartViewController.swift in Sources */,
 				129AAE661E233974006F6CE5 /* ConsentViewController.swift in Sources */,
+				12000C821F5CF57B004B6078 /* UIButtonExtensions.swift in Sources */,
 				129AAE571E226C76006F6CE5 /* YibbyPaddingLabel.swift in Sources */,
 				129AAE531E226C76006F6CE5 /* ENFooterActivityIndicatorView.m in Sources */,
+				1208268F1F6BC12B00BA38E9 /* YibbyMapMarker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1204,8 +1436,6 @@
 					"-framework",
 					"\"QuartzCore\"",
 					"-framework",
-					"\"SVProgressHUD\"",
-					"-framework",
 					"\"Security\"",
 					"-framework",
 					"\"SwiftyJSON\"",
@@ -1317,8 +1547,6 @@
 					"\"OpenInGoogleMaps\"",
 					"-framework",
 					"\"QuartzCore\"",
-					"-framework",
-					"\"SVProgressHUD\"",
 					"-framework",
 					"\"Security\"",
 					"-framework",

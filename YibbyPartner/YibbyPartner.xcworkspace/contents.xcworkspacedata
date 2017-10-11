@@ -5,12 +5,12 @@
       location = "group:hillsdaleToHome.gpx">
    </FileRef>
    <FileRef
-      location = "group:Pods/Pods.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:/Users/kishykumar/Installs/xcodeworkspace/YibbyPartner/YibbyPartner.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:../YibbyPartner.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

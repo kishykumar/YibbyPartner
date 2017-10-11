@@ -14,20 +14,18 @@ import CocoaLumberjack
 class OfferViewController: BaseYibbyViewController {
 
     // MARK: Properties
-    @IBOutlet weak var lowBidPriceOutlet: UILabel!
     @IBOutlet weak var highBidPriceOutlet: UILabel!
     @IBOutlet weak var offerPriceOutlet: UILabel!
     @IBOutlet weak var currentTimerValueOutlet: UILabel!
     @IBOutlet weak var gmsMapViewOutlet: GMSMapView!
+    @IBOutlet weak var acceptButtonOutlet: YibbyButton1!
     
-    var userBid: Bid! // strong reference
+    var curLocation: YBLocation?
     
-    var pickupLatLng: CLLocationCoordinate2D?
-    var pickupPlaceName: String?
+    var pickupLocation: YBLocation?
     var pickupMarker: GMSMarker?
     
-    var dropoffLatLng: CLLocationCoordinate2D?
-    var dropoffPlaceName: String?
+    var dropoffLocation: YBLocation?
     var dropoffMarker: GMSMarker?
 
     let GMS_DEFAULT_CAMERA_ZOOM: Float = 14.0
@@ -45,10 +43,41 @@ class OfferViewController: BaseYibbyViewController {
     var savedBgTimestamp: Date?
 
     // MARK: Setup Functions
-    func setupUI () {
+    fileprivate func setupUI () {
+        
+        let userBid = YBClient.sharedInstance().bid!
         
         // hide the back button
-        self.navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.setHidesBackButton(true, animated: false)
+        
+        acceptButtonOutlet.color = UIColor.appDarkGreen1()
+        acceptButtonOutlet.buttonCornerRadius = 0.0
+        
+        navigationController?.navigationBar.barTintColor = UIColor.red
+        
+        highBidPriceOutlet.text = "$ \(String(Int(userBid.bidHigh!)))"
+        offerPriceOutlet.text = String(Int(userBid.bidHigh!))
+        
+        currentTimerValueOutlet.text = String(Int(timerStart))
+        
+        // set pickup and dropoff
+        setPickupDetails(userBid.pickupLocation!)
+        setDropoffDetails(userBid.dropoffLocation!)
+        
+        adjustGMSCameraFocus()
+    }
+    
+    fileprivate func setupNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(OfferViewController.saveOfferTimer),
+                                               name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(OfferViewController.restoreOfferTimer),
+                                               name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }
     
     override func viewDidLoad() {
@@ -56,48 +85,24 @@ class OfferViewController: BaseYibbyViewController {
         
         // Do any additional setup after loading the view.
         setupUI()
+        setupNotificationObservers()
         
-//        lowBidPriceOutlet.text = String(userBid.bidLow)
-        highBidPriceOutlet.text = String(describing: userBid.bidHigh)
-        currentTimerValueOutlet.text = String(Int(timerStart))
-        
-        // set pickup and dropoff
-        let puLatLng: CLLocationCoordinate2D = CLLocationCoordinate2DMake((userBid.pickupLocation?.latitude)!, (userBid.pickupLocation?.longitude)!)
-        
-        setPickupDetails((userBid.pickupLocation?.name)!, loc: puLatLng)
-        
-        let doLatLng: CLLocationCoordinate2D = CLLocationCoordinate2DMake((userBid.dropoffLocation?.latitude)!, (userBid.dropoffLocation?.longitude)!)
-        setDropoffDetails((userBid.dropoffLocation?.name)!, loc: doLatLng)
-
-        adjustGMSCameraFocus()
-
         DDLogVerbose("TimerStart: \(timerStart)")
-        startOfferTimer()
-        
-        YBClient.sharedInstance().setBid(userBid)
+        startOfferTimer()        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     // MARK: Actions
     
     @IBAction func acceptRequestAction(_ sender: UIButton) {
         
-        DDLogInfo("Called: \(self.offerPriceOutlet.text)")
+        let userBid = YBClient.sharedInstance().bid!
+
+        DDLogInfo("Called: \(String(describing: self.offerPriceOutlet.text))")
         WebInterface.makeWebRequestAndHandleError(
             self,
             webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
@@ -107,7 +112,7 @@ class OfferViewController: BaseYibbyViewController {
                 
                 let client: BAAClient = BAAClient.shared()
                 client.createOffer(
-                    self.userBid.id,
+                    userBid.id,
                     offerPrice: Int(self.offerPriceOutlet.text!) as NSNumber!,
                     completion: {(success, error) -> Void in
 
@@ -116,7 +121,7 @@ class OfferViewController: BaseYibbyViewController {
                     self.stopOfferTimer()
 
                     if (error == nil) {
-                        DDLogVerbose("created offer \(success)")
+                        DDLogVerbose("created offer \(String(describing: success))")
                         self.performSegue(withIdentifier: "offerSentSegue", sender: nil)
                     }
                     else {
@@ -126,41 +131,57 @@ class OfferViewController: BaseYibbyViewController {
         })
     }
     
-    func adjustGMSCameraFocus () {
+    fileprivate func adjustGMSCameraFocus () {
         
-        let bounds = GMSCoordinateBounds(coordinate: (pickupMarker?.position)!, coordinate: (dropoffMarker?.position)!)
-        let insets = UIEdgeInsets(top: 30.0, left: 40.0, bottom: 30.0, right: 40.0)
-        let update = GMSCameraUpdate.fit(bounds, with: insets)
-        gmsMapViewOutlet.moveCamera(update)
-        gmsMapViewOutlet.animate(toZoom: GMS_DEFAULT_CAMERA_ZOOM)
+        let highBidPriceRelativeOrigin: CGPoint =
+            (highBidPriceOutlet.superview?.convert(highBidPriceOutlet.frame.origin,
+                                                        to: gmsMapViewOutlet))!
+        
+        if let pickup = pickupMarker, let dropoff = dropoffMarker {
+            
+            let bounds = GMSCoordinateBounds(coordinate: pickup.position, coordinate: dropoff.position)
+            let insets = UIEdgeInsets(top: self.topLayoutGuide.length + (pickup.icon?.size.height)! + 10.0,
+                                      left: ((pickup.icon?.size.width)! / 2) + 10.0,
+                                      bottom: gmsMapViewOutlet.frame.height - highBidPriceRelativeOrigin.y + 10.0,
+                                      right: ((pickup.icon?.size.width)! / 2) + 10.0)
+            
+            let update = GMSCameraUpdate.fit(bounds, with: insets)
+            gmsMapViewOutlet.moveCamera(update)
+            
+        }
     }
     
-    func setPickupDetails (_ address: String, loc: CLLocationCoordinate2D) {
+    fileprivate func setPickupDetails (_ location: YBLocation) {
         
         pickupMarker?.map = nil
         
-        self.pickupPlaceName = address
-        self.pickupLatLng = loc
+        self.pickupLocation = location
         
-        let pumarker = GMSMarker(position: loc)
+        let pumarker = GMSMarker(position: location.coordinate())
         pumarker.map = gmsMapViewOutlet
-        pumarker.title = address
+        
+        pumarker.icon = YibbyMapMarker.annotationImageWithMarker(pumarker,
+                                                                 title: location.name!,
+                                                                 type: .pickup)
+        
         pickupMarker = pumarker
-        gmsMapViewOutlet.selectedMarker = pickupMarker
     }
     
-    func setDropoffDetails (_ address: String, loc: CLLocationCoordinate2D) {
+    fileprivate func setDropoffDetails (_ location: YBLocation) {
         
         dropoffMarker?.map = nil
         
-        self.dropoffPlaceName = address
-        self.dropoffLatLng = loc
+        self.dropoffLocation = location
         
-        let domarker = GMSMarker(position: loc)
+        let domarker = GMSMarker(position: location.coordinate())
         domarker.map = gmsMapViewOutlet
-        domarker.title = address
+        
+        //        domarker.icon = UIImage(named: "Visa")
+        domarker.icon = YibbyMapMarker.annotationImageWithMarker(domarker,
+                                                                 title: location.name!,
+                                                                 type: .dropoff)
+        
         dropoffMarker = domarker
-        gmsMapViewOutlet.selectedMarker = dropoffMarker
     }
     
     @IBAction func declineRequestAction(_ sender: UIButton) {
@@ -179,19 +200,19 @@ class OfferViewController: BaseYibbyViewController {
     
     // MARK: Helpers
     
-    func startOfferTimer() {
+    fileprivate func startOfferTimer() {
         offerTimer = Timer.scheduledTimer(timeInterval: OfferViewController.OFFER_TIMER_INTERVAL,
-                                                            target: self,
-                                                            selector: #selector(OfferViewController.updateTimer),
-                                                            userInfo: nil,
-                                                            repeats: true)
+                                            target: self,
+                                            selector: #selector(OfferViewController.updateTimer),
+                                            userInfo: nil,
+                                            repeats: true)
     }
     
-    func stopOfferTimer() {
+    @objc fileprivate func stopOfferTimer() {
         offerTimer.invalidate()
     }
     
-    func saveOfferTimer () {
+    @objc fileprivate func saveOfferTimer () {
         DDLogVerbose("Called")
         
         // if there is an active bid, save the current time
@@ -202,7 +223,7 @@ class OfferViewController: BaseYibbyViewController {
         }
     }
     
-    func restoreOfferTimer () {
+    @objc fileprivate func restoreOfferTimer () {
         DDLogVerbose("Called")
         
         if (YBClient.sharedInstance().isOngoingBid()) {
@@ -228,7 +249,7 @@ class OfferViewController: BaseYibbyViewController {
         }
     }
     
-    func updateTimer() {
+    @objc fileprivate func updateTimer() {
 
         // increment the timer count
         timerCount += OfferViewController.OFFER_TIMER_INTERVAL
@@ -241,7 +262,7 @@ class OfferViewController: BaseYibbyViewController {
             stopOfferTimer()
             
             // delete the saved state bid
-            YBClient.sharedInstance().resetBid()
+            YBClient.sharedInstance().bid = nil
 
             let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 

@@ -24,7 +24,8 @@ def shared_pods
     pod 'MMDrawerController', '~> 0.5.7'
     pod 'TTRangeSlider'
     pod 'BButton'
-    pod 'SVProgressHUD'
+    pod 'MBProgressHUD'
+    pod 'TextFieldEffects'
 
     pod 'CocoaLumberjack/Swift', :git => 'https://github.com/CocoaLumberjack/CocoaLumberjack', :branch => 'swift_3'
     pod 'LaunchScreen'
@@ -41,9 +42,28 @@ def shared_pods
     pod 'IQKeyboardManagerSwift'
     pod 'AlamofireObjectMapper', '~> 4.0'
     pod 'AIFlatSwitch', '~> 1.0.1'
+    pod 'DGRunkeeperSwitch', '~> 1.1.4'
     pod 'ImagePicker'
     pod 'Lightbox'
     pod 'FoldingCell'
+    
+    pod 'Font-Awesome-Swift', '~> 1.6.2'
+    pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', :branch => 'master'
+    pod 'PhoneNumberKit', '~> 1.3'
+    pod 'Presentr'
+    pod 'Cosmos', '~> 11.0'
+    pod 'AMPopTip'
+    pod 'CRToast', '~> 0.0.7'
+    pod 'LTMorphingLabel'
+    pod 'M13ProgressSuite'
+    pod 'DZNEmptyDataSet'
+    
+    pod 'PINRemoteImage'
+    pod 'Braintree'
+    pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
+    pod 'Google/SignIn'
+    pod 'Firebase/Auth'
+    pod 'FirebaseUI/Auth', '~> 4.0'
     
 end
 
@@ -56,10 +76,17 @@ target 'YibbyPartnerTests' do
     testing_pods
 end
 
-#post_install do |installer|
-#    installer.pods_project.targets.each do |target|
-#        target.build_configurations.each do |config|
-#            config.build_settings['SWIFT_VERSION'] = '3.0'
-#        end
-#    end
-#end
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '3.0'
+        end
+    end
+    
+    puts("Update debug pod settings to speed up build time")
+    Dir.glob(File.join("Pods", "**", "Pods*{debug,Private}.xcconfig")).each do |file|
+        File.open(file, 'a') { |f| f.puts "\nDEBUG_INFORMATION_FORMAT = dwarf" }
+    end
+end
+
+

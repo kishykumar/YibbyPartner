@@ -33,6 +33,9 @@ private struct YibbyColors {
     static let appDarkGreen1: UIColor = UIColor(netHex: 0x2ECC71)
     
     static let navyblue1: UIColor = UIColor(netHex: 0x000080)
+    
+    static let borderColor: UIColor = UIColor(netHex: 0x31A343)
+
 }
 
 public extension UIColor {
@@ -90,4 +93,7 @@ public extension UIColor {
     class func appDarkGreen1() -> UIColor { return YibbyColors.appDarkGreen1 }
 
     class func navyblue1() -> UIColor { return YibbyColors.navyblue1 }
+    
+    class func borderColor() -> UIColor { return YibbyColors.borderColor }
+
 }

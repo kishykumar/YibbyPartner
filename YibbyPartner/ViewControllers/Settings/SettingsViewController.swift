@@ -9,6 +9,10 @@
 import UIKit
 import CocoaLumberjack
 
+public struct ProfileNotifications {
+    static let profilePictureUpdated = TypedNotification<String>(name: "com.Yibby.Profile.updateProfilePicture")
+}
+
 class SettingsViewController: BaseYibbyViewController {
 
     override func viewDidLoad() {

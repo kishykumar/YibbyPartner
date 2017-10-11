@@ -11,7 +11,7 @@ import GoogleMaps
 import BaasBoxSDK
 import CocoaLumberjack
 
-
+@available(*, deprecated)
 class DriverOnlineViewController: BaseYibbyViewController {
 
     // MARK: Properties
@@ -19,9 +19,6 @@ class DriverOnlineViewController: BaseYibbyViewController {
     
     
     // MARK: Actions
-    @IBAction func unwindToDriverOnlineViewController(_ segue:UIStoryboardSegue) {
-        
-    }
     
     @IBAction func onOfflineButtonClick(_ sender: UIButton) {
     

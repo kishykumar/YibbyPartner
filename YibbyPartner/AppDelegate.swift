@@ -14,7 +14,9 @@ import CocoaLumberjack
 import Fabric
 import Crashlytics
 import IQKeyboardManagerSwift
-
+import Firebase
+import ObjectMapper
+ 
 // TODO: 
 // 1. Bug: The timer in offer view controller shows up less on one of the phones
 // 2. Stop location updates in the background if no driver activity for the last 10 minutes
@@ -36,8 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
 
     let GOOGLE_API_KEY_IOS = "AIzaSyAg47Gp0GvI6myz-sZZfKJ1fPtx0wUBMjU"
     let BAASBOX_APPCODE = "1234567890"
-    let BAASBOX_URL = "http://custom-env.cjamdz6ejx.us-west-1.elasticbeanstalk.com"
-//    let BAASBOX_URL = "http://2445e6bb.ngrok.io"
+    //let BAASBOX_URL = "http://custom-env.cjamdz6ejx.us-west-1.elasticbeanstalk.com"
+    let BAASBOX_URL = "http://052ee98a.ngrok.io"
     
     var centerContainer: MMDrawerController?
     
@@ -65,12 +67,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         // Override point for customization after application launch.
         GMSServices.provideAPIKey(GOOGLE_API_KEY_IOS)
         
+        FirebaseApp.configure()
+        
         // [START_EXCLUDE]
         // Configure the Google context: parses the GoogleService-Info.plist, and initializes
         // the services that have entries in the file
         var configureError:NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        //assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
         gcmSenderID = GGLContext.sharedInstance().configuration.gcmSenderID
         // [END_EXCLUDE]
         
@@ -108,6 +113,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         LocationService.sharedInstance().setupLocationManager()
     }
     
+    // Register for remote notifications
+    func registerForPushNotifications () {
+        PushController.registerForPushNotifications()
+    }
+    
+    func initializeApp() {
+        setupLocationService()
+        
+        // register for push notification
+        registerForPushNotifications()
+    }
+    
     func setupKeyboardManager() {
         
         // Setup IQKeyboardManager
@@ -140,6 +157,206 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         
         centerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode()
         centerContainer!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.all
+    }
+    
+    func syncApp() {
+        let client: BAAClient = BAAClient.shared()
+        
+        let bidId = YBClient.sharedInstance().getPersistedBidId()
+        client.syncClient(BAASBOX_DRIVER_STRING, bidId: bidId, completion: { (success, error) -> Void in
+            
+            if let success = success {
+                
+                let syncModel = Mapper<YBSync>().map(JSONObject: success)
+                
+                if let syncData = syncModel {
+                    
+                    DDLogVerbose("KKDBG syncdata for bidid: \(String(describing: bidId))")
+                    dump(syncData)
+
+                    YBClient.sharedInstance().syncClient(syncData)
+
+                    let status = YBClient.sharedInstance().status
+                    let bid = YBClient.sharedInstance().bid
+                    
+                    // The visible view controller can be splash, login, or signup view controller
+                    guard let visibleVC = self.window!.visibleViewController else {
+                        return;
+                    }
+                    
+                    let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
+                    
+                    if (status == .detailsNotSubmitted) {
+                        let initialRegisterController = registerStoryboard.instantiateViewController(withIdentifier: "VehicleViewControllerIdentifier") as! VehicleViewController
+
+                        visibleVC.present(initialRegisterController, animated: false, completion: nil)
+                        
+                    } else if (status == .notApproved) {
+                        let paViewController = registerStoryboard.instantiateViewController(withIdentifier: "PendingApprovalViewControllerIdentifier") as! PendingApprovalViewController
+
+                        visibleVC.present(paViewController, animated: false, completion: nil)
+                    } else {
+                        self.initializeMainViewController()
+            
+                        if let centerNav = self.centerContainer?.centerViewController as? UINavigationController {
+                            var controllers = centerNav.viewControllers
+                            
+                            if (status != .offline) {
+                                LocationService.sharedInstance().startLocationUpdates()
+                            }
+                            
+                            switch (status) {
+                            case .offline:
+                                // nothing to do here. MainViewController will be shown.
+                                break
+
+                            case .online:
+                                // nothing to do here. MainViewController will be shown.
+                                break
+                                
+                            case .offerInProcess:
+                                
+                                let bidElapsedTime = TimeUtil.diffFromCurTimeISO(bid!.creationTime!)
+                                
+                                if (bidElapsedTime > MainViewController.BID_NOTIFICATION_EXPIRE_TIME) {
+                                    DDLogDebug("Bid Discarded CurrentTime: \(Date()) bidTime: \(bid!.creationTime) bidElapsedTime: \(bidElapsedTime)")
+                                    
+                                    // The driver missed responding to the bid
+                                    AlertUtil.displayAlert("Bid missed.",
+                                                           message: "Reason: You missed sending the bid. Missing a lot of bids would bring you offline.")
+                                } else {
+                                
+                                    // prepare the offerViewController
+                                    let offerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Offer, bundle: nil)
+                                    
+                                    let offerViewController = offerStoryboard.instantiateViewController(withIdentifier: "OfferViewControllerIdentifier") as! OfferViewController
+                                    
+                                    let navController = UINavigationController(rootViewController: offerViewController)
+                                    
+                                    // start the timer by accouting the time elapsed since the user actually created the bid
+                                    offerViewController.timerStart = TimeInterval(Int(OfferViewController.OFFER_TIMER_EXPIRE_PERIOD - bidElapsedTime))
+                                    
+                                    centerNav.present(navController, animated: true, completion: nil)
+                                }
+                                
+                                break
+
+                            case .offerRejected:
+                                
+                                // show an alert for offer reject
+                                AlertUtil.displayAlert("Offer Rejected.",
+                                                       message: "Reason: Your offer was not the lowest.")
+                                
+                                // remove the persisted bid
+                                YBClient.sharedInstance().bid = nil
+                                
+                                break
+
+                            case .offerSent:
+                                
+                                // prepare the offerViewController
+                                let offerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Offer, bundle: nil)
+                                
+                                let offerViewController = offerStoryboard.instantiateViewController(withIdentifier: "OfferViewControllerIdentifier") as! OfferViewController
+                                
+                                let navController = UINavigationController(rootViewController: offerViewController)
+                                centerNav.present(navController, animated: true, completion: nil)
+
+                                let offerSentViewController = offerStoryboard.instantiateViewController(withIdentifier: "OfferSentViewControllerIdentifier") as! OfferSentViewController
+                                
+                                var offerControllers = navController.viewControllers
+                                offerControllers.append(offerSentViewController)
+                                
+                                break
+                                
+                            case .driverEnRoute:
+                                
+                                let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
+                                
+                                let rideStartViewController = rideStoryboard.instantiateViewController(withIdentifier: "RideStartViewControllerIdentifier") as! RideStartViewController
+                                
+                                rideStartViewController.controllerState = .driverEnRoute
+
+                                controllers.append(rideStartViewController)
+                                
+                                break
+                                
+                            case .driverArrived:
+                                
+                                let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
+                                
+                                let rideStartViewController = rideStoryboard.instantiateViewController(withIdentifier: "RideStartViewControllerIdentifier") as! RideStartViewController
+                                
+                                rideStartViewController.controllerState = .driverArrived
+                                
+                                controllers.append(rideStartViewController)
+                                
+                                break
+                                
+                            case .rideStart:
+                                
+                                let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
+                                
+                                let rideStartViewController = rideStoryboard.instantiateViewController(withIdentifier: "RideStartViewControllerIdentifier") as! RideStartViewController
+                                
+                                rideStartViewController.controllerState = .rideStart
+                                
+                                controllers.append(rideStartViewController)
+                                
+                                break
+                                
+                            case .rideEnd:
+                                
+                                let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
+                                
+                                let rideEndViewController = rideStoryboard.instantiateViewController(withIdentifier: "RideEndViewControllerIdentifier") as! RideEndViewController
+                                
+                                controllers.append(rideEndViewController)
+                                
+                                break
+
+                            default:
+                                // nothing to do here. MainViewController will be shown.
+                                break
+                            }
+
+                            centerNav.setViewControllers(controllers, animated: true)
+                            visibleVC.present(self.centerContainer!, animated: true, completion: nil)
+                        }
+                    }
+                    
+                    // Post the notification to the caller View Controller
+                    postNotification(AppInitNotifications.pushStatus,
+                                     value: AppInitReturnCode.success)
+                    
+                    self.initialized = true
+                }
+                else {
+                    DDLogError("Error in parsing sync data: \(String(describing: error))")
+                    self.handleAppInitializationError(error)
+                }
+            } else {
+                // TODO: Show the alert with error
+                DDLogVerbose("syncClient failed: \(String(describing: error))")
+                self.handleAppInitializationError(error)
+            }
+        })
+    }
+
+    func handleAppInitializationError(_ error: Error?) {
+        
+        // If it's authentication error, show the logic view controller
+        if ((error! as NSError).code == WebInterface.BAASBOX_AUTHENTICATION_ERROR) {
+            postNotification(AppInitNotifications.pushStatus,
+                             value: AppInitReturnCode.loginError)
+            
+            DDLogVerbose("Error in webRequest1: \(String(describing: error))")
+        } else {
+            
+            // Post the notification to the Caller ViewController that registration was not successful
+            postNotification(AppInitNotifications.pushStatus,
+                             value: AppInitReturnCode.error)
+        }
     }
     
     // BaasBox login user
@@ -183,10 +400,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 
-        if let vvc = window!.visibleViewController as? OfferViewController {
-            DDLogDebug("Saving the timer")
-            vvc.saveOfferTimer()
-        }
+//        if let vvc = window!.visibleViewController as? OfferViewController {
+//            DDLogDebug("Saving the timer")
+//            vvc.saveOfferTimer()
+//        }
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -226,10 +443,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
             }
         })
         
-        if let vvc = window!.visibleViewController as? OfferViewController {
-            DDLogVerbose("Restoring the timer")
-            vvc.restoreOfferTimer()
-        }
+//        if let vvc = window!.visibleViewController as? OfferViewController {
+//            DDLogVerbose("Restoring the timer")
+//            vvc.restoreOfferTimer()
+//        }
         
         // process a saved notification, if any
         pushController.processSavedNotification()
@@ -244,23 +461,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     func application( _ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken
         deviceToken: Data ) {
         
-            DDLogDebug("Application device token \(deviceToken)");
+        DDLogDebug("Application device token \(deviceToken)");
 
-            self.pushController.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
+        self.pushController.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken)
 
-            // Create a config and set a delegate that implements the GGLInstaceIDDelegate protocol.
-            let instanceIDConfig = GGLInstanceIDConfig.default()
-            instanceIDConfig?.delegate = self
-            
-            // Start the GGLInstanceID shared instance with that config and request a registration
-            // token to enable reception of notifications
-            
-            GGLInstanceID.sharedInstance().start(with: instanceIDConfig)
-            registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken as AnyObject,
-                kGGLInstanceIDAPNSServerTypeSandboxOption:true as AnyObject]
-            GGLInstanceID.sharedInstance().token(withAuthorizedEntity: gcmSenderID,
-                scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
-            // [END get_gcm_reg_token]
+        // Create a config and set a delegate that implements the GGLInstaceIDDelegate protocol.
+        let instanceIDConfig = GGLInstanceIDConfig.default()
+        instanceIDConfig?.delegate = self
+        
+        // Start the GGLInstanceID shared instance with that config and request a registration
+        // token to enable reception of notifications
+        
+        GGLInstanceID.sharedInstance().start(with: instanceIDConfig)
+        
+        registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken as AnyObject,
+            kGGLInstanceIDAPNSServerTypeSandboxOption:true as AnyObject]
+        
+        // [END get_gcm_reg_token]
+        
+        sendGCMTokenToServer()
     }
     
     func enablePushNotificationsFromServer (_ gcmToken: String) {
@@ -271,15 +490,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         client.enableDriverPushNotifications(forGCM: gcmToken, completion: { (success, error) -> Void in
             if (success) {
                 DDLogVerbose("enabled push notifications: Success")
-                SplashViewController.pushSuccessful = true
+                self.syncApp()
             }
             else {
                 DDLogWarn("Error: enabled push notifications: \(error)")
-                
-                // tell Splash that push registration was not successful
-                SplashViewController.pushSuccessful = false
+                self.handleAppInitializationError(error)
             }
-            SplashViewController.pushRegisterResponseArrived = true
         })
     }
     
@@ -292,9 +508,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
 //            NSNotificationCenter.defaultCenter().postNotificationName(
 //                registrationKey, object: nil, userInfo: userInfo)
         
-        // tell Splash that push registration was not successful
-        SplashViewController.pushSuccessful = false
-        SplashViewController.pushRegisterResponseArrived = true
+        self.handleAppInitializationError(error)
     }
     
     
@@ -311,15 +525,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
             let userInfo = ["registrationToken": registrationToken]
             NotificationCenter.default.post(
                 name: Notification.Name(rawValue: self.registrationKey), object: nil, userInfo: userInfo)
+            
         } else {
             DDLogWarn("Registration to GCM failed with error: \((error as? NSError)?.localizedDescription)")
             let userInfo = ["error": (error as? NSError)?.localizedDescription]
             NotificationCenter.default.post(
                 name: Notification.Name(rawValue: self.registrationKey), object: nil, userInfo: userInfo)
             
-            // tell Splash that push registration was not successful
-            SplashViewController.pushSuccessful = false
-            SplashViewController.pushRegisterResponseArrived = true
+            self.handleAppInitializationError(error)
         }
     }
     
@@ -327,9 +540,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     func onTokenRefresh() {
         // A rotation of the registration tokens is happening, so the app needs to request a new token.
         DDLogInfo("The GCM registration token needs to be changed.")
-        GGLInstanceID.sharedInstance().token(withAuthorizedEntity: gcmSenderID,
-            scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: registrationHandler)
+        sendGCMTokenToServer()
     }
+    
     // [END on_token_refresh]
     
     func sendGCMTokenToServer() {

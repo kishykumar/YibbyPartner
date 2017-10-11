@@ -18,12 +18,14 @@ open class LocationService: NSObject, CLLocationManagerDelegate {
     fileprivate var locationManager:CLLocationManager!
     
     fileprivate var lastLocUpdateTS = 0.0
-    fileprivate var curLocation: CLLocation!
+    fileprivate var currentLocation: CLLocation?
 
     fileprivate let UPDATES_AGE_TIME: TimeInterval = 120
     fileprivate let DESIRED_HORIZONTAL_ACCURACY = 200.0
     fileprivate let LOCATION_UPDATE_TIME_INTERVAL = 4.0 // seconds
 
+    fileprivate var isUpdatingLocation = false
+    
     override init() {
         
     }
@@ -46,11 +48,40 @@ open class LocationService: NSObject, CLLocationManagerDelegate {
     }
     
     func startLocationUpdates () {
+        isUpdatingLocation = true
         locationManager.startUpdatingLocation()
     }
     
     func stopLocationUpdates () {
         locationManager.stopUpdatingLocation()
+    }
+    
+    func provideCurrentLocation () -> CLLocation? {
+        
+        let isAlreadyUpdatingLocation = isUpdatingLocation
+        
+        if (!isAlreadyUpdatingLocation) {
+            startLocationUpdates()
+        }
+        
+        // wait for an accurate location update
+        let timeoutDate: Date = Date(timeIntervalSinceNow: 10.0)
+        while (self.currentLocation == nil &&
+            timeoutDate.timeIntervalSinceNow > 0) {
+                
+            CFRunLoopRunInMode(CFRunLoopMode.defaultMode, 0.1, false)
+        }
+        
+        if (!isAlreadyUpdatingLocation) {
+            stopLocationUpdates()
+        }
+        
+        if let location = self.currentLocation {
+            self.currentLocation = nil
+            return location
+        }
+        
+        return nil;
     }
     
     open func locationManager(_ manager: CLLocationManager,
@@ -89,30 +120,42 @@ open class LocationService: NSObject, CLLocationManagerDelegate {
         // switch back to low accuracy
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         
-        if let userLocation:CLLocation = newLocation {
+        self.currentLocation = newLocation
+
+        // upload the new location
+        uploadLocation(newLocation)
+    }
+    
+    fileprivate func uploadLocation(_ userLocation: CLLocation) {
+        
+        if (YBClient.sharedInstance().status == .notApproved ||
+            YBClient.sharedInstance().status == .detailsNotSubmitted ||
+            YBClient.sharedInstance().status == .offline) {
             
-            // update the location on the webserver
-            WebInterface.makeWebRequestAndDiscardError(
-                {() -> Void in
-                    
-                    let client: BAAClient = BAAClient.shared()
-                    
-                    client.updateDriverStatus(
-                        BAASBOX_DRIVER_STATUS_ONLINE, 
-                        latitude: userLocation.coordinate.latitude as NSNumber!,
-                        longitude: userLocation.coordinate.longitude as NSNumber!,
-                        completion: {(success, error) -> Void in
-                            
-                            // TODO: FIX error
-                            if (error == nil) {
-                                // Successfully updated driver location
-                            } else {
-                                // If there is an error updating driver location, do something?
-                                
-                            }
-                    })
-            })
+            return;
         }
+        
+        // update the location on the webserver
+        WebInterface.makeWebRequestAndDiscardError(
+            {() -> Void in
+                
+                let client: BAAClient = BAAClient.shared()
+                
+                client.updateDriverStatus(
+                    BAASBOX_DRIVER_STATUS_ONLINE, 
+                    latitude: userLocation.coordinate.latitude as NSNumber!,
+                    longitude: userLocation.coordinate.longitude as NSNumber!,
+                    completion: {(success, error) -> Void in
+                        
+                        // TODO: FIX error
+                        if (error == nil) {
+                            // Successfully updated driver location
+                        } else {
+                            // If there is an error updating driver location, do something?
+                            
+                        }
+                })
+        })
     }
 }
 

@@ -1,14 +1,20 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="FontAwesome.ttf">
+            <string>FontAwesome</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Yibby Partner-->
         <scene sceneID="tne-QT-ifu">
@@ -22,61 +28,123 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pH-U2-oZp" customClass="BButton">
-                                <rect key="frame" x="11" y="471" width="299" height="53"/>
-                                <color key="backgroundColor" red="0.48060405015670127" green="0.1509024872624154" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gdm-hg-Lwm" userLabel="gmMapView" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="krM-MI-mgi" userLabel="CenterMarkersView" customClass="YibbyBorderedUIView" customModule="YibbyPartner" customModuleProvider="target">
+                                <rect key="frame" x="333" y="62.5" width="27" height="27"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ue-sY-gzk" userLabel="LocationArrowLabel">
+                                        <rect key="frame" x="5" y="5" width="17" height="17"/>
+                                        <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="51" id="mh3-Tg-xBr"/>
+                                    <constraint firstItem="1Ue-sY-gzk" firstAttribute="centerX" secondItem="krM-MI-mgi" secondAttribute="centerX" id="7mR-Ho-Um1"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1Ue-sY-gzk" secondAttribute="trailing" constant="5" id="8Cv-fF-9dn"/>
+                                    <constraint firstItem="1Ue-sY-gzk" firstAttribute="top" secondItem="krM-MI-mgi" secondAttribute="top" priority="750" constant="5" id="DZZ-e0-Fld"/>
+                                    <constraint firstItem="1Ue-sY-gzk" firstAttribute="centerY" secondItem="krM-MI-mgi" secondAttribute="centerY" id="Jbf-Al-Ip3"/>
+                                    <constraint firstItem="1Ue-sY-gzk" firstAttribute="top" relation="greaterThanOrEqual" secondItem="krM-MI-mgi" secondAttribute="top" constant="5" id="NAa-qd-48Y"/>
+                                    <constraint firstItem="1Ue-sY-gzk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="krM-MI-mgi" secondAttribute="leading" constant="5" id="QxA-uy-YdJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="1Ue-sY-gzk" secondAttribute="bottom" priority="750" constant="5" id="arl-fv-EQL"/>
+                                    <constraint firstItem="1Ue-sY-gzk" firstAttribute="leading" secondItem="krM-MI-mgi" secondAttribute="leading" priority="750" constant="5" id="f47-cm-Q59"/>
+                                    <constraint firstAttribute="trailing" secondItem="1Ue-sY-gzk" secondAttribute="trailing" priority="750" constant="5" id="fcK-ql-w9M"/>
+                                    <constraint firstAttribute="width" secondItem="krM-MI-mgi" secondAttribute="height" id="fga-1r-fzM"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="1Ue-sY-gzk" secondAttribute="bottom" constant="5" id="oCV-a1-lcp"/>
                                 </constraints>
-                                <state key="normal" title="Go Online"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="type">
-                                        <integer key="value" value="1"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="onOnlineButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fcb-4q-6Wz"/>
+                                    <outletCollection property="gestureRecognizers" destination="XSK-yN-L2v" appends="YES" id="3Sk-57-DpJ"/>
                                 </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Dashboard" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cV-Cy-nUt">
-                                <rect key="frame" x="118" y="273" width="84" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n4J-uS-qJH" customClass="DGRunkeeperSwitch" customModule="DGRunkeeperSwitch">
+                                <rect key="frame" x="36" y="597" width="303" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Rxz-CO-edK"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="onOnlineSwitchValueChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="5nQ-zb-RKl"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rdd-kj-yhh" userLabel="LabelParentView" customClass="YBBorderedUIView" customModule="YibbyPartner" customModuleProvider="target">
+                                <rect key="frame" x="119.5" y="60" width="135.5" height="32"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are offline" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QSI-am-CUC" userLabel="OnlineStatusLabel" customClass="SpringLabel" customModule="Spring">
+                                        <rect key="frame" x="10" y="5" width="115.5" height="22"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="QSI-am-CUC" firstAttribute="top" secondItem="Rdd-kj-yhh" secondAttribute="top" constant="5" id="TDu-IK-7wk"/>
+                                    <constraint firstItem="QSI-am-CUC" firstAttribute="leading" secondItem="Rdd-kj-yhh" secondAttribute="leading" constant="10" id="UIu-j5-Blt"/>
+                                    <constraint firstAttribute="trailing" secondItem="QSI-am-CUC" secondAttribute="trailing" constant="10" id="XJY-ce-vSu"/>
+                                    <constraint firstAttribute="bottom" secondItem="QSI-am-CUC" secondAttribute="bottom" constant="5" id="c2Q-1Q-Ycn"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6pH-U2-oZp" secondAttribute="bottom" constant="2" id="5Uq-1s-eHj"/>
-                            <constraint firstItem="6pH-U2-oZp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-9" id="5to-kn-SKd"/>
-                            <constraint firstItem="3cV-Cy-nUt" firstAttribute="centerX" secondItem="6pH-U2-oZp" secondAttribute="centerX" id="6DD-rz-PGa"/>
-                            <constraint firstItem="3cV-Cy-nUt" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="DSz-Wd-l2X"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="6pH-U2-oZp" secondAttribute="trailing" constant="-10" id="Rf3-y9-Tr9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="n4J-uS-qJH" secondAttribute="trailing" constant="20" id="6Vk-Ta-JUk"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="n4J-uS-qJH" secondAttribute="bottom" constant="20" id="NAb-yc-mDa"/>
+                            <constraint firstAttribute="trailing" secondItem="krM-MI-mgi" secondAttribute="trailing" constant="15" id="Qvb-Pi-S5A"/>
+                            <constraint firstItem="krM-MI-mgi" firstAttribute="width" secondItem="krM-MI-mgi" secondAttribute="height" id="Sue-RX-fQ1"/>
+                            <constraint firstItem="Rdd-kj-yhh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="WQc-IK-dZA"/>
+                            <constraint firstItem="krM-MI-mgi" firstAttribute="centerY" secondItem="Rdd-kj-yhh" secondAttribute="centerY" id="c7N-mf-VYk"/>
+                            <constraint firstItem="n4J-uS-qJH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="cxO-PI-oaK"/>
+                            <constraint firstItem="gdm-hg-Lwm" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="l68-Zr-bwG"/>
+                            <constraint firstAttribute="trailing" secondItem="gdm-hg-Lwm" secondAttribute="trailing" id="sME-62-fe5"/>
+                            <constraint firstItem="gdm-hg-Lwm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="u00-zW-Fb0"/>
+                            <constraint firstItem="Rdd-kj-yhh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ugP-AC-MdA"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gdm-hg-Lwm" secondAttribute="bottom" id="yVO-I4-9Mq"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Yibby Partner" id="AaQ-aw-lab">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="azS-YQ-Zkf">
-                            <connections>
-                                <action selector="leftSlideButtonTapped:" destination="BYZ-38-t0r" id="NCH-6K-WKn"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationItem key="navigationItem" title="Yibby Partner" id="AaQ-aw-lab"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="gmsMapViewOutlet" destination="gdm-hg-Lwm" id="Vgf-kF-YVc"/>
+                        <outlet property="onlineStatusLabelOutlet" destination="QSI-am-CUC" id="0RV-Qd-Jg0"/>
+                        <outlet property="onlineSwitchOutlet" destination="n4J-uS-qJH" id="EMq-h8-9ub"/>
                         <segue destination="BPk-Z1-Jqp" kind="show" identifier="goOnlineSegue" id="6UJ-Z6-dvg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="XSK-yN-L2v" userLabel="CenterMarkersView Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="onCentersMarkerViewClick:" destination="BYZ-38-t0r" id="6BE-oq-mG0"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="916" y="313"/>
+            <point key="canvasLocation" x="916" y="312.59370314842579"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ot5-vX-wjR">
             <objects>
                 <navigationController storyboardIdentifier="MainNavViewControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="mfk-1V-gJq" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jTm-Gf-t7Q">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jTm-Gf-t7Q">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

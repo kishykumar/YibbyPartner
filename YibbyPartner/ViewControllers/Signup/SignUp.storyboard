@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BNY-vr-SS7">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BNY-vr-SS7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,19 +23,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-Vb-U7h" customClass="YibbyButton1" customModule="YibbyPartner" customModuleProvider="target">
-                                <rect key="frame" x="16" y="310.5" width="343" height="57"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="TWC-Vb-U7h" secondAttribute="height" multiplier="6" id="PlL-gF-V1D"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Sign up"/>
-                                <connections>
-                                    <action selector="submitFormButton:" destination="Idr-6M-XPv" eventType="touchUpInside" id="RjX-oo-KVa"/>
-                                </connections>
-                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgX-wm-jvV">
+                                <rect key="frame" x="16" y="30" width="343" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HeU-NK-SbN" userLabel="Container View">
-                                <rect key="frame" x="16" y="40" width="343" height="245.5"/>
+                                <rect key="frame" x="16" y="59" width="343" height="245.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SIq-qJ-yi9" userLabel="CredentialsSV">
                                         <rect key="frame" x="10" y="10" width="323" height="225.5"/>
@@ -46,7 +41,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="925-521-4585" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zbd-rO-5Sa">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="925-521-4585" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zbd-rO-5Sa" customClass="PhoneNumberTextField" customModule="PhoneNumberKit">
                                                 <rect key="frame" x="0.0" y="59" width="323" height="49"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -77,12 +72,15 @@
                                     <constraint firstItem="SIq-qJ-yi9" firstAttribute="leading" secondItem="HeU-NK-SbN" secondAttribute="leading" constant="10" id="qaw-Ub-A0N"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2V-9W-LAe">
-                                <rect key="frame" x="62" y="600" width="251" height="27"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
-                                <state key="normal" title="TERMS OF SERVICE AND PRIVACY POLICY"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-Vb-U7h" customClass="YibbyButton1" customModule="YibbyPartner" customModuleProvider="target">
+                                <rect key="frame" x="16" y="330" width="343" height="57"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="TWC-Vb-U7h" secondAttribute="height" multiplier="6" id="PlL-gF-V1D"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Sign up"/>
                                 <connections>
-                                    <action selector="tncButtonAction:" destination="Idr-6M-XPv" eventType="touchUpInside" id="lp8-An-ech"/>
+                                    <action selector="submitFormButton:" destination="Idr-6M-XPv" eventType="touchUpInside" id="RjX-oo-KVa"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BY CONTINUING, YOU AGREE TO OUR " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IdC-pi-L6f" userLabel="Signup Label">
@@ -91,17 +89,28 @@
                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2V-9W-LAe">
+                                <rect key="frame" x="62" y="600" width="251" height="27"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
+                                <state key="normal" title="TERMS OF SERVICE AND PRIVACY POLICY"/>
+                                <connections>
+                                    <action selector="tncButtonAction:" destination="Idr-6M-XPv" eventType="touchUpInside" id="lp8-An-ech"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="IdC-pi-L6f" secondAttribute="trailing" id="5AA-11-F5e"/>
                             <constraint firstItem="HeU-NK-SbN" firstAttribute="leading" secondItem="1GQ-Jz-FfC" secondAttribute="leadingMargin" id="72B-XM-nJh"/>
                             <constraint firstItem="TWC-Vb-U7h" firstAttribute="trailing" secondItem="1GQ-Jz-FfC" secondAttribute="trailingMargin" id="DV6-5y-ZP8"/>
+                            <constraint firstItem="HeU-NK-SbN" firstAttribute="top" secondItem="tgX-wm-jvV" secondAttribute="bottom" constant="10" id="FAs-gy-adY"/>
                             <constraint firstItem="TWC-Vb-U7h" firstAttribute="leading" secondItem="1GQ-Jz-FfC" secondAttribute="leadingMargin" id="M41-K0-NId"/>
-                            <constraint firstItem="HeU-NK-SbN" firstAttribute="top" secondItem="pte-6d-DIf" secondAttribute="bottom" constant="20" id="MAe-n5-ojp"/>
                             <constraint firstItem="TWC-Vb-U7h" firstAttribute="top" secondItem="HeU-NK-SbN" secondAttribute="bottom" constant="25" id="N4S-sZ-tBh"/>
                             <constraint firstItem="EnZ-bK-cVD" firstAttribute="top" secondItem="e2V-9W-LAe" secondAttribute="bottom" constant="40" id="PBe-oz-z6w"/>
+                            <constraint firstItem="tgX-wm-jvV" firstAttribute="top" secondItem="pte-6d-DIf" secondAttribute="bottom" constant="10" id="Yt1-bv-Hoz"/>
                             <constraint firstItem="IdC-pi-L6f" firstAttribute="leading" secondItem="1GQ-Jz-FfC" secondAttribute="leadingMargin" id="a7L-wb-TTi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tgX-wm-jvV" secondAttribute="trailing" id="imv-sZ-ia3"/>
+                            <constraint firstItem="tgX-wm-jvV" firstAttribute="leading" secondItem="1GQ-Jz-FfC" secondAttribute="leadingMargin" id="kWE-3T-Dr4"/>
                             <constraint firstItem="HeU-NK-SbN" firstAttribute="trailing" secondItem="1GQ-Jz-FfC" secondAttribute="trailingMargin" id="ofC-LD-rhL"/>
                             <constraint firstItem="e2V-9W-LAe" firstAttribute="centerX" secondItem="1GQ-Jz-FfC" secondAttribute="centerX" id="uMe-Aj-gQ9"/>
                             <constraint firstItem="e2V-9W-LAe" firstAttribute="top" secondItem="IdC-pi-L6f" secondAttribute="bottom" id="yeR-uJ-FDx"/>
@@ -109,6 +118,7 @@
                     </view>
                     <connections>
                         <outlet property="emailAddressOutlet" destination="NIH-UO-tcE" id="EPn-oM-ugn"/>
+                        <outlet property="errorLabelOutlet" destination="tgX-wm-jvV" id="8sZ-Wk-nIg"/>
                         <outlet property="nameOutlet" destination="sVq-5Y-pBp" id="v40-3N-RI8"/>
                         <outlet property="passwordOutlet" destination="9s5-du-fKx" id="hBl-4n-dgV"/>
                         <outlet property="phoneNumberOutlet" destination="zbd-rO-5Sa" id="yxZ-FR-uYO"/>
@@ -181,7 +191,7 @@
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="lXa-cg-mnl">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="lXa-cg-mnl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
