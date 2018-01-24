@@ -41,6 +41,12 @@
       "idiom" : "iphone",
       "filename" : "logo_main_not_transparent_180.png",
       "scale" : "3x"
+    },
+    {
+      "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "yibby 1024.png",
+      "scale" : "1x"
     }
   ],
   "info" : {

@@ -17,13 +17,6 @@ class YBProfile: Mappable {
     var driverLicense: YBDriverLicense?
     var insurance: YBInsurance?
 
-//    var email: String?
-//    var name: String?
-//    var phoneNumber: String?
-//    var profilePicture: String?
-//    var homeLocation: YBLocation?
-//    var workLocation: YBLocation?
-    
     // MARK: Initialization
     
     init() {

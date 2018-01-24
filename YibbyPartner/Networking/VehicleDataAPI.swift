@@ -18,9 +18,9 @@ class VehicleDataAPI: NSObject {
     
     // MARK: - Properties
     
-    let BASE_URL = "http://www.carqueryapi.com/api/0.3"
-    let GET_MAKES_URL = "/?cmd=getMakes&sold_in_us=1"
-    let GET_MODELS_URL = "/?cmd=getModels&sold_in_us=1"
+    let BASE_URL: String = "http://www.carqueryapi.com/api/0.3"
+    let GET_MAKES_URL: String = "/?cmd=getMakes&sold_in_us=1"
+    let GET_MODELS_URL: String = "/?cmd=getModels&sold_in_us=1"
     
     var baseURL: URL!
     

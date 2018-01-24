@@ -122,6 +122,10 @@
 - (void)getRiderLocation: (NSString *)bidId
                completion: (BAAObjectResultBlock)completionBlock;
 
+- (void)getDriverStats: (NSString *)startDate
+               endDate: (NSString *)endDate
+              completion: (BAAObjectResultBlock)completionBlock;
+
 // dummy endpoint
 - (void)dummyCall:(BAAObjectResultBlock)completionBlock;
 
@@ -182,8 +186,9 @@
         numPeople:(NSNumber *)numPeople
         completion:(BAAObjectResultBlock)completionBlock;
 
-- (void) fetchCountForRides:(BAAIntegerResultBlock)completionBlock;
-
+- (void) fetchCountForRides:(NSString *)date
+                 completion:(BAAIntegerResultBlock)completionBlock;
+    
 - (void) getRides:(NSString *)type
                 withParams:(NSDictionary *) parameters
                 completion: (BAAObjectResultBlock)completionBlock;

@@ -7,158 +7,148 @@
 //
 
 import UIKit
-import JTCalendar
 import CocoaLumberjack
 import BaasBoxSDK
 
-class WeeklyEarningsViewController: BaseYibbyViewController, JTCalendarDelegate {
-
+class WeeklyEarningsViewController: BaseYibbyViewController, UITableViewDelegate, UITableViewDataSource {
+    
     // MARK: Properties
     
-    @IBOutlet weak var calendarMenuOutlet: JTCalendarMenuView!
-    @IBOutlet weak var calendarOutlet: JTHorizontalCalendarView!
-    
-    var calendarManager: JTCalendarManager!
+    @IBOutlet weak var dayEarningsTableViewOutlet: UITableView!
+    @IBOutlet weak var bannerLabelOutlet: UILabel!
+
     var dateSelected: Date?
-    
     var startOfTheWeek: Date!
     var endOfWeek: Date!
+
+    let numberOfDaysInWeek = 7
+    let DayEarningsTableCellIdentifier: String = "dayEarningsTableCellIdentifier"
+    
+    var dailyStats: [YBDayStat]?
+    var dailyStatsMap: [Date: YBDayStat] = [:]
 
     // MARK: Actions
     
     
     // MARK: Setup functions
     
-    
     func setupUI() {
+        setupBackButton()
+
+        let weekStartStr = TimeUtil.getDateStringInFormat(date: self.startOfTheWeek, format: "MM/dd")
+        let weekEndStr = TimeUtil.getDateStringInFormat(date: self.endOfWeek, format: "MM/dd")
         
+        self.bannerLabelOutlet.text = "\(weekStartStr) - \(weekEndStr) Detailed Earnings"
+        
+        // override the default background color
+        self.view.backgroundColor = UIColor.white
     }
-    
+
     func initProperties() {
-        
+
     }
 
-    func setupCalendar() {
-        self.calendarManager = JTCalendarManager()
-        self.calendarManager.delegate = self
-        self.calendarManager.menuView = calendarMenuOutlet
-        self.calendarManager.contentView = calendarOutlet
-        
-        var calendar = self.calendarManager.dateHelper.calendar()
-        calendar?.firstWeekday = 4 // Wednesday
-        
-        self.calendarManager.setDate(startOfTheWeek)
-        self.calendarManager.settings.weekModeEnabled = true
-
-        self.calendarManager.reload()
+    func setupDelegates() {
+        dayEarningsTableViewOutlet.delegate = self
+        dayEarningsTableViewOutlet.dataSource = self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        
+        if let dstats = self.dailyStats {
+            for item in dstats {
+                let date = TimeUtil.getDateFromString(dateStr: item.collectionDate!, format: "yyyy-MM-dd")
+                dailyStatsMap[date!] = item
+            }
+        }
+        
         initProperties()
         setupUI()
-        setupCalendar()
+        setupDelegates()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    // MARK: - UITableViewDataSource
     
-    
-    // MARK: JTCalendarDelegate
-    
-    func calendar(_ calendar: JTCalendarManager!, prepareDayView dayView: UIView!) {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1;
+    }
         
-        dayView.isHidden = false
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return numberOfDaysInWeek;
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let dayView = dayView as? JTCalendarDayView {
-            // Test if the dayView is from another month than the page
-            // Use only in month mode for indicate the day of the previous or next month
-            
-            // Selected Day
-            // Today
-            if calendarManager.dateHelper.date(Date(), isTheSameDayThan: dayView.date) {
-                dayView.circleView.isHidden = false
-                dayView.circleView.backgroundColor = UIColor.blue
-                dayView.dotView.backgroundColor = UIColor.white
-                dayView.textLabel.textColor = UIColor.white
-            }
-            else if ((self.dateSelected != nil) &&
-                calendarManager.dateHelper.date(self.dateSelected, isTheSameDayThan: dayView.date)) {
-                dayView.circleView.isHidden = false
-                dayView.circleView.backgroundColor = UIColor.red
-                dayView.dotView.backgroundColor = UIColor.white
-                dayView.textLabel.textColor = UIColor.white
-            }
-            // Other month
-            else if dayView.isFromAnotherMonth {
-                dayView.circleView.isHidden = true
-                dayView.dotView.backgroundColor = UIColor.red
-                dayView.textLabel.textColor = UIColor.lightGray
-            }
-            // Another day of the current month
-            else {
-                dayView.circleView.isHidden = true
-                dayView.dotView.backgroundColor = UIColor.red
-                dayView.textLabel.textColor = UIColor.black
-            }
+        let cell: DayEarningsTableCell = tableView.dequeueReusableCell(withIdentifier: DayEarningsTableCellIdentifier) as! DayEarningsTableCell
+        cell.selectionStyle = .none
+        
+        let date: Date = Calendar.current.date(byAdding: .day, value: indexPath.row, to: startOfTheWeek!)!
+        var dayString = ""
+        
+        switch (indexPath.row) {
+        case 0: dayString = "Wednesday"
+        case 1: dayString = "Thursday"
+        case 2: dayString = "Friday"
+        case 3: dayString = "Saturday"
+        case 4: dayString = "Sunday"
+        case 5: dayString = "Monday"
+        case 6: dayString = "Tuesday"
+        default: assert(false)
         }
-    }
-    
-    func calendar(_ calendar: JTCalendarManager!, prepareMenuItemView menuItemView: UIView!, date: Date!) {
+
+        let dateStr = TimeUtil.getDateStringInFormat(date: date, format: "MM/dd/yyyy")
+        var earnings = "$0"
+        var trips = "No trips"
+        var onlineTime = "0 mins"
         
-        var dateFormatter: DateFormatter = DateFormatter()
+        DDLogVerbose("stat is : \(dailyStatsMap[date]) dump: ")
+        dump(dailyStatsMap)
         
-        dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM yyyy"
-        dateFormatter.locale = calendarManager.dateHelper.calendar().locale
-        dateFormatter.timeZone = calendarManager.dateHelper.calendar().timeZone
-        
-        (menuItemView as? UILabel)!.text = dateFormatter.string(from: date)
-    }
-    
-    func calendar(_ calendar: JTCalendarManager, didTouchDayView dayView: UIView!) {
-        
-        if let dayView = dayView as? JTCalendarDayView {
+        if let stats: YBDayStat = dailyStatsMap[date] {
+            earnings = String(format: "$%.02f", stats.earning!)
             
-            self.dateSelected = dayView.date
+            if (stats.rides != nil) {
+                trips = "\(String(describing: stats.rides)) trips"
+            }
             
-            // Animation for the circleView
-            dayView.circleView.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
-            
-            UIView.transition(with: dayView, duration: 0.3,
-                                      options: [],
-                                      animations: {() -> Void in
-                
-                    dayView.circleView.transform = CGAffineTransform.identity
-                    self.calendarManager.reload()
-                
-                }, completion: { _ in
-                    
-                    let earningsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Earnings, bundle: nil)
-                    
-                    let dailyEarningsViewController = earningsStoryboard.instantiateViewController(withIdentifier: "DailyEarningsViewControllerIdentifier") as! DailyEarningsViewController
-                    
-                    dailyEarningsViewController.selectedDate = self.dateSelected
-                    
-                    self.navigationController!.pushViewController(dailyEarningsViewController, animated: true)
-                }
-            )
+            onlineTime = "\(stats.onlineTime!) mins"
         }
+        
+        cell.configure(dayName: dayString, date: dateStr, earnings: earnings, totalTrips: trips, onlineTime: onlineTime)
+
+        return cell
     }
     
-//    func calendarBuildDayView(calendar: JTCalendarManager!) -> UIView! {
-//        let view: JTCalendarDayView = JTCalendarDayView()
-//        
-//        view.textLabel.font = UIFont(name: "Avenir-Light", size: 13)
-//        view.circleRatio = 2
-//        view.dotRatio = 1.0 / 0.9
-//        
-//        return view
-//    }
+    // MARK: - UITableView Delegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let historyStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.History, bundle: nil)
+        let historyController = historyStoryboard.instantiateViewController(withIdentifier: "HistoryViewControllerIdentifier") as! HistoryViewController
+        
+        let date: Date = Calendar.current.date(byAdding: .day, value: indexPath.row, to: startOfTheWeek!)!
+        historyController.selectedDate = date
+
+        self.navigationController!.pushViewController(historyController, animated: true)
+        
+//        let earningsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Earnings, bundle: nil)
+//
+//        let dailyEarningsViewController = earningsStoryboard.instantiateViewController(withIdentifier: "DailyEarningsViewControllerIdentifier") as! DailyEarningsViewController
+//
+//            //+ indexPath.row
+//
+//        self.navigationController!.pushViewController(dailyEarningsViewController, animated: true)
+    }
     
     // MARK: Helper functions
 

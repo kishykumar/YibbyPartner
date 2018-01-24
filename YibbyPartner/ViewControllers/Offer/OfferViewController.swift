@@ -30,12 +30,12 @@ class OfferViewController: BaseYibbyViewController {
 
     let GMS_DEFAULT_CAMERA_ZOOM: Float = 14.0
 
-    var offerTimer = Timer()
+    var offerTimer: Timer = Timer()
     
-    static let OFFER_TIMER_INTERVAL = 1.0
-    static let OFFER_TIMER_EXPIRE_PERIOD = 25.0 // 25 seconds
-    static let OFFER_TIMER_EXPIRE_MSG_TITLE = "Time expired."
-    static let OFFER_TIMER_EXPIRE_MSG_CONTENT = "Reason: You were given 30 seconds to respond to the ride request."
+    static let OFFER_TIMER_INTERVAL: Double = 1.0
+    static let OFFER_TIMER_EXPIRE_PERIOD: Double = 25.0 // 25 seconds
+    static let OFFER_TIMER_EXPIRE_MSG_TITLE: String = "Time expired."
+    static let OFFER_TIMER_EXPIRE_MSG_CONTENT: String = "Reason: You were given 30 seconds to respond to the ride request."
     
     var timerCount: TimeInterval = 0.0
     var timerStart: TimeInterval!
@@ -259,30 +259,35 @@ class OfferViewController: BaseYibbyViewController {
             
             DDLogVerbose("Resetting the bidState in updateTimer")
             
-            stopOfferTimer()
-            
             // delete the saved state bid
             YBClient.sharedInstance().bid = nil
+            
+            AlertUtil.displayAlert("Time expired.", message: "You missed sending the bid. Missing a lot of bids would bring you offline.", completionBlock: {() -> Void in
+                self.dismiss(animated: true, completion: nil)
+            })
+            
+//            let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+//
+//            if let mmnvc = appDelegate.centerContainer!.centerViewController as? UINavigationController {
+//
+//                // find the DriverOnlineViewController and pop till that
+//                for viewController: UIViewController in mmnvc.viewControllers {
+//
+//                    if (viewController is DriverOnlineViewController) {
+//
+//                        let driverOnlineController: DriverOnlineViewController = (viewController as! DriverOnlineViewController)
+//
+//                        // dismiss all view controllers till this view controller
+//                        driverOnlineController.dismiss(animated: true, completion: nil)
+//
+//                        AlertUtil.displayAlertOnVC(driverOnlineController, title: OfferViewController.OFFER_TIMER_EXPIRE_MSG_TITLE,
+//                                          message: OfferViewController.OFFER_TIMER_EXPIRE_MSG_CONTENT)
+//                    }
+//                }
+//            }
+            
+            stopOfferTimer()
 
-            let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-
-            if let mmnvc = appDelegate.centerContainer!.centerViewController as? UINavigationController {
- 
-                // find the DriverOnlineViewController and pop till that
-                for viewController: UIViewController in mmnvc.viewControllers {
-                    
-                    if (viewController is DriverOnlineViewController) {
-                        
-                        let driverOnlineController: DriverOnlineViewController = (viewController as! DriverOnlineViewController)
-                        
-                        // dismiss all view controllers till this view controller
-                        driverOnlineController.dismiss(animated: true, completion: nil)
-                        
-                        AlertUtil.displayAlertOnVC(driverOnlineController, title: OfferViewController.OFFER_TIMER_EXPIRE_MSG_TITLE,
-                                          message: OfferViewController.OFFER_TIMER_EXPIRE_MSG_CONTENT)
-                    }
-                }
-            }
             return
         }
         

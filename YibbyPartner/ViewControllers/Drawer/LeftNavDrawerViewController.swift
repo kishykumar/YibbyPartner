@@ -23,6 +23,9 @@ class LeftNavDrawerViewController: BaseYibbyViewController,
     @IBOutlet weak var aboutButtonOutlet: UIButton!
     @IBOutlet weak var signOutButtonOutlet: UIButton!
     
+    @IBOutlet weak var vehicleImageViewOutlet: UIImageView!
+    @IBOutlet weak var vehicleMakeModelLabelOutlet: UILabel!
+    
     var menuItems: [String] = ["Trips", "Earnings", "Documents", "Notifications", "Support", "Rewards", "Settings"]
     let menuItemsIconFAFormat: [Int] =  [0xf1ba,    0xf283,     0xf085,     0xf0f3,             0xf1cd,         0xf0a3,         0xf0e4]
 
@@ -99,31 +102,47 @@ class LeftNavDrawerViewController: BaseYibbyViewController,
     
     fileprivate func setupUI() {
         
-        // Modify the background color because we don't want to show the regular gray one.
-        self.view.backgroundColor = UIColor.appDarkGreen1();
+        if let profile = YBClient.sharedInstance().profile {
         
-        // Set rounded profile pic
-        self.profilePictureOutlet.setRoundedWithWhiteBorder()
-        
-        //        self.profilePictureOutlet.layer.cornerRadius = self.profilePictureOutlet.frame.size.height / 2;
-        //        self.profilePictureOutlet.layer.borderWidth = 2.0
-        //        self.profilePictureOutlet.layer.borderColor = UIColor.white.cgColor
-        //        self.profilePictureOutlet.layer.masksToBounds = true
-        //        self.profilePictureOutlet.clipsToBounds = true
-        
-        if let userRealName = YBClient.sharedInstance().profile?.driverLicense?.firstName {
-            if (userRealName != "") {
-                self.userRealNameLabelOutlet.text = userRealName
-            } else {
-                self.userRealNameLabelOutlet.text = "Yibby Partner"
+            // Modify the background color because we don't want to show the regular gray one.
+            self.view.backgroundColor = UIColor.appDarkGreen1();
+            
+            // Set rounded profile pic
+            self.profilePictureOutlet.setRoundedWithWhiteBorder()
+            
+            //        self.profilePictureOutlet.layer.cornerRadius = self.profilePictureOutlet.frame.size.height / 2;
+            //        self.profilePictureOutlet.layer.borderWidth = 2.0
+            //        self.profilePictureOutlet.layer.borderColor = UIColor.white.cgColor
+            //        self.profilePictureOutlet.layer.masksToBounds = true
+            //        self.profilePictureOutlet.clipsToBounds = true
+            
+            if let userRealName = profile.driverLicense?.firstName {
+                if (userRealName != "") {
+                    self.userRealNameLabelOutlet.text = userRealName
+                } else {
+                    self.userRealNameLabelOutlet.text = "Yibby Partner"
+                }
             }
-        }
-        
-        if let cachedImage = TemporaryCache.load(.coverImage) {
-            profilePictureOutlet.image = cachedImage
-        }
-        else {
-            getProfilePicture()
+            
+            if let cachedImage = TemporaryCache.load(.coverImage) {
+                profilePictureOutlet.image = cachedImage
+            }
+            else {
+                getProfilePicture()
+            }
+            
+            if let vehicle = profile.vehicle {
+                
+                if let vehiclePic = YBClient.sharedInstance().profile?.vehicle?.vehiclePictureFileId {
+                    if (vehiclePic != "") {
+                        if let imageUrl  = BAAFile.getCompleteURL(withToken: vehiclePic) {
+                            self.vehicleImageViewOutlet.pin_setImage(from: imageUrl)
+                        }
+                    }
+                }
+                
+                self.vehicleMakeModelLabelOutlet.text = "\(vehicle.make!) \(vehicle.model!)".capitalized
+            }
         }
     }
     
@@ -207,17 +226,17 @@ class LeftNavDrawerViewController: BaseYibbyViewController,
             
         case TableIndex.documents.rawValue:
             
-            let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Settings, bundle: nil)
+            let documentsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Documents, bundle: nil)
 
-            selectedViewController = settingsStoryboard.instantiateViewController(withIdentifier: "SettingsViewControllerIdentifier") as! SettingsViewController
+            selectedViewController = documentsStoryboard.instantiateViewController(withIdentifier: "DocumentsViewControllerIdentifier") as! DocumentsViewController
             
             break
             
         case TableIndex.notifications.rawValue:
             
-            let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Notifications, bundle: nil)
+            let notificationsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Notifications, bundle: nil)
 
-            selectedViewController = settingsStoryboard.instantiateViewController(withIdentifier: "NotificationsViewControllerIdentifier") as! NotificationsViewController
+            selectedViewController = notificationsStoryboard.instantiateViewController(withIdentifier: "NotificationsViewControllerIdentifier") as! NotificationsViewController
             
             break
         case TableIndex.support.rawValue:
@@ -227,11 +246,12 @@ class LeftNavDrawerViewController: BaseYibbyViewController,
             selectedViewController = helpStoryboard.instantiateViewController(withIdentifier: "HelpViewControllerIdentifier") as! HelpViewController
             
             break
+            
         case TableIndex.rewards.rawValue:
             
-            let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Settings, bundle: nil)
+            let rewardsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Rewards, bundle: nil)
 
-            selectedViewController = settingsStoryboard.instantiateViewController(withIdentifier: "SettingsViewControllerIdentifier") as! SettingsViewController
+            selectedViewController = rewardsStoryboard.instantiateViewController(withIdentifier: "RewardsViewControllerIdentifier") as! RewardsViewController
             
             break
         case TableIndex.settings.rawValue:
@@ -278,43 +298,42 @@ class LeftNavDrawerViewController: BaseYibbyViewController,
     
     // BaasBox logout driver
     func logoutDriver() {
-        ActivityIndicatorUtil.enableActivityIndicator(self.view)
         
-        let client: BAAClient = BAAClient.shared()
-        client.logoutCaber(withCompletion: BAASBOX_DRIVER_STRING, completion: {(success, error) -> Void in
+        WebInterface.makeWebRequestAndHandleError(
+            self,
+            webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
+                
+            ActivityIndicatorUtil.enableActivityIndicator(self.view)
             
-            ActivityIndicatorUtil.disableActivityIndicator(self.view)
-            
-            if (success || ((error as! NSError).domain == BaasBox.errorDomain() && (error as! NSError).code ==
-                WebInterface.BAASBOX_AUTHENTICATION_ERROR)) {
+            let client: BAAClient = BAAClient.shared()
+            client.logoutCaber(withCompletion: BAASBOX_DRIVER_STRING, completion: {(success, error) -> Void in
                 
-                // pop all the view controllers so that user starts fresh :)
-                let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-                if let mmnvc = appDelegate.centerContainer!.centerViewController as? UINavigationController {
-                    mmnvc.popToRootViewController(animated: false)
-                }
+                ActivityIndicatorUtil.disableActivityIndicator(self.view)
                 
-                DDLogInfo("user logged out successfully \(success)")
-                // if logout is successful, remove username, password from keychain
-                LoginViewController.removeLoginKeyChainKeys()
-                
-                // Show the Signup/LoginViewController View
-                
-                let signupStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.SignUp,
-                                                                  bundle: nil)
-                
-                self.present(signupStoryboard.instantiateInitialViewController()!, animated: false, completion: nil)
-            }
-            else {
-                // We continue the user session if Logout hits an error
-                if ((error as! NSError).domain == BaasBox.errorDomain()) {
-                    DDLogError("Error in logout: \(error)")
-                    AlertUtil.displayAlert("Error Logging out. ", message: "This is...weird.")
+                if (success || ((error as! NSError).domain == BaasBox.errorDomain() && (error as! NSError).code ==
+                    WebInterface.BAASBOX_AUTHENTICATION_ERROR)) {
+                    
+                    // pop all the view controllers so that user starts fresh :)
+                    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                    if let mmnvc = appDelegate.centerContainer!.centerViewController as? UINavigationController {
+                        mmnvc.popToRootViewController(animated: false)
+                    }
+                    
+                    DDLogInfo("user logged out successfully \(success)")
+                    // if logout is successful, remove username, password from keychain
+                    LoginViewController.removeLoginKeyChainKeys()
+                    
+                    // Show the Signup/LoginViewController View
+                    
+                    let signupStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.SignUp,
+                                                                      bundle: nil)
+                    
+                    self.present(signupStoryboard.instantiateInitialViewController()!, animated: false, completion: nil)
                 }
                 else {
-                    AlertUtil.displayAlert("Connectivity or Server Issues.", message: "Please check your internet connection or wait for some time.")
+                    errorBlock(success, error)
                 }
-            }
+            })
         })
     }
 

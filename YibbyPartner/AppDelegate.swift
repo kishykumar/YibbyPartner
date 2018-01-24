@@ -1,9 +1,9 @@
  //
 //  AppDelegate.swift
-//  Example
+//  Yibby
 //
 //  Created by Kishy Kumar on 1/9/16.
-//  Copyright © 2016 MyComp. All rights reserved.
+//  Copyright © 2016 Yibby. All rights reserved.
 //
 
 import UIKit
@@ -14,17 +14,20 @@ import CocoaLumberjack
 import Fabric
 import Crashlytics
 import IQKeyboardManagerSwift
-import Firebase
+//import Firebase
 import ObjectMapper
  
 // TODO: 
 // 1. Bug: The timer in offer view controller shows up less on one of the phones
 // 2. Stop location updates in the background if no driver activity for the last 10 minutes
  
+ 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GCMReceiverDelegate {
 
     var window: UIWindow?
+
+    var isSandbox = false
 
     var connectedToGCM = false
     var subscribedToTopic = false
@@ -32,14 +35,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     var registrationToken: String?
     var registrationOptions = [String: AnyObject]()
     
-    let registrationKey = "onRegistrationCompleted"
-    let messageKey = "onMessageReceived"
-    let subscriptionTopic = "/topics/global"
+    let registrationKey: String = "onRegistrationCompleted"
+    let messageKey: String = "onMessageReceived"
+    let subscriptionTopic: String = "/topics/global"
 
-    let GOOGLE_API_KEY_IOS = "AIzaSyAg47Gp0GvI6myz-sZZfKJ1fPtx0wUBMjU"
-    let BAASBOX_APPCODE = "1234567890"
-    //let BAASBOX_URL = "http://custom-env.cjamdz6ejx.us-west-1.elasticbeanstalk.com"
-    let BAASBOX_URL = "http://052ee98a.ngrok.io"
+    let GOOGLE_API_KEY_IOS: String = "AIzaSyAg47Gp0GvI6myz-sZZfKJ1fPtx0wUBMjU"
+    let BAASBOX_APPCODE: String = "1234567890"
+    let BAASBOX_URL = "http://custom-env.cjamdz6ejx.us-west-1.elasticbeanstalk.com"
+    //let BAASBOX_URL: String = "https://0d8bd861.ngrok.io"
     
     var centerContainer: MMDrawerController?
     
@@ -67,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         // Override point for customization after application launch.
         GMSServices.provideAPIKey(GOOGLE_API_KEY_IOS)
         
-        FirebaseApp.configure()
+        //FirebaseApp.configure()
         
         // [START_EXCLUDE]
         // Configure the Google context: parses the GoogleService-Info.plist, and initializes
@@ -162,6 +165,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     func syncApp() {
         let client: BAAClient = BAAClient.shared()
         
+        //YBClient.sharedInstance().bid = nil
+
         let bidId = YBClient.sharedInstance().getPersistedBidId()
         client.syncClient(BAASBOX_DRIVER_STRING, bidId: bidId, completion: { (success, error) -> Void in
             
@@ -171,7 +176,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                 
                 if let syncData = syncModel {
                     
-                    DDLogVerbose("KKDBG syncdata for bidid: \(String(describing: bidId))")
+                    DDLogVerbose("syncApp syncdata for bidid: \(String(describing: bidId))")
                     dump(syncData)
 
                     YBClient.sharedInstance().syncClient(syncData)
@@ -187,9 +192,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                     let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
                     
                     if (status == .detailsNotSubmitted) {
+                        
                         let initialRegisterController = registerStoryboard.instantiateViewController(withIdentifier: "VehicleViewControllerIdentifier") as! VehicleViewController
-
-                        visibleVC.present(initialRegisterController, animated: false, completion: nil)
+                        
+                        let navController = UINavigationController(rootViewController: initialRegisterController)
+                        visibleVC.present(navController, animated: false, completion: nil)
                         
                     } else if (status == .notApproved) {
                         let paViewController = registerStoryboard.instantiateViewController(withIdentifier: "PendingApprovalViewControllerIdentifier") as! PendingApprovalViewController
@@ -197,7 +204,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                         visibleVC.present(paViewController, animated: false, completion: nil)
                     } else {
                         self.initializeMainViewController()
-            
+                        
                         if let centerNav = self.centerContainer?.centerViewController as? UINavigationController {
                             var controllers = centerNav.viewControllers
                             
@@ -207,11 +214,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                             
                             switch (status) {
                             case .offline:
-                                // nothing to do here. MainViewController will be shown.
+                                
+                                // Remove the bid if it existed
+                                if (bidId != nil) {
+                                    YBClient.sharedInstance().bid = nil
+                                }
+                                
                                 break
 
                             case .online:
-                                // nothing to do here. MainViewController will be shown.
+                                
+                                // Remove the bid if it existed
+                                if (bidId != nil) {
+                                    YBClient.sharedInstance().bid = nil
+                                }
+                                
                                 break
                                 
                             case .offerInProcess:
@@ -359,20 +376,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         }
     }
     
-    // BaasBox login user
-    func loginUser(_ usernamei: String, passwordi: String) {
-        let client: BAAClient = BAAClient.shared()
-        DDLogVerbose("Logging in user with username \(usernamei)")
-        client.authenticateCaber("driver", username: usernamei, password: passwordi, completion: {(success, error) -> Void in
-            if (success) {
-                DDLogVerbose("logged in automatically in else case: \(success)")
-            }
-            else {
-                DDLogVerbose("error in logging in user automatically\(error)")
-            }
-        })
-    }
-    
     func subscribeToTopic() {
         // If the app has a registration token and is connected to GCM, proceed to subscribe to the
         // topic
@@ -475,7 +478,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         GGLInstanceID.sharedInstance().start(with: instanceIDConfig)
         
         registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken as AnyObject,
-            kGGLInstanceIDAPNSServerTypeSandboxOption:true as AnyObject]
+            kGGLInstanceIDAPNSServerTypeSandboxOption:isSandbox as AnyObject]
         
         // [END get_gcm_reg_token]
         

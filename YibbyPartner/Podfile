@@ -62,8 +62,7 @@ def shared_pods
     pod 'Braintree'
     pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
     pod 'Google/SignIn'
-    pod 'Firebase/Auth'
-    pod 'FirebaseUI/Auth', '~> 4.0'
+    pod 'AccountKit'
     
 end
 

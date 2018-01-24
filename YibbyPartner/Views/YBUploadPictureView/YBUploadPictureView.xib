@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -27,32 +26,32 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oYf-Ad-kNS" userLabel="MainView">
-                    <rect key="frame" x="0.0" y="0.0" width="166.5" height="133"/>
+                    <rect key="frame" x="0.0" y="0.0" width="167" height="133"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="yOE-nY-RiI" userLabel="MainSV">
-                            <rect key="frame" x="0.0" y="0.0" width="166.5" height="133"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yOE-nY-RiI" userLabel="MainSV">
+                            <rect key="frame" x="0.0" y="0.0" width="167" height="133"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dr3-Ko-kkF" userLabel="DummyView">
-                                    <rect key="frame" x="0.0" y="0.0" width="166.5" height="1"/>
+                                    <rect key="frame" x="83.5" y="0.0" width="167" height="1"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="5f7-wg-hhg"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojg-5J-OKB">
-                                    <rect key="frame" x="0.0" y="27.5" width="166.5" height="34"/>
+                                    <rect key="frame" x="150" y="27.5" width="34" height="34"/>
                                     <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="34"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload License" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCM-yZ-Dyp">
-                                    <rect key="frame" x="0.0" y="87.5" width="166.5" height="18"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload License" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCM-yZ-Dyp">
+                                    <rect key="frame" x="0.0" y="87.5" width="167" height="18"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KV7-IA-KJh" userLabel="DummyView">
-                                    <rect key="frame" x="0.0" y="132" width="166.5" height="1"/>
+                                    <rect key="frame" x="83.5" y="132" width="167" height="1"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="XSs-m7-3N1"/>
@@ -60,13 +59,16 @@
                                 </view>
                             </subviews>
                             <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstItem="yCM-yZ-Dyp" firstAttribute="leading" secondItem="yOE-nY-RiI" secondAttribute="leading" constant="10" id="itH-bC-Bda"/>
+                                <constraint firstAttribute="trailing" secondItem="yCM-yZ-Dyp" secondAttribute="trailing" constant="10" id="m2P-Gl-Ib6"/>
+                            </constraints>
                             <connections>
                                 <outletCollection property="gestureRecognizers" destination="QkO-By-eFg" appends="YES" id="gKx-wZ-l54"/>
                             </connections>
                         </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="oYf-Ad-kNS" secondAttribute="height" multiplier="1.25" id="4qq-Da-MpG"/>
                         <constraint firstAttribute="trailing" secondItem="yOE-nY-RiI" secondAttribute="trailing" id="eJ5-lf-MwO"/>
                         <constraint firstItem="yOE-nY-RiI" firstAttribute="leading" secondItem="oYf-Ad-kNS" secondAttribute="leading" id="kxE-nE-msN"/>
                         <constraint firstItem="yOE-nY-RiI" firstAttribute="top" secondItem="oYf-Ad-kNS" secondAttribute="top" id="lJ2-l3-aWc"/>

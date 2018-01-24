@@ -439,7 +439,8 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
            }];
 }
 
-- (void) fetchCountForRides:(BAAIntegerResultBlock)completionBlock {
+- (void) fetchCountForRides:(NSString *)date
+                 completion:(BAAIntegerResultBlock)completionBlock {
     
     if (!self.currentUser) {
         if (completionBlock) {
@@ -453,13 +454,21 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
         }
         return;
     }
+
+    NSString *where = [NSNull null];
+    if (date != nil) {
+        where = [NSString stringWithFormat:@"%@='%@'", @"_creation_date.format('yyyy-MM-dd')", date];
+    }
+
+    NSDictionary *parameters = @{
+              @"appcode": self.appCode,
+              @"X-BB-SESSION": self.currentUser.authenticationToken,
+              @"count": @"true",
+              @"where": where
+              };
     
     [self getPath:@"rides"
-       parameters: @{
-                     @"appcode": self.appCode,
-                     @"X-BB-SESSION": self.currentUser.authenticationToken,
-                     @"count": @"true"
-                     }
+       parameters: parameters
           success:^(id responseObject) {
               
               NSInteger result = [responseObject[@"data"][0][@"count"] intValue];
@@ -1219,6 +1228,11 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
     
     [[self.session dataTaskWithRequest:request
                      completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                         
+                         if(response == nil) {
+                             completionBlock(nil, error);
+                             return;
+                         }
                          
                          if (completionBlock) {
                              
@@ -2657,10 +2671,36 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
 
 - (void)getRiderLocation: (NSString *)bidId
               completion: (BAAObjectResultBlock)completionBlock {
+    
     NSString *path = [NSString stringWithFormat:@"/location/r/%@", bidId];
     
     [self getPath:path
        parameters:@{
+                    @"appcode" : self.appCode,
+                    @"X-BB-SESSION": self.currentUser.authenticationToken
+                    }
+          success:^(NSDictionary *responseObject) {
+              
+              if (completionBlock) {
+                  completionBlock(responseObject[@"data"], nil);
+              }
+              
+          } failure:^(NSError *error) {
+              
+              if (completionBlock) {
+                  completionBlock(nil, error);
+              }
+          }];
+}
+
+- (void)getDriverStats: (NSString *)startDate
+               endDate: (NSString *)endDate
+            completion: (BAAObjectResultBlock)completionBlock {
+    
+    [self getPath:@"/caber/stats"
+       parameters:@{
+                    @"startDate" : startDate,
+                    @"endDate" : endDate,
                     @"appcode" : self.appCode,
                     @"X-BB-SESSION": self.currentUser.authenticationToken
                     }

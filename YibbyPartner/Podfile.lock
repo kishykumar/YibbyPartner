@@ -1,4 +1,5 @@
 PODS:
+  - AccountKit (4.29.0)
   - ActionSheetPicker-3.0 (2.2.0)
   - AIFlatSwitch (1.0.1)
   - Alamofire (4.2.0)
@@ -6,7 +7,7 @@ PODS:
     - Alamofire (~> 4.1)
     - ObjectMapper (~> 2.0)
   - AMPopTip (2.1.7)
-  - BaasBoxSDK (0.9.12)
+  - BaasBoxSDK (0.9.14)
   - BButton (4.0.2)
   - Braintree (4.8.7):
     - Braintree/Card (= 4.8.7)
@@ -48,28 +49,6 @@ PODS:
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
   - FDStackView (1.0)
-  - Firebase/Auth (4.1.1):
-    - Firebase/Core
-    - FirebaseAuth (= 4.1.1)
-  - Firebase/Core (4.1.1):
-    - FirebaseAnalytics (= 4.0.3)
-    - FirebaseCore (= 4.0.6)
-  - FirebaseAnalytics (4.0.3):
-    - FirebaseCore (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-    - nanopb (~> 0.3)
-  - FirebaseAuth (4.1.1):
-    - FirebaseAnalytics (~> 4.0)
-    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
-    - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.6):
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-    - nanopb (~> 0.3)
-  - FirebaseInstanceID (2.0.2):
-    - FirebaseCore (~> 4.0)
-  - FirebaseUI/Auth (4.2.0):
-    - Firebase/Auth (~> 4.0)
   - FLAnimatedImage (1.0.12)
   - FoldingCell (2.1.3)
   - Font-Awesome-Swift (1.6.2)
@@ -118,19 +97,8 @@ PODS:
     - GoogleNetworkingUtilities (~> 1.0)
     - GoogleUtilities (~> 1.0)
   - GoogleSymbolUtilities (1.1.2)
-  - GoogleToolboxForMac/DebugUtils (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/Defines (2.1.1)
-  - GoogleToolboxForMac/NSData+zlib (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
-    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
-  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GoogleUtilities (1.3.2):
     - GoogleSymbolUtilities (~> 1.1)
-  - GTMSessionFetcher/Core (1.1.11)
   - Hue (2.0.1)
   - ImagePicker (2.0.0)
   - IQKeyboardManagerSwift (4.0.8)
@@ -154,11 +122,6 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.5.7):
     - MMDrawerController/Core
-  - nanopb (0.3.8):
-    - nanopb/decode (= 0.3.8)
-    - nanopb/encode (= 0.3.8)
-  - nanopb/decode (0.3.8)
-  - nanopb/encode (0.3.8)
   - Nimble (5.0.0)
   - Nimble-Snapshots (4.4.0):
     - Nimble-Snapshots/Core (= 4.4.0)
@@ -194,6 +157,7 @@ PODS:
   - XLPagerTabStrip (6.0.0)
 
 DEPENDENCIES:
+  - AccountKit
   - ActionSheetPicker-3.0 (~> 2.2.0)
   - AIFlatSwitch (~> 1.0.1)
   - Alamofire (~> 4.0)
@@ -210,8 +174,6 @@ DEPENDENCIES:
   - DZNEmptyDataSet
   - Fabric
   - FDStackView (~> 1.0)
-  - Firebase/Auth
-  - FirebaseUI/Auth (~> 4.0)
   - FoldingCell
   - Font-Awesome-Swift (~> 1.6.2)
   - Google/CloudMessaging
@@ -268,12 +230,13 @@ CHECKOUT OPTIONS:
     :git: https://github.com/jpotts18/SwiftValidator.git
 
 SPEC CHECKSUMS:
+  AccountKit: 27d239ed0254b6cda6597df9d712b5aab8db6e24
   ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
   AIFlatSwitch: 5b121a4a90a06f0fbd72e9f1fe9bb30e64d67177
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   AlamofireObjectMapper: 842d2eed43a4d0593ff0110d54ac86a170c4519c
   AMPopTip: 409326cfee1108b625c85de73934014598cd0797
-  BaasBoxSDK: c6c99a1dd5c7bfb685ed2f6dd04d2cb497ce7e49
+  BaasBoxSDK: d2601bff1f28a8658902b0e018e93ef33ab76ee5
   BButton: ab0f2ed3b998ae73c5188b57d270d81e4a1eeb27
   Braintree: ce12a740328db024ae3bb284551e78d8cc34e57c
   CocoaLumberjack: 0d0a04bbec1e5d9c58d311750e42c85fc51a84ef
@@ -285,12 +248,6 @@ SPEC CHECKSUMS:
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FBSnapshotTestCase: '094f9f314decbabe373b87cc339bea235a63e07a'
   FDStackView: 3a4bbe0ce9c35e974246a585168b9da8c32213f1
-  Firebase: 052c0de688fc87b414996eea13e223dd9fee3fa2
-  FirebaseAnalytics: 76f754d37ca5b04f36856729b6af3ca0152d1069
-  FirebaseAuth: f8b07aa83de60d606b4eadd81484b3ac2097ea3e
-  FirebaseCore: 28def3c643989c97ea5a69ea5000f5fa9902b9fd
-  FirebaseInstanceID: c4c7fca62c7b7330caee5da04f19a37ea37bb1c1
-  FirebaseUI: 76877afa8aa122ea135aa51a10fc7d622a82d096
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FoldingCell: f3073f8b24cf20866a35198f31e3b67aea64e96e
   Font-Awesome-Swift: 4dc96df73b5f32aaccdee50a454c3ec253ee4977
@@ -307,9 +264,7 @@ SPEC CHECKSUMS:
   GooglePlaces: 35636d86e5020cba3856eb988c09a5491de0a65a
   GoogleSignIn: 3d571172b8603be39dcb1705d8217146bb76fe62
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
-  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GoogleUtilities: 8bbc733218aad26306f9d4a253823986110e3358
-  GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   Hue: 354caec055fdc9d38b5ef33ca2e7224721843baf
   ImagePicker: 81175d36c2852cb543cb4f5d6c19e28f3e8d90eb
   IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
@@ -321,7 +276,6 @@ SPEC CHECKSUMS:
   M13ProgressSuite: ea9f7263e73e9215e6849dfa54e29ee0ad6a145c
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
-  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Nimble: 56fc9f5020effa2206de22c3dd910f4fb011b92f
   Nimble-Snapshots: e743439f26c2fa99d8f7e0d7c01c99bcb40aa6f2
   NVActivityIndicatorView: 9f47e8a4affb860ef729aeec99b1550219e6c233
@@ -340,6 +294,6 @@ SPEC CHECKSUMS:
   TTRangeSlider: 2f2ce4a33b32bb323c6575b9f5161c4664459c58
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: 62f724b51ecde61ab2fbee0c0ffec62ef543af56
+PODFILE CHECKSUM: b9a2666f462491ffde08a57ed56f58bb6537292e
 
 COCOAPODS: 1.2.0.beta.1

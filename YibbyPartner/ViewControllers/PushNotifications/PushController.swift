@@ -17,18 +17,18 @@ import CocoaLumberjack
 
 open class PushController: NSObject, PushControllerProtocol {
     
-    let BID_MESSAGE_TYPE = "BID"
-    let DRIVER_EN_ROUTE_MESSAGE_TYPE = "DRIVER_EN_ROUTE"
-    let OFFER_REJECTED_MESSAGE_TYPE = "OFFER_REJECTED"
-    let RIDE_CANCELLED_MESSAGE_TYPE = "RIDE_CANCELLED"
+    let BID_MESSAGE_TYPE: String = "BID"
+    let DRIVER_EN_ROUTE_MESSAGE_TYPE: String = "DRIVER_EN_ROUTE"
+    let OFFER_REJECTED_MESSAGE_TYPE: String = "OFFER_REJECTED"
+    let RIDE_CANCELLED_MESSAGE_TYPE: String = "RIDE_CANCELLED"
     
-    let MESSAGE_JSON_FIELD_NAME = "message"
-    let CUSTOM_JSON_FIELD_NAME = "custom"
-    let BID_JSON_FIELD_NAME = "bid"
-    let RIDE_JSON_FIELD_NAME = "ride"
-    let ID_JSON_FIELD_NAME = "id"
-    let BID_ID_JSON_FIELD_NAME = "bidId"
-    let GCM_MSG_ID_JSON_FIELD_NAME = "gcm.message_id"
+    let MESSAGE_JSON_FIELD_NAME: String = "message"
+    let CUSTOM_JSON_FIELD_NAME: String = "custom"
+    let BID_JSON_FIELD_NAME: String = "bid"
+    let RIDE_JSON_FIELD_NAME: String = "ride"
+    let ID_JSON_FIELD_NAME: String = "id"
+    let BID_ID_JSON_FIELD_NAME: String = "bidId"
+    let GCM_MSG_ID_JSON_FIELD_NAME: String = "gcm.message_id"
     
     var savedNotification: [AnyHashable: Any]?
     

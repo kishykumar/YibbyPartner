@@ -243,7 +243,10 @@ class RideStartViewController: BaseYibbyViewController {
             DDLogVerbose("KKDBG_ride:")
             dump(ride)
 
-            totalFareLabelOutlet.text = "$\(String(describing: ride.fare!))"
+            if let fare = ride.fare {
+                let fareInt = Int(fare)
+                totalFareLabelOutlet.text = "$\(String(describing: fareInt))"
+            }
             
             if let people = ride.people {
                 //let fontSize = numPeopleLabelOutlet.font.pointSize
@@ -252,22 +255,23 @@ class RideStartViewController: BaseYibbyViewController {
             }
             
             if let myRider = ride.rider {
+                
+                // First Name
+                riderFirstNameLabelOutlet.text = myRider.firstName
+                
                 // Rating
-                
-//                driverStarsLabelOutlet.text = "\(String(describing: myRider.rating!))"
-//                
-                // Name
-                
+                if let rating = myRider.rating {
+                    riderRatingLabelOutlet.text = "\(String(describing: rating)) \(String(format: "%C", 0xf005))"
+                }
                 
                 // Profile pic
-                
-//                if let driverProfilePic = myDriver.profilePictureFileId {
-//                    if (driverProfilePic != "") {
-//                        if let imageUrl  = BAAFile.getCompleteURL(withToken: driverProfilePic) {
-//                            innerCircleImageViewOutlet.pin_setImage(from: imageUrl)
-//                        }
-//                    }
-//                }
+                if let riderProfilePic = myRider.profilePictureFileId {
+                    if (riderProfilePic != "") {
+                        if let imageUrl  = BAAFile.getCompleteURL(withToken: riderProfilePic) {
+                            riderProfilePictureOutlet.pin_setImage(from: imageUrl)
+                        }
+                    }
+                }
             }
         }
     }

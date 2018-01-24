@@ -18,33 +18,37 @@ class DocumentUploadViewController: BaseYibbyViewController {
     
     @IBOutlet weak var profilePictureViewOutlet: YBUploadPictureView!
     @IBOutlet weak var vehicleInspFormOutlet: YBUploadPictureView!
+    @IBOutlet weak var errorLabelOutlet: UILabel!
     
-    var profilePictureFileId: String?
-    var vehicleInspFormFileId: String?
-    
-    let testMode = false
+    fileprivate var profilePictureFileId: String?
+    fileprivate var vehicleInspFormFileId: String?
+
+    let testMode: Bool = false
     
     // MARK: - Actions
     
     @IBAction func onSubmitBarButtonClick(_ sender: UIBarButtonItem) {
         
-        // conduct error checks
+        errorLabelOutlet.isHidden = true
+        profilePictureViewOutlet.layer.borderColor = UIColor.appDarkGreen1().cgColor
+        vehicleInspFormOutlet.layer.borderColor = UIColor.appDarkGreen1().cgColor
+
+        // Pictures validations
+        if (self.profilePictureFileId == nil) {
+            errorLabelOutlet.text = "Insurance card picture required."
+            errorLabelOutlet.isHidden = false
+            profilePictureViewOutlet.layer.borderColor = UIColor.red.cgColor
+            return;
+        }
         
-        let personalDetails = YBClient.sharedInstance().registrationDetails.personal
-        personalDetails.profilePicture = profilePictureFileId
+        if (self.vehicleInspFormFileId == nil) {
+            errorLabelOutlet.text = "Driver License picture required."
+            errorLabelOutlet.isHidden = false
+            vehicleInspFormOutlet.layer.borderColor = UIColor.red.cgColor
+            return;
+        }
         
-        let vehicleDetails = YBClient.sharedInstance().registrationDetails.vehicle
-        vehicleDetails.inspectionFormPicture = vehicleInspFormFileId
-        
-        submitRegistrationDetails(completionBlock: { () -> Void in
-            
-            let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
-            
-            let paViewController = registerStoryboard.instantiateViewController(withIdentifier: "PendingApprovalViewControllerIdentifier") as! PendingApprovalViewController
-            
-            // get the navigation VC and push the new VC
-            self.navigationController!.pushViewController(paViewController, animated: true)
-        })
+        validationSuccessful()
     }
     
     // MARK: - Setup
@@ -94,37 +98,28 @@ class DocumentUploadViewController: BaseYibbyViewController {
     
     // MARK: Helper functions
     
-    private func submitRegistrationDetails(completionBlock: @escaping DriverRegstrationCompletionBlock) {
+    func validationSuccessful() {
         
-        // send the driver registration details to webserver
-        let registrationDetails = YBClient.sharedInstance().registrationDetails
-        DDLogVerbose("Final RegisterJSON is : \(registrationDetails.toJSONString(prettyPrint: true))")
+        UIApplication.shared.beginIgnoringInteractionEvents()
         
-        ActivityIndicatorUtil.enableActivityIndicator(self.view)
+        // Put the Activity on the right bar button item instead of Next Button
+//        let uiBusy = UIActivityIndicatorView(activityIndicatorStyle: .white)
+//        uiBusy.hidesWhenStopped = true
+//        uiBusy.startAnimating()
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: uiBusy)
         
-        let client: BAAClient = BAAClient.shared()
-        client.completeDriverRegistration(registrationDetails.toJSON(), completion: {(success, error) -> Void in
-            
-            ActivityIndicatorUtil.disableActivityIndicator(self.view)
-            
-            if (success || self.testMode) {
-                DDLogVerbose("registration details sent successfully success: \(success) error: \(error)")
-                completionBlock()
-            }
-            else {
-                DDLogVerbose("registration details sent FAILED \(error))")
-                
-                if ((error as! NSError).domain == BaasBox.errorDomain() && (error as! NSError).code ==
-                    WebInterface.BAASBOX_AUTHENTICATION_ERROR) {
-                    
-                    // check for authentication error and redirect the user to Login page
-                    AlertUtil.displayAlert("Username/password incorrect", message: "Please reenter user credentials and try again.")
-                }
-                else {
-                    AlertUtil.displayAlert("Connectivity or Server Issues.", message: "Please check your internet connection or wait for some time.")
-                }
-            }
-        })
+        let vehicleDetails = YBClient.sharedInstance().registrationDetails.vehicle
+        let personalDetails = YBClient.sharedInstance().registrationDetails.personal
+        
+        vehicleDetails.inspectionFormPicture = self.vehicleInspFormFileId
+        personalDetails.profilePicture = self.profilePictureFileId
+        
+        let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
+        
+        let fundingViewController = registerStoryboard.instantiateViewController(withIdentifier: "FundingInformationViewControllerIdentifier") as! FundingInformationViewController
+        
+        // get the navigation VC and push the new VC
+        self.navigationController!.pushViewController(fundingViewController, animated: true)
     }
     
     /*
@@ -136,7 +131,6 @@ class DocumentUploadViewController: BaseYibbyViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
 
 extension DocumentUploadViewController: YBUploadPictureViewDelegate {
@@ -150,6 +144,7 @@ extension DocumentUploadViewController: YBUploadPictureViewDelegate {
                     success: { (url, fileId) in
                         ActivityIndicatorUtil.disableActivityIndicator(self.view)
                         self.profilePictureFileId = fileId
+                        self.profilePictureViewOutlet.layer.borderColor = UIColor.appDarkGreen1().cgColor
                         completionBlock(true, nil)
                     },
                     failure: { error in
@@ -167,6 +162,7 @@ extension DocumentUploadViewController: YBUploadPictureViewDelegate {
                     success: { (url, fileId) in
                         ActivityIndicatorUtil.disableActivityIndicator(self.view)
                         self.vehicleInspFormFileId = fileId
+                        self.vehicleInspFormOutlet.layer.borderColor = UIColor.appDarkGreen1().cgColor
                         completionBlock(true, nil)
                     },
                     failure: { error in

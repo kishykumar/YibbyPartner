@@ -14,13 +14,14 @@ public typealias FetchDailyEarningsSuccessBlock = () -> Void
 class DailyEarningsViewController: BaseYibbyViewController, UITableViewDelegate, UITableViewDataSource {
 
     // MARK: Properties
-    @IBOutlet weak var dayEarningsTableView: UITableView!
-
-    let tripsSection: Int = 0
+    @IBOutlet weak var tripsTableView: UITableView!
     
-    let textCellIdentifier = "DayEarningsCellIdentifier"
+    let TripEarningsTableViewCellIdentifier: String = "tripEarningsTableViewCellIdentifier"
     var selectedDate: Date!
     
+    var totalTrips = 0
+    var ridesList: [Ride] = [Ride]()
+
     // MARK: Actions
     
     
@@ -36,8 +37,8 @@ class DailyEarningsViewController: BaseYibbyViewController, UITableViewDelegate,
     }
     
     func initProperties() {
-        dayEarningsTableView.delegate = self
-        dayEarningsTableView.dataSource = self
+        tripsTableView.delegate = self
+        tripsTableView.dataSource = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -46,7 +47,10 @@ class DailyEarningsViewController: BaseYibbyViewController, UITableViewDelegate,
     }
     
     func setupUI() {
-        self.navigationController!.isNavigationBarHidden = false
+        setupBackButton()
+        
+        // override the default background color
+        self.view.backgroundColor = UIColor.white
     }
     
     // MARK: UITableViewDelegate
@@ -54,16 +58,18 @@ class DailyEarningsViewController: BaseYibbyViewController, UITableViewDelegate,
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let earningsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Earnings, bundle: nil)
+        let historyStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.History, bundle: nil)
 
-        let tripDetailsViewController = earningsStoryboard.instantiateViewController(withIdentifier: "TripDetailsViewControllerIdentifier") as! TripDetailsViewController
+        let tripDetailsViewController = historyStoryboard.instantiateViewController(withIdentifier: "RideDetailViewControllerIdentifier") as! RideDetailViewController
+
+        tripDetailsViewController.ride = ridesList[indexPath.row]
 
         self.navigationController!.pushViewController(tripDetailsViewController, animated: true)
     }
     
     // MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: textCellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: TripEarningsTableViewCellIdentifier, for: indexPath)
         
 //        cell.textLabel?.text = swiftBlogs[row]
         
@@ -71,19 +77,7 @@ class DailyEarningsViewController: BaseYibbyViewController, UITableViewDelegate,
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10;
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        // Return the number of sections.
-        return 1;
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if (section == tripsSection) {
-            return InterfaceString.TableSections.Trips;
-        }
-        return ""
+        return totalTrips;
     }
     
     // MARK: Helper functions
@@ -95,10 +89,7 @@ class DailyEarningsViewController: BaseYibbyViewController, UITableViewDelegate,
     func loadEarningsData() {
         ActivityIndicatorUtil.enableActivityIndicator(self.view)
         fetchDailyEarningsDetails(selectedDate, successBlock: { () -> Void in
-            
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(3 * Int64(Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-                ActivityIndicatorUtil.disableActivityIndicator(self.view)
-            });
+            ActivityIndicatorUtil.disableActivityIndicator(self.view)
         })
     }
     

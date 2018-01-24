@@ -10,6 +10,7 @@ import UIKit
 import JTCalendar
 import CocoaLumberjack
 import BaasBoxSDK
+import ObjectMapper
 
 public typealias FetchEarningsSuccessBlock = () -> Void
 
@@ -20,37 +21,50 @@ class EarningsSummaryViewController: BaseYibbyViewController, JTCalendarDelegate
     @IBOutlet weak var calendarMenuOutlet: JTCalendarMenuView!
     @IBOutlet weak var calendarOutlet: JTHorizontalCalendarView!
     @IBOutlet weak var summaryEarningsOutlet: UIView!
-    
+    @IBOutlet weak var weekLabelOutlet: UILabel!
+    @IBOutlet weak var totalPayoutLabelOutlet: UILabel!
+    @IBOutlet weak var completedTripsLabelOutlet: UILabel!
+    @IBOutlet weak var timeOnlineLabelOutlet: UILabel!
+
     var calendarManager: JTCalendarManager!
     var dateSelected: Date?
     var startOfTheWeek: Date?
     var endOfWeek: Date?
+
+    var dailyStats: [YBDayStat]?
     
     // MARK: Actions
-    
-    @IBAction func viewDetailedEarningsAction(_ sender: AnyObject) {
 
+    @IBAction func viewDetailedEarningsActions(_ sender: UIButton) {
         let earningsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Earnings, bundle: nil)
-        
+
         let weeklyEarningsViewController = earningsStoryboard.instantiateViewController(withIdentifier: "WeeklyEarningsViewControllerIdentifier") as! WeeklyEarningsViewController
-        
+
         weeklyEarningsViewController.startOfTheWeek = self.startOfTheWeek
         weeklyEarningsViewController.endOfWeek = self.endOfWeek
-
+        weeklyEarningsViewController.dailyStats = self.dailyStats
+        
         self.navigationController!.pushViewController(weeklyEarningsViewController, animated: true)
     }
-    
+
     // MARK: Setup functions
     
     func setupUI() {
-
+        setupBackButton()
+        
+        calendarOutlet.layer.borderWidth = 1.0
+        calendarOutlet.layer.borderColor = UIColor.gray.cgColor
+        
+        // override the default background color
+        self.view.backgroundColor = UIColor.white
     }
-    
+
     func initProperties() {
         
     }
-    
+
     func setupCalendar() {
+        
         self.calendarManager = JTCalendarManager()
         self.calendarManager.delegate = self
         self.calendarManager.menuView = calendarMenuOutlet
@@ -58,10 +72,12 @@ class EarningsSummaryViewController: BaseYibbyViewController, JTCalendarDelegate
         self.calendarManager.setDate(Date())
         
         var calendar = self.calendarManager.dateHelper.calendar()
-        calendar?.firstWeekday = 4 // Wednesday
+        calendar!.locale = Locale(identifier: "en_US")
+        calendar!.timeZone = TimeZone.init(abbreviation: "PDT")!
+        calendar!.firstWeekday = 4 // Wednesday
         
         computeStartEndWeek(Date())
-        self.calendarManager.reload()
+        self.perform(#selector(EarningsSummaryViewController.fetchEarningsCurrentWeek), with:nil, afterDelay:0.0)
     }
     
     override func viewDidLoad() {
@@ -91,23 +107,26 @@ class EarningsSummaryViewController: BaseYibbyViewController, JTCalendarDelegate
             // Selected week
             if (self.startOfTheWeek != nil && self.endOfWeek != nil &&
                 calendarManager.dateHelper.date(dayView.date, isEqualOrAfter: self.startOfTheWeek!, andEqualOrBefore: self.endOfWeek!)) {
-                dayView.circleView.isHidden = false
-                dayView.circleView.backgroundColor = UIColor.red
+                dayView.circleView.isHidden = true
+                //dayView.circleView.backgroundColor = UIColor.red
                 dayView.dotView.backgroundColor = UIColor.white
-                dayView.textLabel.textColor = UIColor.white
+                dayView.textLabel.textColor = UIColor.appDarkGreen1()
+                dayView.textLabel.font = UIFont(name: "Avenir-Black", size: 20)
             }
             // Other month
             else if dayView.isFromAnotherMonth {
                 dayView.circleView.isHidden = true
                 dayView.dotView.backgroundColor = UIColor.red
                 dayView.textLabel.textColor = UIColor.lightGray
+                dayView.textLabel.font = UIFont(name: "Avenir-Light", size: 16)
             }
             // Today
             else if calendarManager.dateHelper.date(Date(), isTheSameDayThan: dayView.date) {
-                dayView.circleView.isHidden = false
-                dayView.circleView.backgroundColor = UIColor.blue
-                dayView.dotView.backgroundColor = UIColor.white
-                dayView.textLabel.textColor = UIColor.white
+                dayView.circleView.isHidden = true
+                //dayView.circleView.backgroundColor = UIColor.blue
+                dayView.dotView.backgroundColor = UIColor.blue
+                dayView.textLabel.textColor = UIColor.black
+                dayView.textLabel.font = UIFont(name: "Avenir-Light", size: 16)
             }
             // Selected Day
             else if ((self.dateSelected != nil) &&
@@ -116,12 +135,14 @@ class EarningsSummaryViewController: BaseYibbyViewController, JTCalendarDelegate
                 dayView.circleView.backgroundColor = UIColor.red
                 dayView.dotView.backgroundColor = UIColor.white
                 dayView.textLabel.textColor = UIColor.white
+                dayView.textLabel.font = UIFont(name: "Avenir-Light", size: 16)
             }
             // Another day of the current month
             else {
                 dayView.circleView.isHidden = true
                 dayView.dotView.backgroundColor = UIColor.red
                 dayView.textLabel.textColor = UIColor.black
+                dayView.textLabel.font = UIFont(name: "Avenir-Light", size: 16)
             }
             
             // Your method to test if a date have an event for example
@@ -159,13 +180,9 @@ class EarningsSummaryViewController: BaseYibbyViewController, JTCalendarDelegate
             
             UIView.transition(with: dayView, duration: 0.3, options: [], animations: {() -> Void in
                 dayView.circleView.transform = CGAffineTransform.identity
+                self.fetchEarningsCurrentWeek()
                 
-                // Load the data for this week from the server
-                self.fetchWeeklyEarnings(self.startOfTheWeek!, weekEnd: self.endOfWeek!, successBlock: {() -> Void in
-                    self.calendarManager.reload()
-                })
-                
-                }, completion: { _ in })
+            }, completion: { _ in })
             
             // Don't change page in week mode because block the selection of days in first and last weeks of the month
 //            if calendarManager.settings.weekModeEnabled {
@@ -187,36 +204,80 @@ class EarningsSummaryViewController: BaseYibbyViewController, JTCalendarDelegate
     func calendarBuildDayView(_ calendar: JTCalendarManager!) -> UIView! {
         let view: JTCalendarDayView = JTCalendarDayView()
         
-        view.textLabel.font = UIFont(name: "Avenir-Light", size: 13)
-        view.circleRatio = 2
-        view.dotRatio = 1.0 / 0.9
+        //view.textLabel.font = UIFont(name: "Avenir-Light", size: 16)
+        //view.circleRatio = 2
+        //view.dotRatio = 1.0 / 0.9
+        
+        view.textLabel.layer.borderWidth = 1.0
+        view.textLabel.layer.borderColor = UIColor.greyE5().cgColor
         
         return view
     }
     
     // MARK: Helpers
     
+    @objc fileprivate func fetchEarningsCurrentWeek() {
+        
+        let weekStart = self.startOfTheWeek!
+        let endOfWeek = self.endOfWeek!
+        
+        fetchWeeklyEarnings(weekStart, endOfWeek: endOfWeek,  successBlock: {() -> Void in
+            
+            let weekStartStr = TimeUtil.getDateStringInFormat(date: weekStart, format: "MM/dd")
+            let weekEndStr = TimeUtil.getDateStringInFormat(date: endOfWeek, format: "MM/dd")
+            self.weekLabelOutlet.text = "\(weekStartStr) - \(weekEndStr)"
+            
+            self.calendarManager.reload()
+        })
+    }
     
-    func fetchWeeklyEarnings(_ weekStart: Date, weekEnd: Date, successBlock: @escaping FetchEarningsSuccessBlock) {
+    func fetchWeeklyEarnings(_ weekStart: Date, endOfWeek: Date, successBlock: @escaping FetchEarningsSuccessBlock) {
+        
+        let weekStartStr = TimeUtil.getDateStringInFormat(date: weekStart, format: "yyyy-MM-dd")
+        let weekEndStr = TimeUtil.getDateStringInFormat(date: endOfWeek, format: "yyyy-MM-dd")
+        
         WebInterface.makeWebRequestAndHandleError(
             self,
-            webRequest: {(errorBlock: (BAAObjectResultBlock)) -> Void in
+            webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
                 
                 // enable the loading activity indicator
                 ActivityIndicatorUtil.enableActivityIndicator(self.view)
                 
                 let client: BAAClient = BAAClient.shared()
                 
-                client.dummyCall( {(success, error) -> Void in
+                client.getDriverStats(weekStartStr, endDate: weekEndStr, completion: {(success, error) -> Void in
                     
                     // diable the loading activity indicator
                     ActivityIndicatorUtil.disableActivityIndicator(self.view)
-                    //                    if (error == nil) {
-                    successBlock()
-                    //                    }
-                    //                    else {
-                    //                        errorBlock(success, error)
-                    //                    }
+                        if (error == nil) {
+                            
+                            // success has the data
+                            let statsModel = Mapper<YBDriverStats>().map(JSONObject: success)!
+
+                            self.dailyStats = statsModel.daily
+                            
+                            if let weeklyStats: YBWeekStat = statsModel.week {
+                                
+                                if let earning = weeklyStats.earning {
+                                    self.totalPayoutLabelOutlet.text = String(format: "$%.02f", earning)
+                                }
+                                
+                                if let rides = weeklyStats.rides {
+                                    self.completedTripsLabelOutlet.text = String(rides)
+                                }
+                                
+                                if let onlineTime = weeklyStats.onlineTime {
+                                    self.timeOnlineLabelOutlet.text = "\(String(onlineTime)) mins"
+                                }
+                            }
+                            
+                            successBlock()
+                        }
+                        else {
+                            // print error
+                            DDLogError("ERROR in fetchWeeklyEarnings: \(error.debugDescription)")
+                            errorBlock(success, error)
+                        }
                 })
         })
     }
@@ -243,3 +304,4 @@ class EarningsSummaryViewController: BaseYibbyViewController, JTCalendarDelegate
     */
 
 }
+

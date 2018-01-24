@@ -30,6 +30,9 @@ class RideDetailViewController: BaseYibbyViewController {
     @IBOutlet weak var tipLabelOutlet: UILabel!
     @IBOutlet weak var totalFareLabelOutlet: UILabel!
     
+    @IBOutlet weak var lostStolenItemButtonOutlet: UIButton!
+    @IBOutlet weak var fareRideIssueButtonOutlet: UIButton!
+    @IBOutlet weak var otherIssueButtonOutlet: UIButton!
     
     // MARK: - Setup functions
     
@@ -47,17 +50,25 @@ class RideDetailViewController: BaseYibbyViewController {
         if let rideISODateTime = ride.datetime, let rideDate = TimeUtil.getDateFromISOTime(rideISODateTime) {
             let prettyDate = TimeUtil.prettyPrintDate1(rideDate)
             self.dateAndTimeLabelOutlet.text = prettyDate
-            self.dateAndTimeLabelOutlet.text = prettyDate
         }
         
         self.pickupTextFieldOutlet.text = ride.pickupLocation?.name
         self.dropoffTextFieldOutlet.text = ride.dropoffLocation?.name
         
-        if let tip = ride.tip, let ridePrice = ride.fare {
-            self.totalFareLabelOutlet.text = "$\(ridePrice + tip)"
-            self.tipLabelOutlet.text = "$\(tip)"
-            self.ridePriceLabelOutlet.text = "$\(ridePrice)"
+        var ridePrice: Float = 0.00
+        var tip: Float = 0.00
+        
+        if let rp = ride.fare {
+            ridePrice = rp
         }
+        
+        if let tp = ride.tip {
+            tip = tp
+        }
+        
+        self.ridePriceLabelOutlet.text = "$\(ridePrice)"
+        self.tipLabelOutlet.text = "$\(tip)"
+        self.totalFareLabelOutlet.text = "$\(ridePrice + tip)"
         
         if let dropoffCoordinate = ride.dropoffLocation?.coordinate(),
             let pickupCoordinate = ride.pickupLocation?.coordinate() {
@@ -121,20 +132,20 @@ class RideDetailViewController: BaseYibbyViewController {
         gmsMapViewOutlet.layer.borderWidth = 1
         gmsMapViewOutlet.layer.borderColor = UIColor.greyC().cgColor
         
-//        lostOrStolenItemBtn.layer.shadowOpacity = 0.5
-//        lostOrStolenItemBtn.layer.shadowRadius = 2
-//        lostOrStolenItemBtn.layer.shadowColor = UIColor.gray.cgColor
-//        lostOrStolenItemBtn.layer.shadowOffset = CGSize(width: -2, height: 0)
-//        
-//        fareOrRideIssueBtn.layer.shadowOpacity = 0.5
-//        fareOrRideIssueBtn.layer.shadowRadius = 2
-//        fareOrRideIssueBtn.layer.shadowColor = UIColor.gray.cgColor
-//        fareOrRideIssueBtn.layer.shadowOffset = CGSize(width: -2, height: -1)
-//        
-//        otherIssueBtn.layer.shadowOpacity = 0.5
-//        otherIssueBtn.layer.shadowRadius = 2
-//        otherIssueBtn.layer.shadowColor = UIColor.gray.cgColor
-//        otherIssueBtn.layer.shadowOffset = CGSize(width: -2, height: -1)
+        lostStolenItemButtonOutlet.layer.shadowOpacity = 0.5
+        lostStolenItemButtonOutlet.layer.shadowRadius = 2
+        lostStolenItemButtonOutlet.layer.shadowColor = UIColor.gray.cgColor
+        lostStolenItemButtonOutlet.layer.shadowOffset = CGSize(width: -2, height: 0)
+        
+        fareRideIssueButtonOutlet.layer.shadowOpacity = 0.5
+        fareRideIssueButtonOutlet.layer.shadowRadius = 2
+        fareRideIssueButtonOutlet.layer.shadowColor = UIColor.gray.cgColor
+        fareRideIssueButtonOutlet.layer.shadowOffset = CGSize(width: -2, height: -1)
+        
+        otherIssueButtonOutlet.layer.shadowOpacity = 0.5
+        otherIssueButtonOutlet.layer.shadowRadius = 2
+        otherIssueButtonOutlet.layer.shadowColor = UIColor.gray.cgColor
+        otherIssueButtonOutlet.layer.shadowOffset = CGSize(width: -2, height: -1)
     }
     
     override func didReceiveMemoryWarning() {

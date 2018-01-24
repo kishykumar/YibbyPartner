@@ -7,10 +7,10 @@
 //
 
 import UIKit
-//import Spring
+import Spring
 
 @IBDesignable
-open class YBBorderedUIView: UIView {
+open class YBBorderedUIView: SpringView {
     
     required override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,14 +24,22 @@ open class YBBorderedUIView: UIView {
     
     func sharedSetup() {
         
-        self.layer.cornerRadius = 10
+        self.layer.cornerRadius = 0
         
         // shadow
         self.layer.shadowOffset = CGSize(width: 0, height: 0)
-        self.layer.shadowOpacity = 0.5
-        self.layer.shadowRadius = 2
-        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.0
+        self.layer.shadowRadius = 0
+        self.layer.shadowColor = UIColor.clear.cgColor
         self.layer.borderColor = UIColor.clear.cgColor
+        
+        
+//        self.layer.cornerRadius = 10
+//        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+//        self.layer.shadowOpacity = 0.5
+//        self.layer.shadowRadius = 2
+//        self.layer.shadowColor = UIColor.black.cgColor
+//        self.layer.borderColor = UIColor.clear.cgColor
     }
     
     @IBInspectable

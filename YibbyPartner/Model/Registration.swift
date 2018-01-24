@@ -18,6 +18,7 @@ class Registration: Mappable {
     var vehicle: YBVehicle = YBVehicle()
     var driverLicense: YBDriverLicense = YBDriverLicense()
     var insurance: YBInsurance = YBInsurance()
+    var funding: YBFunding = YBFunding()
     
     // MARK: Initialization
     
@@ -36,5 +37,6 @@ class Registration: Mappable {
         vehicle <- map["vehicle"]
         driverLicense <- map["driverLicense"]
         insurance <- map["insurance"]
+        funding <- map["funding"]
     }
 }

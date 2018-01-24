@@ -24,11 +24,13 @@ public struct InterfaceString {
         static let Help = NSLocalizedString("Help", comment: "Help Storyboard")
         static let History = NSLocalizedString("History", comment: "History Storyboard")
         static let Online = NSLocalizedString("Online", comment: "Online Storyboard")
-        static let Promotions = NSLocalizedString("Promotions", comment: "Promotions Storyboard")
+        static let Rewards = NSLocalizedString("Rewards", comment: "Rewards Storyboard")
         static let Ride = NSLocalizedString("Ride", comment: "Ride Storyboard")
         static let Register = NSLocalizedString("Register", comment: "Register Storyboard")
         static let Offer = NSLocalizedString("Offer", comment: "Offer Storyboard")
         static let Earnings = NSLocalizedString("Earnings", comment: "Earnings Storyboard")
+        static let Documents = NSLocalizedString("Documents", comment: "Documents Storyboard")
+
     }
     
     public struct EmptyDataMsg {
@@ -200,9 +202,9 @@ public struct InterfaceString {
     }
     
     public struct Resource {
-        static let USStatesList = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
+        static let USStatesList: [String] = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
         
-        static let VehicleColorsList = ["Aluminum", "Beige", "Black", "Blue", "Bronze", "Brown", "Claret", "Copper", "Cream", "Gold", "Gray", "Green", "Maroon", "Metallic", "Navy", "Orange", "Pink", "Purple", "Red", "Rose", "Rust", "Silver", "Tan", "Turquoise", "White", "Yellow"]
+        static let VehicleColorsList: [String] = ["Aluminum", "Beige", "Black", "Blue", "Bronze", "Brown", "Claret", "Copper", "Cream", "Gold", "Gray", "Green", "Maroon", "Metallic", "Navy", "Orange", "Pink", "Purple", "Red", "Rose", "Rust", "Silver", "Tan", "Turquoise", "White", "Yellow"]
     }
     
     static let GenericError = NSLocalizedString("Something went wrong. Thank you for your patience with Yibby Beta!", comment: "Generic error message")

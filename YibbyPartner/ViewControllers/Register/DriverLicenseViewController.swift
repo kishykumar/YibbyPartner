@@ -3,15 +3,17 @@
 //  YibbyPartner
 //
 //  Created by Kishy Kumar on 1/8/17.
-//  Copyright © 2017 MyComp. All rights reserved.
+//  Copyright © 2017 Yibby. All rights reserved.
 //
 
 import UIKit
 import ActionSheetPicker_3_0
 import CocoaLumberjack
 import AIFlatSwitch
+import SwiftValidator
 
-class DriverLicenseViewController: BaseYibbyViewController {
+class DriverLicenseViewController: BaseYibbyViewController,
+                                   ValidationDelegate {
 
     // MARK: - Properties
     
@@ -29,43 +31,23 @@ class DriverLicenseViewController: BaseYibbyViewController {
     @IBOutlet var birthDateTapGestureRecognizerOutlet: UITapGestureRecognizer!
     @IBOutlet var expirationDateTapGestureRecognizerOutlet: UITapGestureRecognizer!
     
-    var selectedState: String?
-    var selectedBirthDate: Date?
-    var selectedExpirationDate: Date?
-    var isCommercialLicense: Bool?
+    @IBOutlet weak var errorLabelOutlet: UILabel!
     
-    private let MINIMUM_LICENSE_EXPIRATION_MONTHS = 1
+    fileprivate var selectedBirthDate: Date?
+    fileprivate var selectedExpirationDate: Date?
+    fileprivate let validator: Validator = Validator()
+    private let MINIMUM_LICENSE_EXPIRATION_MONTHS: Int = 1
 
-    let testMode = true
+    let testMode: Bool = false
     
     // MARK: - Actions
     
     @IBAction func onNextBarButtonClick(_ sender: UIBarButtonItem) {
-        UIApplication.shared.beginIgnoringInteractionEvents()
-        
-        // conduct error checks
-        
-        let driverLicenseDetails = YBClient.sharedInstance().registrationDetails.driverLicense
-        driverLicenseDetails.dob = TimeUtil.getISODate(inDate: self.selectedBirthDate!)
-        driverLicenseDetails.expiration = TimeUtil.getISODate(inDate: self.selectedExpirationDate!)
-        driverLicenseDetails.firstName = self.firstNameTextFieldOutlet.text
-        driverLicenseDetails.lastName = self.lastNameTextFieldOutlet.text
-        driverLicenseDetails.middleName = self.middleNameTextFieldOutlet.text
-        driverLicenseDetails.number = self.driverLicenseTextFieldOutlet.text
-        driverLicenseDetails.state = self.selectedState
-
-        YBClient.sharedInstance().registrationDetails.driving.hasCommercialLicense = self.isCommercialLicense
-        
-        let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
-        
-        let insuranceViewController = registerStoryboard.instantiateViewController(withIdentifier: "InsuranceViewControllerIdentifier") as! InsuranceViewController
-        
-        // get the navigation VC and push the new VC
-        self.navigationController!.pushViewController(insuranceViewController, animated: true)
+        validator.validate(self)
     }
     
     @IBAction func onCommercialLicenseSwitchValueChange(_ sender: AIFlatSwitch) {
-        isCommercialLicense = commercialLicenseSwitchOutlet.isSelected
+        //isCommercialLicense = commercialLicenseSwitchOutlet.isSelected
     }
     
     @IBAction func onStateTextFieldClick(_ sender: UITapGestureRecognizer) {
@@ -77,7 +59,6 @@ class DriverLicenseViewController: BaseYibbyViewController {
             picker, value, index in
             
             if let state = index as? String {
-                self.selectedState = state
                 self.stateTextFieldOutlet.text = state
             }
             
@@ -158,15 +139,43 @@ class DriverLicenseViewController: BaseYibbyViewController {
     func initProperties() {
         
         if (testMode) {
-            selectedState = "California"
+            self.stateTextFieldOutlet.text = "California"
+            
             selectedBirthDate = Date()
+            self.birthDateTextFieldOutlet.text = "Jan 07, 1989"
+
             selectedExpirationDate = Date()
-            isCommercialLicense = true
-            self.firstNameTextFieldOutlet.text = "We"
-            self.lastNameTextFieldOutlet.text = "People"
-            self.middleNameTextFieldOutlet.text = "The"
+            self.expirationDateTextFieldOutlet.text = "Apr 21, 2022"
+            
+            //isCommercialLicense = true
+            self.firstNameTextFieldOutlet.text = "JAMSHID"
+            self.lastNameTextFieldOutlet.text = "EBADI"
+            self.middleNameTextFieldOutlet.text = ""
             self.driverLicenseTextFieldOutlet.text = "F1234567"
         }
+    }
+    
+    fileprivate func setupValidator() {
+        
+        validator.styleTransformers(success:{ (validationRule) -> Void in
+            
+            // clear error label
+            validationRule.errorLabel?.isHidden = true
+            validationRule.errorLabel?.text = ""
+            
+            if let textField = validationRule.field as? UITextField {
+                textField.layer.borderColor = UIColor.appDarkGreen1().cgColor
+            }
+        }, error:{ (validationError) -> Void in
+            
+        })
+        
+        validator.registerField(firstNameTextFieldOutlet, errorLabel: errorLabelOutlet , rules: [RequiredRule(message: "First Name is required")])
+        validator.registerField(lastNameTextFieldOutlet, errorLabel: errorLabelOutlet , rules: [RequiredRule(message: "Last Name is required")])
+        validator.registerField(driverLicenseTextFieldOutlet, errorLabel: errorLabelOutlet , rules: [RequiredRule(message: "License # is required")])
+        validator.registerField(stateTextFieldOutlet, errorLabel: errorLabelOutlet , rules: [RequiredRule(message: "State is required")])
+        validator.registerField(expirationDateTextFieldOutlet, errorLabel: errorLabelOutlet , rules: [RequiredRule(message: "Expiration Date is required")])
+        validator.registerField(birthDateTextFieldOutlet, errorLabel: errorLabelOutlet , rules: [RequiredRule(message: "Birth Date is required")])
     }
     
     override func viewDidLoad() {
@@ -176,6 +185,7 @@ class DriverLicenseViewController: BaseYibbyViewController {
         setupUI()
         setupDelegates()
         initProperties()
+        setupValidator()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -201,6 +211,83 @@ class DriverLicenseViewController: BaseYibbyViewController {
     }
     */
 
+    // MARK: - ValidationDelegate Methods
+    
+    func validationSuccessful() {
+        
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        // conduct error checks
+        
+        let driverLicenseDetails = YBClient.sharedInstance().registrationDetails.driverLicense
+        driverLicenseDetails.dob = TimeUtil.getISODate(inDate: self.selectedBirthDate!)
+        driverLicenseDetails.expiration = TimeUtil.getISODate(inDate: self.selectedExpirationDate!)
+        driverLicenseDetails.firstName = self.firstNameTextFieldOutlet.text
+        driverLicenseDetails.lastName = self.lastNameTextFieldOutlet.text
+        driverLicenseDetails.middleName = self.middleNameTextFieldOutlet.text
+        driverLicenseDetails.number = self.driverLicenseTextFieldOutlet.text
+        driverLicenseDetails.state = self.stateTextFieldOutlet.text
+        
+        YBClient.sharedInstance().registrationDetails.driving.hasCommercialLicense = commercialLicenseSwitchOutlet.isSelected
+        
+        // Put the Activity on the right bar button item instead of Next Button
+//        let uiBusy = UIActivityIndicatorView(activityIndicatorStyle: .white)
+//        uiBusy.hidesWhenStopped = true
+//        uiBusy.startAnimating()
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: uiBusy)
+        
+        let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
+        
+        let insuranceViewController = registerStoryboard.instantiateViewController(withIdentifier: "InsuranceViewControllerIdentifier") as! InsuranceViewController
+        
+        // get the navigation VC and push the new VC
+        self.navigationController!.pushViewController(insuranceViewController, animated: true)
+    }
+    
+    func validationFailed(_ errors:[(Validatable, ValidationError)]) {
+
+        var errorDict: [UITextField:ValidationError] = [:]
+        var errorTextField: UITextField = self.firstNameTextFieldOutlet
+        var verror: ValidationError?
+        
+        // put the array elements in a dictionary
+        for error in errors {
+            
+            let (_, validationError) = error
+            
+            if let textField = validationError.field as? UITextField {
+                errorDict[textField] = validationError
+            }
+        }
+        
+        if let validationError = errorDict[self.firstNameTextFieldOutlet] {
+            errorTextField = self.firstNameTextFieldOutlet
+            verror = validationError
+        } else if let validationError = errorDict[self.middleNameTextFieldOutlet] {
+            errorTextField = self.middleNameTextFieldOutlet
+            verror = validationError
+        } else if let validationError = errorDict[self.lastNameTextFieldOutlet] {
+            errorTextField = self.lastNameTextFieldOutlet
+            verror = validationError
+        } else if let validationError = errorDict[self.driverLicenseTextFieldOutlet] {
+            errorTextField = self.driverLicenseTextFieldOutlet
+            verror = validationError
+        } else if let validationError = errorDict[self.stateTextFieldOutlet] {
+            errorTextField = self.stateTextFieldOutlet
+            verror = validationError
+        } else if let validationError = errorDict[self.birthDateTextFieldOutlet] {
+            errorTextField = self.birthDateTextFieldOutlet
+            verror = validationError
+        } else if let validationError = errorDict[self.expirationDateTextFieldOutlet] {
+            errorTextField = self.expirationDateTextFieldOutlet
+            verror = validationError
+        }
+        
+        verror!.errorLabel?.isHidden = false
+        verror!.errorLabel?.text = verror!.errorMessage
+        
+        errorTextField.layer.borderColor = UIColor.red.cgColor
+    }
 }
 
 extension DriverLicenseViewController: UIGestureRecognizerDelegate {

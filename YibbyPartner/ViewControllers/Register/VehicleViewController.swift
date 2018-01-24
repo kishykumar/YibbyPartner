@@ -9,25 +9,26 @@
 import UIKit
 import ActionSheetPicker_3_0
 import CocoaLumberjack
+import SwiftValidator
 
-class VehicleViewController: BaseYibbyViewController {
+class VehicleViewController: BaseYibbyViewController,
+                             ValidationDelegate {
 
     // MARK: - Properties
-    var vehicleYearsRange = [String]()
+    fileprivate var vehicleYearsRange: [String] = [String]()
     
-    var vehicleCapacityRange = ["3", "4", "5", "6", "7"]
-    var DEFAULT_VEHICLE_CAPACITY = "4"
+    fileprivate var vehicleCapacityRange: [String] = ["3", "4", "5", "6", "7"]
+    fileprivate var DEFAULT_VEHICLE_CAPACITY: String = "4"
     
-    var vehicleMakeRange = [String]()
-    var vehicleModelRange = [String]()
+    fileprivate var vehicleMakeRange: [String] = [String]()
+    fileprivate var vehicleModelRange: [String] = [String]()
     
-    var selectedYear: String?
-    var selectedMake: String?
-    var selectedModel: String?
-    var selectedColor: String?
-    var selectedCapacity: String?
-    var licensePlateNumber: String?
-    
+//    fileprivate var selectedYear: String?
+//    fileprivate var selectedModel: String?
+//    fileprivate var selectedColor: String?
+//    fileprivate var selectedCapacity: String?
+    fileprivate let validator: Validator = Validator()
+
     @IBOutlet var vehicleMakeTapGestureRecognizerOutlet: UITapGestureRecognizer!
     @IBOutlet var vehicleModelTapGestureRecognizerOutlet: UITapGestureRecognizer!
     @IBOutlet var vehicleYearTapGestureRecognizerOutlet: UITapGestureRecognizer!
@@ -41,34 +42,16 @@ class VehicleViewController: BaseYibbyViewController {
     @IBOutlet weak var vehicleLicensePlateTextFieldOutlet: YBPickerTextField!
     @IBOutlet weak var vehicleCapacityTextFieldOutlet: YBPickerTextField!
     
-    let MINIMUM_VEHICLE_YEAR = "2001"
+    @IBOutlet weak var errorLabelOutlet: UILabel!
     
-    let testMode = true
+    let MINIMUM_VEHICLE_YEAR: String = "2001"
+    
+    let testMode: Bool = false
     
     // MARK: - Actions
     
     @IBAction func onNextBarButtonClick(_ sender: UIBarButtonItem) {
-        
-        UIApplication.shared.beginIgnoringInteractionEvents()
-
-        // TODO: conduct error checks
-        
-        
-        // on successful error checks, fill in the client registration data structure
-        let clientVehicle = YBClient.sharedInstance().registrationDetails.vehicle
-        clientVehicle.licensePlate = licensePlateNumber
-        clientVehicle.capacity = Int(selectedCapacity!)
-        clientVehicle.year = Int(selectedYear!)
-        clientVehicle.make = selectedMake
-        clientVehicle.model = selectedModel
-        clientVehicle.exteriorColor = selectedColor
-        
-        let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
-        
-        let dlViewController = registerStoryboard.instantiateViewController(withIdentifier: "DriverLicenseViewControllerIdentifier") as! DriverLicenseViewController
-        
-        // get the navigation VC and push the new VC
-        self.navigationController!.pushViewController(dlViewController, animated: true)
+        validator.validate(self)
     }
     
     @IBAction func vehicleMakeClicked(_ sender: UITapGestureRecognizer) {
@@ -83,10 +66,8 @@ class VehicleViewController: BaseYibbyViewController {
         ActionSheetStringPicker.show(withTitle: InterfaceString.ActionSheet.VehicleMake, rows: self.vehicleMakeRange, initialSelection: 0, doneBlock: {
             picker, value, index in
             
-            self.selectedMake = (index as? String)!
-            self.vehicleMakeTextFieldOutlet.text = self.selectedMake
-            
-            self.loadVehicleModels(make: self.selectedMake!, year: self.selectedYear!)
+            self.vehicleMakeTextFieldOutlet.text = (index as? String)!
+            self.loadVehicleModels(make: self.vehicleMakeTextFieldOutlet.text!, year: self.vehicleYearTextFieldOutlet.text!)
             
             return
         }, cancel: { ActionStringCancelBlock in return }, origin: vehicleMakeTextFieldOutlet)
@@ -101,10 +82,9 @@ class VehicleViewController: BaseYibbyViewController {
             picker, value, index in
 
             if let year = index as? String {
-                self.selectedYear = year
                 self.vehicleYearTextFieldOutlet.text = year
             
-                self.loadVehicleMakes(year: self.selectedYear!)
+                self.loadVehicleMakes(year: self.vehicleYearTextFieldOutlet.text!)
             }
 
             return
@@ -124,7 +104,6 @@ class VehicleViewController: BaseYibbyViewController {
             picker, value, index in
             
             if let model = index as? String {
-                self.selectedModel = model
                 self.vehicleModelTextFieldOutlet.text = model
                 
                 self.vehicleColorTextFieldOutlet.text = InterfaceString.Resource.VehicleColorsList.first
@@ -143,11 +122,8 @@ class VehicleViewController: BaseYibbyViewController {
             picker, value, index in
             
             if let color = index as? String {
-                self.selectedColor = color
                 self.vehicleColorTextFieldOutlet.text = color
-                
                 self.vehicleCapacityTextFieldOutlet.text = self.DEFAULT_VEHICLE_CAPACITY
-                self.selectedCapacity = self.DEFAULT_VEHICLE_CAPACITY
             }
             
             return
@@ -164,7 +140,6 @@ class VehicleViewController: BaseYibbyViewController {
             
             if let capacity = index as? String {
                 self.vehicleCapacityTextFieldOutlet.text = capacity
-                self.selectedCapacity = capacity
             }
             return
         }, cancel: { ActionStringCancelBlock in return }, origin: vehicleYearTextFieldOutlet)
@@ -195,16 +170,22 @@ class VehicleViewController: BaseYibbyViewController {
         
         // while nav bar tint
         self.navigationController?.navigationBar.tintColor = .white
+        
+        // green navigation bar color
+        self.navigationController?.navigationBar.barTintColor = UIColor.appDarkGreen1()
+        
+        // title color
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
     }
 
     func initProperties() {
         if (self.testMode) {
-            selectedYear = "2014"
-            selectedMake = "Chevrolet"
-            selectedModel = "Camaro"
-            selectedColor = "Black"
-            selectedCapacity = "4"
-            licensePlateNumber = "KTU7083"
+            self.vehicleYearTextFieldOutlet.text = "2014"
+            self.vehicleMakeTextFieldOutlet.text = "Chevrolet"
+            self.vehicleModelTextFieldOutlet.text = "Camaro"
+            self.vehicleColorTextFieldOutlet.text = "Black"
+            self.vehicleCapacityTextFieldOutlet.text = "4"
+            self.vehicleLicensePlateTextFieldOutlet.text = "7KTU999"
         }
     }
     
@@ -226,14 +207,44 @@ class VehicleViewController: BaseYibbyViewController {
         }
     }
     
+    fileprivate func setupValidator() {
+        
+        validator.styleTransformers(success:{ (validationRule) -> Void in
+            
+            // clear error label
+            validationRule.errorLabel?.isHidden = true
+            validationRule.errorLabel?.text = ""
+            
+            if let textField = validationRule.field as? UITextField {
+                textField.layer.borderColor = UIColor.appDarkGreen1().cgColor
+            }
+        }, error:{ (validationError) -> Void in
+            
+            //            validationError.errorLabel?.isHidden = false
+            //            validationError.errorLabel?.text = validationError.errorMessage
+            //
+            //            if let textField = validationError.field as? UITextField {
+            //                textField.setBottomBorder(UIColor.red)
+            //            }
+        })
+        
+        validator.registerField(vehicleYearTextFieldOutlet, errorLabel: errorLabelOutlet , rules: [RequiredRule(message: "Vehicle Year is required")])
+        validator.registerField(vehicleMakeTextFieldOutlet, errorLabel: errorLabelOutlet , rules: [RequiredRule(message: "Vehicle Make is required")])
+        validator.registerField(vehicleModelTextFieldOutlet, errorLabel: errorLabelOutlet , rules: [RequiredRule(message: "Vehicle Model is required")])
+        validator.registerField(vehicleColorTextFieldOutlet, errorLabel: errorLabelOutlet , rules: [RequiredRule(message: "Vehicle Color is required")])
+        validator.registerField(vehicleLicensePlateTextFieldOutlet, errorLabel: errorLabelOutlet , rules: [RequiredRule(message: "License Plate is required")])
+        validator.registerField(vehicleCapacityTextFieldOutlet, errorLabel: errorLabelOutlet , rules: [RequiredRule(message: "Vehicle Capacity is required")])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        initProperties()
         setupUI()
         setupDelegates()
         setupActionSheets()
-        initProperties()
+        setupValidator()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -248,6 +259,77 @@ class VehicleViewController: BaseYibbyViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK: - ValidationDelegate Methods
+    
+    func validationSuccessful() {
+        
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        // on successful error checks, fill in the client registration data structure
+        let clientVehicle = YBClient.sharedInstance().registrationDetails.vehicle
+        clientVehicle.licensePlate = self.vehicleLicensePlateTextFieldOutlet.text
+        clientVehicle.capacity = Int(self.vehicleCapacityTextFieldOutlet.text!)
+        clientVehicle.year = Int(self.vehicleYearTextFieldOutlet.text!)
+        clientVehicle.make = self.vehicleMakeTextFieldOutlet.text!
+        clientVehicle.model = self.vehicleModelTextFieldOutlet.text!
+        clientVehicle.exteriorColor = self.vehicleColorTextFieldOutlet.text!
+        
+        // Put the Activity on the right bar button item instead of Next Button
+//        let uiBusy = UIActivityIndicatorView(activityIndicatorStyle: .white)
+//        uiBusy.hidesWhenStopped = true
+//        uiBusy.startAnimating()
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: uiBusy)
+        
+        let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
+        
+        let dlViewController = registerStoryboard.instantiateViewController(withIdentifier: "DriverLicenseViewControllerIdentifier") as! DriverLicenseViewController
+        
+        // get the navigation VC and push the new VC
+        self.navigationController!.pushViewController(dlViewController, animated: true)
+    }
+    
+    func validationFailed(_ errors:[(Validatable, ValidationError)]) {
+        
+        var errorDict: [UITextField:ValidationError] = [:]
+        var errorTextField: UITextField = self.vehicleYearTextFieldOutlet
+        var verror: ValidationError?
+        
+        // put the array elements in a dictionary
+        for error in errors {
+            
+            let (_, validationError) = error
+            
+            if let textField = validationError.field as? UITextField {
+                errorDict[textField] = validationError
+            }
+        }
+        
+        if let validationError = errorDict[self.vehicleYearTextFieldOutlet] {
+            errorTextField = self.vehicleYearTextFieldOutlet
+            verror = validationError
+        } else if let validationError = errorDict[self.vehicleMakeTextFieldOutlet] {
+            errorTextField = self.vehicleMakeTextFieldOutlet
+            verror = validationError
+        } else if let validationError = errorDict[self.vehicleModelTextFieldOutlet] {
+            errorTextField = self.vehicleModelTextFieldOutlet
+            verror = validationError
+        } else if let validationError = errorDict[self.vehicleColorTextFieldOutlet] {
+            errorTextField = self.vehicleColorTextFieldOutlet
+            verror = validationError
+        } else if let validationError = errorDict[self.vehicleLicensePlateTextFieldOutlet] {
+            errorTextField = self.vehicleLicensePlateTextFieldOutlet
+            verror = validationError
+        } else if let validationError = errorDict[self.vehicleCapacityTextFieldOutlet] {
+            errorTextField = self.vehicleCapacityTextFieldOutlet
+            verror = validationError
+        }
+        
+        verror!.errorLabel?.isHidden = false
+        verror!.errorLabel?.text = verror!.errorMessage
+        
+        errorTextField.layer.borderColor = UIColor.red.cgColor
+    }
+    
     // MARK: - Helpers
     
     func loadVehicleMakes(year: String) {
@@ -269,6 +351,7 @@ class VehicleViewController: BaseYibbyViewController {
                 }
                 
                 self.vehicleMakeTextFieldOutlet.text = self.vehicleMakeRange.first
+                self.loadVehicleModels(make: self.vehicleMakeTextFieldOutlet.text!, year: self.vehicleYearTextFieldOutlet.text!)
 
             } else {
                 // TODO: show error alert
@@ -293,7 +376,10 @@ class VehicleViewController: BaseYibbyViewController {
                         }
                     }
                 }
+                
+                // Initialize the model on a successful models fetch
                 self.vehicleModelTextFieldOutlet.text = self.vehicleModelRange.first
+                
             } else {
                 // TODO: show error alert
             }

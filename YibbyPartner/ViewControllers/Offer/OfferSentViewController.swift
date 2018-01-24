@@ -20,7 +20,7 @@ class OfferSentViewController: BaseYibbyViewController, LTMorphingLabelDelegate 
     
     fileprivate var morphingLabelTextArrayIndex = 0
     
-    fileprivate var morphingLabelTextArray = [
+    fileprivate var morphingLabelTextArray: [String] = [
         "Getting your ride!",
         "Hang on tight!",
         "Ride in less than 30 seconds",
@@ -41,9 +41,9 @@ class OfferSentViewController: BaseYibbyViewController, LTMorphingLabelDelegate 
     var offerTimer: Timer?
     var progressTimer: Timer?
     
-    let OFFER_TIMER_INTERVAL = 30.0
-    let OFFER_TIMER_EXPIRE_MSG_TITLE = "Offer Rejected."
-    let OFFER_TIMER_EXPIRE_MSG_CONTENT = "Reason: Your offer was not the lowest."
+    let OFFER_TIMER_INTERVAL: Double = 30.0
+    let OFFER_TIMER_EXPIRE_MSG_TITLE: String = "Offer Rejected."
+    let OFFER_TIMER_EXPIRE_MSG_CONTENT: String = "Reason: Your offer was not the lowest."
     
     let PROGRESS_TIMER_INTERVAL: Float = 0.3 // this is the default image progress view animation time
     

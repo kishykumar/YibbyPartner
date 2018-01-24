@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,7 +40,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="voV-Oq-j4d" userLabel="FirstContainerView">
                                                 <rect key="frame" x="0.0" y="40" width="320" height="175"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3/6/2016 at 5:01 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMl-VP-51H" userLabel="DateTimeLabel">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="03/06/2017 at 5:01 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMl-VP-51H" userLabel="DateTimeLabel">
                                                         <rect key="frame" x="10" y="10" width="300" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="cnU-fg-3U9"/>
@@ -71,21 +71,12 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="144" height="115"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     </imageView>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sy1-kX-9q7" userLabel="CarDetailsButton">
-                                                                        <rect key="frame" x="57" y="70.5" width="30" height="32"/>
-                                                                        <fontDescription key="fontDescription" name="Ionicons" family="Ionicons" pointSize="20"/>
-                                                                        <state key="normal" title="">
-                                                                            <color key="titleColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        </state>
-                                                                    </button>
                                                                 </subviews>
                                                                 <constraints>
-                                                                    <constraint firstItem="Sy1-kX-9q7" firstAttribute="centerY" secondItem="T6j-IL-mzv" secondAttribute="centerY" multiplier="1.5" id="IFq-tv-Gnl"/>
                                                                     <constraint firstItem="Bv9-OJ-Dcz" firstAttribute="top" secondItem="T6j-IL-mzv" secondAttribute="top" id="PX7-ae-rSj"/>
                                                                     <constraint firstAttribute="trailing" secondItem="Bv9-OJ-Dcz" secondAttribute="trailing" id="XPX-EC-MTN"/>
                                                                     <constraint firstAttribute="width" secondItem="T6j-IL-mzv" secondAttribute="height" multiplier="1.25" id="dI1-WP-pTk"/>
                                                                     <constraint firstAttribute="bottom" secondItem="Bv9-OJ-Dcz" secondAttribute="bottom" id="rBf-qf-RMo"/>
-                                                                    <constraint firstItem="Sy1-kX-9q7" firstAttribute="centerX" secondItem="T6j-IL-mzv" secondAttribute="centerX" id="rbE-UN-Tde"/>
                                                                     <constraint firstItem="Bv9-OJ-Dcz" firstAttribute="leading" secondItem="T6j-IL-mzv" secondAttribute="leading" id="sEs-cf-jcx"/>
                                                                 </constraints>
                                                             </view>
@@ -351,7 +342,10 @@
                         <outlet property="dateAndTimeLabelOutlet" destination="uMl-VP-51H" id="dfu-66-EDk"/>
                         <outlet property="distanceLabelOutlet" destination="bvB-tD-Y0X" id="3gb-tN-dD6"/>
                         <outlet property="dropoffTextFieldOutlet" destination="ovP-8k-l1Y" id="gRL-Mb-mdD"/>
+                        <outlet property="fareRideIssueButtonOutlet" destination="M17-nZ-dUx" id="hWS-if-wAg"/>
                         <outlet property="gmsMapViewOutlet" destination="JEZ-75-Whn" id="zZK-u2-H6R"/>
+                        <outlet property="lostStolenItemButtonOutlet" destination="As0-YM-jjH" id="euJ-wB-SnO"/>
+                        <outlet property="otherIssueButtonOutlet" destination="S00-TC-9Pd" id="olh-YI-6nM"/>
                         <outlet property="pickupTextFieldOutlet" destination="1mo-qt-AyL" id="ggu-IY-7uR"/>
                         <outlet property="ridePriceLabelOutlet" destination="jzn-Xy-UIU" id="YB9-8U-fZE"/>
                         <outlet property="riderImageViewOutlet" destination="BhQ-gL-WB6" id="EqK-p0-1Ie"/>
@@ -388,7 +382,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NB8-7D-iXD" userLabel="Container">
                                             <rect key="frame" x="8" y="0.0" width="304" height="162.5"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25/2/17 at 6:01 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MrN-Y2-2pZ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12/25/17 at 6:01 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MrN-Y2-2pZ">
                                                     <rect key="frame" x="0.0" y="7" width="304" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -575,7 +569,7 @@
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         </imageView>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hIt-fr-Xtn" userLabel="CarDetailsButton">
-                                                                            <rect key="frame" x="51" y="63.5" width="30" height="32"/>
+                                                                            <rect key="frame" x="51" y="61.5" width="30" height="36"/>
                                                                             <fontDescription key="fontDescription" name="Ionicons" family="Ionicons" pointSize="20"/>
                                                                             <state key="normal" title="">
                                                                                 <color key="titleColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -735,7 +729,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enS-kn-HZl">
-                                                                            <rect key="frame" x="104.5" y="102" width="30" height="16"/>
+                                                                            <rect key="frame" x="104" y="102" width="29.5" height="16"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <nil key="highlightedColor"/>
@@ -748,7 +742,7 @@
                                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 </view>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*0418" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSA-Lj-682">
-                                                                                    <rect key="frame" x="0.5" y="21" width="39" height="19"/>
+                                                                                    <rect key="frame" x="1" y="21" width="38.5" height="19"/>
                                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <nil key="highlightedColor"/>
@@ -929,7 +923,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toyota Corolla  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdB-CF-MX5" customClass="YibbyPaddingLabel" customModule="YibbyPartner" customModuleProvider="target">
-                                                <rect key="frame" x="87.5" y="195" width="125" height="40"/>
+                                                <rect key="frame" x="87.5" y="193.5" width="125" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Hkt-YJ-B54"/>
@@ -945,7 +939,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6EDG137" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTf-fX-Nvg" customClass="YibbyPaddingLabel" customModule="YibbyPartner" customModuleProvider="target">
-                                                <rect key="frame" x="87.5" y="340" width="125" height="40"/>
+                                                <rect key="frame" x="87.5" y="337.5" width="125" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="TDk-Tg-H1K"/>
@@ -960,7 +954,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xun-8B-zmb" userLabel="UpAngleFAButton">
-                                                <rect key="frame" x="135" y="485" width="30" height="38"/>
+                                                <rect key="frame" x="135" y="481" width="30" height="42"/>
                                                 <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="25"/>
                                                 <state key="normal" title="">
                                                     <color key="titleColor" red="0.1529411765" green="0.68235294120000001" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>

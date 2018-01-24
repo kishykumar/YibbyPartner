@@ -27,20 +27,20 @@ class SplashViewController: BaseYibbyViewController {
 
     // MARK: Properties
     
-    static let SPLASH_SCREEN_TAG = 10
+    static let SPLASH_SCREEN_TAG: Int = 10
     
-    let APP_FIRST_RUN = "FIRST_RUN"
-    let STATUS_JSON_FIELD_NAME = "status"
-    let BID_JSON_FIELD_NAME = "bid"
-    let OFFER_JSON_FIELD_NAME = "status"
-    let RIDE_JSON_FIELD_NAME = "ride"
+    let APP_FIRST_RUN: String = "FIRST_RUN"
+    let STATUS_JSON_FIELD_NAME: String = "status"
+    let BID_JSON_FIELD_NAME: String = "bid"
+    let OFFER_JSON_FIELD_NAME: String = "status"
+    let RIDE_JSON_FIELD_NAME: String = "ride"
     
     var launchScreenVC: LaunchScreenViewController?
     var snapshot: UIImage?
     var imageView: UIImageView?
     fileprivate var pushStatusObserver: NotificationObserver?
 
-    let ERROR_TEXTVIEW_TAG = 100
+    let ERROR_TEXTVIEW_TAG: Int = 100
 
     // MARK: view functions
     

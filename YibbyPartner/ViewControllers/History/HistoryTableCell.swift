@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 import BaasBoxSDK
+import CocoaLumberjack
 
 class HistoryTableCell : UITableViewCell {
     
@@ -36,11 +37,14 @@ class HistoryTableCell : UITableViewCell {
         if let rideISODateTime = ride.datetime, let rideDate = TimeUtil.getDateFromISOTime(rideISODateTime) {
             let prettyDate = TimeUtil.prettyPrintDate1(rideDate)
             self.dateTimeLabelOutlet.text = prettyDate
-            self.dateTimeLabelOutlet.text = prettyDate
         }
         
-        if let tip = ride.tip, let totalFare = ride.fare {
-            self.ridePriceLabelOutlet.text = "$\(totalFare + tip)"
+        if let totalFare = ride.fare {
+            if let tip = ride.tip  {
+                self.ridePriceLabelOutlet.text = "$\(totalFare + tip)"
+            } else {
+                self.ridePriceLabelOutlet.text = "$\(totalFare)"
+            }
         }
         
         self.tripGMSMapViewOutlet.clear()

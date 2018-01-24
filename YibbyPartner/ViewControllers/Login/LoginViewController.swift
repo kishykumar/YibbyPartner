@@ -25,8 +25,8 @@ class LoginViewController: BaseYibbyViewController,
     @IBOutlet weak var errorLabelOutlet: UILabel!
     @IBOutlet weak var phoneNumberTextFieldOutlet: PhoneNumberTextField!
     
-    static let PASSWORD_KEY_NAME = "PASSWORD"
-    static let PHONE_NUMBER_KEY_NAME = "PHONE_NUMBER"
+    static let PASSWORD_KEY_NAME: String = "PASSWORD"
+    static let PHONE_NUMBER_KEY_NAME: String = "PHONE_NUMBER"
     
     var onStartup = true
 
@@ -36,12 +36,12 @@ class LoginViewController: BaseYibbyViewController,
     // MARK: - Actions
     
     @IBAction func facebookAction(_ sender: UIButton) {
-        AlertUtil.displayAlert("Coming Soon!", message: "Please use our regular login flow.")
+        AlertUtil.displayAlertOnVC(self, title: "Coming Soon!", message: "Please use our regular login flow.")
         return;
     }
     
     @IBAction func googleAction(_ sender: UIButton) {
-        AlertUtil.displayAlert("Coming Soon!", message: "Please use our regular login flow.")
+        AlertUtil.displayAlertOnVC(self, title: "Coming Soon!", message: "Please use our regular login flow.")
         return;
     }
     
@@ -54,6 +54,7 @@ class LoginViewController: BaseYibbyViewController,
     
     func setupUI() {
         loginButtonOutlet.color = UIColor.appDarkGreen1()
+        phoneNumberTextFieldOutlet.defaultRegion = "US"
     }
     
     func setupValidator() {
@@ -81,7 +82,7 @@ class LoginViewController: BaseYibbyViewController,
                                 errorLabel: self.errorLabelOutlet,
                                 rules: [RequiredRule(message: "Phone number is required"),
                                         MinLengthRule(length: MAX_PHONE_NUMBER_TEXTFIELD_LENGTH,
-                                                      message: "Must be at least 9 characters long")])
+                                                      message: "Must be at least 10 characters long")])
         
         validator.registerField(password,
                                 errorLabel: self.errorLabelOutlet,
@@ -122,7 +123,7 @@ class LoginViewController: BaseYibbyViewController,
     // MARK: - KeyChain functions
     static func setLoginKeyChainKeys (_ username: String, password: String) {
         let ret = KeychainWrapper.standard.set(username, forKey: LoginViewController.PHONE_NUMBER_KEY_NAME)
-        print("Keychain set value for email : \(ret)")
+        print("Keychain set value for phoneNumber : \(ret)")
         KeychainWrapper.standard.set(password, forKey: LoginViewController.PASSWORD_KEY_NAME)
     }
     
@@ -132,9 +133,9 @@ class LoginViewController: BaseYibbyViewController,
     }
     
     static func getLoginKeyChainValues () -> (String?, String?) {
-        let retrievedEmailAddress = KeychainWrapper.standard.string(forKey: LoginViewController.PHONE_NUMBER_KEY_NAME)
+        let retrievedPhoneNumber = KeychainWrapper.standard.string(forKey: LoginViewController.PHONE_NUMBER_KEY_NAME)
         let retrievedPassword = KeychainWrapper.standard.string(forKey: LoginViewController.PASSWORD_KEY_NAME)
-        return (retrievedEmailAddress, retrievedPassword)
+        return (retrievedPhoneNumber, retrievedPassword)
     }
     
     // MARK: - Helper functions
@@ -149,35 +150,33 @@ class LoginViewController: BaseYibbyViewController,
     
     // BaasBox login user
     func loginUser(_ usernamei: String, passwordi: String) {
-        ActivityIndicatorUtil.enableActivityIndicator(self.view)
-        
-        let client: BAAClient = BAAClient.shared()
-        client.authenticateCaber(BAASBOX_DRIVER_STRING, username: usernamei, password: passwordi, completion: {(success, error) -> Void in
+        WebInterface.makeWebRequestAndHandleError(
+            self,
+            webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
+
+            ActivityIndicatorUtil.enableActivityIndicator(self.view)
             
-            ActivityIndicatorUtil.disableActivityIndicator(self.view)
-            
-            if (success) {
-                DDLogVerbose("user logged in successfully \(success)")
-                let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+            let client: BAAClient = BAAClient.shared()
+            client.authenticateCaber(BAASBOX_DRIVER_STRING, username: usernamei, password: passwordi, completion: {(success, error) -> Void in
                 
-                // if login is successful, save username, password, token in keychain
-                LoginViewController.setLoginKeyChainKeys(usernamei, password: passwordi)
+                ActivityIndicatorUtil.disableActivityIndicator(self.view)
                 
-                appDelegate.initializeApp()
-            }
-            else {
-                DDLogVerbose("Error logging in: \(String(describing: error))")
-                
-                if ((error! as NSError).domain == BaasBox.errorDomain() && (error! as NSError).code ==
-                    WebInterface.BAASBOX_AUTHENTICATION_ERROR) {
+                if (success) {
+                    DDLogVerbose("user logged in successfully \(success)")
+                    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
                     
-                    // check for authentication error and redirect the user to Login page
-                    AlertUtil.displayAlert("Username/password incorrect", message: "Please reenter user credentials and try again.")
+                    // if login is successful, save username, password, token in keychain
+                    LoginViewController.setLoginKeyChainKeys(usernamei, password: passwordi)
+                    
+                    appDelegate.initializeApp()
                 }
                 else {
-                    AlertUtil.displayAlert("Connectivity or Server Issues.", message: "Please check your internet connection or wait for some time.")
+                    errorBlock(success, error)
                 }
-            }
+                
+                // enable the login button interaction
+                self.loginButtonOutlet.isUserInteractionEnabled = true
+            })
         })
     }
     
@@ -206,21 +205,42 @@ class LoginViewController: BaseYibbyViewController,
             formattedPhoneNumber?.replacingOccurrences(of: "-", with: "", options: .literal, range: nil)
         
         if let phoneNumber = formattedPhoneNumber {
-            DDLogVerbose("KKDBG_ \(phoneNumber)")
+            
+            // disable the login button interaction if error
+            self.loginButtonOutlet.isUserInteractionEnabled = false
+            
             loginUser(phoneNumber, passwordi: password.text!)
         }
     }
     
     func validationFailed(_ errors:[(Validatable, ValidationError)]) {
         
-        let (_, validationError) = errors[0]
+        var errorDict: [UITextField:ValidationError] = [:]
+        var errorTextField: UITextField = self.phoneNumberTextFieldOutlet
+        var verror: ValidationError?
         
-        validationError.errorLabel?.isHidden = false
-        validationError.errorLabel?.text = validationError.errorMessage
-        
-        if let textField = validationError.field as? UITextField {
-            textField.setBottomBorder(UIColor.red)
+        // put the array elements in a dictionary
+        for error in errors {
+            
+            let (_, validationError) = error
+            
+            if let textField = validationError.field as? UITextField {
+                errorDict[textField] = validationError
+            }
         }
+        
+        if let validationError = errorDict[phoneNumberTextFieldOutlet] {
+            errorTextField = phoneNumberTextFieldOutlet
+            verror = validationError
+        } else if let validationError = errorDict[self.password] {
+            errorTextField = self.password
+            verror = validationError
+        }
+        
+        verror!.errorLabel?.isHidden = false
+        verror!.errorLabel?.text = verror!.errorMessage
+
+        errorTextField.setBottomBorder(UIColor.red)
     }
     
     // MARK: - UITextFieldDelegate

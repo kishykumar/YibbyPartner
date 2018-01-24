@@ -66,21 +66,27 @@ class MainViewController: BaseYibbyViewController {
         if (sender.selectedIndex == onlineSwitchIndex.offline.rawValue) {
             // Offline
             
-            // enable the loading activity indicator
-            ActivityIndicatorUtil.enableActivityIndicator(self.view)
-            
-            let client: BAAClient = BAAClient.shared()
-            client.updateDriverStatus(BAASBOX_DRIVER_STATUS_OFFLINE,
-                                      latitude: 18.5,
-                                      longitude: 16.3,
-                                      completion: {(success, error) -> Void in
-                                        
-                                        // diable the loading activity indicator
-                                        ActivityIndicatorUtil.disableActivityIndicator(self.view)
-                                        
-//                                        // whether success or error, just pop the view controller.
-//                                        // Webserver will automatically take the driver offline in case of error.
-//                                        self.navigationController!.popViewController(animated: true)
+            WebInterface.makeWebRequestAndHandleError(
+                self,
+                webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
+                    
+                // enable the loading activity indicator
+                ActivityIndicatorUtil.enableActivityIndicator(self.view)
+                
+                let client: BAAClient = BAAClient.shared()
+                client.updateDriverStatus(BAASBOX_DRIVER_STATUS_OFFLINE,
+                  latitude: 18.5,
+                  longitude: 16.3,
+                  completion: {(success, error) -> Void in
+                    
+                    // diable the loading activity indicator
+                    ActivityIndicatorUtil.disableActivityIndicator(self.view)
+                    
+                    // Check for error
+                    if (error == nil) {
+                        errorBlock(success, error)
+                    }
+                })
             })
             
             // close down all active driver operations
@@ -117,12 +123,6 @@ class MainViewController: BaseYibbyViewController {
                         // diable the loading activity indicator
                         ActivityIndicatorUtil.disableActivityIndicator(self.view)
                         if (error == nil) {
-//                            let onlineStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Online, bundle: nil)
-//
-//                            let driverOnlineViewController = onlineStoryboard.instantiateViewController(withIdentifier: "DriverOnlineViewControllerIdentifier") as! DriverOnlineViewController
-//                            
-//                            // get the navigation VC and push the new VC
-//                            self.navigationController!.pushViewController(driverOnlineViewController, animated: true)
                             
                             self.onlineStatusLabelOutlet.text = "You are online"
                             
@@ -133,6 +133,8 @@ class MainViewController: BaseYibbyViewController {
                         }
                         else {
                             errorBlock(success, error)
+                            
+                            self.onlineSwitchOutlet.setSelectedIndex(onlineSwitchIndex.offline.rawValue, animated: false)
                         }
                     })
             })
@@ -320,7 +322,10 @@ class MainViewController: BaseYibbyViewController {
                 
                 return;
             }
-            
+
+            // Initialize the ride
+            YBClient.sharedInstance().ride = ride
+
             self.dismiss(animated: true, completion: nil)
             
             let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)

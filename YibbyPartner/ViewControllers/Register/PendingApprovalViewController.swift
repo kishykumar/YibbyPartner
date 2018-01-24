@@ -8,8 +8,19 @@
 
 import UIKit
 
-class PendingApprovalViewController: UIViewController {
+class PendingApprovalViewController: BaseYibbyViewController {
 
+    // MARK: - Properties
+    
+    
+    // MARK: Actions
+    
+    @IBAction func onLearnMoreButtonClick(_ sender: UIButton) {
+        let url = URL(string: "http://yibbyapp.com")!
+        UIApplication.shared.openURL(url)
+    }
+    
+    
     // MARK: - Setup
     
     override func viewDidLoad() {
@@ -17,6 +28,9 @@ class PendingApprovalViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setupUI()
+        
+        // remove navigation bar
+        self.navigationController?.isNavigationBarHidden = true
     }
 
     override func didReceiveMemoryWarning() {

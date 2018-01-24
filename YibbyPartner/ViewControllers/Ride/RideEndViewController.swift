@@ -39,36 +39,41 @@ class RideEndViewController: BaseYibbyViewController {
     // MARK: Actions
     
     @IBAction func onTipViewClick(_ sender: UIButton) {
-        popTip.show(text: "Exact earning", direction: .right, maxWidth: 200, in: innerContentViewOutlet, from: moreInfoButtonOutlet.frame)
+        popTip.show(text: "Earning before tip", direction: .right, maxWidth: 200, in: innerContentViewOutlet, from: moreInfoButtonOutlet.frame)
     }
     
     @IBAction func rideFinishAction(_ sender: AnyObject) {
         let rating = String(ratingViewOutlet.rating)
         
-        ActivityIndicatorUtil.enableActivityIndicator(self.view)
-        
-        let client: BAAClient = BAAClient.shared()
-        
-        let reviewDict = ["bidId": YBClient.sharedInstance().bid!.id!,
-                          "feedback": "Hello I am here",
-                          "rating": rating]
-        
-        client.postReview(BAASBOX_DRIVER_STRING, jsonBody: reviewDict, completion:{(success, error) -> Void in
-            if ((success) != nil) {
-                DDLogVerbose("Review success: \(String(describing: success))")
-            }
-            else {
-                DDLogVerbose("Review failed: \(String(describing: error))")
-            }
+        WebInterface.makeWebRequestAndHandleError(
+            self,
+            webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
+                
+            ActivityIndicatorUtil.enableActivityIndicator(self.view)
             
-            AlertUtil.displayAlert("Done with the ride!",
-                                   message: "Now let's take another one.",
-                                   completionBlock: {() -> Void in
-                                    self.performSegue(withIdentifier: "unwindToMainViewController1", sender: self)
+            let client: BAAClient = BAAClient.shared()
+            
+            let reviewDict = ["bidId": YBClient.sharedInstance().bid!.id!,
+                              "feedback": "Hello I am here",
+                              "rating": rating]
+            
+            client.postReview(BAASBOX_DRIVER_STRING, jsonBody: reviewDict, completion:{(success, error) -> Void in
+                if ((success) != nil) {
+                    DDLogVerbose("Review success: \(String(describing: success))")
+                }
+                else {
+                    DDLogVerbose("Review failed: \(String(describing: error))")
+                }
+                
+                AlertUtil.displayAlert("Done with the ride!",
+                                       message: "Now let's take another one.",
+                                       completionBlock: {() -> Void in
+                                        self.performSegue(withIdentifier: "unwindToMainViewController1", sender: self)
+                })
+                
+                YBClient.sharedInstance().bid = nil
+                ActivityIndicatorUtil.disableActivityIndicator(self.view)
             })
-            
-            YBClient.sharedInstance().bid = nil
-            ActivityIndicatorUtil.disableActivityIndicator(self.view)
         })
     }
     
@@ -116,6 +121,14 @@ class RideEndViewController: BaseYibbyViewController {
                 rideDateLbl.text = prettyDate
             }
             
+            if let rideMiles = ride.miles {
+                milesDriverLabelOutlet.text = "\(rideMiles) miles"
+            }
+            
+            if let rideDuration = ride.rideTime {
+                milesDriverLabelOutlet.text = "\(rideDuration) mins"
+            }
+            
             if let pickupCoordinate = ride.pickupLocation?.coordinate(),
                let dropoffCoordinate = ride.dropoffLocation?.coordinate() {
                 
@@ -138,6 +151,10 @@ class RideEndViewController: BaseYibbyViewController {
             }
             
             if let myRider = ride.rider {
+                
+                if let riderFirstName = myRider.firstName {
+                    riderNameLabelOutlet.text = riderFirstName
+                }
                 
                 if let riderProfilePic = myRider.profilePictureFileId {
                     if (riderProfilePic != "") {

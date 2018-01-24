@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import ObjectMapper
 
-class YBRider: NSObject {
+class YBRider: Mappable {
     
     // MARK: - Properties
     var id: String?

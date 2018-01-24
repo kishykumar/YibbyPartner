@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationsViewController: UIViewController {
+class NotificationsViewController: BaseYibbyViewController {
 
     // MARK: - Properties
     

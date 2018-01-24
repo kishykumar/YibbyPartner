@@ -21,7 +21,7 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
 
     let identifier: String = "historyTableCell"
 
-    var ridesList = [Ride]()
+    var ridesList: [Ride] = [Ride]()
     
     var shownRides: Int = 0
     var totalRides: Int = 0
@@ -29,6 +29,8 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
     var totalPages: Int = 0
     var isLoading: Bool = false
 
+    var selectedDate: Date?
+    
     // MARK - Setup
 
     let NUM_FETCH_RIDE_ENTRIES: Int = 5
@@ -82,8 +84,6 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
         // Dispose of any resources that can be recreated.
     }
     
-
-    
     // MARK: - UITableView DataSource
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -93,8 +93,8 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
         cell.myViewController = self
         cell.myTrip = ride
         
-        let myride = YBClient.sharedInstance().fakeRide
-        cell.configure(myride)
+        //let myride = YBClient.sharedInstance().fakeRide
+        cell.configure(ride)
         
         cell.selectionStyle = .none
         
@@ -109,9 +109,7 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        // TODO: Push the Ride Details view controller
-        
+
         let historyStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.History, bundle: nil)
         let rideDetailViewController = historyStoryboard.instantiateViewController(withIdentifier: "RideDetailViewControllerIdentifier") as! RideDetailViewController
         rideDetailViewController.ride = ridesList[indexPath.row]
@@ -148,7 +146,7 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
             return nil;
         }
         
-        let attrs = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 22.0), NSForegroundColorAttributeName: UIColor.appDarkGreen1()]
+        let attrs: [String: Any] = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 22.0), NSForegroundColorAttributeName: UIColor.appDarkGreen1()]
         return NSAttributedString(string: InterfaceString.EmptyDataMsg.NotRiddenYetTitle, attributes: attrs)
     }
     
@@ -158,13 +156,13 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
             return nil;
         }
         
-        let attrs = [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0), NSForegroundColorAttributeName: UIColor.black]
+        let attrs: [String: Any] = [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0), NSForegroundColorAttributeName: UIColor.black]
         return NSAttributedString(string: InterfaceString.EmptyDataMsg.NotRiddenYetDescription, attributes: attrs)
     }
     
     func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
         let defaultColor: UIColor = self.view.tintColor
-        let attrs = [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0), NSForegroundColorAttributeName: defaultColor]
+        let attrs: [String: Any] = [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0), NSForegroundColorAttributeName: defaultColor]
         return NSAttributedString(string: "Learn More", attributes: attrs)
     }
     
@@ -201,7 +199,7 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
     
     @objc fileprivate func loadNextPage() {
         self.isLoading = true
-        DDLogVerbose("KKDBG_loadNextPage called")
+
         if (self.footerActivityIndicatorView() == nil &&
             nextPageToLoad != 0) {
             self.addFooterActivityIndicator(withHeight: 80.0)
@@ -218,8 +216,13 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
                 self,
                 webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
                     
+                    var dateStr: String?
+                    if let date = selectedDate {
+                        dateStr = TimeUtil.getDateStringInFormat(date: date, format: "yyyy-MM-dd")
+                    }
+                    
                     let client: BAAClient = BAAClient.shared()
-                    client.fetchCount(forRides: {(success, error) -> Void in
+                    client.fetchCount(forRides: dateStr, completion: {(success, error) -> Void in
                         
                         if (error == nil) {
                             
@@ -243,9 +246,9 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
                             }
                             
                             // If non-zero total rides, then fetch the first batch
-                            // TODO: Remove the delay later
-                            self.perform(#selector(HistoryViewController.loadNewRides),
-                                         with:nil, afterDelay:3.0)
+                            // delay for testing
+                            //self.perform(#selector(HistoryViewController.loadNewRides),
+                            //             with:nil, afterDelay:3.0)
                         }
                         else {
                             errorBlock(success, error)
@@ -280,8 +283,6 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
     
     @objc fileprivate func loadNewRides() {
         
-        DDLogVerbose("KKDBG_loadNewRides called")
-        
         // load the new rides
         WebInterface.makeWebRequestAndHandleError(
             self,
@@ -289,9 +290,16 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
                 
                 let client: BAAClient = BAAClient.shared()
                 
+                var parameters: [String : Any] = ["orderBy": "_creation_date desc", "recordsPerPage": self.NUM_FETCH_RIDE_ENTRIES,
+                                                  "page": self.nextPageToLoad]
+                
+                if let date = selectedDate {
+                    let dateStr = TimeUtil.getDateStringInFormat(date: date, format: "yyyy-MM-dd")
+                    parameters["where"] = "_creation_date.format('yyyy-MM-dd')='\(dateStr)'"
+                }
+                
                 client.getRides(BAASBOX_RIDER_STRING,
-                    withParams: ["orderBy": "_creation_date desc", "recordsPerPage": self.NUM_FETCH_RIDE_ENTRIES,
-                                 "page": self.nextPageToLoad],
+                    withParams: parameters,
                     completion: {(success, error) -> Void in
                         
                         if (error == nil && success != nil) {
