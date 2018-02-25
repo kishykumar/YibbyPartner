@@ -23,8 +23,7 @@ import Spring
 class MainViewController: BaseYibbyViewController {
 
     // MARK: Properties
-    let BAASBOX_AUTHENTICATION_ERROR = -22222
-
+    
     @IBOutlet weak var onlineStatusLabelOutlet: SpringLabel!
     @IBOutlet weak var gmsMapViewOutlet: GMSMapView!
     let ddLogLevel: DDLogLevel = DDLogLevel.verbose
@@ -43,9 +42,9 @@ class MainViewController: BaseYibbyViewController {
     // As a workaround, we skip the first event by using this variable. 
     var firstValueChangedSkipped = false
     
-    fileprivate var bidObserver: NotificationObserver?
-    fileprivate var offerObserver: NotificationObserver?
-    fileprivate var rideObserver: NotificationObserver?
+    fileprivate var bidObserver: NotificationObserver? // for incoming offer
+    fileprivate var offerRejectedObserver: NotificationObserver? // for offer reject
+    fileprivate var rideObserver: NotificationObserver? // for driver en route message
     
     // MARK: Actions
 
@@ -147,10 +146,6 @@ class MainViewController: BaseYibbyViewController {
     
     // MARK: Setup
 
-    deinit {
-        removeNotificationObservers()
-    }
-    
     fileprivate func setupMap () {
         gmsMapViewOutlet.isMyLocationEnabled = true
         
@@ -165,15 +160,6 @@ class MainViewController: BaseYibbyViewController {
                 }
             }
         }
-    }
-    
-    static func initMainViewController(_ vc: UIViewController, animated anim: Bool) {
-        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        appDelegate.sendGCMTokenToServer()
-        
-        appDelegate.initializeMainViewController()
-        vc.present(appDelegate.centerContainer!, animated: anim, completion: nil)
     }
     
     fileprivate func setupUI () {
@@ -208,24 +194,44 @@ class MainViewController: BaseYibbyViewController {
 //        }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
         setupUI()
         setupMap()
-        setupNotificationObservers()
 
         self.perform(#selector(afterViewLoadOps), with: nil, afterDelay: 0.0)
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        DDLogVerbose("Fired init")
+        setupNotificationObservers()
+    }
+    
+    deinit {
+        DDLogVerbose("Fired deinit")
+        removeNotificationObservers()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)        
+        super.viewDidAppear(animated)
+        
+        if (YBClient.sharedInstance().status == .online) {
+            startOnlineStatusAnimation()
+        } else {
+            stopOnlineStatusAnimation()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -238,7 +244,7 @@ class MainViewController: BaseYibbyViewController {
     fileprivate func removeNotificationObservers() {
         
         bidObserver?.removeObserver()
-        offerObserver?.removeObserver()
+        offerRejectedObserver?.removeObserver()
         rideObserver?.removeObserver()
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
@@ -258,7 +264,10 @@ class MainViewController: BaseYibbyViewController {
             let bidElapsedTime = TimeUtil.diffFromCurTimeISO(bid.creationTime!)
             
             if (bidElapsedTime > MainViewController.BID_NOTIFICATION_EXPIRE_TIME) {
-                DDLogDebug("Bid Discarded CurrentTime: \(Date()) bidTime: \(bid.creationTime) bidElapsedTime: \(bidElapsedTime)")
+                DDLogDebug("Bid Discarded CurrentTime: \(Date()) bidTime: \(String(describing: bid.creationTime)) bidElapsedTime: \(bidElapsedTime)")
+                
+                // Clear the bid before exiting
+                YBClient.sharedInstance().bid = nil;
                 
                 // The driver missed responding to the bid
                 AlertUtil.displayAlert("Bid missed.",
@@ -283,49 +292,29 @@ class MainViewController: BaseYibbyViewController {
                 }
             }
 
+            YBClient.sharedInstance().status = .offerInProcess
             self.navigationController?.present(navController, animated: true, completion: nil)
         }
         
-        offerObserver = NotificationObserver(notification: BidNotifications.offerRejected) { [unowned self] bid in
+        offerRejectedObserver = NotificationObserver(notification: BidNotifications.offerRejected) { [unowned self] bid in
             
-            if (!YBClient.sharedInstance().isSameAsOngoingBid(bidId: bid.id)) {
-                DDLogDebug("Not same as ongoingBid. Discarded. ")
-                
-                if let ongoingBid = YBClient.sharedInstance().bid {
-                    DDLogDebug("Ongoingbid is: \(String(describing: ongoingBid.id)). Incoming is \(String(describing: bid.id))")
-                } else {
-                    DDLogDebug("Ongoingbid is: nil. Incoming is \(String(describing: bid.id))")
-                }
-                
-                return;
-            }
-            
+            YBClient.sharedInstance().status = .online
+
             YBClient.sharedInstance().bid = nil
-            
             AlertUtil.displayAlert("Offer Rejected.",
                                    message: "Reason: Your offer was not the lowest.",
                                    completionBlock: {() -> Void in
+                                    
                                         self.dismiss(animated: true, completion: nil)
                                     })
         }
         
         rideObserver = NotificationObserver(notification: RideNotifications.driverEnRoute) { [unowned self] ride in
-            
-            if (!YBClient.sharedInstance().isSameAsOngoingBid(bidId: ride.bidId)) {
-                DDLogDebug("Not same as ongoingBid. Discarded:")
-                
-                if let ongoingBid = YBClient.sharedInstance().bid {
-                    DDLogDebug("Ongoingbid is: \(String(describing: ongoingBid.id)). Incoming is \(String(describing: ride.bidId))")
-                } else {
-                    DDLogDebug("Ongoingbid is: nil. Incoming is \(String(describing: ride.bidId))")
-                }
-                
-                return;
-            }
 
             // Initialize the ride
             YBClient.sharedInstance().ride = ride
-
+            YBClient.sharedInstance().status = .driverEnRoute
+            
             self.dismiss(animated: true, completion: nil)
             
             let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
@@ -344,14 +333,14 @@ class MainViewController: BaseYibbyViewController {
         self.gmsMapViewOutlet.moveCamera(update)
     }
     
-    func startOnlineStatusAnimation() {
+    fileprivate func startOnlineStatusAnimation() {
         onlineStatusLabelOutlet.animation = "flash"
         onlineStatusLabelOutlet.duration = 1.5
         onlineStatusLabelOutlet.repeatCount = .infinity
         onlineStatusLabelOutlet.animate()
     }
     
-    func stopOnlineStatusAnimation() {
+    fileprivate func stopOnlineStatusAnimation() {
         onlineStatusLabelOutlet.layer.removeAllAnimations()
     }
     

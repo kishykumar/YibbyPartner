@@ -11,6 +11,7 @@ import MMDrawerController
 import BaasBoxSDK
 import CocoaLumberjack
 import PINRemoteImage
+import Crashlytics
 
 class LeftNavDrawerViewController: BaseYibbyViewController,
                                     UITableViewDataSource,
@@ -18,7 +19,7 @@ class LeftNavDrawerViewController: BaseYibbyViewController,
     
     // MARK: Properties
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var profilePictureOutlet: UIImageView!
+    @IBOutlet weak var profilePictureOutlet: SwiftyAvatar!
     @IBOutlet weak var userRealNameLabelOutlet: UILabel!
     @IBOutlet weak var aboutButtonOutlet: UIButton!
     @IBOutlet weak var signOutButtonOutlet: UIButton!
@@ -86,10 +87,25 @@ class LeftNavDrawerViewController: BaseYibbyViewController,
         
         // Do any additional setup after loading the view.
         setupUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        DDLogVerbose("Fired init")
         setupNotificationObservers()
     }
     
     deinit {
+        DDLogVerbose("Fired deinit")
         removeNotificationObservers()
     }
     
@@ -108,7 +124,7 @@ class LeftNavDrawerViewController: BaseYibbyViewController,
             self.view.backgroundColor = UIColor.appDarkGreen1();
             
             // Set rounded profile pic
-            self.profilePictureOutlet.setRoundedWithWhiteBorder()
+            //self.profilePictureOutlet.setRoundedWithWhiteBorder()
             
             //        self.profilePictureOutlet.layer.cornerRadius = self.profilePictureOutlet.frame.size.height / 2;
             //        self.profilePictureOutlet.layer.borderWidth = 2.0
@@ -128,7 +144,7 @@ class LeftNavDrawerViewController: BaseYibbyViewController,
                 profilePictureOutlet.image = cachedImage
             }
             else {
-                getProfilePicture()
+                setProfilePicture()
             }
             
             if let vehicle = profile.vehicle {
@@ -282,11 +298,19 @@ class LeftNavDrawerViewController: BaseYibbyViewController,
     // MARK: - Helpers
     
     public func refreshProfilePicture() {
-        getProfilePicture()
+        setProfilePicture()
     }
     
-    fileprivate func getProfilePicture() {
+    fileprivate func setProfilePicture() {
         
+        let dl = YBClient.sharedInstance().profile!.driverLicense!
+        let name = "\(dl.firstName!) \(dl.lastName!)"
+        
+        profilePictureOutlet.setImageForName(string: name,
+                                             backgroundColor: UIColor.appDarkBlue1(),
+                                             circular: true,
+                                             textAttributes: nil)
+
         if let profilePic = YBClient.sharedInstance().profile?.personal?.profilePicture {
             if (profilePic != "") {
                 if let imageUrl  = BAAFile.getCompleteURL(withToken: profilePic) {
@@ -310,8 +334,9 @@ class LeftNavDrawerViewController: BaseYibbyViewController,
                 
                 ActivityIndicatorUtil.disableActivityIndicator(self.view)
                 
-                if (success || ((error as! NSError).domain == BaasBox.errorDomain() && (error as! NSError).code ==
-                    WebInterface.BAASBOX_AUTHENTICATION_ERROR)) {
+                if (success ||
+                    ((error! as NSError).domain == BaasBox.errorDomain() &&
+                        (error! as NSError).code == WebInterface.BAASBOX_AUTHENTICATION_ERROR)) {
                     
                     // pop all the view controllers so that user starts fresh :)
                     let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate

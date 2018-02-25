@@ -88,9 +88,13 @@
 		12133DD01F947E640068308C /* Documents.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12133DCF1F947E640068308C /* Documents.storyboard */; };
 		12133DD41F947EB70068308C /* DocumentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12133DD31F947EB70068308C /* DocumentsTableViewController.swift */; };
 		12133DD61F9484880068308C /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12133DD51F9484880068308C /* DocumentsViewController.swift */; };
+		1228A0B920317C1600AF6801 /* YBRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1228A0B620317C1500AF6801 /* YBRoundedView.swift */; };
+		1228A0BA20317C1600AF6801 /* InitialsImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1228A0B720317C1500AF6801 /* InitialsImageView.swift */; };
+		1228A0BB20317C1600AF6801 /* SwiftyAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1228A0B820317C1500AF6801 /* SwiftyAvatar.swift */; };
 		123524961C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
 		123524971C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
 		123D8D951FE6FE5700C312C9 /* FundingInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123D8D941FE6FE5700C312C9 /* FundingInformationViewController.swift */; };
+		12439388201EFEC50057DA63 /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12439387201EFEC50057DA63 /* DispatchQueueExtensions.swift */; };
 		12473F521FF46C4A00676E3D /* YBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12473F511FF46C4A00676E3D /* YBTextField.swift */; };
 		125B0C041E2C4B2D00534359 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C031E2C4B2D00534359 /* ImageService.swift */; };
 		125B0C081E2CDFDC00534359 /* TemporaryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C071E2CDFDC00534359 /* TemporaryCache.swift */; };
@@ -258,8 +262,12 @@
 		12133DCF1F947E640068308C /* Documents.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Documents.storyboard; sourceTree = "<group>"; };
 		12133DD31F947EB70068308C /* DocumentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentsTableViewController.swift; sourceTree = "<group>"; };
 		12133DD51F9484880068308C /* DocumentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
+		1228A0B620317C1500AF6801 /* YBRoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBRoundedView.swift; sourceTree = "<group>"; };
+		1228A0B720317C1500AF6801 /* InitialsImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialsImageView.swift; sourceTree = "<group>"; };
+		1228A0B820317C1500AF6801 /* SwiftyAvatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyAvatar.swift; sourceTree = "<group>"; };
 		123524951C89475D004307EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		123D8D941FE6FE5700C312C9 /* FundingInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundingInformationViewController.swift; sourceTree = "<group>"; };
+		12439387201EFEC50057DA63 /* DispatchQueueExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtensions.swift; sourceTree = "<group>"; };
 		12473F511FF46C4A00676E3D /* YBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YBTextField.swift; sourceTree = "<group>"; };
 		125B0C031E2C4B2D00534359 /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		125B0C071E2CDFDC00534359 /* TemporaryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporaryCache.swift; sourceTree = "<group>"; };
@@ -546,6 +554,7 @@
 				12000C761F5CF57B004B6078 /* UIImageViewExtensions.swift */,
 				12000C771F5CF57B004B6078 /* UITextFieldExtensions.swift */,
 				12000C781F5CF57B004B6078 /* UIViewControllerExtensions.swift */,
+				12439387201EFEC50057DA63 /* DispatchQueueExtensions.swift */,
 				12000C791F5CF57B004B6078 /* UIViewExtensions.swift */,
 				12000C7A1F5CF57B004B6078 /* UIViewNibLoading.swift */,
 				129AAE581E226CE2006F6CE5 /* UIColorExtensions.swift */,
@@ -637,6 +646,9 @@
 				129AAE4B1E226C76006F6CE5 /* ENFooterActivityIndicatorView */,
 				129AAE501E226C76006F6CE5 /* FloatLabelTextField.swift */,
 				12473F511FF46C4A00676E3D /* YBTextField.swift */,
+				1228A0B720317C1500AF6801 /* InitialsImageView.swift */,
+				1228A0B820317C1500AF6801 /* SwiftyAvatar.swift */,
+				1228A0B620317C1500AF6801 /* YBRoundedView.swift */,
 				129AAE511E226C76006F6CE5 /* YibbyButton1.swift */,
 				129AAE701E238E2B006F6CE5 /* YBBorderedTextField.swift */,
 				129AAE721E238E57006F6CE5 /* YBPickerTextField.swift */,
@@ -1167,12 +1179,14 @@
 				129AAE541E226C76006F6CE5 /* UITableViewController+ENFooterActivityIndicatorView.m in Sources */,
 				126EC5631F7E31720040704F /* HelpViewController.swift in Sources */,
 				129AAE771E24D648006F6CE5 /* YBFloatLabelTextField.swift in Sources */,
+				1228A0BA20317C1600AF6801 /* InitialsImageView.swift in Sources */,
 				1284914C1E260B10002D047B /* VehicleDataAPI.swift in Sources */,
 				120826631F5D3F5500BA38E9 /* BoxType.swift in Sources */,
 				129AAE4A1E226B72006F6CE5 /* Colors.swift in Sources */,
 				125B0C101E2DE1B000534359 /* YBDriverLicense.swift in Sources */,
 				1201B7B21D23B49000A7EEAF /* OfferSentViewController.swift in Sources */,
 				128491541E263E44002D047B /* VehicleModels.swift in Sources */,
+				1228A0B920317C1600AF6801 /* YBRoundedView.swift in Sources */,
 				126EC55B1F7E2D6A0040704F /* NotificationsViewController.swift in Sources */,
 				1201B7B61D23B49000A7EEAF /* RideEndViewController.swift in Sources */,
 				12000C7E1F5CF57B004B6078 /* ImageExtensions.swift in Sources */,
@@ -1194,6 +1208,7 @@
 				120826861F62863E00BA38E9 /* YBSync.swift in Sources */,
 				12000C871F5CF57B004B6078 /* UIViewExtensions.swift in Sources */,
 				12000C7B1F5CF57B004B6078 /* Array.swift in Sources */,
+				1228A0BB20317C1600AF6801 /* SwiftyAvatar.swift in Sources */,
 				1211FF111D61260900AD9591 /* WeeklyEarningsViewController.swift in Sources */,
 				12000C881F5CF57B004B6078 /* UIViewNibLoading.swift in Sources */,
 				1201B7AE1D23B49000A7EEAF /* LeftNavDrawerTableViewCell.swift in Sources */,
@@ -1229,6 +1244,7 @@
 				125B0C041E2C4B2D00534359 /* ImageService.swift in Sources */,
 				12000C7F1F5CF57B004B6078 /* NSObjectClassName.swift in Sources */,
 				1201B7D01D23B4AC00A7EEAF /* Ride.swift in Sources */,
+				12439388201EFEC50057DA63 /* DispatchQueueExtensions.swift in Sources */,
 				1201B7D31D23B4AC00A7EEAF /* MapService.swift in Sources */,
 				12F3CCD61C41EFC700F79A26 /* AppDelegate.swift in Sources */,
 				128C0B101E2B14E70063FD91 /* YBBorderedUIView.swift in Sources */,

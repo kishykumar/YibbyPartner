@@ -32,7 +32,7 @@ class RideStartViewController: BaseYibbyViewController {
     @IBOutlet weak var riderDetailsViewOutlet: SpringView!
     @IBOutlet weak var riderFirstNameLabelOutlet: UILabel!
     @IBOutlet weak var riderRatingLabelOutlet: UILabel!
-    @IBOutlet weak var riderProfilePictureOutlet: UIImageView!
+    @IBOutlet weak var riderProfilePictureOutlet: SwiftyAvatar!
     
     var bid: Bid!
     
@@ -136,6 +136,8 @@ class RideStartViewController: BaseYibbyViewController {
                             
                             if (error == nil) {
                             
+                                YBClient.sharedInstance().status = .driverArrived
+                                
                                 self.controllerState = RideViewControllerState.driverArrived
                                 self.rideActionButton.setTitle(InterfaceString.Ride.StartRide, for: .normal)
 
@@ -171,6 +173,8 @@ class RideStartViewController: BaseYibbyViewController {
                             
                             if (error == nil) {
                                 
+                                YBClient.sharedInstance().status = .rideStart
+                                
                                 self.controllerState = RideViewControllerState.rideStart
                                 self.rideActionButton.setTitle(InterfaceString.Ride.EndRide, for: .normal)
                                 self.startNavigationButton.isHidden = false
@@ -203,6 +207,8 @@ class RideStartViewController: BaseYibbyViewController {
                             
                             if (error == nil) {
                                 
+                                YBClient.sharedInstance().status = .rideEnd
+                                
                                 let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
 
                                 let rideEndViewController = rideStoryboard.instantiateViewController(withIdentifier: "RideEndViewControllerIdentifier") as! RideEndViewController
@@ -219,7 +225,6 @@ class RideStartViewController: BaseYibbyViewController {
                         })
                     })
             })
-            
         }
     }
     
@@ -235,9 +240,6 @@ class RideStartViewController: BaseYibbyViewController {
         riderDetailsViewOutlet.animation = "fadeOut"
         riderDetailsViewOutlet.animate()
 
-        riderProfilePictureOutlet.setRoundedWithBorder(self.view.tintColor)
-        riderProfilePictureOutlet.addShadow()
-        
         if let ride = YBClient.sharedInstance().ride {
             
             DDLogVerbose("KKDBG_ride:")
@@ -265,10 +267,18 @@ class RideStartViewController: BaseYibbyViewController {
                 }
                 
                 // Profile pic
+                riderProfilePictureOutlet.setImageForName(string: myRider.firstName!,
+                                                          backgroundColor: UIColor.appDarkBlue1(),
+                                                          circular: true,
+                                                          textAttributes: nil)
+                
                 if let riderProfilePic = myRider.profilePictureFileId {
                     if (riderProfilePic != "") {
                         if let imageUrl  = BAAFile.getCompleteURL(withToken: riderProfilePic) {
                             riderProfilePictureOutlet.pin_setImage(from: imageUrl)
+                            
+                            riderProfilePictureOutlet.borderWidth = 2.0
+                            riderProfilePictureOutlet.borderColor = self.view.tintColor
                         }
                     }
                 }

@@ -35,7 +35,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JhR-83-3dD" userLabel="ContainerTopView">
                                 <rect key="frame" x="25" y="40" width="325" height="128"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ozS-em-iyl" userLabel="ProfileSV">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ozS-em-iyl" userLabel="ProfileSV">
                                         <rect key="frame" x="0.0" y="0.0" width="151.5" height="128"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQS-vu-K6A" userLabel="DummyView">
@@ -45,17 +45,15 @@
                                                     <constraint firstAttribute="height" id="6kl-zw-Az4"/>
                                                 </constraints>
                                             </view>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account" translatesAutoresizingMaskIntoConstraints="NO" id="6dQ-5e-E1i">
-                                                <rect key="frame" x="40.5" y="10" width="71" height="71"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account" translatesAutoresizingMaskIntoConstraints="NO" id="6dQ-5e-E1i" customClass="SwiftyAvatar" customModule="YibbyPartner" customModuleProvider="target">
+                                                <rect key="frame" x="30.5" y="5" width="90.5" height="90.5"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="71" id="Fba-PE-6OT"/>
-                                                    <constraint firstAttribute="height" constant="71" id="NKM-BI-D72"/>
                                                     <constraint firstAttribute="width" secondItem="6dQ-5e-E1i" secondAttribute="height" multiplier="1:1" id="jlw-s8-SkF"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Yibby User" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HC3-ju-IHZ" userLabel="NameTextfieldOutlet" customClass="YibbyPaddingLabel" customModule="YibbyPartner" customModuleProvider="target">
-                                                <rect key="frame" x="34" y="91" width="83.5" height="27"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Yibby User" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HC3-ju-IHZ" userLabel="NameLabelOutlet" customClass="YibbyPaddingLabel" customModule="YibbyPartner" customModuleProvider="target">
+                                                <rect key="frame" x="32" y="100.5" width="87.5" height="27.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
@@ -64,13 +62,6 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wgR-KB-r0M" userLabel="DummyView">
-                                                <rect key="frame" x="29" y="128" width="93.5" height="0.0"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" id="nad-lA-qSN"/>
-                                                </constraints>
-                                            </view>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jPc-3p-ToY" userLabel="SeparatorView">
@@ -91,24 +82,17 @@
                                                 </constraints>
                                             </view>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car_with_steering" translatesAutoresizingMaskIntoConstraints="NO" id="QJY-Xg-rLg" userLabel="VehicleImageOutlet">
-                                                <rect key="frame" x="37" y="10" width="77.5" height="77.5"/>
+                                                <rect key="frame" x="32" y="10" width="87.5" height="87.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="QJY-Xg-rLg" secondAttribute="height" multiplier="1:1" id="8Xt-ci-qJn"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Chevrolet Malibu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="QaF-Xz-4g1" userLabel="VehicleNameOutlet">
-                                                <rect key="frame" x="11" y="97.5" width="129.5" height="20.5"/>
+                                                <rect key="frame" x="11" y="107.5" width="129.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9f9-7f-0gA" userLabel="DummyView">
-                                                <rect key="frame" x="25" y="128" width="101.5" height="0.0"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" id="YYn-1p-SeM"/>
-                                                </constraints>
-                                            </view>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -231,11 +215,6 @@
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="aboutButtonOutlet" destination="9tx-g6-90V" id="jaF-ae-GMj"/>
                         <outlet property="profilePictureOutlet" destination="6dQ-5e-E1i" id="Lh3-TK-AbO"/>

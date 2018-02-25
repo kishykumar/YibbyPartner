@@ -281,7 +281,7 @@ class SignupViewController: BaseYibbyViewController,
     }
     
     // BaasBox create user
-    fileprivate func createUser(_ usernamei: String, emaili: String, phoneNumberi: String, passwordi: String) {
+    fileprivate func createUser(_ namei: String, emaili: String, phoneNumberi: String, passwordi: String) {
         
         WebInterface.makeWebRequestAndHandleError(
             self,
@@ -290,12 +290,12 @@ class SignupViewController: BaseYibbyViewController,
             ActivityIndicatorUtil.enableActivityIndicator(self.view)
             
             let client: BAAClient = BAAClient.shared()
-            client.createCaber(BAASBOX_DRIVER_STRING, name: usernamei, email: emaili, phoneNumber: phoneNumberi, password: passwordi, completion:{(success, error) -> Void in
+            client.createCaber(BAASBOX_DRIVER_STRING, name: namei, email: emaili, phoneNumber: phoneNumberi, password: passwordi, completion:{(success, error) -> Void in
                 if (success || self.testMode) {
                     DDLogVerbose("Success signing up: \(success)")
                     
                     // if login is successful, save username, password, token in keychain
-                    LoginViewController.setLoginKeyChainKeys(usernamei, password: passwordi)
+                    LoginViewController.setLoginKeyChainKeys(phoneNumberi, password: passwordi)
                     
                     let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
                     let initialRegisterController = registerStoryboard.instantiateViewController(withIdentifier: "VehicleViewControllerIdentifier") as! VehicleViewController

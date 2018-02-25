@@ -67,17 +67,24 @@ class OfferViewController: BaseYibbyViewController {
         adjustGMSCameraFocus()
     }
     
-    fileprivate func setupNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(OfferViewController.saveOfferTimer),
-                                               name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(OfferViewController.restoreOfferTimer),
-                                               name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        DDLogVerbose("Fired init")
+        setupNotificationObservers()
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        DDLogVerbose("Fired deinit")
+        removeNotificationObservers()
     }
     
     override func viewDidLoad() {
@@ -85,7 +92,6 @@ class OfferViewController: BaseYibbyViewController {
         
         // Do any additional setup after loading the view.
         setupUI()
-        setupNotificationObservers()
         
         DDLogVerbose("TimerStart: \(timerStart)")
         startOfferTimer()        
@@ -96,6 +102,21 @@ class OfferViewController: BaseYibbyViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK: - Notifications
+    
+    fileprivate func setupNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(OfferViewController.saveOfferTimer),
+                                               name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(OfferViewController.restoreOfferTimer),
+                                               name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+    }
+    
+    fileprivate func removeNotificationObservers() {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+    }
+    
     // MARK: Actions
     
     @IBAction func acceptRequestAction(_ sender: UIButton) {
@@ -122,6 +143,8 @@ class OfferViewController: BaseYibbyViewController {
 
                     if (error == nil) {
                         DDLogVerbose("created offer \(String(describing: success))")
+                        
+                        YBClient.sharedInstance().status = .offerSent
                         self.performSegue(withIdentifier: "offerSentSegue", sender: nil)
                     }
                     else {
@@ -263,28 +286,10 @@ class OfferViewController: BaseYibbyViewController {
             YBClient.sharedInstance().bid = nil
             
             AlertUtil.displayAlert("Time expired.", message: "You missed sending the bid. Missing a lot of bids would bring you offline.", completionBlock: {() -> Void in
+                
+                YBClient.sharedInstance().status = .online
                 self.dismiss(animated: true, completion: nil)
             })
-            
-//            let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-//
-//            if let mmnvc = appDelegate.centerContainer!.centerViewController as? UINavigationController {
-//
-//                // find the DriverOnlineViewController and pop till that
-//                for viewController: UIViewController in mmnvc.viewControllers {
-//
-//                    if (viewController is DriverOnlineViewController) {
-//
-//                        let driverOnlineController: DriverOnlineViewController = (viewController as! DriverOnlineViewController)
-//
-//                        // dismiss all view controllers till this view controller
-//                        driverOnlineController.dismiss(animated: true, completion: nil)
-//
-//                        AlertUtil.displayAlertOnVC(driverOnlineController, title: OfferViewController.OFFER_TIMER_EXPIRE_MSG_TITLE,
-//                                          message: OfferViewController.OFFER_TIMER_EXPIRE_MSG_CONTENT)
-//                    }
-//                }
-//            }
             
             stopOfferTimer()
 

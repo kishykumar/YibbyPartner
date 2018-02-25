@@ -25,7 +25,7 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
     
     @IBOutlet weak var emailAddress: YBTextField!
     @IBOutlet weak var phoneNo: UITextField!
-    @IBOutlet weak var profileImageViewOutlet: UIImageView!
+    @IBOutlet weak var profileImageViewOutlet: SwiftyAvatar!
     @IBOutlet var VW: YBBorderedUIView!
     @IBOutlet var firstNameLbl: UILabel!
     @IBOutlet var lastNameLbl: UILabel!
@@ -161,7 +161,7 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
         
         if let profile = YBClient.sharedInstance().profile {
             self.applyProfileModel(profile)
-            getProfilePicture()
+            setProfilePicture()
         }
     }
     
@@ -198,7 +198,16 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
     
     // MARK: - Helpers
     
-    func getProfilePicture() {
+    func setProfilePicture() {
+        
+        let dl = YBClient.sharedInstance().profile!.driverLicense!
+        let name = "\(dl.firstName!) \(dl.lastName!)"
+        
+        profileImageViewOutlet.setImageForName(string: name,
+                                               backgroundColor: UIColor.appDarkGreen1(),
+                                               circular: true,
+                                               textAttributes: nil)
+        
         if let profilePic = YBClient.sharedInstance().profile?.personal?.profilePicture {
             if (profilePic != "") {
                 if let imageUrl  = BAAFile.getCompleteURL(withToken: profilePic) {
@@ -308,7 +317,7 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
             self.licensePlateLabelOutlet.text = vehicle.licensePlate?.uppercased()
         }
         
-        getProfilePicture()
+        setProfilePicture()
     }
 }
 
@@ -341,16 +350,13 @@ extension SettingsViewController: ImagePickerDelegate {
               cacheKey: .profilePicture,
               success: { (url, fileId) in
                 
-                // update UI here
-                self.profileImageViewOutlet.image = image
-                
                 WebInterface.makeWebRequestAndHandleError(
                     self,
                     webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
                         
                     let client: BAAClient = BAAClient.shared()
-                    let dictionary: [String: String] = ["profilePicture": fileId]
-                    
+
+                    let dictionary = ["personal": ["profilePicture": fileId]]
                     client.updateProfile(BAASBOX_DRIVER_STRING, jsonBody: dictionary, completion:{(success, error) -> Void in
                         
                         if let success = success {
@@ -358,6 +364,9 @@ extension SettingsViewController: ImagePickerDelegate {
                             
                             if let profile = profileModel {
                                 self.applyProfileModel(profile)
+                                
+                                // update UI here
+                                self.profileImageViewOutlet.image = image
                                 
                                 // post notification to update the profile picture in other view controllers
                                 postNotification(ProfileNotifications.profilePictureUpdated, value: "")
@@ -376,8 +385,10 @@ extension SettingsViewController: ImagePickerDelegate {
                 })
             },
               failure: { error in
-                AlertUtil.displayAlert("Upload failed", message: "Failure in uploading profile picture : \(error.description)")
+                
                 DDLogError("Failure in uploading profile picture: \(error.description)")
+
+                AlertUtil.displayAlert("Upload failed", message: error.localizedDescription)
                 ActivityIndicatorUtil.disableActivityIndicator(self.view)
             })
         }

@@ -12,7 +12,7 @@ import MMDrawerController
 
 class YBMenuButton: UIButton {
     
-    var myViewController: UIViewController!
+    weak var myViewController: UIViewController!
     
     enum YBMenuButtonType: Int {
         case menu = 0
@@ -59,7 +59,9 @@ class YBMenuButton: UIButton {
     }
     
     @objc private func backButtonClicked() {
-        _ = myViewController.navigationController?.popViewController(animated: true)
+        if let myVC = self.myViewController {
+            _ = myVC.navigationController?.popViewController(animated: true)
+        }
     }
     
     @objc private func menuButtonClicked() {

@@ -245,10 +245,8 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
                                 return;
                             }
                             
-                            // If non-zero total rides, then fetch the first batch
-                            // delay for testing
-                            //self.perform(#selector(HistoryViewController.loadNewRides),
-                            //             with:nil, afterDelay:3.0)
+                            self.perform(#selector(HistoryViewController.loadNewRides),
+                                         with:nil, afterDelay:1.0)
                         }
                         else {
                             errorBlock(success, error)

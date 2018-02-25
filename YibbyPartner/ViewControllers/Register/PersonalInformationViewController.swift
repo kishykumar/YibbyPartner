@@ -160,7 +160,7 @@ class PersonalInformationViewController: BaseYibbyViewController,
         personalDetails.streetAddress = self.streetAddressTextFieldOutlet.text
         personalDetails.postalCode = self.zipcodeTextFieldOutlet.text
         
-        let (phoneNumber, password) = LoginViewController.getLoginKeyChainValues()
+        let (phoneNumber, _) = LoginViewController.getLoginKeyChainValues()
         personalDetails.phoneNumber = phoneNumber
         
         // Put the Activity on the right bar button item instead of Next Button

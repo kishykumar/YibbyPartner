@@ -14,8 +14,8 @@ enum YBClientStatus: String {
     case notApproved = "NOT_APPROVED"
     case offline = "OFFLINE"
     case online = "ONLINE"
-    case offerInProcess = "OFFER_IN_PROCESS"
-    case offerSent = "OFFER_SENT"
+    case offerInProcess = "OFFER_IN_PROCESS" // driver is still trying to bid
+    case offerSent = "OFFER_SENT" // driver has already bid and seeing the progress screen
     case offerRejected = "OFFER_REJECTED"
     case driverEnRoute = "DRIVER_EN_ROUTE"
     case driverArrived = "DRIVER_ARRIVED"
@@ -129,7 +129,6 @@ open class YBClient {
     }
 
     func syncClient(_ syncData: YBSync) {
-        //defaultPaymentMethod = nil
         if let myBid = syncData.bid {
             self.bid = myBid
         }

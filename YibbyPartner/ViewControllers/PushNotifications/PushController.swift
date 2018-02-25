@@ -15,12 +15,14 @@ import CocoaLumberjack
     func receiveRemoteNotification(_ application: UIApplication, notification:[AnyHashable: Any])
 }
 
+enum YBMessageType: String {
+    case bid = "BID"
+    case driverEnRoute = "DRIVER_EN_ROUTE"
+    case offerRejected = "OFFER_REJECTED"
+    case rideCancelled = "RIDE_CANCELLED"
+}
+
 open class PushController: NSObject, PushControllerProtocol {
-    
-    let BID_MESSAGE_TYPE: String = "BID"
-    let DRIVER_EN_ROUTE_MESSAGE_TYPE: String = "DRIVER_EN_ROUTE"
-    let OFFER_REJECTED_MESSAGE_TYPE: String = "OFFER_REJECTED"
-    let RIDE_CANCELLED_MESSAGE_TYPE: String = "RIDE_CANCELLED"
     
     let MESSAGE_JSON_FIELD_NAME: String = "message"
     let CUSTOM_JSON_FIELD_NAME: String = "custom"
@@ -31,7 +33,6 @@ open class PushController: NSObject, PushControllerProtocol {
     let GCM_MSG_ID_JSON_FIELD_NAME: String = "gcm.message_id"
     
     var savedNotification: [AnyHashable: Any]?
-    
     var mLastGCMMsgId: String?
     
     public override init() {
@@ -70,7 +71,7 @@ open class PushController: NSObject, PushControllerProtocol {
     func handleBgNotification (_ notification: [AnyHashable: Any]) {
         
         // save the most recent push message
-        DDLogDebug("Save push message in BG from \(savedNotification) to \(notification)")
+        DDLogDebug("Save push message in BG from \(String(describing: savedNotification)) to \(notification)")
         
         savedNotification = [AnyHashable: Any]()
         savedNotification = notification
@@ -128,53 +129,81 @@ open class PushController: NSObject, PushControllerProtocol {
             return;
         }
         
-        if let mmnvc = appDelegate.centerContainer!.centerViewController as? UINavigationController {
+        let jsonCustom = notification[CUSTOM_JSON_FIELD_NAME]
+        
+        guard let jsonCustomString = jsonCustom as? String else {
+            DDLogVerbose("Returning because of JSON custom string: \(String(describing: jsonCustom))")
+            return;
+        }
+        
+        let messageTypeStr = (notification[MESSAGE_JSON_FIELD_NAME] as! String)
+        let messageType: YBMessageType = YBMessageType(rawValue: messageTypeStr)!
+        let bid = Bid(JSONString: jsonCustomString)!
+
+        if (messageType == YBMessageType.bid) {
+            DDLogVerbose("BID message RCVD")
             
-            let jsonCustom = notification[CUSTOM_JSON_FIELD_NAME]
-            
-            guard let jsonCustomString = jsonCustom as? String else {
-                DDLogVerbose("Returning because of JSON custom string: \(jsonCustom)")
+            if (YBClient.sharedInstance().isOngoingBid()) {
+                DDLogDebug("Ongoing bid. Discarded: \(notification[MESSAGE_JSON_FIELD_NAME] as! String)")
+                
+                if let ongoingBid = YBClient.sharedInstance().bid {
+                    DDLogDebug("Ongoingbid is: \(String(describing: ongoingBid.id)). Incoming is \(String(describing: bid.id))")
+                } else {
+                    DDLogDebug("Ongoingbid is: nil. Incoming is \(String(describing: bid.id))")
+                }
                 return;
             }
             
-            switch notification[MESSAGE_JSON_FIELD_NAME] as! String {
-                
-            case BID_MESSAGE_TYPE:
-                DDLogVerbose("BID message RCVD")
-                let bid = Bid(JSONString: jsonCustomString)!
-                postNotification(BidNotifications.bidReceived, value: bid)
+            postNotification(BidNotifications.bidReceived, value: bid)
 
-                break
+        } else if (messageType == YBMessageType.offerRejected) {
+            DDLogDebug("REJECT RCVD")
+            
+            if (!YBClient.sharedInstance().isSameAsOngoingBid(bidId: bid.id)) {
+                DDLogDebug("Not same as ongoingBid. Discarded: \(notification[MESSAGE_JSON_FIELD_NAME] as! String)")
+                
+                if let ongoingBid = YBClient.sharedInstance().bid {
+                    DDLogDebug("Ongoingbid is: \(String(describing: ongoingBid.id)). Incoming is \(String(describing: bid.id))")
+                } else {
+                    DDLogDebug("Ongoingbid is: nil. Incoming is \(String(describing: bid.id))")
+                }
+                return;
+            }
+            
+            postNotification(BidNotifications.offerRejected, value: bid)
+            
+        } else if (messageType == YBMessageType.driverEnRoute ||
+                    messageType == YBMessageType.rideCancelled) {
 
-            case OFFER_REJECTED_MESSAGE_TYPE:
-                DDLogDebug("REJECT RCVD")
-                
-                let bid = Bid(JSONString: jsonCustomString)!
-                postNotification(BidNotifications.offerRejected, value: bid)
-                
-                break
-                
-            case DRIVER_EN_ROUTE_MESSAGE_TYPE:
-                
+            switch messageType {
+            case YBMessageType.driverEnRoute:
                 DDLogDebug("DRIVER EN ROUTE")
                 
                 let ride = Ride(JSONString: jsonCustomString)!
-                postNotification(RideNotifications.driverEnRoute, value: ride)
-
-                break
+                if (!YBClient.sharedInstance().isSameAsOngoingBid(bidId: ride.bidId)) {
+                    
+                    if let ongoingBid = YBClient.sharedInstance().bid {
+                        DDLogDebug("Ongoingbid is: \(String(describing: ongoingBid.id)). Incoming is \(String(describing: ride.bidId))")
+                    } else {
+                        DDLogDebug("Ongoingbid is: nil. Incoming is \(String(describing: ride.bidId))")
+                    }
+                    return;
+                }
                 
-            case RIDE_CANCELLED_MESSAGE_TYPE:
+                if (YBClient.sharedInstance().status == .offerSent) {
+                    postNotification(RideNotifications.driverEnRoute, value: ride)
+                }
+                
+            case YBMessageType.rideCancelled:
+                // TODO: HANDLE THIS
                 DDLogDebug("RIDE CANCELLED MESSAGE RCVD")
-                break
                 
-            default: break
+                break
+            default:
+                DDLogError("Weird message received during Bid1: \(messageType)")
+                break
             }
         }
-    }
-    
-    //MARK: APNS Token
-    open func didRegisterForRemoteNotificationsWithDeviceToken(_ data:Data) {
-        
     }
 
     //MARK: Utility

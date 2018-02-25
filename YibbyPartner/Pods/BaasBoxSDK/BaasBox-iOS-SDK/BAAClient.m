@@ -2586,7 +2586,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
             NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
                                                  code:[BaasBox errorCode]
                                              userInfo:details];
-            completionBlock(NO, error);
+            completionBlock(nil, error);
         }
         return;
     }

@@ -3,7 +3,7 @@
 //  YibbyPartner
 //
 //  Created by Kishy Kumar on 6/10/16.
-//  Copyright © 2016 MyComp. All rights reserved.
+//  Copyright © 2016 Yibby. All rights reserved.
 //
 
 import UIKit
@@ -13,6 +13,7 @@ import BaasBoxSDK
 import GoogleMaps
 import Cosmos
 import AMPopTip
+import ObjectMapper
 
 class RideEndViewController: BaseYibbyViewController {
 
@@ -58,21 +59,41 @@ class RideEndViewController: BaseYibbyViewController {
                               "rating": rating]
             
             client.postReview(BAASBOX_DRIVER_STRING, jsonBody: reviewDict, completion:{(success, error) -> Void in
-                if ((success) != nil) {
+                if (success != nil) {
                     DDLogVerbose("Review success: \(String(describing: success))")
+                    YBClient.sharedInstance().bid = nil
+
+                    client.syncClient(BAASBOX_DRIVER_STRING, bidId: nil, completion: { (success, error) -> Void in
+                        
+                        if let success = success {
+                            let syncModel = Mapper<YBSync>().map(JSONObject: success)
+                            if let syncData = syncModel {
+                                
+                                DDLogVerbose("syncApp syncdata for no bid: ")
+                                dump(syncData)
+                                
+                                // Sync the local client
+                                YBClient.sharedInstance().syncClient(syncData)
+
+                                AlertUtil.displayAlert("Done with the ride!",
+                                                       message: "Now let's take another one.",
+                                                       completionBlock: {() -> Void in
+                                                        
+                                                        self.performSegue(withIdentifier: "unwindToMainViewController1", sender: self)
+                                })
+                            }
+                        } else {
+                            DDLogVerbose("Sync failed: \(String(describing: error))")
+                            errorBlock(success, error)
+                        }
+                        ActivityIndicatorUtil.disableActivityIndicator(self.view)
+                    })
                 }
                 else {
                     DDLogVerbose("Review failed: \(String(describing: error))")
+                    errorBlock(success, error)
+                    ActivityIndicatorUtil.disableActivityIndicator(self.view)
                 }
-                
-                AlertUtil.displayAlert("Done with the ride!",
-                                       message: "Now let's take another one.",
-                                       completionBlock: {() -> Void in
-                                        self.performSegue(withIdentifier: "unwindToMainViewController1", sender: self)
-                })
-                
-                YBClient.sharedInstance().bid = nil
-                ActivityIndicatorUtil.disableActivityIndicator(self.view)
             })
         })
     }

@@ -20,7 +20,7 @@ public enum AppInitReturnCode: Int {
 }
 
 public struct AppInitNotifications {
-    static let pushStatus = TypedNotification<AppInitReturnCode>(name: "com.Yibby.SplashViewController.pushSuccess")
+    static let initStatus = TypedNotification<AppInitReturnCode>(name: "com.Yibby.AppInit.Init")
 }
 
 class SplashViewController: BaseYibbyViewController {
@@ -28,37 +28,50 @@ class SplashViewController: BaseYibbyViewController {
     // MARK: Properties
     
     static let SPLASH_SCREEN_TAG: Int = 10
-    
+    let ERROR_TEXTVIEW_TAG: Int = 100
+
     let APP_FIRST_RUN: String = "FIRST_RUN"
-    let STATUS_JSON_FIELD_NAME: String = "status"
-    let BID_JSON_FIELD_NAME: String = "bid"
-    let OFFER_JSON_FIELD_NAME: String = "status"
-    let RIDE_JSON_FIELD_NAME: String = "ride"
+//    let STATUS_JSON_FIELD_NAME: String = "status"
+//    let BID_JSON_FIELD_NAME: String = "bid"
+//    let OFFER_JSON_FIELD_NAME: String = "status"
+//    let RIDE_JSON_FIELD_NAME: String = "ride"
     
     var launchScreenVC: LaunchScreenViewController?
     var snapshot: UIImage?
     var imageView: UIImageView?
-    fileprivate var pushStatusObserver: NotificationObserver?
-
-    let ERROR_TEXTVIEW_TAG: Int = 100
+    fileprivate var initStatusObserver: NotificationObserver?
 
     // MARK: view functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initSplash()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        DDLogVerbose("Fired init")
         setupNotificationObservers()
     }
     
     deinit {
-        DDLogVerbose("SplashViewController Deinit")
+        DDLogVerbose("Fired deinit")
         removeNotificationObservers()
     }
     
     fileprivate func setupNotificationObservers() {
         
-        pushStatusObserver = NotificationObserver(notification: AppInitNotifications.pushStatus) { [unowned self] returnCode in
-            DDLogVerbose("pushStatusObserver status: \(returnCode)")
+        initStatusObserver = NotificationObserver(notification: AppInitNotifications.initStatus) { [unowned self] returnCode in
+            DDLogVerbose("initStatusObserver status: \(returnCode)")
             
             switch (returnCode) {
             case .error:
@@ -72,14 +85,13 @@ class SplashViewController: BaseYibbyViewController {
             case .loginError:
                 self.pushLoginErrorCallback()
                 break
-                
-            default: break
             }
         }
     }
 
     fileprivate func removeNotificationObservers() {
-        pushStatusObserver?.removeObserver()
+        initStatusObserver?.removeObserver()
+        initStatusObserver = nil // reset initStatusObserver to prevent a second removeObserver call
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -204,6 +216,9 @@ class SplashViewController: BaseYibbyViewController {
         
         // Initialize the status bar before we show the first screen
         setStatusBar()
+        
+        // remove the notification observers
+        self.removeNotificationObservers()
         
         let v: UIView = self.launchScreenVC!.view!
         UIView.animate(withDuration: 1.0, delay: 1.0, options: .curveEaseOut,

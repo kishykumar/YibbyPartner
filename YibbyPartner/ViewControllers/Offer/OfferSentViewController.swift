@@ -10,6 +10,8 @@ import UIKit
 import CocoaLumberjack
 import LTMorphingLabel
 import M13ProgressSuite
+import BaasBoxSDK
+import ObjectMapper
 
 class OfferSentViewController: BaseYibbyViewController, LTMorphingLabelDelegate {
     
@@ -38,26 +40,27 @@ class OfferSentViewController: BaseYibbyViewController, LTMorphingLabelDelegate 
         return morphingLabelTextArray[morphingLabelTextArrayIndex]
     }
     
-    var offerTimer: Timer?
-    var progressTimer: Timer?
+    fileprivate var offerTimer: Timer?
+    fileprivate var progressTimer: Timer?
     
-    let OFFER_TIMER_INTERVAL: Double = 30.0
-    let OFFER_TIMER_EXPIRE_MSG_TITLE: String = "Offer Rejected."
-    let OFFER_TIMER_EXPIRE_MSG_CONTENT: String = "Reason: Your offer was not the lowest."
+    fileprivate let OFFER_TIMER_INTERVAL: Double = 5.0 // Timer fires every 5 seconds
+    fileprivate let OFFER_TIMER_EXPIRE_MSG_TITLE: String = "Offer Rejected."
+    fileprivate let OFFER_TIMER_EXPIRE_MSG_CONTENT: String = "Reason: Your offer was not the lowest."
     
-    let PROGRESS_TIMER_INTERVAL: Float = 0.3 // this is the default image progress view animation time
+    fileprivate let PROGRESS_TIMER_INTERVAL: Float = 0.3 // this is the default image progress view animation time
     
-    var sampleProgress: Int = 1
-    var progressTimeSum: Int = 0
-    var logoImageProgress: Int = 1
-    var logoImageProgressDirection: Bool = true
+    fileprivate var offerTimeSum: Int = 0
+    fileprivate var sampleProgress: Int = 1
+    fileprivate var progressTimeSum: Int = 0
+    fileprivate var logoImageProgress: Int = 1
+    fileprivate var logoImageProgressDirection: Bool = true
     
     fileprivate var offerObserver: NotificationObserver?
     fileprivate var rideObserver: NotificationObserver?
     
     // MARK: - Setup Functions
     
-    func setupUI () {
+    fileprivate func setupUI () {
         
         // hide the back button
         self.navigationItem.setHidesBackButton(true, animated: false)
@@ -71,12 +74,27 @@ class OfferSentViewController: BaseYibbyViewController, LTMorphingLabelDelegate 
         progressImageOutlet.drawGreyscaleBackground = true
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        DDLogVerbose("Fired init")
+        setupNotificationObservers()
+    }
+    
     deinit {
-        stopOfferTimer()
+        DDLogVerbose("Fired deinit")
         removeNotificationObservers()
     }
     
-    func setupDelegates() {
+    fileprivate func setupDelegates() {
         morphingLabelOutlet.delegate = self
     }
     
@@ -86,8 +104,6 @@ class OfferSentViewController: BaseYibbyViewController, LTMorphingLabelDelegate 
         // Do any additional setup after loading the view.
         setupUI()
         
-        setupNotificationObservers()
-
         setupDelegates()
 
         // start the timer
@@ -106,17 +122,19 @@ class OfferSentViewController: BaseYibbyViewController, LTMorphingLabelDelegate 
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Helper
+    // MARK: - Helpers
     
-    func startOfferTimer() {
+    // MARK: - OfferTimer functions
+
+    fileprivate func startOfferTimer() {
         offerTimer = Timer.scheduledTimer(timeInterval: OFFER_TIMER_INTERVAL,
                                           target: self,
-                                          selector: #selector(OfferSentViewController.bidWaitTimeoutCb),
+                                          selector: #selector(OfferSentViewController.bidWaitTimeoutCallback),
                                           userInfo: nil,
                                           repeats: false)
     }
     
-    func stopOfferTimer() {
+    fileprivate func stopOfferTimer() {
         if let offerTimer = self.offerTimer {
             offerTimer.invalidate()
         }
@@ -125,22 +143,66 @@ class OfferSentViewController: BaseYibbyViewController, LTMorphingLabelDelegate 
         stopProgressTimer()
     }
     
-    func bidWaitTimeoutCb() {
+    @objc fileprivate func bidWaitTimeoutCallback() {
 
+        // called every 5 seconds
+        offerTimeSum += 5
+        DDLogVerbose("Incremented timer \(offerTimeSum)")
         
-        // TODO: Rather than aborting the bid, query the webserver for bidDetails and show the result
-        
-        DDLogDebug("Resetting the bidState in bidWaitTimeoutCb")
-        
-        // delete the saved state bid
-        YBClient.sharedInstance().bid = nil
-        
-        stopOfferTimer()
-        
-        // dismiss the offer view controller
-        AlertUtil.displayAlert(OFFER_TIMER_EXPIRE_MSG_TITLE, message: OFFER_TIMER_EXPIRE_MSG_CONTENT, completionBlock: {() -> Void in
-            self.dismiss(animated: true, completion: nil)
-        })
+        // check if it's more than 35 seconds
+        if (offerTimeSum >= 35 && offerTimeSum < 120) {
+            
+            DDLogVerbose("Fired")
+            let bidId = YBClient.sharedInstance().bid!.id
+            
+            let client: BAAClient = BAAClient.shared()
+            client.syncClient(BAASBOX_DRIVER_STRING, bidId: bidId, completion: { (success, error) -> Void in
+                
+                if let success = success {
+                    let syncModel = Mapper<YBSync>().map(JSONObject: success)
+                    if let syncData = syncModel {
+                        
+                        DDLogVerbose("syncApp syncdata for bidId: \(String(describing: bidId))")
+                        dump(syncData)
+                        
+                        // Sync the local client
+                        YBClient.sharedInstance().syncClient(syncData)
+                        
+                        switch (YBClient.sharedInstance().status) {
+                            
+                        case .driverEnRoute:
+                            
+                            self.stopOfferTimer()
+                            postNotification(RideNotifications.driverEnRoute, value: YBClient.sharedInstance().ride!)
+                            
+                        case .offerRejected:
+                            
+                            self.stopOfferTimer()
+                            postNotification(BidNotifications.offerRejected, value: YBClient.sharedInstance().bid!)
+
+                            break
+                            
+                        case .offerInProcess:
+                            assert(false)
+                            
+                        case .offerSent:
+                            // We have to continue with the timer
+                            break
+                            
+                        default:
+                            break
+                        }
+                    }
+                }
+            })
+        } else if (offerTimeSum >= 120) {
+            
+            self.stopOfferTimer()
+            
+            // if (timeout is more than 2 minutes, cancel the ride)
+            DDLogDebug("Resetting the bidState in bidWaitTimeoutCb")
+            postNotification(BidNotifications.offerRejected, value: YBClient.sharedInstance().bid!)
+        }
     }
     
     // MARK: - Notifications
@@ -164,19 +226,19 @@ class OfferSentViewController: BaseYibbyViewController, LTMorphingLabelDelegate 
 
     // MARK: Progress view functions
     
-    func startProgressTimer () {
+    fileprivate func startProgressTimer () {
         progressTimer = Timer.scheduledTimer(timeInterval: TimeInterval(PROGRESS_TIMER_INTERVAL), target: self,
                                              selector: #selector(OfferSentViewController.progress),
                                              userInfo: nil, repeats: true)
     }
     
-    func stopProgressTimer() {
+    fileprivate func stopProgressTimer() {
         if let progressTimer = self.progressTimer {
             progressTimer.invalidate()
         }
     }
     
-    func progress() {
+    @objc fileprivate func progress() {
         
         progressTimeSum += 3 // sum by 0.3s
         

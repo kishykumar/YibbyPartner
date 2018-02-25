@@ -88,6 +88,13 @@ extension UIView {
     func makeRounded() {
         let layer = self.layer
         self.clipsToBounds = true
+        
+        if (self.frame.size.height > self.frame.size.width) {
+            self.frame.size.height = self.frame.size.width
+        } else {
+            self.frame.size.width = self.frame.size.height
+        }
+        
         layer.cornerRadius = self.frame.size.height / 2;
         layer.masksToBounds = true
     }

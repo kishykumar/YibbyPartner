@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,8 +32,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="533"/>
                                 <color key="backgroundColor" red="0.59887528419494629" green="0.87706345319747925" blue="0.92127001285552979" alpha="0.35782822986577179" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MSF-HH-Cyh" userLabel="CenterMarkersView" customClass="YibbyBorderedUIView" customModule="YibbyPartner" customModuleProvider="target">
-                                <rect key="frame" x="338" y="73" width="27" height="27"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MSF-HH-Cyh" userLabel="CenterMarkersView" customClass="YBBorderedUIView" customModule="YibbyPartner" customModuleProvider="target">
+                                <rect key="frame" x="338" y="73.5" width="27" height="27"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3WU-fA-li4" userLabel="LocationArrowLabel">
                                         <rect key="frame" x="5" y="5" width="17" height="17"/>
@@ -163,11 +163,19 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kRI-5X-nXO" userLabel="ProfilePicParentView">
                                                 <rect key="frame" x="126.5" y="0.0" width="122" height="101"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile" translatesAutoresizingMaskIntoConstraints="NO" id="Nzp-4Y-UjJ">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account" translatesAutoresizingMaskIntoConstraints="NO" id="Nzp-4Y-UjJ" customClass="SwiftyAvatar" customModule="YibbyPartner" customModuleProvider="target">
                                                         <rect key="frame" x="20.5" y="10" width="81" height="81"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Nzp-4Y-UjJ" secondAttribute="height" id="PiF-xE-jO0"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                <real key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -344,7 +352,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i6J-Xb-HOt" userLabel="RiderImageAndNameView">
                                                                 <rect key="frame" x="120" y="0.0" width="115" height="80"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile" translatesAutoresizingMaskIntoConstraints="NO" id="xg6-8L-8ky" userLabel="Rider Image">
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account" translatesAutoresizingMaskIntoConstraints="NO" id="xg6-8L-8ky" userLabel="Rider Image">
                                                                         <rect key="frame" x="0.0" y="0.0" width="115" height="80"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="xg6-8L-8ky" secondAttribute="height" multiplier="23:16" id="crp-sL-AOE"/>
@@ -393,7 +401,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZAX-iS-epB" userLabel="CosmosRatingView" customClass="CosmosView" customModule="Cosmos">
-                                                        <rect key="frame" x="67.5" y="412" width="240" height="40"/>
+                                                        <rect key="frame" x="47.5" y="412" width="280" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" priority="250" constant="240" id="8Gv-qo-N4y"/>
                                                             <constraint firstAttribute="height" constant="40" id="JzJ-HV-dXs"/>
@@ -524,6 +532,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="default-profile" width="480" height="640"/>
+        <image name="account" width="128" height="128"/>
     </resources>
 </document>

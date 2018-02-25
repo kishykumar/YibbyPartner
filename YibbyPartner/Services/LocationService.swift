@@ -37,6 +37,7 @@ open class LocationService: NSObject, CLLocationManagerDelegate {
     func setupLocationManager () {
         locationManager = CLLocationManager()
         locationManager.delegate = self
+        locationManager.activityType = .automotiveNavigation
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.requestWhenInUseAuthorization()
         
