@@ -28,7 +28,7 @@
                         <constraint firstAttribute="width" secondItem="Ncr-J2-nyv" secondAttribute="height" multiplier="219:209" id="jFA-12-Bfn"/>
                     </constraints>
                 </imageView>
-                <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" tag="100" contentMode="scaleToFill" text="There was some problem in loading the application." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bnm-4N-YwZ">
+                <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" tag="100" contentMode="scaleToFill" text="There was some problem in loading the application. Restart the app." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bnm-4N-YwZ" userLabel="ErrorTextView">
                     <rect key="frame" x="16" y="355.5" width="343" height="75"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="75" id="Yu3-Ma-CX3"/>

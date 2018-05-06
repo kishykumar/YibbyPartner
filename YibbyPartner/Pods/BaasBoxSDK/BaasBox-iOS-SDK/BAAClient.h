@@ -214,6 +214,9 @@
                 jsonBody:(NSDictionary *)jsonBody
                 completion: (BAAObjectResultBlock)completionBlock;
 
+- (void) getNearestDriverEta: (NSDictionary *) parameters
+                    completion: (BAAObjectResultBlock)completionBlock;
+
 // Offer
 - (void)createOffer:(NSString *)bidId
          offerPrice:(NSNumber *)offerPrice

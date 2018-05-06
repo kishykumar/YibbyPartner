@@ -27,23 +27,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
 
     var window: UIWindow?
 
-    var isSandbox = true
+    fileprivate var isSandbox = true
 
-    var connectedToGCM = false
-    var subscribedToTopic = false
-    var gcmSenderID: String?
-    var registrationToken: String?
-    var registrationOptions = [String: AnyObject]()
+    fileprivate var connectedToGCM = false
+    fileprivate var subscribedToTopic = false
+    fileprivate var gcmSenderID: String?
+    fileprivate var registrationToken: String?
+    fileprivate var registrationOptions = [String: AnyObject]()
     
-    let registrationKey: String = "onRegistrationCompleted"
-    let messageKey: String = "onMessageReceived"
-    let subscriptionTopic: String = "/topics/global"
+    fileprivate let registrationKey: String = "onRegistrationCompleted"
+    fileprivate let messageKey: String = "onMessageReceived"
+    fileprivate let subscriptionTopic: String = "/topics/global"
 
-    let GOOGLE_API_KEY_IOS: String = "AIzaSyAg47Gp0GvI6myz-sZZfKJ1fPtx0wUBMjU"
-    let BAASBOX_APPCODE: String = "1234567890"
-    //let BAASBOX_URL = "http://custom-env.cjamdz6ejx.us-west-1.elasticbeanstalk.com"
-    let BAASBOX_URL: String = "https://870f1005.ngrok.io"
-    
+    fileprivate let GOOGLE_API_KEY_IOS: String = "AIzaSyAg47Gp0GvI6myz-sZZfKJ1fPtx0wUBMjU"
+    fileprivate let BAASBOX_APPCODE: String = "1234567890"
+    //fileprivate let BAASBOX_URL = "http://custom-env.cjamdz6ejx.us-west-1.elasticbeanstalk.com"
+    fileprivate let BAASBOX_URL = "https://08bf238c.ngrok.io"
+
     var centerContainer: MMDrawerController?
     var pushController: PushController =  PushController()
     var initialized: Bool = false

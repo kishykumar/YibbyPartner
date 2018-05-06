@@ -3,55 +3,55 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "yibby_40.png",
+      "filename" : "40px-x-40px.png",
       "scale" : "2x"
     },
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "yibby_60.png",
+      "filename" : "60px-x-60px.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "yibby_58.png",
+      "filename" : "58px-x-58px.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "yibby_87.png",
+      "filename" : "87px-x-87px.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "yibby_80.png",
+      "filename" : "80px-x-80px.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "yibby_120.png",
+      "filename" : "120px-x-120px.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "yibby_120-1.png",
+      "filename" : "120px-x-120px-1.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "yibby_180.png",
+      "filename" : "180px-x-180px.png",
       "scale" : "3x"
     },
     {
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "filename" : "yibby 1024.png",
+      "filename" : "1024px-x-1024px.png",
       "scale" : "1x"
     }
   ],

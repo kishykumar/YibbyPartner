@@ -7,7 +7,7 @@ PODS:
     - Alamofire (~> 4.1)
     - ObjectMapper (~> 2.0)
   - AMPopTip (2.1.7)
-  - BaasBoxSDK (0.9.15)
+  - BaasBoxSDK (0.9.16)
   - BButton (4.0.2)
   - Braintree (4.8.7):
     - Braintree/Card (= 4.8.7)
@@ -236,7 +236,7 @@ SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   AlamofireObjectMapper: 842d2eed43a4d0593ff0110d54ac86a170c4519c
   AMPopTip: 409326cfee1108b625c85de73934014598cd0797
-  BaasBoxSDK: 8023c692ae190c4f4321a304921bb2babdf7bdfd
+  BaasBoxSDK: 2a9eb4b87f77f8a20ade4b75f4ad80899ea05fc8
   BButton: ab0f2ed3b998ae73c5188b57d270d81e4a1eeb27
   Braintree: ce12a740328db024ae3bb284551e78d8cc34e57c
   CocoaLumberjack: 0d0a04bbec1e5d9c58d311750e42c85fc51a84ef
@@ -255,7 +255,7 @@ SPEC CHECKSUMS:
   Google: d536877ec602555b755cc28ce6fed104825c693c
   GoogleAppUtilities: a8a552aa74f6597f805e45b5a3962766c3134973
   GoogleAuthUtilities: ccad2e0a9284699973ff57c0dd24c3893657fda4
-  GoogleCloudMessaging: f37ea14dd0f41d4d889c10b5559dd35bbfd9ac26
+  GoogleCloudMessaging: 2f503711dac162dc08c0c418643210793335eca2
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleIPhoneUtilities: 63f25e93a3ddcb66884d182aab3a660d98f1479b
   GoogleMaps: a5b5bbe47734e2443bde781a6aa64e69fdb6d785

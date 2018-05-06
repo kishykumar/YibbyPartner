@@ -42,7 +42,118 @@ class OfferViewController: BaseYibbyViewController {
     
     var savedBgTimestamp: Date?
 
-    // MARK: Setup Functions
+    // MARK: Actions
+    
+    @IBAction func acceptRequestAction(_ sender: UIButton) {
+        
+        let userBid = YBClient.sharedInstance().bid!
+        
+        DDLogInfo("Called: \(String(describing: self.offerPriceOutlet.text))")
+        WebInterface.makeWebRequestAndHandleError(
+            self,
+            webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
+                
+                // enable the loading activity indicator
+                ActivityIndicatorUtil.enableActivityIndicator(self.view)
+                
+                let client: BAAClient = BAAClient.shared()
+                client.createOffer(
+                    userBid.id,
+                    offerPrice: Int(self.offerPriceOutlet.text!) as NSNumber!,
+                    completion: {(success, error) -> Void in
+                        
+                        // diable the loading activity indicator
+                        ActivityIndicatorUtil.disableActivityIndicator(self.view)
+                        self.stopOfferTimer()
+                        
+                        if (error == nil) {
+                            DDLogVerbose("created offer \(String(describing: success))")
+                            
+                            YBClient.sharedInstance().status = .offerSent
+                            self.performSegue(withIdentifier: "offerSentSegue", sender: nil)
+                        }
+                        else {
+                            errorBlock(success, error)
+                        }
+                })
+        })
+    }
+    
+    fileprivate func adjustGMSCameraFocus () {
+        
+        let highBidPriceRelativeOrigin: CGPoint =
+            (highBidPriceOutlet.superview?.convert(highBidPriceOutlet.frame.origin,
+                                                   to: gmsMapViewOutlet))!
+        
+        if let pickup = pickupMarker, let dropoff = dropoffMarker {
+            
+            let bounds = GMSCoordinateBounds(coordinate: pickup.position, coordinate: dropoff.position)
+            let insets = UIEdgeInsets(top: self.topLayoutGuide.length + (pickup.icon?.size.height)! + 10.0,
+                                      left: ((pickup.icon?.size.width)! / 2) + 10.0,
+                                      bottom: gmsMapViewOutlet.frame.height - highBidPriceRelativeOrigin.y + 10.0,
+                                      right: ((pickup.icon?.size.width)! / 2) + 10.0)
+            
+            let update = GMSCameraUpdate.fit(bounds, with: insets)
+            gmsMapViewOutlet.moveCamera(update)
+            
+        }
+    }
+    
+    fileprivate func setPickupDetails (_ location: YBLocation) {
+        
+        pickupMarker?.map = nil
+        
+        self.pickupLocation = location
+        
+        let pumarker = GMSMarker(position: location.coordinate())
+        pumarker.map = gmsMapViewOutlet
+        
+        pumarker.icon = YibbyMapMarker.annotationImageWithMarker(pumarker,
+                                                                 title: location.name!,
+                                                                 type: .pickup)
+        
+        pickupMarker = pumarker
+    }
+    
+    fileprivate func setDropoffDetails (_ location: YBLocation) {
+        
+        dropoffMarker?.map = nil
+        
+        self.dropoffLocation = location
+        
+        let domarker = GMSMarker(position: location.coordinate())
+        domarker.map = gmsMapViewOutlet
+        
+        //        domarker.icon = UIImage(named: "Visa")
+        domarker.icon = YibbyMapMarker.annotationImageWithMarker(domarker,
+                                                                 title: location.name!,
+                                                                 type: .dropoff)
+        
+        dropoffMarker = domarker
+    }
+    
+    @IBAction func declineRequestAction(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func incrementOfferPriceAction(_ sender: AnyObject) {
+        let userBid = YBClient.sharedInstance().bid!
+        let offerPrice: Int = Int(offerPriceOutlet.text!)! + 1
+        let bidHigh: Int = Int(userBid.bidHigh!)
+        
+        // increment only if the offer price is less than bidHigh
+        if (offerPrice < bidHigh) {
+            offerPriceOutlet.text = String(offerPrice)
+        }
+    }
+    
+    @IBAction func decrementOfferPriceAction(_ sender: AnyObject) {
+        if (Int(offerPriceOutlet.text!) != 0) {
+            offerPriceOutlet.text = String(Int(offerPriceOutlet.text!)! - 1)
+        }
+    }
+    
+    // MARK: Setup
     fileprivate func setupUI () {
         
         let userBid = YBClient.sharedInstance().bid!
@@ -115,110 +226,6 @@ class OfferViewController: BaseYibbyViewController {
     fileprivate func removeNotificationObservers() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-    }
-    
-    // MARK: Actions
-    
-    @IBAction func acceptRequestAction(_ sender: UIButton) {
-        
-        let userBid = YBClient.sharedInstance().bid!
-
-        DDLogInfo("Called: \(String(describing: self.offerPriceOutlet.text))")
-        WebInterface.makeWebRequestAndHandleError(
-            self,
-            webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
-                
-                // enable the loading activity indicator
-                ActivityIndicatorUtil.enableActivityIndicator(self.view)
-                
-                let client: BAAClient = BAAClient.shared()
-                client.createOffer(
-                    userBid.id,
-                    offerPrice: Int(self.offerPriceOutlet.text!) as NSNumber!,
-                    completion: {(success, error) -> Void in
-
-                    // diable the loading activity indicator
-                    ActivityIndicatorUtil.disableActivityIndicator(self.view)
-                    self.stopOfferTimer()
-
-                    if (error == nil) {
-                        DDLogVerbose("created offer \(String(describing: success))")
-                        
-                        YBClient.sharedInstance().status = .offerSent
-                        self.performSegue(withIdentifier: "offerSentSegue", sender: nil)
-                    }
-                    else {
-                        errorBlock(success, error)
-                    }
-                })
-        })
-    }
-    
-    fileprivate func adjustGMSCameraFocus () {
-        
-        let highBidPriceRelativeOrigin: CGPoint =
-            (highBidPriceOutlet.superview?.convert(highBidPriceOutlet.frame.origin,
-                                                        to: gmsMapViewOutlet))!
-        
-        if let pickup = pickupMarker, let dropoff = dropoffMarker {
-            
-            let bounds = GMSCoordinateBounds(coordinate: pickup.position, coordinate: dropoff.position)
-            let insets = UIEdgeInsets(top: self.topLayoutGuide.length + (pickup.icon?.size.height)! + 10.0,
-                                      left: ((pickup.icon?.size.width)! / 2) + 10.0,
-                                      bottom: gmsMapViewOutlet.frame.height - highBidPriceRelativeOrigin.y + 10.0,
-                                      right: ((pickup.icon?.size.width)! / 2) + 10.0)
-            
-            let update = GMSCameraUpdate.fit(bounds, with: insets)
-            gmsMapViewOutlet.moveCamera(update)
-            
-        }
-    }
-    
-    fileprivate func setPickupDetails (_ location: YBLocation) {
-        
-        pickupMarker?.map = nil
-        
-        self.pickupLocation = location
-        
-        let pumarker = GMSMarker(position: location.coordinate())
-        pumarker.map = gmsMapViewOutlet
-        
-        pumarker.icon = YibbyMapMarker.annotationImageWithMarker(pumarker,
-                                                                 title: location.name!,
-                                                                 type: .pickup)
-        
-        pickupMarker = pumarker
-    }
-    
-    fileprivate func setDropoffDetails (_ location: YBLocation) {
-        
-        dropoffMarker?.map = nil
-        
-        self.dropoffLocation = location
-        
-        let domarker = GMSMarker(position: location.coordinate())
-        domarker.map = gmsMapViewOutlet
-        
-        //        domarker.icon = UIImage(named: "Visa")
-        domarker.icon = YibbyMapMarker.annotationImageWithMarker(domarker,
-                                                                 title: location.name!,
-                                                                 type: .dropoff)
-        
-        dropoffMarker = domarker
-    }
-    
-    @IBAction func declineRequestAction(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func incrementOfferPriceAction(_ sender: AnyObject) {
-        offerPriceOutlet.text = String(Int(offerPriceOutlet.text!)! + 1)
-    }
-    
-    @IBAction func decrementOfferPriceAction(_ sender: AnyObject) {
-        if (Int(offerPriceOutlet.text!) != 0) {
-            offerPriceOutlet.text = String(Int(offerPriceOutlet.text!)! - 1)
-        }
     }
     
     // MARK: Helpers

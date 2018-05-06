@@ -521,6 +521,40 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
           }];
 }
 
+- (void) getNearestDriverEta: (NSDictionary *) parameters
+                   completion: (BAAObjectResultBlock)completionBlock {
+    
+    if (!self.currentUser) {
+        if (completionBlock) {
+            
+            NSMutableDictionary* details = [NSMutableDictionary dictionary];
+            details[@"NSLocalizedDescriptionKey"] = @"getNearestDriversEta can't be called for a non logged-in user.";
+            NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
+                                                 code:[BaasBox errorCode]
+                                             userInfo:details];
+            completionBlock(nil, error);
+            
+        }
+        return;
+    }
+    
+    [self getPath:@"nearest_eta"
+       parameters: parameters
+          success:^(NSDictionary *responseObject) {
+              
+              if (completionBlock) {
+                  completionBlock(responseObject[@"data"], nil);
+              }
+              
+          } failure:^(NSError *error) {
+              
+              if (completionBlock) {
+                  completionBlock(nil, error);
+              }
+              
+          }];
+}
+
 - (void)cancelRiderRide:(NSString *)bidId
                 message:(NSString *)message
                 completion:(BAAObjectResultBlock)completionBlock {
