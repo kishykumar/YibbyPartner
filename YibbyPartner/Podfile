@@ -8,7 +8,7 @@ use_frameworks!
 
 def testing_pods
     pod 'Quick'
-    pod 'Nimble', '~> 5.0.0'
+    pod 'Nimble'
     pod 'Nimble-Snapshots'
 end
 

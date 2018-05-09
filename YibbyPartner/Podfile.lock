@@ -122,7 +122,7 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.5.7):
     - MMDrawerController/Core
-  - Nimble (5.0.0)
+  - Nimble (7.1.1)
   - Nimble-Snapshots (4.4.0):
     - Nimble-Snapshots/Core (= 4.4.0)
   - Nimble-Snapshots/Core (4.4.0):
@@ -191,7 +191,7 @@ DEPENDENCIES:
   - M13ProgressSuite
   - MBProgressHUD
   - MMDrawerController (~> 0.5.7)
-  - Nimble (~> 5.0.0)
+  - Nimble
   - Nimble-Snapshots
   - NVActivityIndicatorView
   - OpenInGoogleMaps
@@ -276,7 +276,7 @@ SPEC CHECKSUMS:
   M13ProgressSuite: ea9f7263e73e9215e6849dfa54e29ee0ad6a145c
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
-  Nimble: 56fc9f5020effa2206de22c3dd910f4fb011b92f
+  Nimble: 391f07782af4b37914f9bd7b2ffbb952731b8202
   Nimble-Snapshots: e743439f26c2fa99d8f7e0d7c01c99bcb40aa6f2
   NVActivityIndicatorView: 9f47e8a4affb860ef729aeec99b1550219e6c233
   ObjectMapper: 9e385c2295bcc4e16eabbcfc85db801442bba545
@@ -294,6 +294,6 @@ SPEC CHECKSUMS:
   TTRangeSlider: 2f2ce4a33b32bb323c6575b9f5161c4664459c58
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: b9a2666f462491ffde08a57ed56f58bb6537292e
+PODFILE CHECKSUM: 9e901e6509e6403da705bd54925219e50e10f096
 
 COCOAPODS: 1.2.0.beta.1
