@@ -6,11 +6,11 @@ struct Helper {
   static func rotationTransform() -> CGAffineTransform {
     switch UIDevice.current.orientation {
     case .landscapeLeft:
-      return CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+      return CGAffineTransform(rotationAngle: CGFloat.pi * 0.5)
     case .landscapeRight:
-      return CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
+      return CGAffineTransform(rotationAngle: -(CGFloat.pi * 0.5))
     case .portraitUpsideDown:
-      return CGAffineTransform(rotationAngle: CGFloat(M_PI))
+      return CGAffineTransform(rotationAngle: CGFloat.pi)
     default:
       return CGAffineTransform.identity
     }
@@ -23,6 +23,16 @@ struct Helper {
     case .landscapeRight: return .landscapeLeft
     case .portraitUpsideDown: return .portraitUpsideDown
     default: return .portrait
+    }
+  }
+
+  static func screenSizeForOrientation() -> CGSize {
+    switch UIDevice.current.orientation {
+    case .landscapeLeft, .landscapeRight:
+      return CGSize(width: UIScreen.main.bounds.height,
+                    height: UIScreen.main.bounds.width)
+    default:
+      return UIScreen.main.bounds.size
     }
   }
 }

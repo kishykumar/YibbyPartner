@@ -20,8 +20,12 @@ CocoaLumberjack
 ##### Swift version via CocoaPods
 ```ruby
 platform :ios, '8.0'
-pod 'CocoaLumberjack/Swift'
-use_frameworks!
+
+# You need to set target when you use CocoaPods 1.0.0 or later.
+target 'SampleTarget' do 
+  use_frameworks!
+  pod 'CocoaLumberjack/Swift'
+end
 ```
 Note: `Swift` is a subspec which will include all the Obj-C code plus the Swift one, so this is sufficient. 
 For more details about how to use Swift with Lumberjack, see [this conversation](https://github.com/CocoaLumberjack/CocoaLumberjack/issues/405).
@@ -34,8 +38,8 @@ import CocoaLumberjack
 ```
 
 ```swift
-DDLog.add(DDTTYLogger.sharedInstance()) // TTY = Xcode console
-DDLog.add(DDASLLogger.sharedInstance()) // ASL = Apple System Logs
+DDLog.add(DDTTYLogger.sharedInstance) // TTY = Xcode console
+DDLog.add(DDASLLogger.sharedInstance) // ASL = Apple System Logs
 
 let fileLogger: DDFileLogger = DDFileLogger() // File Logger
 fileLogger.rollingFrequency = TimeInterval(60*60*24)  // 24 hours
@@ -44,11 +48,11 @@ DDLog.add(fileLogger)
 
 ...
 
-DDLogVerbose("Verbose");
-DDLogDebug("Debug");
-DDLogInfo("Info");
-DDLogWarn("Warn");
-DDLogError("Error");
+DDLogVerbose("Verbose")
+DDLogDebug("Debug")
+DDLogInfo("Info")
+DDLogWarn("Warn")
+DDLogError("Error")
 ```
 
 ##### Obj-C version via CocoaPods
@@ -147,14 +151,16 @@ Configure your logging however you want. Change log levels per file (perfect for
 
 ### Requirements 
 The current version of Lumberjack requires:
-- Xcode 8 or later
-- Swift 3.0 or later
-- iOS 5 or later
-- OS X 10.7 or later
+- Xcode 9 or later
+- Swift 4.0 or later
+- iOS 6 or later
+- OS X 10.8 or later
 - WatchOS 2 or later
 - TVOS 9 or later
 
 #### Backwards compability
+- for iOS 5 and OS X 10.7, use the 3.3 version
+- for Xcode 8 and Swift 3, use the 3.2 version
 - for Xcode 7.3 and Swift 2.3, use the 2.4.0 version
 - for Xcode 7.3 and Swift 2.2, use the 2.3.0 version
 - for Xcode 7.2 and 7.1, use the 2.2.0 version

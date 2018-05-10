@@ -186,7 +186,7 @@ class MainViewController: BaseYibbyViewController {
         }
     }
 
-    func afterViewLoadOps(_ sender: AnyObject) {
+    @objc func afterViewLoadOps(_ sender: AnyObject) {
         
 //        let client: BAAClient = BAAClient.sharedClient()
 //        if (client.isDriverOnline()) {

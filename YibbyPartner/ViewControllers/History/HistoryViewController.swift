@@ -146,7 +146,7 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
             return nil;
         }
         
-        let attrs: [String: Any] = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 22.0), NSForegroundColorAttributeName: UIColor.appDarkGreen1()]
+        let attrs = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 22.0), NSAttributedStringKey.foregroundColor: UIColor.appDarkGreen1()]
         return NSAttributedString(string: InterfaceString.EmptyDataMsg.NotRiddenYetTitle, attributes: attrs)
     }
     
@@ -156,13 +156,13 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
             return nil;
         }
         
-        let attrs: [String: Any] = [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0), NSForegroundColorAttributeName: UIColor.black]
+        let attrs = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15.0), NSAttributedStringKey.foregroundColor: UIColor.black]
         return NSAttributedString(string: InterfaceString.EmptyDataMsg.NotRiddenYetDescription, attributes: attrs)
     }
     
     func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControlState) -> NSAttributedString! {
         let defaultColor: UIColor = self.view.tintColor
-        let attrs: [String: Any] = [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0), NSForegroundColorAttributeName: defaultColor]
+        let attrs = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15.0), NSAttributedStringKey.foregroundColor: defaultColor]
         return NSAttributedString(string: "Learn More", attributes: attrs)
     }
     

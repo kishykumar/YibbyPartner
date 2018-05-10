@@ -1,29 +1,29 @@
 //
 //  LogFormatter.swift
-//  YibbyPartner
+//  Yibby
 //
 //  Created by Kishy Kumar on 5/5/16.
-//  Copyright © 2016 MyComp. All rights reserved.
+//  Copyright © 2016 Yibby. All rights reserved.
 //
 
 import Foundation
-import CocoaLumberjack.DDDispatchQueueLogFormatter
+import CocoaLumberjack
 
-class LogFormatter: DDDispatchQueueLogFormatter {
+class LogFormatter: NSObject, DDLogFormatter {
     let dateFormatter: DateFormatter
     
     override init() {
         dateFormatter = DateFormatter()
-//        dateFormatter.formatterBehavior = .Behavior10_4
+        //        dateFormatter.formatterBehavior = .Behavior10_4
         dateFormatter.timeZone = NSTimeZone.local
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale?
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss:SSS"
         super.init()
     }
     
-    override func format(message logMessage: DDLogMessage!) -> String {
+    func format(message logMessage: DDLogMessage) -> String? {
         let dateAndTime = dateFormatter.string(from: logMessage.timestamp)
-        return "\(dateAndTime) [\(logMessage.fileName):\(logMessage.function):\(logMessage.line)]: \(logMessage.message)"
-//        return "\(logMessage.timestamp) [\(logMessage.fileName):\(logMessage.line)]: \(logMessage.message)"
+        return "\(dateAndTime) [\(logMessage.fileName):\(String(describing: logMessage.function)):\(logMessage.line)]: \(logMessage.message)"
+        //        return "\(logMessage.timestamp) [\(logMessage.fileName):\(logMessage.line)]: \(logMessage.message)"
     }
 }

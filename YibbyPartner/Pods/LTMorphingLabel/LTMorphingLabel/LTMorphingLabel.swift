@@ -119,7 +119,7 @@ typealias LTMorphingSkipFramesClosure =
         }
     }
     
-    override open var text: String! {
+    override open var text: String? {
         get {
             return super.text ?? ""
         }
@@ -205,7 +205,7 @@ typealias LTMorphingSkipFramesClosure =
 // MARK: - Animation extension
 extension LTMorphingLabel {
 
-    func displayFrameTick() {
+    @objc func displayFrameTick() {
         if displayLink.duration > 0.0 && totalFrames == 0 {
             var frameRate = Float(0)
             if #available(iOS 10.0, tvOS 10.0, *) {
@@ -223,7 +223,7 @@ extension LTMorphingLabel {
             }
             totalFrames = Int(ceil(morphingDuration / frameRate))
 
-            let totalDelay = Float((text!).characters.count) * morphingCharacterDelay
+            let totalDelay = Float((text!).count) * morphingCharacterDelay
             totalDelayFrames = Int(ceil(totalDelay / frameRate))
         }
 
@@ -259,12 +259,12 @@ extension LTMorphingLabel {
         var charRects = [CGRect]()
         var leftOffset: CGFloat = 0.0
         
-        charHeight = "Leg".size(attributes: [NSFontAttributeName: font]).height
+        charHeight = "Leg".size(withAttributes: [.font: font]).height
         
         let topOffset = (bounds.size.height - charHeight) / 2.0
 
-        for char in textToDraw.characters {
-            let charSize = String(char).size(attributes: [NSFontAttributeName: font])
+        for char in textToDraw {
+            let charSize = String(char).size(withAttributes: [.font: font])
             charRects.append(
                 CGRect(
                     origin: CGPoint(
@@ -399,7 +399,7 @@ extension LTMorphingLabel {
         var limbo = [LTCharacterLimbo]()
         
         // Iterate original characters
-        for (i, character) in previousText.characters.enumerated() {
+        for (i, character) in previousText.enumerated() {
             var progress: Float = 0.0
             
             if let closure = progressClosures[
@@ -415,7 +415,7 @@ extension LTMorphingLabel {
         }
         
         // Add new characters
-        for (i, character) in (text!).characters.enumerated() {
+        for (i, character) in (text!).enumerated() {
             if i >= diffResults?.0.count {
                 break
             }
@@ -491,12 +491,12 @@ extension LTMorphingLabel {
                 }(charLimbo)
 
             if !willAvoidDefaultDrawing {
-                var attrs: [String: Any] = [
-                    NSForegroundColorAttributeName: textColor.withAlphaComponent(charLimbo.alpha)
+                var attrs: [NSAttributedStringKey: Any] = [
+                    .foregroundColor: textColor.withAlphaComponent(charLimbo.alpha)
                 ]
 
                 if let font = UIFont(name: font.fontName, size: charLimbo.size) {
-                    attrs[NSFontAttributeName] = font
+                    attrs[.font] = font
                 }
                 let s = String(charLimbo.char)
                 s.draw(in: charRect, withAttributes: attrs)

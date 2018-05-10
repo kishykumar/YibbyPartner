@@ -15,6 +15,7 @@
 #import "BTCardClient.h"
 #import "BTCardNonce.h"
 #import "BTCardRequest.h"
+#import "BTThreeDSecureInfo.h"
 #import "BraintreeCore.h"
 #import "BTAPIClient.h"
 #import "BTAppSwitch.h"

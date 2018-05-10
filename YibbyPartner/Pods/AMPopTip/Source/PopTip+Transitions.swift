@@ -6,12 +6,14 @@
 //  Copyright © 2017 Andrea Mazzini. All rights reserved.
 //
 
+import UIKit
+
 public extension PopTip {
 
   /// Triggers the chosen entrance animation
   ///
   /// - Parameter completion: the completion handler
-  public func performEntranceAnimation(completion: @escaping (Void) -> Void) {
+  public func performEntranceAnimation(completion: @escaping () -> Void) {
     switch entranceAnimation {
     case .scale:
       entranceScale(completion: completion)
@@ -37,22 +39,20 @@ public extension PopTip {
   /// Triggers the chosen exit animation
   ///
   /// - Parameter completion: the completion handler
-  public func performExitAnimation(completion: @escaping (Void) -> Void) {
+  public func performExitAnimation(completion: @escaping () -> Void) {
     switch exitAnimation {
     case .scale:
       exitScale(completion: completion)
     case .fadeOut:
       exitFadeOut(completion: completion)
     case .custom:
-      containerView?.addSubview(self)
       exitAnimationHandler?(completion)
     case .none:
-      containerView?.addSubview(self)
       completion()
     }
   }
 
-  private func entranceTransition(completion: @escaping (Void) -> Void) {
+  private func entranceTransition(completion: @escaping () -> Void) {
     transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
     switch direction {
     case .up:
@@ -77,7 +77,7 @@ public extension PopTip {
     }
   }
 
-  private func entranceScale(completion: @escaping (Void) -> Void) {
+  private func entranceScale(completion: @escaping () -> Void) {
     transform = CGAffineTransform(scaleX: 0, y: 0)
     if let backgroundMask = backgroundMask {
       containerView?.addSubview(backgroundMask)
@@ -92,7 +92,7 @@ public extension PopTip {
     }
   }
 
-  private func entranceFadeIn(completion: @escaping (Void) -> Void) {
+  private func entranceFadeIn(completion: @escaping () -> Void) {
     if let backgroundMask = backgroundMask {
       containerView?.addSubview(backgroundMask)
     }
@@ -107,7 +107,7 @@ public extension PopTip {
     }
   }
 
-  private func exitScale(completion: @escaping (Void) -> Void) {
+  private func exitScale(completion: @escaping () -> Void) {
     transform = .identity
 
     UIView.animate(withDuration: animationOut, delay: delayOut, options: [.curveEaseInOut, .beginFromCurrentState], animations: { 
@@ -118,8 +118,8 @@ public extension PopTip {
     }
   }
 
-  private func exitFadeOut(completion: @escaping (Void) -> Void) {
-    alpha = 0
+  private func exitFadeOut(completion: @escaping () -> Void) {
+    alpha = 1
 
     UIView.animate(withDuration: animationOut, delay: delayOut, options: [.curveEaseInOut, .beginFromCurrentState], animations: {
       self.alpha = 0

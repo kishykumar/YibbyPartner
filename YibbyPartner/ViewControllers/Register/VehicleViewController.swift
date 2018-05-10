@@ -175,7 +175,7 @@ class VehicleViewController: BaseYibbyViewController,
         self.navigationController?.navigationBar.barTintColor = UIColor.appDarkGreen1()
         
         // title color
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
     }
 
     func initProperties() {

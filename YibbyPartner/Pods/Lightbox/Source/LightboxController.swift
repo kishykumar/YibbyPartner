@@ -11,21 +11,24 @@ public protocol LightboxControllerDismissalDelegate: class {
   func lightboxControllerWillDismiss(_ controller: LightboxController)
 }
 
+public protocol LightboxControllerTouchDelegate: class {
+
+  func lightboxController(_ controller: LightboxController, didTouch image: LightboxImage, at index: Int)
+}
+
 open class LightboxController: UIViewController {
 
   // MARK: - Internal views
 
   lazy var scrollView: UIScrollView = { [unowned self] in
     let scrollView = UIScrollView()
-    scrollView.frame = self.screenBounds
     scrollView.isPagingEnabled = false
     scrollView.delegate = self
-    scrollView.isUserInteractionEnabled = true
     scrollView.showsHorizontalScrollIndicator = false
     scrollView.decelerationRate = UIScrollViewDecelerationRateFast
 
     return scrollView
-    }()
+  }()
 
   lazy var overlayTapGestureRecognizer: UITapGestureRecognizer = { [unowned self] in
     let gesture = UITapGestureRecognizer()
@@ -56,29 +59,25 @@ open class LightboxController: UIViewController {
     view.delegate = self
 
     return view
-    }()
+  }()
 
   open fileprivate(set) lazy var footerView: FooterView = { [unowned self] in
     let view = FooterView()
     view.delegate = self
 
     return view
-    }()
+  }()
 
   open fileprivate(set) lazy var overlayView: UIView = { [unowned self] in
     let view = UIView(frame: CGRect.zero)
     let gradient = CAGradientLayer()
     let colors = [UIColor(hex: "090909").alpha(0), UIColor(hex: "040404")]
 
-    _ = view.addGradientLayer(colors)
+    view.addGradientLayer(colors)
     view.alpha = 0
 
     return view
-    }()
-
-  var screenBounds: CGRect {
-    return UIScreen.main.bounds
-  }
+  }()
 
   // MARK: - Properties
 
@@ -94,7 +93,7 @@ open class LightboxController: UIViewController {
 
       pageDelegate?.lightboxController(self, didMoveToPage: currentPage)
 
-      if let image = pageViews[currentPage].imageView.image , dynamicBackground {
+      if let image = pageViews[currentPage].imageView.image, dynamicBackground {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.125) {
           self.loadDynamicBackground(image)
         }
@@ -122,7 +121,7 @@ open class LightboxController: UIViewController {
 
   open var spacing: CGFloat = 20 {
     didSet {
-      configureLayout()
+      configureLayout(view.bounds.size)
     }
   }
 
@@ -137,6 +136,7 @@ open class LightboxController: UIViewController {
 
   open weak var pageDelegate: LightboxControllerPageDelegate?
   open weak var dismissalDelegate: LightboxControllerDismissalDelegate?
+  open weak var imageTouchDelegate: LightboxControllerTouchDelegate?
   open internal(set) var presented = false
   open fileprivate(set) var seen = false
 
@@ -182,23 +182,36 @@ open class LightboxController: UIViewController {
 
   open override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-
-    if LightboxConfig.hideStatusBar {
-      UIApplication.shared.setStatusBarHidden(true, with: .fade)
-    }
-
     if !presented {
       presented = true
-      configureLayout()
+      configureLayout(view.bounds.size)
     }
   }
 
-  open override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
+  open override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
 
-    if LightboxConfig.hideStatusBar {
-      UIApplication.shared.setStatusBarHidden(statusBarHidden, with: .fade)
-    }
+    scrollView.frame = view.bounds
+    footerView.frame.size = CGSize(
+      width: view.bounds.width,
+      height: 100
+    )
+
+    footerView.frame.origin = CGPoint(
+      x: 0,
+      y: view.bounds.height - footerView.frame.height
+    )
+
+    headerView.frame = CGRect(
+      x: 0,
+      y: 16,
+      width: view.bounds.width,
+      height: 100
+    )
+  }
+
+  open override var prefersStatusBarHidden: Bool {
+    return LightboxConfig.hideStatusBar
   }
 
   // MARK: - Rotation
@@ -206,9 +219,9 @@ open class LightboxController: UIViewController {
   override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
     super.viewWillTransition(to: size, with: coordinator)
 
-    coordinator.animate(alongsideTransition: { (UIViewControllerTransitionCoordinatorContext) -> Void in
+    coordinator.animate(alongsideTransition: { _ in
       self.configureLayout(size)
-      }, completion: nil)
+    }, completion: nil)
   }
 
   // MARK: - Configuration
@@ -225,7 +238,7 @@ open class LightboxController: UIViewController {
       pageViews.append(pageView)
     }
 
-    configureLayout()
+    configureLayout(view.bounds.size)
   }
 
   // MARK: - Pagination
@@ -240,7 +253,9 @@ open class LightboxController: UIViewController {
     var offset = scrollView.contentOffset
     offset.x = CGFloat(page) * (scrollView.frame.width + spacing)
 
-    scrollView.setContentOffset(offset, animated: animated)
+    let shouldAnimated = view.window != nil ? animated : false
+
+    scrollView.setContentOffset(offset, animated: shouldAnimated)
   }
 
   open func next(_ animated: Bool = true) {
@@ -253,13 +268,13 @@ open class LightboxController: UIViewController {
 
   // MARK: - Actions
 
-  func overlayViewDidTap(_ tapGestureRecognizer: UITapGestureRecognizer) {
+  @objc func overlayViewDidTap(_ tapGestureRecognizer: UITapGestureRecognizer) {
     footerView.expand(false)
   }
 
   // MARK: - Layout
 
-  open func configureLayout(_ size: CGSize = UIScreen.main.bounds.size) {
+  open func configureLayout(_ size: CGSize) {
     scrollView.frame.size = size
     scrollView.contentSize = CGSize(
       width: size.width * CGFloat(numberOfPages) + spacing * CGFloat(numberOfPages - 1),
@@ -276,17 +291,7 @@ open class LightboxController: UIViewController {
       }
     }
 
-    let bounds = scrollView.bounds
-    let headerViewHeight = headerView.closeButton.frame.height > headerView.deleteButton.frame.height
-      ? headerView.closeButton.frame.height
-      : headerView.deleteButton.frame.height
-
-    headerView.frame = CGRect(x: 0, y: 16, width: bounds.width, height: headerViewHeight)
-    footerView.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 70)
-
     [headerView, footerView].forEach { ($0 as AnyObject).configureLayout() }
-
-    footerView.frame.origin.y = bounds.height - footerView.frame.height
 
     overlayView.frame = scrollView.frame
     overlayView.resizeGradientLayer()
@@ -333,7 +338,7 @@ extension LightboxController: UIScrollViewDelegate {
     }
 
     targetContentOffset.pointee.x = x
-    currentPage = Int(x / screenBounds.width)
+    currentPage = Int(x / pageWidth)
   }
 }
 
@@ -341,8 +346,16 @@ extension LightboxController: UIScrollViewDelegate {
 
 extension LightboxController: PageViewDelegate {
 
-  func remoteImageDidLoad(_ image: UIImage?) {
-    guard let image = image , dynamicBackground else { return }
+  func remoteImageDidLoad(_ image: UIImage?, imageView: UIImageView) {
+    guard let image = image, dynamicBackground else {
+      return
+    }
+
+    let imageViewFrame = imageView.convert(imageView.frame, to: view)
+    guard view.frame.intersects(imageViewFrame) else {
+      return
+    }
+
     loadDynamicBackground(image)
   }
 
@@ -357,6 +370,8 @@ extension LightboxController: PageViewDelegate {
 
   func pageViewDidTouch(_ pageView: PageView) {
     guard !pageView.hasZoomed else { return }
+
+    imageTouchDelegate?.lightboxController(self, didTouch: images[currentPage], at: currentPage)
 
     let visible = (headerView.alpha == 1.0)
     toggleControls(pageView: pageView, visible: !visible)
@@ -388,8 +403,8 @@ extension LightboxController: HeaderViewDelegate {
     self.pageViews.remove(at: prevIndex).removeFromSuperview()
 
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-      self.configureLayout()
-      self.currentPage = Int(self.scrollView.contentOffset.x / self.screenBounds.width)
+      self.configureLayout(self.view.bounds.size)
+      self.currentPage = Int(self.scrollView.contentOffset.x / self.view.bounds.width)
       deleteButton.isEnabled = true
     }
   }
@@ -407,11 +422,9 @@ extension LightboxController: HeaderViewDelegate {
 extension LightboxController: FooterViewDelegate {
 
   public func footerView(_ footerView: FooterView, didExpand expanded: Bool) {
-    footerView.frame.origin.y = screenBounds.height - footerView.frame.height
-
     UIView.animate(withDuration: 0.25, animations: {
       self.overlayView.alpha = expanded ? 1.0 : 0.0
       self.headerView.deleteButton.alpha = expanded ? 0.0 : 1.0
-    }) 
+    })
   }
 }

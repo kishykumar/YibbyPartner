@@ -102,9 +102,9 @@ open class YibbyMapMarker: UIView {
                                                 height: referenceIcon.size.height))
         
         label.font = UIFont(name: "FontAwesome", size: 12.0)
-        label.text = String.fa_string(forFontAwesomeIcon: FAIcon.FAMapMarker)
+        label.text = NSString.fa_string(forFontAwesomeIcon: FAIcon.FAMapMarker)
         
-        let labelFontSize = String.getFontSizeFromCGSize(label.text!,
+        let labelFontSize = NSString.getFontSizeFromCGSize(label.text!,
                                                          font: label.font,
                                                          rect: CGSize(width: infoWindowWidth, height: referenceIcon.size.height))
         
@@ -163,7 +163,7 @@ open class YibbyMapMarker: UIView {
         infoWindow.titleYPadding = 5.0
         
         let labelString = infoWindow.text! as NSString
-        let labelStringSize: CGSize = labelString.size(attributes: [NSFontAttributeName: infoWindow.font!])
+        let labelStringSize: CGSize = labelString.size(withAttributes: [NSAttributedStringKey.font: infoWindow.font!])
         let labelStringWidth: CGFloat = labelStringSize.width;
         
         infoWindowWidth = labelStringWidth + 30.0

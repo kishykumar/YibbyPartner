@@ -32,7 +32,7 @@ extension NSString {
     class func getFontSizeFromCGSize(_ text: String, font: UIFont, rect: CGSize) -> CGFloat {
         
         // Size required to render string
-        let size = text.size(attributes: [NSFontAttributeName: font])
+        let size = text.size(withAttributes: [NSAttributedStringKey.font: font])
         
         // For current font point size, calculate points per pixel
         let pointsPerPixel: CGFloat =  font.pointSize / size.height;

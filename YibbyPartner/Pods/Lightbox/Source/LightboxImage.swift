@@ -1,4 +1,5 @@
 import UIKit
+import Imaginary
 
 open class LightboxImage {
 
@@ -15,20 +16,18 @@ open class LightboxImage {
     self.videoURL = videoURL
   }
 
-  public init(imageURL: URL, text: String = "", videoURL: URL? = nil ) {
+  public init(imageURL: URL, text: String = "", videoURL: URL? = nil) {
     self.imageURL = imageURL
     self.text = text
     self.videoURL = videoURL
   }
 
-  open func addImageTo(_ imageView: UIImageView, completion: ((_ image: UIImage?) -> Void)? = nil) {
+  open func addImageTo(_ imageView: UIImageView, completion: ((UIImage?) -> Void)? = nil) {
     if let image = image {
       imageView.image = image
       completion?(image)
     } else if let imageURL = imageURL {
-      LightboxConfig.loadImage(imageView, imageURL) { error, image in
-        completion?(image)
-      }
+      LightboxConfig.loadImage(imageView, imageURL, completion)
     }
   }
 }

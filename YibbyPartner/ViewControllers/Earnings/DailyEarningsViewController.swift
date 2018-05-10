@@ -82,7 +82,7 @@ class DailyEarningsViewController: BaseYibbyViewController, UITableViewDelegate,
     
     // MARK: Helper functions
     
-    func afterViewLoadOps(_ sender: AnyObject) {
+    @objc func afterViewLoadOps(_ sender: AnyObject) {
         loadEarningsData()
     }
     

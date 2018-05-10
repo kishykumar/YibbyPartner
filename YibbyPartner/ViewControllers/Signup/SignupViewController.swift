@@ -57,9 +57,9 @@ class SignupViewController: BaseYibbyViewController,
         signupButtonOutlet.color = UIColor.appDarkGreen1()
         
         let attrTitle = NSAttributedString(string: InterfaceString.Button.TANDC,
-                                           attributes: [NSForegroundColorAttributeName : UIColor.appDarkGreen1(),
-                                                        NSFontAttributeName : UIFont.boldSystemFont(ofSize: 12.0),
-                                                        NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
+                                           attributes: [NSAttributedStringKey.foregroundColor : UIColor.appDarkGreen1(),
+                                                        NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 12.0),
+                                                        NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
         tandcButtonOutlet.setAttributedTitle(attrTitle, for: UIControlState())
         
         phoneNumberOutlet.defaultRegion = "US"
