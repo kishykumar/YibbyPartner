@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'D8167FC80FB75998FEB9BCF29455230B'
-               BlueprintName = 'BButton'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'BButton.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D8167FC80FB75998FEB9BCF29455230B"
+               BlueprintName = "BButton"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "BButton.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

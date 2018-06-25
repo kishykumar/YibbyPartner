@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -58,7 +58,7 @@
                                                                     <constraint firstAttribute="width" constant="1" id="KyN-ub-LJ1"/>
                                                                 </constraints>
                                                             </view>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile" translatesAutoresizingMaskIntoConstraints="NO" id="BhQ-gL-WB6">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account1" translatesAutoresizingMaskIntoConstraints="NO" id="BhQ-gL-WB6">
                                                                 <rect key="frame" x="14" y="0.0" width="115" height="115"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="BhQ-gL-WB6" secondAttribute="height" multiplier="1:1" id="Sfq-fy-Lpx"/>
@@ -67,7 +67,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T6j-IL-mzv" userLabel="CarView">
                                                                 <rect key="frame" x="142" y="0.0" width="144" height="115"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoMain" translatesAutoresizingMaskIntoConstraints="NO" id="Bv9-OJ-Dcz">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="driver_car" translatesAutoresizingMaskIntoConstraints="NO" id="Bv9-OJ-Dcz">
                                                                         <rect key="frame" x="0.0" y="0.0" width="144" height="115"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     </imageView>
@@ -208,7 +208,7 @@
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wbK-3C-gdj" userLabel="PriceNumbersSV">
                                                                                 <rect key="frame" x="71.5" y="0.0" width="56" height="73.5"/>
                                                                                 <subviews>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$5.25" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jzn-Xy-UIU" userLabel="RidePriceLabel">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jzn-Xy-UIU" userLabel="RidePriceLabel">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="56" height="37"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -243,7 +243,7 @@
                                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$7.25" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2m-EN-KMs" userLabel="TotalFareLabel">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2m-EN-KMs" userLabel="TotalFareLabel">
                                                                                 <rect key="frame" x="71.5" y="0.0" width="56" height="55.5"/>
                                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -395,7 +395,7 @@
                                                         <constraint firstAttribute="height" constant="100" id="ecA-6C-RJQ"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile" translatesAutoresizingMaskIntoConstraints="NO" id="KBA-mL-Mra">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account1" translatesAutoresizingMaskIntoConstraints="NO" id="KBA-mL-Mra">
                                                     <rect key="frame" x="20" y="99.5" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="KBA-mL-Mra" secondAttribute="height" multiplier="1:1" id="A5l-hr-mEm"/>
@@ -403,8 +403,8 @@
                                                         <constraint firstAttribute="height" constant="60" id="rBx-Q2-uB8"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jamshid Ebadi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N39-HN-H3m">
-                                                    <rect key="frame" x="85" y="137.5" width="94" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jamshid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N39-HN-H3m">
+                                                    <rect key="frame" x="85" y="137.5" width="54.5" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -415,16 +415,24 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="CANCELLED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y1u-ad-4hS">
+                                                    <rect key="frame" x="144.5" y="139" width="84" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="N39-HN-H3m" firstAttribute="top" secondItem="YGJ-UW-d1W" secondAttribute="bottom" constant="8" id="6fp-oS-r6W"/>
                                                 <constraint firstItem="N39-HN-H3m" firstAttribute="leading" secondItem="KBA-mL-Mra" secondAttribute="trailing" constant="5" id="8ey-XR-Ck6"/>
                                                 <constraint firstItem="2C8-kh-8tQ" firstAttribute="top" secondItem="YGJ-UW-d1W" secondAttribute="bottom" constant="8" id="EiU-DJ-XK7"/>
+                                                <constraint firstItem="2C8-kh-8tQ" firstAttribute="leading" secondItem="y1u-ad-4hS" secondAttribute="trailing" constant="5" id="GcZ-ey-F0Q"/>
                                                 <constraint firstAttribute="trailing" secondItem="2C8-kh-8tQ" secondAttribute="trailing" constant="14" id="HYV-Qu-S3N"/>
                                                 <constraint firstAttribute="trailing" secondItem="YGJ-UW-d1W" secondAttribute="trailing" id="Jeb-Tj-yHM"/>
                                                 <constraint firstItem="MrN-Y2-2pZ" firstAttribute="leading" secondItem="NB8-7D-iXD" secondAttribute="leading" id="OKQ-pr-ool"/>
                                                 <constraint firstItem="YGJ-UW-d1W" firstAttribute="leading" secondItem="NB8-7D-iXD" secondAttribute="leading" id="P1d-gn-DWL"/>
+                                                <constraint firstItem="y1u-ad-4hS" firstAttribute="centerY" secondItem="N39-HN-H3m" secondAttribute="centerY" id="Q43-e1-MjY"/>
                                                 <constraint firstAttribute="bottom" secondItem="KBA-mL-Mra" secondAttribute="bottom" constant="3" id="QKk-iS-3iG"/>
                                                 <constraint firstAttribute="bottom" secondItem="2C8-kh-8tQ" secondAttribute="bottom" constant="5" id="gKC-Ty-bSE"/>
                                                 <constraint firstItem="YGJ-UW-d1W" firstAttribute="top" secondItem="MrN-Y2-2pZ" secondAttribute="bottom" constant="5" id="giR-y2-h0O"/>
@@ -432,6 +440,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="MrN-Y2-2pZ" secondAttribute="trailing" id="lgv-BA-mdo"/>
                                                 <constraint firstItem="KBA-mL-Mra" firstAttribute="leading" secondItem="NB8-7D-iXD" secondAttribute="leading" constant="20" id="ofX-S9-stV"/>
                                                 <constraint firstAttribute="bottom" secondItem="N39-HN-H3m" secondAttribute="bottom" constant="5" id="qCR-SY-Lef"/>
+                                                <constraint firstItem="y1u-ad-4hS" firstAttribute="leading" secondItem="N39-HN-H3m" secondAttribute="trailing" constant="5" id="zYl-7u-eab"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -444,6 +453,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
+                                    <outlet property="cancelledLabelOutlet" destination="y1u-ad-4hS" id="2Qa-RI-Ekm"/>
                                     <outlet property="containerView" destination="NB8-7D-iXD" id="4Gr-gu-Yjq"/>
                                     <outlet property="dateTimeLabelOutlet" destination="MrN-Y2-2pZ" id="Ks1-8U-MJr"/>
                                     <outlet property="ridePriceLabelOutlet" destination="2C8-kh-8tQ" id="OjB-Ro-9eG"/>
@@ -569,7 +579,7 @@
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         </imageView>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hIt-fr-Xtn" userLabel="CarDetailsButton">
-                                                                            <rect key="frame" x="51" y="61.5" width="30" height="36"/>
+                                                                            <rect key="frame" x="51" y="63.5" width="30" height="32"/>
                                                                             <fontDescription key="fontDescription" name="Ionicons" family="Ionicons" pointSize="20"/>
                                                                             <state key="normal" title="">
                                                                                 <color key="titleColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -923,7 +933,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toyota Corolla  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdB-CF-MX5" customClass="YibbyPaddingLabel" customModule="YibbyPartner" customModuleProvider="target">
-                                                <rect key="frame" x="87.5" y="193.5" width="125" height="40"/>
+                                                <rect key="frame" x="87.5" y="195" width="125" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Hkt-YJ-B54"/>
@@ -939,7 +949,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6EDG137" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTf-fX-Nvg" customClass="YibbyPaddingLabel" customModule="YibbyPartner" customModuleProvider="target">
-                                                <rect key="frame" x="87.5" y="337.5" width="125" height="40"/>
+                                                <rect key="frame" x="87.5" y="340" width="125" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="TDk-Tg-H1K"/>
@@ -954,7 +964,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xun-8B-zmb" userLabel="UpAngleFAButton">
-                                                <rect key="frame" x="135" y="481" width="30" height="42"/>
+                                                <rect key="frame" x="135" y="485" width="30" height="38"/>
                                                 <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="25"/>
                                                 <state key="normal" title="">
                                                     <color key="titleColor" red="0.1529411765" green="0.68235294120000001" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -999,10 +1009,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="account1" width="82" height="82"/>
         <image name="car_gear" width="128" height="128"/>
-        <image name="default-profile" width="480" height="640"/>
         <image name="defaultProfile" width="480" height="640"/>
         <image name="dots" width="14" height="84"/>
+        <image name="driver_car" width="64" height="64"/>
         <image name="logoMain" width="468" height="468"/>
     </resources>
 </document>

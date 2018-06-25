@@ -135,7 +135,7 @@ class VehicleViewController: BaseYibbyViewController,
         // dismiss the keyboard if it's visible
         self.view.endEditing(true)
         
-        ActionSheetStringPicker.show(withTitle: InterfaceString.ActionSheet.VehicleYear, rows: self.vehicleCapacityRange, initialSelection: 1, doneBlock: {
+        ActionSheetStringPicker.show(withTitle: InterfaceString.ActionSheet.VehicleCapacity, rows: self.vehicleCapacityRange, initialSelection: 1, doneBlock: {
             picker, value, index in
             
             if let capacity = index as? String {

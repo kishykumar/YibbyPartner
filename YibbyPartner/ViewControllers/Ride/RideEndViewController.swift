@@ -131,10 +131,8 @@ class RideEndViewController: BaseYibbyViewController {
         tripDestinationMapViewOutlet.layer.borderColor = UIColor.borderColor().cgColor
         
         if let ride = YBClient.sharedInstance().ride {
-            DDLogVerbose("KKDBG_rideEnd ride: \(ride)")
-            dump(ride)
             
-            let rideFareInt = Int(ride.fare!)
+            let rideFareInt = Int(ride.bidPrice!)
             rideFareLabel.text = "$\(rideFareInt)"
             
             if let rideISODateTime = ride.datetime, let rideDate = TimeUtil.getDateFromISOTime(rideISODateTime) {
@@ -142,12 +140,14 @@ class RideEndViewController: BaseYibbyViewController {
                 rideDateLbl.text = prettyDate
             }
             
-            if let rideMiles = ride.miles {
+            if let rideMeters = ride.tripDistance {
+                let rideMiles: Int = (Int(rideMeters) + 1608) / 1609
                 milesDriverLabelOutlet.text = "\(rideMiles) miles"
             }
             
-            if let rideDuration = ride.rideTime {
-                milesDriverLabelOutlet.text = "\(rideDuration) mins"
+            if let rideDurationSeconds = ride.tripDuration {
+                let rideMins: Int = (rideDurationSeconds + 59) / 60
+                tripDurationLabelOutlet.text = "\(rideMins) mins"
             }
             
             if let pickupCoordinate = ride.pickupLocation?.coordinate(),
@@ -162,9 +162,9 @@ class RideEndViewController: BaseYibbyViewController {
                 domarker.map = tripDestinationMapViewOutlet
             
                 let bounds = GMSCoordinateBounds(coordinate: pickupCoordinate, coordinate: dropoffCoordinate)
-                let insets = UIEdgeInsets(top: 10.0 + (domarker.icon?.size.height)!,
+                let insets = UIEdgeInsets(top: 50.0,
                                           left: 20.0,
-                                          bottom: 10.0,
+                                          bottom: 15.0,
                                           right: 20.0)
                 
                 let update = GMSCameraUpdate.fit(bounds, with: insets)

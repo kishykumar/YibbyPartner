@@ -398,29 +398,22 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
     
 }
 
-
-- (void)createBid:(NSNumber *)bidHigh
-       bidLow:(NSNumber *)bidLow
-       etaHigh:(NSNumber *)etaHigh
-       etaLow:(NSNumber *)etaLow
-       pickupLat:(NSNumber *)pickupLat
+- (void)createBid:(NSNumber *)bidPrice
+        pickupLat:(NSNumber *)pickupLat
        pickupLong:(NSNumber *)pickupLong
-       pickupLoc:(NSString *)pickupLoc
+        pickupLoc:(NSString *)pickupLoc
        dropoffLat:(NSNumber *)dropoffLat
-       dropoffLong:(NSNumber *)dropoffLong
+      dropoffLong:(NSNumber *)dropoffLong
        dropoffLoc:(NSString *)dropoffLoc
-       paymentMethodToken:(NSString *)paymentMethodToken
-       paymentMethodBrand:(NSString *)paymentMethodBrand
-       paymentMethodLast4:(NSString *)paymentMethodLast4
-       numPeople:(NSNumber *)numPeople
+paymentMethodToken:(NSString *)paymentMethodToken
+paymentMethodBrand:(NSString *)paymentMethodBrand
+paymentMethodLast4:(NSString *)paymentMethodLast4
+        numPeople:(NSNumber *)numPeople
        completion:(BAAObjectResultBlock)completionBlock {
     
     [self postPath:@"bid"
         parameters:@{
-                     @"bidHigh" : bidHigh,
-                     @"bidLow": bidLow,
-                     @"etaHigh": etaHigh,
-                     @"etaLow": etaLow,
+                     @"bidPrice" : bidPrice,
                      @"pickupLat": pickupLat,
                      @"pickupLong": pickupLong,
                      @"pickupLoc": pickupLoc,
@@ -556,17 +549,17 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
 }
 
 - (void)cancelRiderRide:(NSString *)bidId
-                message:(NSString *)message
-                completion:(BAAObjectResultBlock)completionBlock {
+             cancelCode:(NSNumber *)cancelCode
+             completion:(BAAObjectResultBlock)completionBlock {
     
     NSString *path = @"ride/r/cancel";
-
+    
     [self postPath:path
         parameters:@{
                      @"appcode" : self.appCode,
                      @"X-BB-SESSION": self.currentUser.authenticationToken,
                      @"bidId": bidId,
-                     @"message": message
+                     @"cancelCode": cancelCode
                      }
            success:^(NSDictionary *responseObject) {
                completionBlock(responseObject, nil);
@@ -576,8 +569,8 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
 }
 
 - (void)cancelDriverRide:(NSString *)bidId
-                 message:(NSString *)message
-                 completion:(BAAObjectResultBlock)completionBlock {
+              cancelCode:(NSNumber *)cancelCode
+              completion:(BAAObjectResultBlock)completionBlock {
     
     NSString *path = [NSString stringWithFormat:@"ride/d/cancel"];
     
@@ -586,7 +579,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
                      @"appcode" : self.appCode,
                      @"X-BB-SESSION": self.currentUser.authenticationToken,
                      @"bidId": bidId,
-                     @"message": message
+                     @"cancelCode": cancelCode
                      }
            success:^(NSDictionary *responseObject) {
                completionBlock(responseObject, nil);
@@ -606,7 +599,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
                      @"X-BB-SESSION": self.currentUser.authenticationToken
                      }
            success:^(NSDictionary *responseObject) {
-               completionBlock(responseObject, nil);
+               completionBlock(responseObject[@"data"], nil);
            } failure:^(NSError *error) {
                completionBlock(nil, error);
            }];
@@ -623,7 +616,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
                      @"X-BB-SESSION": self.currentUser.authenticationToken
                      }
            success:^(NSDictionary *responseObject) {
-               completionBlock(responseObject, nil);
+               completionBlock(responseObject[@"data"], nil);
            } failure:^(NSError *error) {
                completionBlock(nil, error);
            }];
@@ -639,7 +632,7 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
                      @"X-BB-SESSION": self.currentUser.authenticationToken
                      }
            success:^(NSDictionary *responseObject) {
-               completionBlock(responseObject, nil);
+               completionBlock(responseObject[@"data"], nil);
            } failure:^(NSError *error) {
                completionBlock(nil, error);
            }];
@@ -663,16 +656,31 @@ NSString* const BAAUserKeyForUserDefaults = @"com.baaxbox.user";
           }];
 }
 
-
-// Offer
-- (void)createOffer:(NSString *)bidId
-         offerPrice:(NSNumber *)offerPrice
-         completion:(BAAObjectResultBlock)completionBlock {
+// Accept or Reject Bid
+- (void)acceptBid:(NSString *)bidId
+       completion:(BAAObjectResultBlock)completionBlock {
     
-    [self postPath:@"offer"
+    NSString *path = [NSString stringWithFormat:@"bid/%@/accept", bidId];
+    [self postPath:path
         parameters:@{
                      @"bidId" : bidId,
-                     @"offerPrice": offerPrice,
+                     @"appcode" : self.appCode,
+                     @"X-BB-SESSION": self.currentUser.authenticationToken
+                     }
+           success:^(NSDictionary *responseObject) {
+               completionBlock(responseObject[@"data"], nil);
+           } failure:^(NSError *error) {
+               completionBlock(nil, error);
+           }];
+}
+
+- (void)rejectBid:(NSString *)bidId
+       completion:(BAAObjectResultBlock)completionBlock {
+    
+    NSString *path = [NSString stringWithFormat:@"bid/%@/reject", bidId];
+    [self postPath:path
+        parameters:@{
+                     @"bidId" : bidId,
                      @"appcode" : self.appCode,
                      @"X-BB-SESSION": self.currentUser.authenticationToken
                      }

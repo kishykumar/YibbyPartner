@@ -3,7 +3,7 @@
 //  YibbyPartner
 //
 //  Created by Kishy Kumar on 10/22/17.
-//  Copyright © 2017 MyComp. All rights reserved.
+//  Copyright © 2017 Yibby. All rights reserved.
 //
 
 import UIKit

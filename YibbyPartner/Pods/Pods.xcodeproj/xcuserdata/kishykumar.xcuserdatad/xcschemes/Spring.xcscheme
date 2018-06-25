@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '67CA9E7FE55F57C5D50A3826B3FD35B2'
-               BlueprintName = 'Spring'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Spring.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "78BC79F71E3646B439FBDC8673093C21"
+               BlueprintName = "Spring"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "Spring.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,6 +13,9 @@
     <customFonts key="customFonts">
         <array key="FontAwesome.ttf">
             <string>FontAwesome</string>
+        </array>
+        <array key="ionicons.ttf">
+            <string>Ionicons</string>
         </array>
     </customFonts>
     <scenes>
@@ -33,11 +36,11 @@
                                 <color key="backgroundColor" red="0.59887528419494629" green="0.87706345319747925" blue="0.92127001285552979" alpha="0.35782822986577179" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MSF-HH-Cyh" userLabel="CenterMarkersView" customClass="YBBorderedUIView" customModule="YibbyPartner" customModuleProvider="target">
-                                <rect key="frame" x="338" y="73.5" width="27" height="27"/>
+                                <rect key="frame" x="323" y="45" width="42" height="42"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3WU-fA-li4" userLabel="LocationArrowLabel">
-                                        <rect key="frame" x="5" y="5" width="17" height="17"/>
-                                        <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3WU-fA-li4" userLabel="LocationArrowLabel">
+                                        <rect key="frame" x="10.5" y="10" width="21.5" height="22"/>
+                                        <fontDescription key="fontDescription" name="Ionicons" family="Ionicons" pointSize="22"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -45,54 +48,92 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="3WU-fA-li4" secondAttribute="bottom" priority="750" constant="5" id="1J3-CU-48q"/>
-                                    <constraint firstAttribute="trailing" secondItem="3WU-fA-li4" secondAttribute="trailing" priority="750" constant="5" id="4eJ-Sw-yTS"/>
-                                    <constraint firstItem="3WU-fA-li4" firstAttribute="top" secondItem="MSF-HH-Cyh" secondAttribute="top" priority="750" constant="5" id="7Mx-ve-Bx5"/>
-                                    <constraint firstItem="3WU-fA-li4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MSF-HH-Cyh" secondAttribute="leading" constant="5" id="GgI-P6-AKn"/>
+                                    <constraint firstAttribute="bottom" secondItem="3WU-fA-li4" secondAttribute="bottom" priority="750" constant="10" id="1J3-CU-48q"/>
+                                    <constraint firstAttribute="trailing" secondItem="3WU-fA-li4" secondAttribute="trailing" priority="750" constant="10" id="4eJ-Sw-yTS"/>
+                                    <constraint firstItem="3WU-fA-li4" firstAttribute="top" secondItem="MSF-HH-Cyh" secondAttribute="top" priority="750" constant="10" id="7Mx-ve-Bx5"/>
+                                    <constraint firstItem="3WU-fA-li4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MSF-HH-Cyh" secondAttribute="leading" constant="10" id="GgI-P6-AKn"/>
                                     <constraint firstAttribute="width" secondItem="MSF-HH-Cyh" secondAttribute="height" id="L4a-86-CTF"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3WU-fA-li4" secondAttribute="trailing" constant="5" id="R4B-tx-Zt5"/>
-                                    <constraint firstItem="3WU-fA-li4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="MSF-HH-Cyh" secondAttribute="top" constant="5" id="bG1-GU-576"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3WU-fA-li4" secondAttribute="trailing" constant="10" id="R4B-tx-Zt5"/>
+                                    <constraint firstItem="3WU-fA-li4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="MSF-HH-Cyh" secondAttribute="top" constant="10" id="bG1-GU-576"/>
                                     <constraint firstItem="3WU-fA-li4" firstAttribute="centerX" secondItem="MSF-HH-Cyh" secondAttribute="centerX" id="pOA-Ef-Pw3"/>
                                     <constraint firstItem="3WU-fA-li4" firstAttribute="centerY" secondItem="MSF-HH-Cyh" secondAttribute="centerY" id="qb9-g2-x5v"/>
-                                    <constraint firstItem="3WU-fA-li4" firstAttribute="leading" secondItem="MSF-HH-Cyh" secondAttribute="leading" priority="750" constant="5" id="uCL-oS-6pY"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="3WU-fA-li4" secondAttribute="bottom" constant="5" id="vrF-fJ-1yc"/>
+                                    <constraint firstItem="3WU-fA-li4" firstAttribute="leading" secondItem="MSF-HH-Cyh" secondAttribute="leading" priority="750" constant="10" id="uCL-oS-6pY"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="3WU-fA-li4" secondAttribute="bottom" constant="10" id="vrF-fJ-1yc"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="0.0"/>
+                                        <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                         <color key="value" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.10000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="lwz-v0-NxK" appends="YES" id="9SE-Of-HEf"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VnB-kW-xXJ" userLabel="StartNavButtonParentView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VnB-kW-xXJ" userLabel="RideActionParentView">
                                 <rect key="frame" x="0.0" y="600" width="375" height="67"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M56-FA-e9O" customClass="YibbyButton1" customModule="YibbyPartner" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="7" width="335" height="54"/>
-                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Ride Action"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="type">
-                                                <integer key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="onRideActionButtonClick:" destination="uDm-SZ-2VI" eventType="touchUpInside" id="yC8-k2-Pbo"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="NSI-ox-Kv5" userLabel="RideActionsSV">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RR9-Qq-yJY" userLabel="CancelButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="125" height="67"/>
+                                                <color key="backgroundColor" red="0.91921168565750122" green="0.41822531109458316" blue="0.33939560172081268" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="17"/>
+                                                <state key="normal" title="Cancel ">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onCancelRideClick:" destination="uDm-SZ-2VI" eventType="touchUpInside" id="pwq-Ze-tBm"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M56-FA-e9O">
+                                                <rect key="frame" x="125" y="0.0" width="125" height="67"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Ride Action"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="type">
+                                                        <integer key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onRideActionButtonClick:" destination="uDm-SZ-2VI" eventType="touchUpInside" id="yC8-k2-Pbo"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tpu-QH-Eqe" userLabel="StartNavButton">
+                                                <rect key="frame" x="250" y="0.0" width="125" height="67"/>
+                                                <color key="backgroundColor" red="0.15686274509803921" green="0.74509803921568629" blue="0.27058823529411763" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="18"/>
+                                                <state key="normal" title="Nav "/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="type">
+                                                        <integer key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="startNavAction:" destination="uDm-SZ-2VI" eventType="touchUpInside" id="aMj-zl-KPv"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="M56-FA-e9O" firstAttribute="centerY" secondItem="VnB-kW-xXJ" secondAttribute="centerY" id="Ibc-fr-ZnD"/>
-                                    <constraint firstAttribute="trailing" secondItem="M56-FA-e9O" secondAttribute="trailing" constant="20" id="MZW-e0-Ieb"/>
-                                    <constraint firstItem="M56-FA-e9O" firstAttribute="centerX" secondItem="VnB-kW-xXJ" secondAttribute="centerX" id="iQc-ea-oHf"/>
-                                    <constraint firstItem="M56-FA-e9O" firstAttribute="leading" secondItem="VnB-kW-xXJ" secondAttribute="leading" constant="20" id="iVS-dK-qJr"/>
-                                    <constraint firstItem="M56-FA-e9O" firstAttribute="height" secondItem="VnB-kW-xXJ" secondAttribute="height" multiplier="0.8" id="reZ-Fi-F6e"/>
+                                    <constraint firstAttribute="bottom" secondItem="NSI-ox-Kv5" secondAttribute="bottom" id="6rZ-a8-VN3"/>
+                                    <constraint firstItem="NSI-ox-Kv5" firstAttribute="leading" secondItem="VnB-kW-xXJ" secondAttribute="leading" id="cQC-PN-dNg"/>
+                                    <constraint firstItem="NSI-ox-Kv5" firstAttribute="top" secondItem="VnB-kW-xXJ" secondAttribute="top" id="m5C-p4-5XE"/>
+                                    <constraint firstAttribute="trailing" secondItem="NSI-ox-Kv5" secondAttribute="trailing" id="wJq-gl-G9d"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kBJ-pm-ya2" userLabel="ActionsMenuParentView">
@@ -163,7 +204,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kRI-5X-nXO" userLabel="ProfilePicParentView">
                                                 <rect key="frame" x="126.5" y="0.0" width="122" height="101"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account" translatesAutoresizingMaskIntoConstraints="NO" id="Nzp-4Y-UjJ" customClass="SwiftyAvatar" customModule="YibbyPartner" customModuleProvider="target">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account1" translatesAutoresizingMaskIntoConstraints="NO" id="Nzp-4Y-UjJ" customClass="SwiftyAvatar" customModule="YibbyPartner" customModuleProvider="target">
                                                         <rect key="frame" x="20.5" y="10" width="81" height="81"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Nzp-4Y-UjJ" secondAttribute="height" id="PiF-xE-jO0"/>
@@ -207,43 +248,25 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tpu-QH-Eqe" userLabel="RideActionButton" customClass="YibbyButton1" customModule="YibbyPartner" customModuleProvider="target">
-                                <rect key="frame" x="50" y="60" width="275" height="54"/>
-                                <color key="backgroundColor" red="0.3921568627" green="0.80000000000000004" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="18"/>
-                                <state key="normal" title="Start Navigation  "/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="type">
-                                        <integer key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="startNavAction:" destination="uDm-SZ-2VI" eventType="touchUpInside" id="aMj-zl-KPv"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="pZa-MG-XhF" firstAttribute="top" secondItem="X6k-sa-aqt" secondAttribute="top" id="0OD-zb-Gio"/>
                             <constraint firstItem="pZa-MG-XhF" firstAttribute="leading" secondItem="X6k-sa-aqt" secondAttribute="leading" id="2AH-FT-6af"/>
                             <constraint firstAttribute="trailing" secondItem="kBJ-pm-ya2" secondAttribute="trailing" id="2eN-lh-hOV"/>
+                            <constraint firstItem="MSF-HH-Cyh" firstAttribute="top" secondItem="g5L-7n-sQf" secondAttribute="bottom" constant="25" id="6zr-Fe-nfE"/>
                             <constraint firstItem="MSF-HH-Cyh" firstAttribute="width" secondItem="MSF-HH-Cyh" secondAttribute="height" id="D8w-55-MiS"/>
                             <constraint firstItem="MSF-HH-Cyh" firstAttribute="width" secondItem="MSF-HH-Cyh" secondAttribute="height" id="Dk2-CZ-ONm"/>
                             <constraint firstItem="VnB-kW-xXJ" firstAttribute="height" secondItem="X6k-sa-aqt" secondAttribute="height" multiplier="0.1" id="DpS-eA-ccj"/>
                             <constraint firstItem="XJY-xM-QlM" firstAttribute="height" secondItem="kBJ-pm-ya2" secondAttribute="height" multiplier="1.5" id="Ha2-6S-L8I"/>
                             <constraint firstItem="tEZ-Ce-1nf" firstAttribute="top" secondItem="VnB-kW-xXJ" secondAttribute="bottom" id="IXi-Ot-BId"/>
-                            <constraint firstItem="Tpu-QH-Eqe" firstAttribute="leading" secondItem="X6k-sa-aqt" secondAttribute="leading" constant="50" id="LPD-S0-xzB"/>
                             <constraint firstItem="kBJ-pm-ya2" firstAttribute="leading" secondItem="X6k-sa-aqt" secondAttribute="leading" id="QIg-g5-Mfw"/>
                             <constraint firstItem="kBJ-pm-ya2" firstAttribute="top" secondItem="XJY-xM-QlM" secondAttribute="bottom" id="Tt0-Re-BYq"/>
                             <constraint firstItem="kBJ-pm-ya2" firstAttribute="height" secondItem="VnB-kW-xXJ" secondAttribute="height" id="Vls-Rj-5vY"/>
                             <constraint firstAttribute="trailing" secondItem="VnB-kW-xXJ" secondAttribute="trailing" id="WiW-le-jCX"/>
                             <constraint firstAttribute="trailing" secondItem="pZa-MG-XhF" secondAttribute="trailing" id="Xzd-jF-3WM"/>
-                            <constraint firstItem="Tpu-QH-Eqe" firstAttribute="height" secondItem="M56-FA-e9O" secondAttribute="height" id="a41-rS-gob"/>
                             <constraint firstAttribute="trailing" secondItem="MSF-HH-Cyh" secondAttribute="trailing" constant="10" id="buf-FV-ct8"/>
-                            <constraint firstItem="MSF-HH-Cyh" firstAttribute="centerY" secondItem="Tpu-QH-Eqe" secondAttribute="centerY" id="cbP-OE-80X"/>
-                            <constraint firstAttribute="trailing" secondItem="Tpu-QH-Eqe" secondAttribute="trailing" constant="50" id="jyk-1G-lWB"/>
                             <constraint firstItem="XJY-xM-QlM" firstAttribute="leading" secondItem="X6k-sa-aqt" secondAttribute="leading" id="lFo-G5-GjZ"/>
-                            <constraint firstItem="Tpu-QH-Eqe" firstAttribute="top" secondItem="g5L-7n-sQf" secondAttribute="bottom" constant="40" id="llQ-EH-XS1"/>
                             <constraint firstItem="VnB-kW-xXJ" firstAttribute="top" secondItem="kBJ-pm-ya2" secondAttribute="bottom" id="p0U-HN-pRL"/>
                             <constraint firstAttribute="trailing" secondItem="XJY-xM-QlM" secondAttribute="trailing" id="p4c-zg-Sfk"/>
                             <constraint firstItem="VnB-kW-xXJ" firstAttribute="leading" secondItem="X6k-sa-aqt" secondAttribute="leading" id="sRZ-AW-c9G"/>
@@ -251,6 +274,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelButtonOutlet" destination="RR9-Qq-yJY" id="gsN-Ls-I8V"/>
                         <outlet property="gmsMapViewOutlet" destination="pZa-MG-XhF" id="qfh-4Y-N8S"/>
                         <outlet property="numPeopleLabelOutlet" destination="a62-QQ-ht9" id="QCW-JF-F70"/>
                         <outlet property="rideActionButton" destination="M56-FA-e9O" id="nAM-So-Dj8"/>
@@ -260,9 +284,11 @@
                         <outlet property="riderRatingLabelOutlet" destination="9vR-Jc-ryF" id="fge-h4-wk2"/>
                         <outlet property="startNavigationButton" destination="Tpu-QH-Eqe" id="Ld4-GN-27B"/>
                         <outlet property="totalFareLabelOutlet" destination="cnl-uY-JE7" id="QPk-VV-SE9"/>
+                        <segue destination="UUR-Ud-6VC" kind="unwind" identifier="unwindToMainViewControllerFromRideStartViewController" unwindAction="unwindToMainViewController:" id="Kyy-TU-KGj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vei-sw-4Bi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="UUR-Ud-6VC" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="lwz-v0-NxK" userLabel="CenterMarkersView Tap Gesture Recognizer">
                     <connections>
                         <action selector="onCenterMarkersViewClick:" destination="uDm-SZ-2VI" id="sFf-pR-plR"/>
@@ -352,7 +378,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i6J-Xb-HOt" userLabel="RiderImageAndNameView">
                                                                 <rect key="frame" x="120" y="0.0" width="115" height="80"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account" translatesAutoresizingMaskIntoConstraints="NO" id="xg6-8L-8ky" userLabel="Rider Image">
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account1" translatesAutoresizingMaskIntoConstraints="NO" id="xg6-8L-8ky" userLabel="Rider Image">
                                                                         <rect key="frame" x="0.0" y="0.0" width="115" height="80"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="xg6-8L-8ky" secondAttribute="height" multiplier="23:16" id="crp-sL-AOE"/>
@@ -401,7 +427,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZAX-iS-epB" userLabel="CosmosRatingView" customClass="CosmosView" customModule="Cosmos">
-                                                        <rect key="frame" x="47.5" y="412" width="280" height="40"/>
+                                                        <rect key="frame" x="67.5" y="412" width="240" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" priority="250" constant="240" id="8Gv-qo-N4y"/>
                                                             <constraint firstAttribute="height" constant="40" id="JzJ-HV-dXs"/>
@@ -532,6 +558,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="account" width="128" height="128"/>
+        <image name="account1" width="82" height="82"/>
     </resources>
 </document>

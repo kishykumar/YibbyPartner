@@ -16,7 +16,7 @@ class YBDayStat: Mappable {
     var collectionDate: String?
     var onlineTime: Int?
     var earning: Double?
-    var rides: Int?
+    var totalTrips: Int?
     
     // MARK: Initialization
     
@@ -29,6 +29,6 @@ class YBDayStat: Mappable {
         collectionDate <- map["collectionDate"]
         onlineTime <- map["onlineTime"]
         earning <- map["earning"]
-        rides <- map["rides"]
+        totalTrips <- map["totalTrips"]
     }
 }

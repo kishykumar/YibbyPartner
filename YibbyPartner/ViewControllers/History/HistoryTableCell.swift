@@ -21,12 +21,14 @@ class HistoryTableCell : UITableViewCell {
     @IBOutlet weak var riderNameLabelOutlet: UILabel!
     @IBOutlet weak var ridePriceLabelOutlet: UILabel!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var cancelledLabelOutlet: UILabel!
     
-    var myTrip: Ride!
-    var myViewController: HistoryViewController!
-
     // MARK: - Setup
     func configure(_ ride: Ride) {
+        
+        if (ride.cancelled != RideCancelled.notCancelled.rawValue) {
+            cancelledLabelOutlet.isHidden = false
+        }
         
         riderImageViewOutlet.layer.borderColor = UIColor.grey5().cgColor
         riderImageViewOutlet.layer.borderWidth = 1.0
@@ -39,7 +41,7 @@ class HistoryTableCell : UITableViewCell {
             self.dateTimeLabelOutlet.text = prettyDate
         }
         
-        if let totalFare = ride.fare {
+        if let totalFare = ride.bidPrice {
             if let tip = ride.tip  {
                 self.ridePriceLabelOutlet.text = "$\(totalFare + tip)"
             } else {
@@ -57,11 +59,11 @@ class HistoryTableCell : UITableViewCell {
             
             // Markers for gmsMapViewOutlet
             let domarker = GMSMarker(position: dropoffCoordinate)
-            domarker.icon = UIImage(named: "famarker_green")
+            domarker.icon = UIImage(named: "famarker_red")
             domarker.map = self.tripGMSMapViewOutlet
             
             let pumarker = GMSMarker(position: pickupCoordinate)
-            pumarker.icon = UIImage(named: "famarker_red")
+            pumarker.icon = UIImage(named: "famarker_green")
             pumarker.map = self.tripGMSMapViewOutlet
             
             adjustGMSCameraFocus(mapView: self.tripGMSMapViewOutlet, pickupMarker: pumarker, dropoffMarker: domarker)

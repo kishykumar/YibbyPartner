@@ -3,13 +3,18 @@
 //  YibbyPartner
 //
 //  Created by Kishy Kumar on 3/6/16.
-//  Copyright © 2016 MyComp. All rights reserved.
+//  Copyright © 2016 Yibby. All rights reserved.
 //
 
 import UIKit
 import GoogleMaps
 import BaasBoxSDK
 import CocoaLumberjack
+import ObjectMapper
+
+protocol OfferViewControllerDelegate {
+    func startRide()
+}
 
 class OfferViewController: BaseYibbyViewController {
 
@@ -18,9 +23,9 @@ class OfferViewController: BaseYibbyViewController {
     @IBOutlet weak var offerPriceOutlet: UILabel!
     @IBOutlet weak var currentTimerValueOutlet: UILabel!
     @IBOutlet weak var gmsMapViewOutlet: GMSMapView!
-    @IBOutlet weak var acceptButtonOutlet: YibbyButton1!
-    
-    var curLocation: YBLocation?
+    @IBOutlet weak var etaToRiderLabelOutlet: UILabel!
+    @IBOutlet weak var milesLabelOutlet: UILabel!
+    @IBOutlet weak var etaToDropoffLabelOutlet: UILabel!
     
     var pickupLocation: YBLocation?
     var pickupMarker: GMSMarker?
@@ -41,11 +46,54 @@ class OfferViewController: BaseYibbyViewController {
     var timerStart: TimeInterval!
     
     var savedBgTimestamp: Date?
-
+    var delegate: MainViewController!
+    
     // MARK: Actions
     
-    @IBAction func acceptRequestAction(_ sender: UIButton) {
+    @IBAction func onDeclineOfferClick(_ sender: UIButton) {
+        // Stop the offer timer right away!
         
+        self.stopOfferTimer()
+        
+        let userBid = YBClient.sharedInstance().bid!
+        
+        WebInterface.makeWebRequestAndHandleError(
+            self,
+            webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
+                
+                // enable the loading activity indicator
+                ActivityIndicatorUtil.enableActivityIndicator(self.view)
+                
+                let client: BAAClient = BAAClient.shared()
+                client.rejectBid(
+                    userBid.id,
+                    completion: {(success, error) -> Void in
+                        
+                        // diable the loading activity indicator
+                        ActivityIndicatorUtil.disableActivityIndicator(self.view)
+                        
+                        // Clear the saved bid
+                        YBClient.sharedInstance().bid = nil
+                        
+                        if (error == nil) {
+                            DDLogVerbose("Rejected offer \(String(describing: success))")
+                            
+                            YBClient.sharedInstance().status = .online
+                            YBClient.sharedInstance().bid = nil
+
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                        else {
+                            errorBlock(success, error)
+                        }
+                })
+        })
+    }
+    
+    @IBAction func onAccceptOfferClick(_ sender: UIButton) {
+        
+        self.stopOfferTimer()
+
         let userBid = YBClient.sharedInstance().bid!
         
         DDLogInfo("Called: \(String(describing: self.offerPriceOutlet.text))")
@@ -57,20 +105,34 @@ class OfferViewController: BaseYibbyViewController {
                 ActivityIndicatorUtil.enableActivityIndicator(self.view)
                 
                 let client: BAAClient = BAAClient.shared()
-                client.createOffer(
-                    userBid.id,
-                    offerPrice: Int(self.offerPriceOutlet.text!) as NSNumber!,
+                client.acceptBid(userBid.id,
                     completion: {(success, error) -> Void in
                         
                         // diable the loading activity indicator
                         ActivityIndicatorUtil.disableActivityIndicator(self.view)
-                        self.stopOfferTimer()
                         
-                        if (error == nil) {
-                            DDLogVerbose("created offer \(String(describing: success))")
+                        if let success = success {
+                            DDLogVerbose("Offer accepted? \(String(describing: success))")
                             
-                            YBClient.sharedInstance().status = .offerSent
-                            self.performSegue(withIdentifier: "offerSentSegue", sender: nil)
+                            let ride: Ride = Mapper<Ride>().map(JSONObject: success)!
+                            if (ride.id != nil) {
+                            
+                                // Initialize the ride
+                                YBClient.sharedInstance().ride = ride
+                                YBClient.sharedInstance().status = .driverEnRoute
+                                
+                                self.delegate.startRide()
+                            } else {
+                                YBClient.sharedInstance().status = .online
+                                YBClient.sharedInstance().bid = nil
+                                
+                                AlertUtil.displayAlert("Offer Rejected.",
+                                                       message: "Reason: Your offer was not the first.",
+                                                       completionBlock: {() -> Void in
+                                                        
+                                                        self.dismiss(animated: true, completion: nil)
+                                })
+                            }
                         }
                         else {
                             errorBlock(success, error)
@@ -78,6 +140,64 @@ class OfferViewController: BaseYibbyViewController {
                 })
         })
     }
+
+    // MARK: Setup
+    fileprivate func setupUI () {
+        
+        if let userBid = YBClient.sharedInstance().bid {
+        
+            // hide the back button
+            navigationItem.setHidesBackButton(true, animated: false)
+            
+            navigationController?.navigationBar.barTintColor = UIColor.red
+            
+            highBidPriceOutlet.text = "$ \(String(Int(userBid.bidPrice!)))"
+            offerPriceOutlet.text = String(Int(userBid.bidPrice!))
+            
+            currentTimerValueOutlet.text = String(Int(timerStart))
+            
+            // set pickup and dropoff
+            setPickupDetails(userBid.pickupLocation!)
+            setDropoffDetails(userBid.dropoffLocation!)
+            
+            adjustGMSCameraFocus()
+            
+            setTripDetails(pickupLoc: userBid.pickupLocation!, dropoffLoc: userBid.dropoffLocation!)
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+        setupUI()
+        
+        DDLogVerbose("TimerStart: \(timerStart)")
+        startOfferTimer()        
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    // MARK: - Notifications
+    
+    fileprivate func setupNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(OfferViewController.saveOfferTimer),
+                                               name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(OfferViewController.restoreOfferTimer),
+                                               name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+    }
+    
+    fileprivate func removeNotificationObservers() {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+    }
+    
+    // MARK: Helpers
+    
     
     fileprivate func adjustGMSCameraFocus () {
         
@@ -132,105 +252,40 @@ class OfferViewController: BaseYibbyViewController {
         dropoffMarker = domarker
     }
     
-    @IBAction func declineRequestAction(_ sender: UIButton) {
+    fileprivate func setTripDetails(pickupLoc: YBLocation, dropoffLoc: YBLocation) {
         
-    }
-    
-    @IBAction func incrementOfferPriceAction(_ sender: AnyObject) {
-        let userBid = YBClient.sharedInstance().bid!
-        let offerPrice: Int = Int(offerPriceOutlet.text!)! + 1
-        let bidHigh: Int = Int(userBid.bidHigh!)
+        self.milesLabelOutlet.text = "Loading"
+        self.etaToDropoffLabelOutlet.text = "Loading"
+        self.etaToRiderLabelOutlet.text = "Loading"
         
-        // increment only if the offer price is less than bidHigh
-        if (offerPrice < bidHigh) {
-            offerPriceOutlet.text = String(offerPrice)
+        DirectionsService.shared.getEta(from: pickupLoc.coordinate(), to: dropoffLoc.coordinate(),
+            completionBlock: { (etaSeconds, distanceMeters) -> Void in
+                
+                let etaMins: Int = (Int(etaSeconds) + 59) / 60
+                let miles: Int = (Int(distanceMeters) + 1608) / 1609
+                
+                self.etaToDropoffLabelOutlet.text = "\(etaMins) mins"
+                self.milesLabelOutlet.text = "\(miles) miles"
+        })
+        
+        if let driverLoc = LocationService.sharedInstance().getNoWaitCurLocation() {
+            
+            DirectionsService.shared.getEta(from: driverLoc.coordinate, to: pickupLoc.coordinate(),
+                completionBlock: { (etaSeconds, distanceMeters) -> Void in
+                    
+                    var etaMins: Int = (Int(etaSeconds) + 59) / 60
+                    if (etaMins == 0) {
+                        etaMins = 1 // minimum 1 minute
+                    }
+                    
+                    self.etaToRiderLabelOutlet.text = "\(etaMins) mins"
+            })
         }
     }
-    
-    @IBAction func decrementOfferPriceAction(_ sender: AnyObject) {
-        if (Int(offerPriceOutlet.text!) != 0) {
-            offerPriceOutlet.text = String(Int(offerPriceOutlet.text!)! - 1)
-        }
-    }
-    
-    // MARK: Setup
-    fileprivate func setupUI () {
-        
-        let userBid = YBClient.sharedInstance().bid!
-        
-        // hide the back button
-        navigationItem.setHidesBackButton(true, animated: false)
-        
-        acceptButtonOutlet.color = UIColor.appDarkGreen1()
-        acceptButtonOutlet.buttonCornerRadius = 0.0
-        
-        navigationController?.navigationBar.barTintColor = UIColor.red
-        
-        highBidPriceOutlet.text = "$ \(String(Int(userBid.bidHigh!)))"
-        offerPriceOutlet.text = String(Int(userBid.bidHigh!))
-        
-        currentTimerValueOutlet.text = String(Int(timerStart))
-        
-        // set pickup and dropoff
-        setPickupDetails(userBid.pickupLocation!)
-        setDropoffDetails(userBid.dropoffLocation!)
-        
-        adjustGMSCameraFocus()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        commonInit()
-    }
-    
-    private func commonInit() {
-        DDLogVerbose("Fired init")
-        setupNotificationObservers()
-    }
-    
-    deinit {
-        DDLogVerbose("Fired deinit")
-        removeNotificationObservers()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        setupUI()
-        
-        DDLogVerbose("TimerStart: \(timerStart)")
-        startOfferTimer()        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Notifications
-    
-    fileprivate func setupNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(OfferViewController.saveOfferTimer),
-                                               name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(OfferViewController.restoreOfferTimer),
-                                               name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-    }
-    
-    fileprivate func removeNotificationObservers() {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-    }
-    
-    // MARK: Helpers
     
     fileprivate func startOfferTimer() {
+        setupNotificationObservers()
+        
         offerTimer = Timer.scheduledTimer(timeInterval: OfferViewController.OFFER_TIMER_INTERVAL,
                                             target: self,
                                             selector: #selector(OfferViewController.updateTimer),
@@ -239,6 +294,7 @@ class OfferViewController: BaseYibbyViewController {
     }
     
     @objc fileprivate func stopOfferTimer() {
+        removeNotificationObservers()
         offerTimer.invalidate()
     }
     
@@ -292,7 +348,7 @@ class OfferViewController: BaseYibbyViewController {
             // delete the saved state bid
             YBClient.sharedInstance().bid = nil
             
-            AlertUtil.displayAlert("Time expired.", message: "You missed sending the bid. Missing a lot of bids would bring you offline.", completionBlock: {() -> Void in
+            AlertUtil.displayAlertOnVC(self, title: "Time expired.", message: "You missed sending the bid.", completionBlock: {() -> Void in
                 
                 YBClient.sharedInstance().status = .online
                 self.dismiss(animated: true, completion: nil)

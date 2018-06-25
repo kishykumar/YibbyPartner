@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'A795DAB76A95D29F9CC4533E8B55AA35'
-               BlueprintName = 'LaunchScreen'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'LaunchScreen.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A795DAB76A95D29F9CC4533E8B55AA35"
+               BlueprintName = "LaunchScreen"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "LaunchScreen.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

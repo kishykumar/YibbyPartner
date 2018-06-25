@@ -3,10 +3,8 @@
 //  Yibby
 //
 //  Created by Kishy Kumar on 6/17/16.
-//  Copyright © 2016 MyComp. All rights reserved.
+//  Copyright © 2016 Yibby. All rights reserved.
 //
-
-// TODO: Remove 'import BaasBoxSDK' and BAAFile references
 
 import UIKit
 import BaasBoxSDK
@@ -16,7 +14,7 @@ import Font_Awesome_Swift
 class RideDetailViewController: BaseYibbyViewController {
 
     // MARK: - Properties
-    var ride: Ride!             // we need a strong reference as the ride should not be nil
+    weak var ride: Ride?
     
     @IBOutlet weak var dateAndTimeLabelOutlet: UILabel!
     @IBOutlet weak var riderImageViewOutlet: UIImageView!
@@ -40,12 +38,15 @@ class RideDetailViewController: BaseYibbyViewController {
         super.viewDidLoad()
 
         setupUI()
-        configure()
+        
+        if let myRide = self.ride {
+            configure(myRide)
+        }
         // Do any additional setup after loading the view.
         
     }
 
-    private func configure() {
+    private func configure(_ ride: Ride) {
         
         if let rideISODateTime = ride.datetime, let rideDate = TimeUtil.getDateFromISOTime(rideISODateTime) {
             let prettyDate = TimeUtil.prettyPrintDate1(rideDate)
@@ -55,20 +56,11 @@ class RideDetailViewController: BaseYibbyViewController {
         self.pickupTextFieldOutlet.text = ride.pickupLocation?.name
         self.dropoffTextFieldOutlet.text = ride.dropoffLocation?.name
         
-        var ridePrice: Float = 0.00
-        var tip: Float = 0.00
-        
-        if let rp = ride.fare {
-            ridePrice = rp
+        if let tip = ride.tip, let ridePrice = ride.bidPrice {
+            self.ridePriceLabelOutlet.text = "$\(ridePrice)"
+            self.tipLabelOutlet.text = "$\(tip)"
+            self.totalFareLabelOutlet.text = "$\(ridePrice + tip)"
         }
-        
-        if let tp = ride.tip {
-            tip = tp
-        }
-        
-        self.ridePriceLabelOutlet.text = "$\(ridePrice)"
-        self.tipLabelOutlet.text = "$\(tip)"
-        self.totalFareLabelOutlet.text = "$\(ridePrice + tip)"
         
         if let dropoffCoordinate = ride.dropoffLocation?.coordinate(),
             let pickupCoordinate = ride.pickupLocation?.coordinate() {
@@ -76,11 +68,11 @@ class RideDetailViewController: BaseYibbyViewController {
             // Markers for gmsMapViewOutlet
             
             let domarker = GMSMarker(position: dropoffCoordinate)
-            domarker.icon = UIImage(named: "famarker_green")
+            domarker.icon = UIImage(named: "famarker_red")
             domarker.map = self.gmsMapViewOutlet
             
             let pumarker = GMSMarker(position: pickupCoordinate)
-            pumarker.icon = UIImage(named: "famarker_red")
+            pumarker.icon = UIImage(named: "famarker_green")
             pumarker.map = self.gmsMapViewOutlet
             
             adjustGMSCameraFocus(mapView: self.gmsMapViewOutlet, pickupMarker: pumarker, dropoffMarker: domarker)
@@ -93,13 +85,15 @@ class RideDetailViewController: BaseYibbyViewController {
         if let vehiclePictureFileId = ride.vehicle?.vehiclePictureFileId {
             setPicture(imageView: self.carImageViewOutlet, ride: ride, fileId: vehiclePictureFileId)
         }
-        
-        if let milesTravelled = ride.miles {
-            self.distanceLabelOutlet.text = "\(String(describing: milesTravelled)) miles"
+
+        if let metersTravelled = ride.tripDistance {
+            let rideMiles: Int = (Int(metersTravelled) + 1608) / 1609
+            self.distanceLabelOutlet.text = "\(rideMiles) miles"
         }
         
-        if let rideTime = ride.rideTime {
-            self.tripDurationLabelOutlet.text = "\(String(describing: rideTime)) mins"
+        if let rideTime = ride.tripDuration {
+            let rideMins: Int = (rideTime + 59) / 60
+            self.tripDurationLabelOutlet.text = "\(rideMins) mins"
         }
     }
     
@@ -161,9 +155,9 @@ class RideDetailViewController: BaseYibbyViewController {
                                          coordinate: (dropoffMarker.position))
         
         let insets = UIEdgeInsets(top: 50.0,
-                                  left: 10.0,
+                                  left: 20.0,
                                   bottom: 20.0,
-                                  right: 10.0)
+                                  right: 20.0)
         
         let update = GMSCameraUpdate.fit(bounds, with: insets)
         mapView.moveCamera(update)

@@ -15,12 +15,13 @@ enum YBClientStatus: String {
     case offline = "OFFLINE"
     case online = "ONLINE"
     case offerInProcess = "OFFER_IN_PROCESS" // driver is still trying to bid
-    case offerSent = "OFFER_SENT" // driver has already bid and seeing the progress screen
     case offerRejected = "OFFER_REJECTED"
     case driverEnRoute = "DRIVER_EN_ROUTE"
     case driverArrived = "DRIVER_ARRIVED"
     case rideStart = "RIDE_START"
     case rideEnd = "RIDE_END"
+    case rideDriverCancelled = "RIDE_DRIVER_CANCELLED"
+    case rideRiderCancelled = "RIDE_RIDER_CANCELLED"
 }
 
 // BidState singleton
@@ -49,7 +50,7 @@ open class YBClient {
     var fakeBid: Bid {
         get {
             let bid = Bid()
-            bid.bidHigh = 20
+            bid.bidPrice = 20
             bid.people = 2
             bid.dropoffLocation = YBLocation(lat: 37.787884, long: -122.407536, name: "Union Square, San Francisco")
             bid.pickupLocation = YBLocation(lat: 37.531631, long: -122.263606, name: "420 Oracle Pkwy, Redwood City, CA 94065")
@@ -61,19 +62,16 @@ open class YBClient {
     var fakeRide: Ride {
         get {
             let ride = Ride()
-            ride.riderBidPrice = 40
-            ride.driverBidPrice = 40
+            ride.bidPrice = 40
             ride.tip = 2.0
-            ride.totalCharge = 42.0
-            ride.fare = 40 // this is the price of ride excluding the tip
             
             ride.bidId = "myid"
             ride.datetime = ""
             ride.id = "myrideid"
-            ride.miles = 13.5
+            ride.tripDistance = 13.5 * 1609
             ride.people = 2
             ride.rider = nil
-            ride.rideTime = 22
+            ride.tripDuration = 22 * 60
             
             ride.dropoffLocation = YBLocation(lat: 37.787884, long: -122.407536, name: "Union Square, San Francisco")
             ride.pickupLocation = YBLocation(lat: 37.531631, long: -122.263606, name: "420 Oracle Pkwy, Redwood City, CA 94065")

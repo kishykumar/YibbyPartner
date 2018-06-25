@@ -16,7 +16,6 @@ class YBSync: Mappable {
     var profile: YBProfile?
     var bid: Bid?
     var ride: Ride?
-    var offer: Offer?
     
     // MARK: Initialization
     
@@ -33,7 +32,6 @@ class YBSync: Mappable {
         bid             <- map["bid"]
         status          <- map["status"]
         ride            <- map["ride"]
-        offer            <- map["offer"]
         profile         <- map["profile"]
     }
 }

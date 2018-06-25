@@ -90,9 +90,7 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
         let cell: HistoryTableCell = tableView.dequeueReusableCell(withIdentifier: identifier) as! HistoryTableCell
         
         let ride = self.ridesList[indexPath.row]
-        cell.myViewController = self
-        cell.myTrip = ride
-        
+
         //let myride = YBClient.sharedInstance().fakeRide
         cell.configure(ride)
         

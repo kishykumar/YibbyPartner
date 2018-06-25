@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '399334E6B328F8F397E87CFE154992C9'
-               BlueprintName = 'Braintree-Braintree-Drop-In-Localization'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Braintree-Drop-In-Localization.bundle'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "399334E6B328F8F397E87CFE154992C9"
+               BlueprintName = "Braintree-Braintree-Drop-In-Localization"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "Braintree-Braintree-Drop-In-Localization.bundle">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

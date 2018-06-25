@@ -33,7 +33,6 @@
 		1201B7AF1D23B49000A7EEAF /* LeftNavDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7961D23B49000A7EEAF /* LeftNavDrawerViewController.swift */; };
 		1201B7B01D23B49000A7EEAF /* DriverEnRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7981D23B49000A7EEAF /* DriverEnRouteViewController.swift */; };
 		1201B7B11D23B49000A7EEAF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B79A1D23B49000A7EEAF /* LoginViewController.swift */; };
-		1201B7B21D23B49000A7EEAF /* OfferSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B79C1D23B49000A7EEAF /* OfferSentViewController.swift */; };
 		1201B7B31D23B49000A7EEAF /* OfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B79D1D23B49000A7EEAF /* OfferViewController.swift */; };
 		1201B7B41D23B49000A7EEAF /* DriverOnlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B79F1D23B49000A7EEAF /* DriverOnlineViewController.swift */; };
 		1201B7B51D23B49000A7EEAF /* PushController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1201B7A11D23B49000A7EEAF /* PushController.swift */; };
@@ -107,8 +106,6 @@
 		125B0C161E2DE77500534359 /* YBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C151E2DE77500534359 /* YBClient.swift */; };
 		125B0C1A1E308E3B00534359 /* PendingApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C191E308E3B00534359 /* PendingApprovalViewController.swift */; };
 		126E80AB1FC6B39B000EEBEE /* YBDayStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126E80AA1FC6B39B000EEBEE /* YBDayStat.swift */; };
-		126E80AD1FC6E2B0000EEBEE /* YBWeekStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126E80AC1FC6E2B0000EEBEE /* YBWeekStat.swift */; };
-		126E80AF1FC6E30A000EEBEE /* YBDriverStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126E80AE1FC6E30A000EEBEE /* YBDriverStats.swift */; };
 		126EC5541F73A67F0040704F /* MessageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126EC5531F73A67F0040704F /* MessageComposer.swift */; };
 		126EC5561F7CCAF40040704F /* YBNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126EC5551F7CCAF40040704F /* YBNotifications.swift */; };
 		126EC5591F7E2D590040704F /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 126EC5581F7E2D590040704F /* Notifications.storyboard */; };
@@ -152,7 +149,25 @@
 		129AAE731E238E57006F6CE5 /* YBPickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129AAE721E238E57006F6CE5 /* YBPickerTextField.swift */; };
 		129AAE751E238F3B006F6CE5 /* InterfaceImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129AAE741E238F3B006F6CE5 /* InterfaceImage.swift */; };
 		129AAE771E24D648006F6CE5 /* YBFloatLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129AAE761E24D648006F6CE5 /* YBFloatLabelTextField.swift */; };
-		12C38CF61E28830B0003DCB5 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12C38CF51E28830B0003DCB5 /* FontAwesome.ttf */; };
+		12AE12DC20B50A9A006F3178 /* DirectionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12DB20B50A9A006F3178 /* DirectionsService.swift */; };
+		12AE12F120B50AE6006F3178 /* PXGoogleDirectionsTransitLineVehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12DE20B50AE5006F3178 /* PXGoogleDirectionsTransitLineVehicle.swift */; };
+		12AE12F220B50AE6006F3178 /* PXGoogleDirectionsStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12E020B50AE5006F3178 /* PXGoogleDirectionsStop.swift */; };
+		12AE12F320B50AE6006F3178 /* PXGoogleDirectionsDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12E120B50AE5006F3178 /* PXGoogleDirectionsDuration.swift */; };
+		12AE12F420B50AE6006F3178 /* PXGoogleDirectionsTransitAgency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12E220B50AE5006F3178 /* PXGoogleDirectionsTransitAgency.swift */; };
+		12AE12F520B50AE6006F3178 /* PXLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12E320B50AE5006F3178 /* PXLocation.swift */; };
+		12AE12F620B50AE6006F3178 /* PXGoogleDirectionsTransitLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12E420B50AE5006F3178 /* PXGoogleDirectionsTransitLine.swift */; };
+		12AE12F720B50AE6006F3178 /* PXGoogleDirectionsRouteLeg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12E520B50AE5006F3178 /* PXGoogleDirectionsRouteLeg.swift */; };
+		12AE12F820B50AE6006F3178 /* PXGoogleDirectionsRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12E620B50AE5006F3178 /* PXGoogleDirectionsRoute.swift */; };
+		12AE12F920B50AE6006F3178 /* PXGoogleDirectionsRouteLegStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12E720B50AE5006F3178 /* PXGoogleDirectionsRouteLegStep.swift */; };
+		12AE12FA20B50AE6006F3178 /* PXUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12E820B50AE5006F3178 /* PXUtils.swift */; };
+		12AE12FB20B50AE6006F3178 /* PXGoogleDirectionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12E920B50AE5006F3178 /* PXGoogleDirectionsResponse.swift */; };
+		12AE12FC20B50AE6006F3178 /* PXGoogleDirectionsTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12EA20B50AE5006F3178 /* PXGoogleDirectionsTime.swift */; };
+		12AE12FD20B50AE6006F3178 /* PXGoogleDirectionsRouteLegStepTransitDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12EB20B50AE5006F3178 /* PXGoogleDirectionsRouteLegStepTransitDetails.swift */; };
+		12AE12FE20B50AE6006F3178 /* PXGoogleDirections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12EC20B50AE5006F3178 /* PXGoogleDirections.swift */; };
+		12AE12FF20B50AE6006F3178 /* PXTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12ED20B50AE5006F3178 /* PXTime.swift */; };
+		12AE130020B50AE6006F3178 /* PXGoogleDirectionsEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12EE20B50AE5006F3178 /* PXGoogleDirectionsEnums.swift */; };
+		12AE130120B50AE6006F3178 /* PXGoogleDirectionsDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12EF20B50AE5006F3178 /* PXGoogleDirectionsDistance.swift */; };
+		12AE130220B50AE6006F3178 /* PXGoogleDirectionsRouteFare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12F020B50AE5006F3178 /* PXGoogleDirectionsRouteFare.swift */; };
 		12C38CFA1E2A143B0003DCB5 /* YBUploadPictureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12C38CF91E2A143B0003DCB5 /* YBUploadPictureView.xib */; };
 		12C38CFC1E2A14490003DCB5 /* YBUploadPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C38CFB1E2A14490003DCB5 /* YBUploadPictureView.swift */; };
 		12F3CCD61C41EFC700F79A26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F3CCD51C41EFC700F79A26 /* AppDelegate.swift */; };
@@ -164,6 +179,9 @@
 		12F3CCF81C4CF16D00F79A26 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F3CCF71C4CF16D00F79A26 /* CoreLocation.framework */; };
 		12F992321FF5CD12001567A0 /* Rewards.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F992311FF5CD12001567A0 /* Rewards.storyboard */; };
 		12F992341FF5CD24001567A0 /* RewardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F992331FF5CD24001567A0 /* RewardsViewController.swift */; };
+		12FA8FCE20AEB82800E9C6C5 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12FA8FCD20AEB73800E9C6C5 /* FontAwesome.ttf */; };
+		12FA8FCF20AEB82F00E9C6C5 /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12FA8FCB20AEB73800E9C6C5 /* fontello.ttf */; };
+		12FA8FD020AEB83300E9C6C5 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12FA8FCC20AEB73800E9C6C5 /* ionicons.ttf */; };
 		12FAC28A1E34768B00D77486 /* YBLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FAC2891E34768B00D77486 /* YBLocation.swift */; };
 		12FAC28C1E34863A00D77486 /* YBRider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12FAC28B1E34863900D77486 /* YBRider.swift */; };
 		6B9369FC30AAD797CF0D9B31 /* Pods_YibbyPartner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF052090573D5AD3602BC58 /* Pods_YibbyPartner.framework */; };
@@ -207,7 +225,6 @@
 		1201B7961D23B49000A7EEAF /* LeftNavDrawerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftNavDrawerViewController.swift; sourceTree = "<group>"; };
 		1201B7981D23B49000A7EEAF /* DriverEnRouteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverEnRouteViewController.swift; sourceTree = "<group>"; };
 		1201B79A1D23B49000A7EEAF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		1201B79C1D23B49000A7EEAF /* OfferSentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferSentViewController.swift; sourceTree = "<group>"; };
 		1201B79D1D23B49000A7EEAF /* OfferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferViewController.swift; sourceTree = "<group>"; };
 		1201B79F1D23B49000A7EEAF /* DriverOnlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverOnlineViewController.swift; sourceTree = "<group>"; };
 		1201B7A11D23B49000A7EEAF /* PushController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushController.swift; sourceTree = "<group>"; };
@@ -280,8 +297,6 @@
 		125B0C151E2DE77500534359 /* YBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBClient.swift; sourceTree = "<group>"; };
 		125B0C191E308E3B00534359 /* PendingApprovalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingApprovalViewController.swift; sourceTree = "<group>"; };
 		126E80AA1FC6B39B000EEBEE /* YBDayStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YBDayStat.swift; sourceTree = "<group>"; };
-		126E80AC1FC6E2B0000EEBEE /* YBWeekStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YBWeekStat.swift; sourceTree = "<group>"; };
-		126E80AE1FC6E30A000EEBEE /* YBDriverStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YBDriverStats.swift; sourceTree = "<group>"; };
 		126EC5531F73A67F0040704F /* MessageComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageComposer.swift; sourceTree = "<group>"; };
 		126EC5551F7CCAF40040704F /* YBNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBNotifications.swift; sourceTree = "<group>"; };
 		126EC5581F7E2D590040704F /* Notifications.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
@@ -296,8 +311,6 @@
 		126EC56A1F7E3F440040704F /* HistoryTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableCell.swift; sourceTree = "<group>"; };
 		126EC56B1F7E3F440040704F /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		126EC56D1F7E3F440040704F /* RideDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideDetailViewController.swift; sourceTree = "<group>"; };
-		126EC5781F8A0BCA0040704F /* fontello.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontello.ttf; sourceTree = "<group>"; };
-		126EC5791F8A0BCA0040704F /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
 		12814FBA1E0EFBF600F08CFF /* YibbyPartner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YibbyPartner.entitlements; sourceTree = "<group>"; };
 		1284914B1E260B10002D047B /* VehicleDataAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleDataAPI.swift; sourceTree = "<group>"; };
 		1284914D1E262DA2002D047B /* VehicleMake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleMake.swift; sourceTree = "<group>"; };
@@ -330,11 +343,30 @@
 		129AAE721E238E57006F6CE5 /* YBPickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBPickerTextField.swift; sourceTree = "<group>"; };
 		129AAE741E238F3B006F6CE5 /* InterfaceImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InterfaceImage.swift; path = ../Utilities/InterfaceImage.swift; sourceTree = "<group>"; };
 		129AAE761E24D648006F6CE5 /* YBFloatLabelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBFloatLabelTextField.swift; sourceTree = "<group>"; };
+		12AE12DB20B50A9A006F3178 /* DirectionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsService.swift; sourceTree = "<group>"; };
+		12AE12DE20B50AE5006F3178 /* PXGoogleDirectionsTransitLineVehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsTransitLineVehicle.swift; sourceTree = "<group>"; };
+		12AE12DF20B50AE5006F3178 /* PXGoogleDirections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXGoogleDirections.h; sourceTree = "<group>"; };
+		12AE12E020B50AE5006F3178 /* PXGoogleDirectionsStop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsStop.swift; sourceTree = "<group>"; };
+		12AE12E120B50AE5006F3178 /* PXGoogleDirectionsDuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsDuration.swift; sourceTree = "<group>"; };
+		12AE12E220B50AE5006F3178 /* PXGoogleDirectionsTransitAgency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsTransitAgency.swift; sourceTree = "<group>"; };
+		12AE12E320B50AE5006F3178 /* PXLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXLocation.swift; sourceTree = "<group>"; };
+		12AE12E420B50AE5006F3178 /* PXGoogleDirectionsTransitLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsTransitLine.swift; sourceTree = "<group>"; };
+		12AE12E520B50AE5006F3178 /* PXGoogleDirectionsRouteLeg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsRouteLeg.swift; sourceTree = "<group>"; };
+		12AE12E620B50AE5006F3178 /* PXGoogleDirectionsRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsRoute.swift; sourceTree = "<group>"; };
+		12AE12E720B50AE5006F3178 /* PXGoogleDirectionsRouteLegStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsRouteLegStep.swift; sourceTree = "<group>"; };
+		12AE12E820B50AE5006F3178 /* PXUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXUtils.swift; sourceTree = "<group>"; };
+		12AE12E920B50AE5006F3178 /* PXGoogleDirectionsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsResponse.swift; sourceTree = "<group>"; };
+		12AE12EA20B50AE5006F3178 /* PXGoogleDirectionsTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsTime.swift; sourceTree = "<group>"; };
+		12AE12EB20B50AE5006F3178 /* PXGoogleDirectionsRouteLegStepTransitDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsRouteLegStepTransitDetails.swift; sourceTree = "<group>"; };
+		12AE12EC20B50AE5006F3178 /* PXGoogleDirections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirections.swift; sourceTree = "<group>"; };
+		12AE12ED20B50AE5006F3178 /* PXTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXTime.swift; sourceTree = "<group>"; };
+		12AE12EE20B50AE5006F3178 /* PXGoogleDirectionsEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsEnums.swift; sourceTree = "<group>"; };
+		12AE12EF20B50AE5006F3178 /* PXGoogleDirectionsDistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsDistance.swift; sourceTree = "<group>"; };
+		12AE12F020B50AE5006F3178 /* PXGoogleDirectionsRouteFare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsRouteFare.swift; sourceTree = "<group>"; };
 		12C21E221C7DADE7000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
 		12C21E241C7DAE23000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
 		12C21E261C7DB0A0000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
 		12C21E281C7DB0CB000AAFFC /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
-		12C38CF51E28830B0003DCB5 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		12C38CF91E2A143B0003DCB5 /* YBUploadPictureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBUploadPictureView.xib; sourceTree = "<group>"; };
 		12C38CFB1E2A14490003DCB5 /* YBUploadPictureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBUploadPictureView.swift; sourceTree = "<group>"; };
 		12EB18161C5A00780037EB86 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
@@ -351,6 +383,9 @@
 		12F3CCF71C4CF16D00F79A26 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		12F992311FF5CD12001567A0 /* Rewards.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Rewards.storyboard; sourceTree = "<group>"; };
 		12F992331FF5CD24001567A0 /* RewardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsViewController.swift; sourceTree = "<group>"; };
+		12FA8FCB20AEB73800E9C6C5 /* fontello.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontello.ttf; sourceTree = "<group>"; };
+		12FA8FCC20AEB73800E9C6C5 /* ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ionicons.ttf; sourceTree = "<group>"; };
+		12FA8FCD20AEB73800E9C6C5 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		12FAC2891E34768B00D77486 /* YBLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBLocation.swift; sourceTree = "<group>"; };
 		12FAC28B1E34863900D77486 /* YBRider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBRider.swift; sourceTree = "<group>"; };
 		1AF052090573D5AD3602BC58 /* Pods_YibbyPartner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YibbyPartner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -478,7 +513,6 @@
 			isa = PBXGroup;
 			children = (
 				1201B8031D263C3600A7EEAF /* Offer.storyboard */,
-				1201B79C1D23B49000A7EEAF /* OfferSentViewController.swift */,
 				1201B79D1D23B49000A7EEAF /* OfferViewController.swift */,
 			);
 			path = Offer;
@@ -584,8 +618,6 @@
 				1284914F1E262DAD002D047B /* VehicleModel.swift */,
 				128491531E263E44002D047B /* VehicleModels.swift */,
 				126E80AA1FC6B39B000EEBEE /* YBDayStat.swift */,
-				126E80AE1FC6E30A000EEBEE /* YBDriverStats.swift */,
-				126E80AC1FC6E2B0000EEBEE /* YBWeekStat.swift */,
 				12FAC2891E34768B00D77486 /* YBLocation.swift */,
 			);
 			path = Model;
@@ -604,6 +636,7 @@
 			isa = PBXGroup;
 			children = (
 				1201B7C51D23B4AB00A7EEAF /* LocationService.swift */,
+				12AE12DB20B50A9A006F3178 /* DirectionsService.swift */,
 				125B0C031E2C4B2D00534359 /* ImageService.swift */,
 				1201B7C61D23B4AB00A7EEAF /* MapService.swift */,
 				129AAE741E238F3B006F6CE5 /* InterfaceImage.swift */,
@@ -664,6 +697,7 @@
 		1208265C1F5D3F5500BA38E9 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				12AE12DD20B50AE5006F3178 /* PXGoogleDirections */,
 				1208265D1F5D3F5500BA38E9 /* Box */,
 			);
 			path = ThirdParty;
@@ -790,12 +824,38 @@
 			path = Register;
 			sourceTree = "<group>";
 		};
+		12AE12DD20B50AE5006F3178 /* PXGoogleDirections */ = {
+			isa = PBXGroup;
+			children = (
+				12AE12DE20B50AE5006F3178 /* PXGoogleDirectionsTransitLineVehicle.swift */,
+				12AE12DF20B50AE5006F3178 /* PXGoogleDirections.h */,
+				12AE12E020B50AE5006F3178 /* PXGoogleDirectionsStop.swift */,
+				12AE12E120B50AE5006F3178 /* PXGoogleDirectionsDuration.swift */,
+				12AE12E220B50AE5006F3178 /* PXGoogleDirectionsTransitAgency.swift */,
+				12AE12E320B50AE5006F3178 /* PXLocation.swift */,
+				12AE12E420B50AE5006F3178 /* PXGoogleDirectionsTransitLine.swift */,
+				12AE12E520B50AE5006F3178 /* PXGoogleDirectionsRouteLeg.swift */,
+				12AE12E620B50AE5006F3178 /* PXGoogleDirectionsRoute.swift */,
+				12AE12E720B50AE5006F3178 /* PXGoogleDirectionsRouteLegStep.swift */,
+				12AE12E820B50AE5006F3178 /* PXUtils.swift */,
+				12AE12E920B50AE5006F3178 /* PXGoogleDirectionsResponse.swift */,
+				12AE12EA20B50AE5006F3178 /* PXGoogleDirectionsTime.swift */,
+				12AE12EB20B50AE5006F3178 /* PXGoogleDirectionsRouteLegStepTransitDetails.swift */,
+				12AE12EC20B50AE5006F3178 /* PXGoogleDirections.swift */,
+				12AE12ED20B50AE5006F3178 /* PXTime.swift */,
+				12AE12EE20B50AE5006F3178 /* PXGoogleDirectionsEnums.swift */,
+				12AE12EF20B50AE5006F3178 /* PXGoogleDirectionsDistance.swift */,
+				12AE12F020B50AE5006F3178 /* PXGoogleDirectionsRouteFare.swift */,
+			);
+			path = PXGoogleDirections;
+			sourceTree = "<group>";
+		};
 		12C38CF41E28830B0003DCB5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				126EC5781F8A0BCA0040704F /* fontello.ttf */,
-				126EC5791F8A0BCA0040704F /* ionicons.ttf */,
-				12C38CF51E28830B0003DCB5 /* FontAwesome.ttf */,
+				12FA8FCD20AEB73800E9C6C5 /* FontAwesome.ttf */,
+				12FA8FCB20AEB73800E9C6C5 /* fontello.ttf */,
+				12FA8FCC20AEB73800E9C6C5 /* ionicons.ttf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1022,10 +1082,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12FA8FD020AEB83300E9C6C5 /* ionicons.ttf in Resources */,
+				12FA8FCF20AEB82F00E9C6C5 /* fontello.ttf in Resources */,
+				12FA8FCE20AEB82800E9C6C5 /* FontAwesome.ttf in Resources */,
 				120826641F5D3F5500BA38E9 /* LICENSE.txt in Resources */,
 				12133DD01F947E640068308C /* Documents.storyboard in Resources */,
 				120826901F6BC12B00BA38E9 /* YibbyMapMarker.xib in Resources */,
-				12C38CF61E28830B0003DCB5 /* FontAwesome.ttf in Resources */,
 				12F3CCF61C4B9C0C00F79A26 /* Podfile in Resources */,
 				12F3CCE01C41EFC800F79A26 /* LaunchScreen.storyboard in Resources */,
 				12C38CFA1E2A143B0003DCB5 /* YBUploadPictureView.xib in Resources */,
@@ -1083,9 +1145,22 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/YibbyPartner/Pods/Target Support Files/Pods-YibbyPartner/Pods-YibbyPartner-resources.sh",
+				"${PODS_ROOT}/AccountKit/AccountKitStrings.bundle",
+				"${PODS_ROOT}/GoogleAuthUtilities/Frameworks/frameworks/GoogleAuthUtilities.framework/Resources/GTMOAuth2ViewTouch.xib",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccountKitStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GTMOAuth2ViewTouch.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1098,9 +1173,96 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/YibbyPartner/Pods/Target Support Files/Pods-YibbyPartner/Pods-YibbyPartner-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AIFlatSwitch/AIFlatSwitch.framework",
+				"${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/BButton/BButton.framework",
+				"${BUILT_PRODUCTS_DIR}/BaasBoxSDK/BaasBoxSDK.framework",
+				"${BUILT_PRODUCTS_DIR}/Braintree/Braintree.framework",
+				"${BUILT_PRODUCTS_DIR}/Cache/Cache.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
+				"${BUILT_PRODUCTS_DIR}/DGRunkeeperSwitch/DGRunkeeperSwitch.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/FoldingCell/FoldingCell.framework",
+				"${BUILT_PRODUCTS_DIR}/Font-Awesome-Swift/Font_Awesome_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/ISHPullUp/ISHPullUp.framework",
+				"${BUILT_PRODUCTS_DIR}/ImagePicker/ImagePicker.framework",
+				"${BUILT_PRODUCTS_DIR}/Imaginary/Imaginary.framework",
+				"${BUILT_PRODUCTS_DIR}/JTCalendar/JTCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/LTMorphingLabel/LTMorphingLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/LaunchScreen/LaunchScreen.framework",
+				"${BUILT_PRODUCTS_DIR}/Lightbox/Lightbox.framework",
+				"${BUILT_PRODUCTS_DIR}/M13ProgressSuite/M13ProgressSuite.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MMDrawerController/MMDrawerController.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/OpenInGoogleMaps/OpenInGoogleMaps.framework",
+				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
+				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
+				"${BUILT_PRODUCTS_DIR}/PasswordTextField/PasswordTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/PhoneNumberKit/PhoneNumberKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Spring/Spring.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftValidator/SwiftValidator.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TTRangeSlider/TTRangeSlider.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AIFlatSwitch.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMPopTip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BaasBoxSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Braintree.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGRunkeeperSwitch.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FoldingCell.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Font_Awesome_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISHPullUp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImagePicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Imaginary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTMorphingLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LaunchScreen.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lightbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M13ProgressSuite.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMDrawerController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenInGoogleMaps.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PasswordTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PhoneNumberKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Spring.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftValidator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTRangeSlider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1113,9 +1275,104 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/YibbyPartner/Pods/Target Support Files/Pods-YibbyPartnerTests/Pods-YibbyPartnerTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AIFlatSwitch/AIFlatSwitch.framework",
+				"${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/BButton/BButton.framework",
+				"${BUILT_PRODUCTS_DIR}/BaasBoxSDK/BaasBoxSDK.framework",
+				"${BUILT_PRODUCTS_DIR}/Braintree/Braintree.framework",
+				"${BUILT_PRODUCTS_DIR}/Cache/Cache.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
+				"${BUILT_PRODUCTS_DIR}/DGRunkeeperSwitch/DGRunkeeperSwitch.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/FoldingCell/FoldingCell.framework",
+				"${BUILT_PRODUCTS_DIR}/Font-Awesome-Swift/Font_Awesome_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/ISHPullUp/ISHPullUp.framework",
+				"${BUILT_PRODUCTS_DIR}/ImagePicker/ImagePicker.framework",
+				"${BUILT_PRODUCTS_DIR}/Imaginary/Imaginary.framework",
+				"${BUILT_PRODUCTS_DIR}/JTCalendar/JTCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/LTMorphingLabel/LTMorphingLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/LaunchScreen/LaunchScreen.framework",
+				"${BUILT_PRODUCTS_DIR}/Lightbox/Lightbox.framework",
+				"${BUILT_PRODUCTS_DIR}/M13ProgressSuite/M13ProgressSuite.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MMDrawerController/MMDrawerController.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/OpenInGoogleMaps/OpenInGoogleMaps.framework",
+				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
+				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
+				"${BUILT_PRODUCTS_DIR}/PasswordTextField/PasswordTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/PhoneNumberKit/PhoneNumberKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Spring/Spring.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftValidator/SwiftValidator.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TTRangeSlider/TTRangeSlider.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble-Snapshots/Nimble_Snapshots.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+				"${BUILT_PRODUCTS_DIR}/iOSSnapshotTestCase/FBSnapshotTestCase.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AIFlatSwitch.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMPopTip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BaasBoxSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Braintree.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGRunkeeperSwitch.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FoldingCell.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Font_Awesome_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISHPullUp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImagePicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Imaginary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTMorphingLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LaunchScreen.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lightbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M13ProgressSuite.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMDrawerController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenInGoogleMaps.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PasswordTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PhoneNumberKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Spring.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftValidator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTRangeSlider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble_Snapshots.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSnapshotTestCase.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1128,13 +1385,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YibbyPartnerTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E6F39E6AA71B9E64C2C8375A /* [CP] Check Pods Manifest.lock */ = {
@@ -1143,13 +1403,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YibbyPartner-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F1EA9702A2E692F1CBEC2489 /* [CP] Copy Pods Resources */ = {
@@ -1158,9 +1421,22 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/YibbyPartner/Pods/Target Support Files/Pods-YibbyPartnerTests/Pods-YibbyPartnerTests-resources.sh",
+				"${PODS_ROOT}/AccountKit/AccountKitStrings.bundle",
+				"${PODS_ROOT}/GoogleAuthUtilities/Frameworks/frameworks/GoogleAuthUtilities.framework/Resources/GTMOAuth2ViewTouch.xib",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccountKitStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GTMOAuth2ViewTouch.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1174,27 +1450,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12AE130120B50AE6006F3178 /* PXGoogleDirectionsDistance.swift in Sources */,
 				1201B7B91D23B49000A7EEAF /* SignupViewController.swift in Sources */,
 				126EC5621F7E31720040704F /* HelpCenterVC.swift in Sources */,
 				129AAE541E226C76006F6CE5 /* UITableViewController+ENFooterActivityIndicatorView.m in Sources */,
 				126EC5631F7E31720040704F /* HelpViewController.swift in Sources */,
+				12AE12FD20B50AE6006F3178 /* PXGoogleDirectionsRouteLegStepTransitDetails.swift in Sources */,
 				129AAE771E24D648006F6CE5 /* YBFloatLabelTextField.swift in Sources */,
+				12AE12F620B50AE6006F3178 /* PXGoogleDirectionsTransitLine.swift in Sources */,
 				1228A0BA20317C1600AF6801 /* InitialsImageView.swift in Sources */,
+				12AE12F420B50AE6006F3178 /* PXGoogleDirectionsTransitAgency.swift in Sources */,
 				1284914C1E260B10002D047B /* VehicleDataAPI.swift in Sources */,
+				12AE130020B50AE6006F3178 /* PXGoogleDirectionsEnums.swift in Sources */,
 				120826631F5D3F5500BA38E9 /* BoxType.swift in Sources */,
 				129AAE4A1E226B72006F6CE5 /* Colors.swift in Sources */,
 				125B0C101E2DE1B000534359 /* YBDriverLicense.swift in Sources */,
-				1201B7B21D23B49000A7EEAF /* OfferSentViewController.swift in Sources */,
 				128491541E263E44002D047B /* VehicleModels.swift in Sources */,
+				12AE130220B50AE6006F3178 /* PXGoogleDirectionsRouteFare.swift in Sources */,
 				1228A0B920317C1600AF6801 /* YBRoundedView.swift in Sources */,
 				126EC55B1F7E2D6A0040704F /* NotificationsViewController.swift in Sources */,
 				1201B7B61D23B49000A7EEAF /* RideEndViewController.swift in Sources */,
+				12AE12F220B50AE6006F3178 /* PXGoogleDirectionsStop.swift in Sources */,
 				12000C7E1F5CF57B004B6078 /* ImageExtensions.swift in Sources */,
+				12AE12F520B50AE6006F3178 /* PXLocation.swift in Sources */,
+				12AE12FE20B50AE6006F3178 /* PXGoogleDirections.swift in Sources */,
 				12FAC28C1E34863A00D77486 /* YBRider.swift in Sources */,
 				129AAE751E238F3B006F6CE5 /* InterfaceImage.swift in Sources */,
 				129AAE731E238E57006F6CE5 /* YBPickerTextField.swift in Sources */,
+				12AE12FC20B50AE6006F3178 /* PXGoogleDirectionsTime.swift in Sources */,
 				125B0C0C1E2DD04D00534359 /* YBPersonal.swift in Sources */,
 				1284914E1E262DA2002D047B /* VehicleMake.swift in Sources */,
+				12AE12F120B50AE6006F3178 /* PXGoogleDirectionsTransitLineVehicle.swift in Sources */,
+				12AE12F720B50AE6006F3178 /* PXGoogleDirectionsRouteLeg.swift in Sources */,
+				12AE12FA20B50AE6006F3178 /* PXUtils.swift in Sources */,
 				1201B7D11D23B4AC00A7EEAF /* WebInterface.swift in Sources */,
 				129AAE471E226ABE006F6CE5 /* BaseYibbyViewController.swift in Sources */,
 				1201B7D51D23B4AC00A7EEAF /* LogFormatter.swift in Sources */,
@@ -1210,19 +1498,21 @@
 				12000C7B1F5CF57B004B6078 /* Array.swift in Sources */,
 				1228A0BB20317C1600AF6801 /* SwiftyAvatar.swift in Sources */,
 				1211FF111D61260900AD9591 /* WeeklyEarningsViewController.swift in Sources */,
+				12AE12FF20B50AE6006F3178 /* PXTime.swift in Sources */,
 				12000C881F5CF57B004B6078 /* UIViewNibLoading.swift in Sources */,
 				1201B7AE1D23B49000A7EEAF /* LeftNavDrawerTableViewCell.swift in Sources */,
 				120826571F5D3B1B00BA38E9 /* TypedNotifications.swift in Sources */,
+				12AE12DC20B50A9A006F3178 /* DirectionsService.swift in Sources */,
 				126EC5561F7CCAF40040704F /* YBNotifications.swift in Sources */,
 				1211FF041D5991D800AD9591 /* ActivityIndicatorUtil.swift in Sources */,
 				12000C7C1F5CF57B004B6078 /* CGRectExtensions.swift in Sources */,
 				12000C801F5CF57B004B6078 /* NSStringExtensions.swift in Sources */,
-				126E80AD1FC6E2B0000EEBEE /* YBWeekStat.swift in Sources */,
 				1211F28D200677F900F18CAF /* YBSSNRule.swift in Sources */,
 				129AAE711E238E2B006F6CE5 /* YBBorderedTextField.swift in Sources */,
 				12133DD61F9484880068308C /* DocumentsViewController.swift in Sources */,
 				125B0C081E2CDFDC00534359 /* TemporaryCache.swift in Sources */,
 				129AAE621E23393B006F6CE5 /* InsuranceViewController.swift in Sources */,
+				12AE12F320B50AE6006F3178 /* PXGoogleDirectionsDuration.swift in Sources */,
 				12000C851F5CF57B004B6078 /* UITextFieldExtensions.swift in Sources */,
 				129AAE591E226CE2006F6CE5 /* UIColorExtensions.swift in Sources */,
 				129AAE451E226ABE006F6CE5 /* BaseYibbyTableViewController.swift in Sources */,
@@ -1238,7 +1528,7 @@
 				125B0C0E1E2DE10500534359 /* YBVehicle.swift in Sources */,
 				1211FF021D5991C800AD9591 /* TimeUtil.swift in Sources */,
 				1211FF0D1D604AC800AD9591 /* DayEarningsTableCell.swift in Sources */,
-				126E80AF1FC6E30A000EEBEE /* YBDriverStats.swift in Sources */,
+				12AE12F820B50AE6006F3178 /* PXGoogleDirectionsRoute.swift in Sources */,
 				12000C811F5CF57B004B6078 /* ScreenExtensions.swift in Sources */,
 				12000C941F5CFF30004B6078 /* YBMenuButton.swift in Sources */,
 				125B0C041E2C4B2D00534359 /* ImageService.swift in Sources */,
@@ -1290,6 +1580,8 @@
 				1201B7B31D23B49000A7EEAF /* OfferViewController.swift in Sources */,
 				129AAE561E226C76006F6CE5 /* YibbyButton1.swift in Sources */,
 				129AAE641E233949006F6CE5 /* PersonalInformationViewController.swift in Sources */,
+				12AE12FB20B50AE6006F3178 /* PXGoogleDirectionsResponse.swift in Sources */,
+				12AE12F920B50AE6006F3178 /* PXGoogleDirectionsRouteLegStep.swift in Sources */,
 				1201B7B71D23B49000A7EEAF /* RideStartViewController.swift in Sources */,
 				129AAE661E233974006F6CE5 /* ConsentViewController.swift in Sources */,
 				12000C821F5CF57B004B6078 /* UIButtonExtensions.swift in Sources */,

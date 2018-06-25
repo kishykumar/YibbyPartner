@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '871634FA6310B4E1D1DE82A13971E039'
-               BlueprintName = 'Braintree'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Braintree.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "871634FA6310B4E1D1DE82A13971E039"
+               BlueprintName = "Braintree"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "Braintree.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

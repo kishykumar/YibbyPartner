@@ -170,10 +170,7 @@
 - (void) loadFilesAndDetailsWithCompletion:(BAAArrayResultBlock)completionBlock;
 
 // Bid
-- (void)createBid:(NSNumber *)bidHigh
-        bidLow:(NSNumber *)bidLow
-        etaHigh:(NSNumber *)etaHigh
-        etaLow:(NSNumber *)etaLow
+- (void)createBid:(NSNumber *)bidPrice
         pickupLat:(NSNumber *)pickupLat
         pickupLong:(NSNumber *)pickupLong
         pickupLoc:(NSString *)pickupLoc
@@ -194,12 +191,12 @@
                 completion: (BAAObjectResultBlock)completionBlock;
 
 - (void)cancelRiderRide:(NSString *)bidId
-                message:(NSString *)message
-                completion:(BAAObjectResultBlock)completionBlock;
+             cancelCode:(NSNumber *)cancelCode
+             completion:(BAAObjectResultBlock)completionBlock;
 
 - (void)cancelDriverRide:(NSString *)bidId
-                message:(NSString *)message
-                completion:(BAAObjectResultBlock)completionBlock;
+              cancelCode:(NSNumber *)cancelCode
+              completion:(BAAObjectResultBlock)completionBlock;
 
 - (void)startRide:(NSString *)bidId
               completion:(BAAObjectResultBlock)completionBlock;
@@ -218,9 +215,11 @@
                     completion: (BAAObjectResultBlock)completionBlock;
 
 // Offer
-- (void)createOffer:(NSString *)bidId
-         offerPrice:(NSNumber *)offerPrice
-         completion:(BAAObjectResultBlock)completionBlock;
+- (void)acceptBid:(NSString *)bidId
+       completion:(BAAObjectResultBlock)completionBlock;
+
+- (void)rejectBid:(NSString *)bidId
+       completion:(BAAObjectResultBlock)completionBlock;
 
 // User
 - (void) loadCurrentUserWithCompletion:(BAAObjectResultBlock)completionBlock;

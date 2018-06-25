@@ -12,6 +12,7 @@ import CocoaLumberjack
 import BaasBoxSDK
 import BButton
 import Spring
+import ObjectMapper
 
 public enum RideViewControllerState: Int {
     case driverEnRoute = 0
@@ -19,13 +20,19 @@ public enum RideViewControllerState: Int {
     case rideStart
 }
 
+// The following enum values have to match the values on the webserver
+public enum RideCancellationReason: Int {
+    case driverPlansChanged = 4
+    case driverEmergency = 5
+}
+
 class RideStartViewController: BaseYibbyViewController {
 
     // MARK: - Properties
     
     public var controllerState: RideViewControllerState = RideViewControllerState.driverEnRoute
-    @IBOutlet weak var rideActionButton: BButton!
-    @IBOutlet weak var startNavigationButton: BButton!
+    @IBOutlet weak var rideActionButton: UIButton!
+    @IBOutlet weak var startNavigationButton: UIButton!
     @IBOutlet weak var gmsMapViewOutlet: GMSMapView!
     @IBOutlet weak var numPeopleLabelOutlet: UILabel!
     @IBOutlet weak var totalFareLabelOutlet: UILabel!
@@ -33,11 +40,9 @@ class RideStartViewController: BaseYibbyViewController {
     @IBOutlet weak var riderFirstNameLabelOutlet: UILabel!
     @IBOutlet weak var riderRatingLabelOutlet: UILabel!
     @IBOutlet weak var riderProfilePictureOutlet: SwiftyAvatar!
+    @IBOutlet weak var cancelButtonOutlet: UIButton!
     
     var bid: Bid!
-    
-//    var driverLocLatLng: CLLocationCoordinate2D?
-//    var driverLocMarker: GMSMarker?
     
     var pickupMarker: GMSMarker?
     var dropoffMarker: GMSMarker?
@@ -48,15 +53,38 @@ class RideStartViewController: BaseYibbyViewController {
 
     var isRiderDetailsViewHidden = true
     
+    fileprivate var rideCancelObserver: NotificationObserver?
+
     // MARK: - Actions
+    
+    @IBAction func onCancelRideClick(_ sender: UIButton) {
+        
+        let emergencyAction = UIAlertAction(title: InterfaceString.ActionSheet.EmergencyReason, style: .default) { _ in
+            self.cancelRide(with: .driverEmergency)
+        }
+        
+        let plansChangedAction = UIAlertAction(title: InterfaceString.ActionSheet.PlansChangedReason,
+                                               style: .destructive) { _ in
+            self.cancelRide(with: .driverPlansChanged)
+        }
+        
+        let cancelAction = UIAlertAction(title: InterfaceString.Cancel, style: .cancel)
+        
+        let controller = UIAlertController(title: InterfaceString.ActionSheet.CancelReason,
+                                           message: "Cancelling too many rides decreases your chance to get future rides.",
+                                           preferredStyle: .actionSheet)
+        
+        for action in [emergencyAction, plansChangedAction, cancelAction] {
+            controller.addAction(action)
+        }
+        present(controller, animated: true, completion: nil)
+        
+    }
     
     @IBAction func onCallButtonTap(_ sender: UIButton) {
         
         guard let ride = YBClient.sharedInstance().ride, let myRider = ride.rider else {
-            
-            let errorAlert = UIAlertView(title: "Cannot Send Text Message", message: "Your device is not able to send text messages.", delegate: self, cancelButtonTitle: "OK")
-            errorAlert.show()
-            
+            AlertUtil.displayAlertOnVC(self, title: "Cannot make the call at this moment.", message: "")
             return;
         }
         
@@ -66,10 +94,7 @@ class RideStartViewController: BaseYibbyViewController {
     @IBAction func sendTextMessageButtonTapped(_ sender: UIButton) {
         
         guard let ride = YBClient.sharedInstance().ride, let myRider = ride.rider, let phoneNumber = myRider.phoneNumber else {
-            
-            let errorAlert = UIAlertView(title: "Unexpected Error.", message: "We are working on resolving this error for you. Sincere apology for the inconvenience.", delegate: self, cancelButtonTitle: "OK")
-            errorAlert.show()
-            
+            AlertUtil.displayAlertOnVC(self, title: "Cannot Send Text Message at this moment.", message: "")
             return;
         }
         
@@ -83,8 +108,7 @@ class RideStartViewController: BaseYibbyViewController {
             self.present(messageComposeVC, animated: true, completion: nil)
             
         } else {
-            let errorAlert = UIAlertView(title: "Unexpected Error.", message: "We are working on resolving this error for you. Sincere apology for the inconvenience.", delegate: self, cancelButtonTitle: "OK")
-            errorAlert.show()
+            AlertUtil.displayAlertOnVC(self, title: "Cannot Send Text Message at this moment.", message: "")
         }
     }
     
@@ -118,7 +142,7 @@ class RideStartViewController: BaseYibbyViewController {
     
     @IBAction func onRideActionButtonClick(_ sender: AnyObject) {
         
-        // Case 1: Clicked on Arrived at Pickup Point
+        // Case 1: Clicked on  at Pickup Point
         if (controllerState == RideViewControllerState.driverEnRoute) {
             
             WebInterface.makeWebRequestAndHandleError(
@@ -142,6 +166,7 @@ class RideStartViewController: BaseYibbyViewController {
                                 self.rideActionButton.setTitle(InterfaceString.Ride.StartRide, for: .normal)
 
                                 self.startNavigationButton.isHidden = true
+                                self.cancelButtonOutlet.removeFromSuperview()
                                 
                                 self.driverArrivedCallback()
                             }
@@ -209,6 +234,11 @@ class RideStartViewController: BaseYibbyViewController {
                                 
                                 YBClient.sharedInstance().status = .rideEnd
                                 
+                                let rideModel = Mapper<Ride>().map(JSONObject: success)
+                                
+                                // Refresh the ride state from the response
+                                YBClient.sharedInstance().ride = rideModel
+                                
                                 let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
 
                                 let rideEndViewController = rideStoryboard.instantiateViewController(withIdentifier: "RideEndViewControllerIdentifier") as! RideEndViewController
@@ -229,7 +259,22 @@ class RideStartViewController: BaseYibbyViewController {
     }
     
     // MARK: - Setup functions
-
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        DDLogVerbose("Fired init")
+        setupNotificationObservers()
+    }
+    
     func initProperties() {
         self.bid = (YBClient.sharedInstance().bid)
     }
@@ -245,7 +290,7 @@ class RideStartViewController: BaseYibbyViewController {
             DDLogVerbose("KKDBG_ride:")
             dump(ride)
 
-            if let fare = ride.fare {
+            if let fare = ride.bidPrice {
                 let fareInt = Int(fare)
                 totalFareLabelOutlet.text = "$\(String(describing: fareInt))"
             }
@@ -314,6 +359,11 @@ class RideStartViewController: BaseYibbyViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        DDLogVerbose("Fired deinit")
+        removeNotificationObservers()
+    }
+    
     fileprivate func rideSetup() {
         
         switch (self.controllerState) {
@@ -341,12 +391,13 @@ class RideStartViewController: BaseYibbyViewController {
             rideActionButton.setTitle(InterfaceString.Ride.StartRide, for: .normal)
 
             self.startNavigationButton.isHidden = true
+            self.cancelButtonOutlet.removeFromSuperview()
             
             // Add marker to dropoff location
             self.setDropoffDetails(self.bid.dropoffLocation!)
             
             DispatchQueue.global(qos: .userInteractive).async {
-                
+
                 if let curLocation = LocationService.sharedInstance().provideCurrentLocation() {
                     DispatchQueue.main.async {
                         self.adjustGMSCameraFocus(marker1: self.dropoffMarker, driverLocation: curLocation.coordinate)
@@ -360,7 +411,7 @@ class RideStartViewController: BaseYibbyViewController {
             rideActionButton.setTitle(InterfaceString.Ride.EndRide, for: .normal)
 
             self.startNavigationButton.isHidden = false
-
+            self.cancelButtonOutlet.removeFromSuperview()
             
             // Add marker to dropoff location
             self.setDropoffDetails(self.bid.dropoffLocation!)
@@ -378,7 +429,75 @@ class RideStartViewController: BaseYibbyViewController {
         }
     }
     
+    // MARK: Notifications
+    
+    fileprivate func setupNotificationObservers() {
+        
+        DDLogVerbose("setup notifications observers")
+        
+        rideCancelObserver = NotificationObserver(notification: RideNotifications.rideCancelled) { [unowned self] ride in
+            DDLogVerbose("NotificationObserver rideCancel: \(ride)")
+            self.riderCancelledRideCallback()
+        }
+    }
+    
+    fileprivate func removeNotificationObservers() {
+        DDLogVerbose("removing notifications observers")
+        rideCancelObserver?.removeObserver()
+    }
+    
     // MARK: - Helper functions
+    
+    fileprivate func riderCancelledRideCallback() {
+        
+        YBClient.sharedInstance().bid = nil
+        YBClient.sharedInstance().status = .online
+        
+        AlertUtil.displayAlertOnVC(self, title: "Unfortunately, your ride has been cancelled by the rider.",
+                                   message: "You will be compensated according to our Terms & Conditions.",
+                                   completionBlock: {() -> Void in
+                                    
+                                    // Trigger unwind segue to MainViewController
+                                    self.performSegue(withIdentifier: "unwindToMainViewControllerFromRideStartViewController", sender: self)
+        })
+    }
+    
+    fileprivate func cancelRide(with reason: RideCancellationReason) {
+        WebInterface.makeWebRequestAndHandleError(
+            self,
+            webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
+                
+                ActivityIndicatorUtil.enableActivityIndicator(self.view, title: "Cancelling Ride")
+                
+                let client: BAAClient = BAAClient.shared()
+                
+                client.cancelDriverRide(YBClient.sharedInstance().bid?.id,
+                                        cancelCode: reason.rawValue as NSNumber,
+                                        completion: {(success, error) -> Void in
+                                        
+                                        ActivityIndicatorUtil.disableActivityIndicator(self.view)
+                                        
+                                        if (success != nil) {
+                                            
+                                            // Set the client state
+                                            YBClient.sharedInstance().status = .online
+                                            YBClient.sharedInstance().bid = nil
+                                            
+                                            AlertUtil.displayAlertOnVC(self, title: "Ride successfully cancelled",
+                                                                       message: "Cancelling too many rides decreases your chance to get future rides.",
+                                                                       completionBlock: {() -> Void in
+                                                                        
+                                                                        // Trigger unwind segue to MainViewController
+                                                                        self.performSegue(withIdentifier: "unwindToMainViewControllerFromRideStartViewController", sender: self)
+                                            })
+                                            
+                                        } else {
+                                            DDLogVerbose("Ride Cancel failed: \(String(describing: error))")
+                                            errorBlock(success, error)
+                                        }
+                })
+        })
+    }
     
     fileprivate func centerMarkers() {
         let driverLocation = gmsMapViewOutlet.myLocation?.coordinate
@@ -450,12 +569,8 @@ class RideStartViewController: BaseYibbyViewController {
         let heightInset = marker1.icon?.size.height
         let widthInset = marker1.icon?.size.width
         
-        let startNavigationButtonRelativeOrigin: CGPoint =
-            (startNavigationButton.superview?.convert(startNavigationButton.frame.origin,
-                                                 to: gmsMapViewOutlet))!
-        
         let bounds = GMSCoordinateBounds(coordinate: marker1.position, coordinate: driverLoc)
-        let insets = UIEdgeInsets(top: startNavigationButtonRelativeOrigin.y + startNavigationButton.bounds.height + (heightInset!) + 10.0,
+        let insets = UIEdgeInsets(top: (heightInset!) + 20.0,
                                   left: (widthInset! / 2) + 20.0,
                                   bottom: 20.0,
                                   right: (widthInset! / 2) + 20.0)

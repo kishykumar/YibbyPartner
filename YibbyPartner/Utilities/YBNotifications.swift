@@ -14,5 +14,5 @@ public struct BidNotifications {
 }
 
 public struct RideNotifications {
-    static let driverEnRoute = TypedNotification<Ride>(name: "com.Yibby.Ride.DriverEnRoute")
+    static let rideCancelled = TypedNotification<Ride>(name: "com.Yibby.Ride.RideCancelled")
 }

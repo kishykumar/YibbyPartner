@@ -20,7 +20,7 @@ import Spring
 // 1. Enable push notifications for Google needs to retry with exponential backoffs
 // 2. Push notifications 
 
-class MainViewController: BaseYibbyViewController {
+class MainViewController: BaseYibbyViewController, OfferViewControllerDelegate {
 
     // MARK: Properties
     
@@ -43,12 +43,24 @@ class MainViewController: BaseYibbyViewController {
     var firstValueChangedSkipped = false
     
     fileprivate var bidObserver: NotificationObserver? // for incoming offer
-    fileprivate var offerRejectedObserver: NotificationObserver? // for offer reject
-    fileprivate var rideObserver: NotificationObserver? // for driver en route message
     
     // MARK: Actions
 
     @IBAction func onCentersMarkerViewClick(_ sender: UITapGestureRecognizer) {
+        
+//        // prepare the offerViewController
+//        let offerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Offer, bundle: nil)
+//        
+//        let offerViewController = offerStoryboard.instantiateViewController(withIdentifier: "OfferViewControllerIdentifier") as! OfferViewController
+//        
+//        let navController = UINavigationController(rootViewController: offerViewController)
+//        
+//        // start the timer by accouting the time elapsed since the user actually created the bid
+//        offerViewController.timerStart = 30
+//
+//        self.navigationController?.present(navController, animated: true, completion: nil)
+//
+//        return;
         
         if let driverLocation = gmsMapViewOutlet.myLocation {
             adjustGMSCameraFocus(driverLocation.coordinate)
@@ -244,8 +256,6 @@ class MainViewController: BaseYibbyViewController {
     fileprivate func removeNotificationObservers() {
         
         bidObserver?.removeObserver()
-        offerRejectedObserver?.removeObserver()
-        rideObserver?.removeObserver()
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }
@@ -284,44 +294,15 @@ class MainViewController: BaseYibbyViewController {
             
             // start the timer by accouting the time elapsed since the user actually created the bid
             offerViewController.timerStart = TimeInterval(Int(OfferViewController.OFFER_TIMER_EXPIRE_PERIOD - bidElapsedTime))
+            offerViewController.delegate = self
             
             // if an alert was already displayed, dismiss it
-            if let presentedVC = self.presentedViewController {
-                if (presentedVC.isMember(of: UIAlertController.self)) {
-                    self.dismiss(animated: false, completion: nil)
-                }
+            if self.presentedViewController != nil {
+                self.dismiss(animated: false, completion: nil)
             }
 
             YBClient.sharedInstance().status = .offerInProcess
             self.navigationController?.present(navController, animated: true, completion: nil)
-        }
-        
-        offerRejectedObserver = NotificationObserver(notification: BidNotifications.offerRejected) { [unowned self] bid in
-            
-            YBClient.sharedInstance().status = .online
-
-            YBClient.sharedInstance().bid = nil
-            AlertUtil.displayAlert("Offer Rejected.",
-                                   message: "Reason: Your offer was not the lowest.",
-                                   completionBlock: {() -> Void in
-                                    
-                                        self.dismiss(animated: true, completion: nil)
-                                    })
-        }
-        
-        rideObserver = NotificationObserver(notification: RideNotifications.driverEnRoute) { [unowned self] ride in
-
-            // Initialize the ride
-            YBClient.sharedInstance().ride = ride
-            YBClient.sharedInstance().status = .driverEnRoute
-            
-            self.dismiss(animated: true, completion: nil)
-            
-            let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
-            
-            let rideStartViewController = rideStoryboard.instantiateViewController(withIdentifier: "RideStartViewControllerIdentifier") as! RideStartViewController
-            
-            self.navigationController?.pushViewController(rideStartViewController, animated: true)
         }
     }
 
@@ -345,10 +326,27 @@ class MainViewController: BaseYibbyViewController {
     }
     
     @objc fileprivate func appBecameActive() {
+        
+        if (!self.isViewLoaded) {
+            return;
+        }
+        
         if (YBClient.sharedInstance().status == .online) {
             startOnlineStatusAnimation()
         } else {
             stopOnlineStatusAnimation()
         }
+    }
+    
+    // MARK: - OfferViewControllerDelegate
+    
+    func startRide() {
+        self.dismiss(animated: true, completion: {
+            let rideStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Ride, bundle: nil)
+            
+            let rideStartViewController = rideStoryboard.instantiateViewController(withIdentifier: "RideStartViewControllerIdentifier") as! RideStartViewController
+            
+            self.navigationController?.pushViewController(rideStartViewController, animated: true)
+        })
     }
 }

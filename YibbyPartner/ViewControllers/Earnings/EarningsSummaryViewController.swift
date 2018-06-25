@@ -74,7 +74,7 @@ class EarningsSummaryViewController: BaseYibbyViewController, JTCalendarDelegate
         var calendar = self.calendarManager.dateHelper.calendar()
         calendar!.locale = Locale(identifier: "en_US")
         calendar!.timeZone = TimeZone.init(abbreviation: "PDT")!
-        calendar!.firstWeekday = 4 // Wednesday
+        // DOES NOT WORK - calendar!.firstWeekday = 4 // Wednesday
         
         computeStartEndWeek(Date())
         self.perform(#selector(EarningsSummaryViewController.fetchEarningsCurrentWeek), with:nil, afterDelay:0.0)
@@ -225,7 +225,7 @@ class EarningsSummaryViewController: BaseYibbyViewController, JTCalendarDelegate
             
             let weekStartStr = TimeUtil.getDateStringInFormat(date: weekStart, format: "MM/dd")
             let weekEndStr = TimeUtil.getDateStringInFormat(date: endOfWeek, format: "MM/dd")
-            self.weekLabelOutlet.text = "\(weekStartStr) - \(weekEndStr)"
+            self.weekLabelOutlet.text = "Showing Earnings for \(weekStartStr) - \(weekEndStr)"
             
             self.calendarManager.reload()
         })
@@ -251,25 +251,25 @@ class EarningsSummaryViewController: BaseYibbyViewController, JTCalendarDelegate
                     ActivityIndicatorUtil.disableActivityIndicator(self.view)
                         if (error == nil) {
                             
-                            // success has the data
-                            let statsModel = Mapper<YBDriverStats>().map(JSONObject: success)!
-
-                            self.dailyStats = statsModel.daily
+                            // success has the JSON
+                            let weekStats = Mapper<YBDayStat>().mapArray(JSONObject: success)!
+                            self.dailyStats = weekStats
                             
-                            if let weeklyStats: YBWeekStat = statsModel.week {
-                                
-                                if let earning = weeklyStats.earning {
-                                    self.totalPayoutLabelOutlet.text = String(format: "$%.02f", earning)
-                                }
-                                
-                                if let rides = weeklyStats.rides {
-                                    self.completedTripsLabelOutlet.text = String(rides)
-                                }
-                                
-                                if let onlineTime = weeklyStats.onlineTime {
-                                    self.timeOnlineLabelOutlet.text = "\(String(onlineTime)) mins"
-                                }
+                            var totalEarning: Double = 0
+                            var totalRides: Int = 0
+                            var totalOnlineTime: Int = 0
+                            
+                            for dayStat in weekStats {
+                                totalEarning += (dayStat.earning ?? 0.0)
+                                totalRides += (dayStat.totalTrips ?? 0)
+                                totalOnlineTime += (dayStat.onlineTime ?? 0)
                             }
+                            
+                            self.totalPayoutLabelOutlet.text = String(format: "$%.02f", totalEarning)
+                            self.completedTripsLabelOutlet.text = String(totalRides)
+                            
+                            let totalOnlineTimeMins: Int = (totalOnlineTime + 59) / 60
+                            self.timeOnlineLabelOutlet.text = "\(String(totalOnlineTimeMins)) mins"
                             
                             successBlock()
                         }
@@ -283,14 +283,16 @@ class EarningsSummaryViewController: BaseYibbyViewController, JTCalendarDelegate
     }
     
     func computeStartEndWeek(_ inDate: Date) {
-//        let calendar = calendarManager.dateHelper.calendar()
         var interval = TimeInterval(0)
-        
         var date: Date = Date()
-        Calendar.current.dateInterval(of: .weekOfMonth, start: &date, interval: &interval, for: inDate)
+        let result = Calendar.current.dateInterval(of: .weekOfMonth, start: &date, interval: &interval, for: inDate)
         
-        self.startOfTheWeek = date
-        self.endOfWeek = self.startOfTheWeek!.addingTimeInterval(interval - 1)
+        if (result) {
+            self.startOfTheWeek = date
+            self.endOfWeek = self.startOfTheWeek!.addingTimeInterval(interval - 1)
+        } else {
+            
+        }
     }
     
     /*

@@ -194,7 +194,7 @@ class LeftNavDrawerViewController: BaseYibbyViewController,
         let mycell = tableView.dequeueReusableCell(withIdentifier: "LeftNavDrawerCellIdentifier", for: indexPath) as! LeftNavDrawerTableViewCell
         
         // set the label
-        mycell.menuItemLabel.text = menuItems[indexPath.row]
+        mycell.menuItemLabel.text = menuItems[indexPath.row].uppercased()
         
         // set the icon
         mycell.menuItemIconLabelOutlet.font = UIFont(name: "FontAwesome", size: 20)

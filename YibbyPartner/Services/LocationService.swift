@@ -3,7 +3,7 @@
 //  YibbyPartner
 //
 //  Created by Kishy Kumar on 6/9/16.
-//  Copyright © 2016 MyComp. All rights reserved.
+//  Copyright © 2016 Yibby. All rights reserved.
 //
 
 import UIKit
@@ -54,7 +54,12 @@ open class LocationService: NSObject, CLLocationManagerDelegate {
     }
     
     func stopLocationUpdates () {
+        isUpdatingLocation = false
         locationManager.stopUpdatingLocation()
+    }
+    
+    func getNoWaitCurLocation () -> CLLocation? {
+        return self.currentLocation
     }
     
     func provideCurrentLocation () -> CLLocation? {
@@ -144,8 +149,8 @@ open class LocationService: NSObject, CLLocationManagerDelegate {
                 
                 client.updateDriverStatus(
                     BAASBOX_DRIVER_STATUS_ONLINE, 
-                    latitude: userLocation.coordinate.latitude as NSNumber!,
-                    longitude: userLocation.coordinate.longitude as NSNumber!,
+                    latitude: userLocation.coordinate.latitude as NSNumber?,
+                    longitude: userLocation.coordinate.longitude as NSNumber?,
                     completion: {(success, error) -> Void in
                         
                         // TODO: FIX error

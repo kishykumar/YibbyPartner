@@ -171,13 +171,28 @@ class LoginViewController: BaseYibbyViewController,
                     // if login is successful, save username, password, token in keychain
                     LoginViewController.setLoginKeyChainKeys(usernamei, password: passwordi)
                     
-                    appDelegate.initializeApp()
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        
+                        let error = appDelegate.initializeApp()
+                        
+                        DispatchQueue.main.async {
+                            
+                            if (error != nil) {
+                                AlertUtil.displayAlertOnVC(self,
+                                                           title: error!.localizedDescription, message: "Try again with logging in")
+                            }
+                            
+                            ActivityIndicatorUtil.disableActivityIndicator(self.view)
+                            self.loginButtonOutlet.isUserInteractionEnabled = true
+                        }
+                    }
                 }
                 else {
                     errorBlock(success, error)
                     
                     // enable the login button interaction
                     self.loginButtonOutlet.isUserInteractionEnabled = true
+                    ActivityIndicatorUtil.disableActivityIndicator(self.view)
                 }
             })
         })

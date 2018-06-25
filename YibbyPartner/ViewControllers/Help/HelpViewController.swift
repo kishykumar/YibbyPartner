@@ -99,7 +99,7 @@ class HelpViewController: BaseYibbyViewController {
         
         if let ride = lastRide {
             
-            lastTripPrice.text = "$\(ride.fare!)"
+            lastTripPrice.text = "$\(ride.bidPrice!)"
             
             if let rideISODateTime = ride.datetime, let rideDate = TimeUtil.getDateFromISOTime(rideISODateTime) {
                 let prettyDate = TimeUtil.prettyPrintDate1(rideDate)

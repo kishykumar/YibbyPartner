@@ -94,13 +94,13 @@ class WeeklyEarningsViewController: BaseYibbyViewController, UITableViewDelegate
         var dayString = ""
         
         switch (indexPath.row) {
-        case 0: dayString = "Wednesday"
-        case 1: dayString = "Thursday"
-        case 2: dayString = "Friday"
-        case 3: dayString = "Saturday"
-        case 4: dayString = "Sunday"
-        case 5: dayString = "Monday"
-        case 6: dayString = "Tuesday"
+        case 0: dayString = "Sunday"
+        case 1: dayString = "Monday"
+        case 2: dayString = "Tuesday"
+        case 3: dayString = "Wednesday"
+        case 4: dayString = "Thursday"
+        case 5: dayString = "Friday"
+        case 6: dayString = "Saturday"
         default: assert(false)
         }
 
@@ -115,11 +115,12 @@ class WeeklyEarningsViewController: BaseYibbyViewController, UITableViewDelegate
         if let stats: YBDayStat = dailyStatsMap[date] {
             earnings = String(format: "$%.02f", stats.earning!)
             
-            if (stats.rides != nil) {
-                trips = "\(String(describing: stats.rides)) trips"
+            if (stats.totalTrips != nil) {
+                trips = "\(String(describing: stats.totalTrips!)) trips"
             }
             
-            onlineTime = "\(stats.onlineTime!) mins"
+            let totalOnlineTimeMins: Int = (stats.onlineTime! + 59) / 60
+            onlineTime = "\(totalOnlineTimeMins) mins"
         }
         
         cell.configure(dayName: dayString, date: dateStr, earnings: earnings, totalTrips: trips, onlineTime: onlineTime)

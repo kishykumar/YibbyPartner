@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '9EF8E2CB03A6BA0320C14D2E87A45921'
-               BlueprintName = 'BaasBoxSDK'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'BaasBoxSDK.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9EF8E2CB03A6BA0320C14D2E87A45921"
+               BlueprintName = "BaasBoxSDK"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "BaasBoxSDK.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

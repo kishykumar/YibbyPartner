@@ -57,11 +57,10 @@ public struct InterfaceString {
         static let Pickup = NSLocalizedString("Pickup", comment: "Pickup")
         static let Dropoff = NSLocalizedString("Dropoff", comment: "Dropoff")
         static let Driver = NSLocalizedString("Driver", comment: "Driver")
-        static let ArrivedAtPickup = NSLocalizedString("Arrived at Pickup", comment: "ArrivedAtPickup")
+        static let ArrivedAtPickup = NSLocalizedString("Arrived?", comment: "ArrivedAtPickup")
         static let StartRide = NSLocalizedString("Start Ride", comment: "StartRide")
         static let EndRide = NSLocalizedString("End Ride", comment: "EndRide")
     }
-    
     
     public struct Upload {
         static let License = NSLocalizedString("Upload License", comment: "Upload License")
@@ -85,6 +84,10 @@ public struct InterfaceString {
 
         static let InsuranceState = NSLocalizedString("Insurance State", comment: "Insurance State")
         static let InsuranceExpirationDate = NSLocalizedString("Insurance Expiration Date", comment: "Insurance Expiration Date")
+        
+        static let CancelReason = NSLocalizedString("Cancel Reason", comment: "Cancel Reason")
+        static let PlansChangedReason = NSLocalizedString("Plans Changed", comment: "PlansChangedReason")
+        static let EmergencyReason = NSLocalizedString("Emergency", comment: "EmergencyReason")
     }
     
     public struct TableSections {

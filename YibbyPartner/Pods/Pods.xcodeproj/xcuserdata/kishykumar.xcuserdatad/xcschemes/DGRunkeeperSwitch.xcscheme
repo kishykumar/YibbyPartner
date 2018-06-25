@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E6201897E03F1CF81B18D371B6BEA2CB'
-               BlueprintName = 'DGRunkeeperSwitch'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'DGRunkeeperSwitch.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E6201897E03F1CF81B18D371B6BEA2CB"
+               BlueprintName = "DGRunkeeperSwitch"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "DGRunkeeperSwitch.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

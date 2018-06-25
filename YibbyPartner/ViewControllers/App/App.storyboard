@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="FontAwesome.ttf">
-            <string>FontAwesome</string>
+        <array key="ionicons.ttf">
+            <string>Ionicons</string>
         </array>
     </customFonts>
     <scenes>
@@ -33,11 +33,11 @@
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="krM-MI-mgi" userLabel="CenterMarkersView" customClass="YBBorderedUIView" customModule="YibbyPartner" customModuleProvider="target">
-                                <rect key="frame" x="333" y="62.5" width="27" height="27"/>
+                                <rect key="frame" x="318" y="55" width="42" height="42"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ue-sY-gzk" userLabel="LocationArrowLabel">
-                                        <rect key="frame" x="5" y="5" width="17" height="17"/>
-                                        <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ue-sY-gzk" userLabel="LocationArrowLabel">
+                                        <rect key="frame" x="10.5" y="10" width="21.5" height="22"/>
+                                        <fontDescription key="fontDescription" name="Ionicons" family="Ionicons" pointSize="22"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -46,23 +46,32 @@
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="1Ue-sY-gzk" firstAttribute="centerX" secondItem="krM-MI-mgi" secondAttribute="centerX" id="7mR-Ho-Um1"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1Ue-sY-gzk" secondAttribute="trailing" constant="5" id="8Cv-fF-9dn"/>
-                                    <constraint firstItem="1Ue-sY-gzk" firstAttribute="top" secondItem="krM-MI-mgi" secondAttribute="top" priority="750" constant="5" id="DZZ-e0-Fld"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1Ue-sY-gzk" secondAttribute="trailing" constant="10" id="8Cv-fF-9dn"/>
+                                    <constraint firstItem="1Ue-sY-gzk" firstAttribute="top" secondItem="krM-MI-mgi" secondAttribute="top" priority="750" constant="10" id="DZZ-e0-Fld"/>
                                     <constraint firstItem="1Ue-sY-gzk" firstAttribute="centerY" secondItem="krM-MI-mgi" secondAttribute="centerY" id="Jbf-Al-Ip3"/>
-                                    <constraint firstItem="1Ue-sY-gzk" firstAttribute="top" relation="greaterThanOrEqual" secondItem="krM-MI-mgi" secondAttribute="top" constant="5" id="NAa-qd-48Y"/>
-                                    <constraint firstItem="1Ue-sY-gzk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="krM-MI-mgi" secondAttribute="leading" constant="5" id="QxA-uy-YdJ"/>
-                                    <constraint firstAttribute="bottom" secondItem="1Ue-sY-gzk" secondAttribute="bottom" priority="750" constant="5" id="arl-fv-EQL"/>
-                                    <constraint firstItem="1Ue-sY-gzk" firstAttribute="leading" secondItem="krM-MI-mgi" secondAttribute="leading" priority="750" constant="5" id="f47-cm-Q59"/>
-                                    <constraint firstAttribute="trailing" secondItem="1Ue-sY-gzk" secondAttribute="trailing" priority="750" constant="5" id="fcK-ql-w9M"/>
+                                    <constraint firstItem="1Ue-sY-gzk" firstAttribute="top" relation="greaterThanOrEqual" secondItem="krM-MI-mgi" secondAttribute="top" constant="10" id="NAa-qd-48Y"/>
+                                    <constraint firstItem="1Ue-sY-gzk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="krM-MI-mgi" secondAttribute="leading" constant="10" id="QxA-uy-YdJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="1Ue-sY-gzk" secondAttribute="bottom" priority="750" constant="10" id="arl-fv-EQL"/>
+                                    <constraint firstItem="1Ue-sY-gzk" firstAttribute="leading" secondItem="krM-MI-mgi" secondAttribute="leading" priority="750" constant="10" id="f47-cm-Q59"/>
+                                    <constraint firstAttribute="trailing" secondItem="1Ue-sY-gzk" secondAttribute="trailing" priority="750" constant="10" id="fcK-ql-w9M"/>
                                     <constraint firstAttribute="width" secondItem="krM-MI-mgi" secondAttribute="height" id="fga-1r-fzM"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="1Ue-sY-gzk" secondAttribute="bottom" constant="5" id="oCV-a1-lcp"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="1Ue-sY-gzk" secondAttribute="bottom" constant="10" id="oCV-a1-lcp"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="0.0"/>
+                                        <real key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                         <color key="value" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.10000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -163,7 +172,7 @@
                 <viewControllerPlaceholder storyboardName="Online" referencedIdentifier="DriverOnlineViewControllerIdentifier" id="BPk-Z1-Jqp" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hPS-LO-fh0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1371" y="313"/>
+            <point key="canvasLocation" x="1569" y="312"/>
         </scene>
     </scenes>
 </document>

@@ -48,7 +48,7 @@ class SignupViewController: BaseYibbyViewController,
     
     @IBAction func tncButtonAction(_ sender: AnyObject) {
         let url = URL(string: "http://yibbyapp.com")!
-        UIApplication.shared.openURL(url)
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     // MARK: - Setup functions
@@ -354,11 +354,12 @@ class SignupViewController: BaseYibbyViewController,
         if (textField == phoneNumberOutlet) {
             if var str = textField.text {
                 str = str + string
-                if str.characters.count <= MAX_PHONE_NUMBER_TEXTFIELD_LENGTH {
+                if str.count <= MAX_PHONE_NUMBER_TEXTFIELD_LENGTH {
                     return true
                 }
-                
-                textField.text = str.substring(to: str.index(str.startIndex, offsetBy: MAX_PHONE_NUMBER_TEXTFIELD_LENGTH))
+
+                let index = str.index(str.startIndex, offsetBy: MAX_PHONE_NUMBER_TEXTFIELD_LENGTH)
+                textField.text = String(str[..<index])
                 return false
             }
         }
@@ -368,7 +369,7 @@ class SignupViewController: BaseYibbyViewController,
     
     // MARK: - AKFViewControllerDelegate extension
     
-    func viewController(_ viewController: UIViewController!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
+    func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
         // login success
         DDLogVerbose("Login Success")
         
@@ -381,7 +382,7 @@ class SignupViewController: BaseYibbyViewController,
                         phoneNumberi: self.formattedPhoneNumber!, passwordi: self.passwordOutlet.text!)
     }
     
-    func viewController(_ viewController: UIViewController!, didFailWithError error: Error!) {
+    func viewController(_ viewController: (UIViewController & AKFViewController)!, didFailWithError error: Error!) {
         // login failed
         DDLogVerbose("\(viewController) did fail with error: \(error)")
         accountKit.logOut()

@@ -7,7 +7,7 @@ PODS:
     - Alamofire (~> 4.1)
     - ObjectMapper (~> 3.0)
   - AMPopTip (3.2.1)
-  - BaasBoxSDK (0.9.16)
+  - BaasBoxSDK (0.9.17)
   - BButton (4.0.2)
   - Braintree (4.15.0):
     - Braintree/Card (= 4.15.0)
@@ -133,6 +133,7 @@ PODS:
   - NVActivityIndicatorView/Presenter (4.2.1)
   - ObjectMapper (3.1.0)
   - OpenInGoogleMaps (0.1.0)
+  - PasswordTextField (1.1.0)
   - PhoneNumberKit (2.1.0):
     - PhoneNumberKit/PhoneNumberKitCore (= 2.1.0)
     - PhoneNumberKit/UIKit (= 2.1.0)
@@ -194,6 +195,7 @@ DEPENDENCIES:
   - Nimble-Snapshots
   - NVActivityIndicatorView
   - OpenInGoogleMaps
+  - PasswordTextField
   - PhoneNumberKit
   - PINRemoteImage
   - Presentr
@@ -205,6 +207,72 @@ DEPENDENCIES:
   - TextFieldEffects
   - TTRangeSlider
   - XLPagerTabStrip
+
+SPEC REPOS:
+  https://bitbucket.org/kishykumar/yibbypods:
+    - BaasBoxSDK
+  https://github.com/cocoapods/specs.git:
+    - AccountKit
+    - ActionSheetPicker-3.0
+    - AIFlatSwitch
+    - Alamofire
+    - AlamofireObjectMapper
+    - AMPopTip
+    - BButton
+    - Braintree
+    - Cache
+    - CocoaLumberjack
+    - Cosmos
+    - Crashlytics
+    - DGRunkeeperSwitch
+    - DZNEmptyDataSet
+    - Fabric
+    - FLAnimatedImage
+    - FoldingCell
+    - Font-Awesome-Swift
+    - GGLInstanceID
+    - Google
+    - GoogleAppUtilities
+    - GoogleAuthUtilities
+    - GoogleCloudMessaging
+    - GoogleInterchangeUtilities
+    - GoogleIPhoneUtilities
+    - GoogleMaps
+    - GoogleNetworkingUtilities
+    - GooglePlacePicker
+    - GooglePlaces
+    - GoogleSignIn
+    - GoogleSymbolUtilities
+    - GoogleUtilities
+    - Hue
+    - ImagePicker
+    - Imaginary
+    - iOSSnapshotTestCase
+    - IQKeyboardManagerSwift
+    - ISHPullUp
+    - JTCalendar
+    - LaunchScreen
+    - Lightbox
+    - LTMorphingLabel
+    - M13ProgressSuite
+    - MBProgressHUD
+    - MMDrawerController
+    - Nimble
+    - Nimble-Snapshots
+    - NVActivityIndicatorView
+    - ObjectMapper
+    - OpenInGoogleMaps
+    - PasswordTextField
+    - PhoneNumberKit
+    - PINCache
+    - PINRemoteImage
+    - Presentr
+    - Quick
+    - SwiftKeychainWrapper
+    - SwiftyJSON
+    - TextFieldEffects
+    - TTRangeSlider
+    - XLPagerTabStrip
 
 EXTERNAL SOURCES:
   Spring:
@@ -228,7 +296,7 @@ SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   AlamofireObjectMapper: 5fafc816351cbbc0d486611aaeba7461c0cbad49
   AMPopTip: 31251008f2c00cbc0a3d2b18520f277c5b5ab4da
-  BaasBoxSDK: 2a9eb4b87f77f8a20ade4b75f4ad80899ea05fc8
+  BaasBoxSDK: 808108361294303536cb9098f2bf6c028b271201
   BButton: ab0f2ed3b998ae73c5188b57d270d81e4a1eeb27
   Braintree: 5f10816f455ffd79c411e6d22a177846971f3677
   Cache: f28f8dd64b632155aabf9b3906b036a659048251
@@ -273,11 +341,12 @@ SPEC CHECKSUMS:
   NVActivityIndicatorView: 8068ba3ad39cb44cbaab25d89ff2546b3f092681
   ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
   OpenInGoogleMaps: 60dd887d2e2b2149166a03bd6dab1d4478a7d3e8
+  PasswordTextField: 35ee7f34448c3de061136cf2556a967f1a287476
   PhoneNumberKit: 62003f40ff75315fd3738286558bc365365ac222
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
   PINRemoteImage: 4ac4011c5caefd6befd99758e09becede05d3226
   Presentr: 797ae6ec8904eaba4ec58a4c2065bd66e31569ea
-  Quick: '03278013f71aa05fe9ecabc94fbcc6835f1ee76f'
+  Quick: 03278013f71aa05fe9ecabc94fbcc6835f1ee76f
   Spring: 3c7666eccefdeb87140008dc81043f89f8dbb787
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   SwiftValidator: 25ded5ca1f10c05adf57f6ac82a72d28ac8d91af
@@ -286,6 +355,6 @@ SPEC CHECKSUMS:
   TTRangeSlider: 78188bea83f6471a06f75adbc88da5e990baeafe
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: 897df78a37370951fada428318ba90e65ece618b
+PODFILE CHECKSUM: a0f68b9f113dfb8ccda7fc1657595f44c6a05da1
 
-COCOAPODS: 1.2.0.beta.1
+COCOAPODS: 1.5.3

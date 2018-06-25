@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '15B05D20664D59CB66AB7D681198E1ED'
-               BlueprintName = 'SwiftValidator'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SwiftValidator.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CE5CA1FDD9FFF4BB1787C84C64E180E9"
+               BlueprintName = "SwiftValidator"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "SwiftValidator.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

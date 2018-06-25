@@ -19,10 +19,6 @@ public enum AppInitReturnCode: Int {
     case loginError
 }
 
-public struct AppInitNotifications {
-    static let initStatus = TypedNotification<AppInitReturnCode>(name: "com.Yibby.AppInit.Init")
-}
-
 class SplashViewController: BaseYibbyViewController {
 
     // MARK: Properties
@@ -39,59 +35,12 @@ class SplashViewController: BaseYibbyViewController {
     var launchScreenVC: LaunchScreenViewController?
     var snapshot: UIImage?
     var imageView: UIImageView?
-    fileprivate var initStatusObserver: NotificationObserver?
 
     // MARK: view functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initSplash()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        commonInit()
-    }
-    
-    private func commonInit() {
-        DDLogVerbose("Fired init")
-        setupNotificationObservers()
-    }
-    
-    deinit {
-        DDLogVerbose("Fired deinit")
-        removeNotificationObservers()
-    }
-    
-    fileprivate func setupNotificationObservers() {
-        
-        initStatusObserver = NotificationObserver(notification: AppInitNotifications.initStatus) { [unowned self] returnCode in
-            DDLogVerbose("initStatusObserver status: \(returnCode)")
-            
-            switch (returnCode) {
-            case .error:
-                self.pushRegistrationErrorCallback()
-                break
-                
-            case .success:
-                self.pushRegistrationSuccessCallback()
-                break
-                
-            case .loginError:
-                self.pushLoginErrorCallback()
-                break
-            }
-        }
-    }
-
-    fileprivate func removeNotificationObservers() {
-        initStatusObserver?.removeObserver()
-        initStatusObserver = nil // reset initStatusObserver to prevent a second removeObserver call
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,36 +56,7 @@ class SplashViewController: BaseYibbyViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-//    func processSyncState (_ responseData: AnyObject) {
-//        
-//        return;
-//        
-//        let jsonStatus = responseData[STATUS_JSON_FIELD_NAME]
-//        
-//        let jsonBid = responseData[BID_JSON_FIELD_NAME]
-//        
-//        guard let jsonBidString = jsonBid as? String else {
-//            DDLogVerbose("Returning because of JSON bid string: \(jsonBid)")
-//            return;
-//        }
-//        
-//        if let dataFromString = jsonBidString.data(using: .utf8, allowLossyConversion: false) {
-//            let topJson = JSON(data: dataFromString)
-//            if let topBidJson = topJson[BID_JSON_FIELD_NAME].string {
-//                
-//                if let bidData = topBidJson.data(using: String.Encoding.utf8) {
-//                    let bidJson = JSON(data: bidData)
-//                    
-//                    switch bidJson[BID_JSON_FIELD_NAME] as! String {
-//                    default:
-//                        break
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
+
     func doSetup () {
         DDLogVerbose("Called");
 
@@ -166,8 +86,23 @@ class SplashViewController: BaseYibbyViewController {
         if client.isAuthenticated() {
             DDLogVerbose("User already authenticated");
             
-            appDelegate.initializeApp()
-            
+            // Do the initialization on a background thread, not Main thread.
+            DispatchQueue.global(qos: .userInitiated).async {
+                
+                let error = appDelegate.initializeApp()
+                DispatchQueue.main.async {
+                    if (error != nil) {
+                        
+                        if let myNSError = error as NSError? {
+                            
+                            DDLogVerbose("Error in webRequest1: \(String(describing: myNSError))")
+                            self.initLoginErrorCallback()
+                        }
+                    } else {
+                        self.initSuccessCallback()
+                    }
+                }
+            }
         } else {
             DDLogVerbose("User NOT authenticated");
             
@@ -180,6 +115,27 @@ class SplashViewController: BaseYibbyViewController {
         }
     }
     // MARK: Helpers
+    
+    func initSuccessCallback() {
+        DDLogDebug("initSuccessCallback Called")
+        removeSplash()
+    }
+    
+    func initErrorCallback() {
+        
+        let v: UIView = self.launchScreenVC!.view!
+        let label: UITextView = v.viewWithTag(ERROR_TEXTVIEW_TAG) as! UITextView
+        label.isHidden = false
+    }
+    
+    func initLoginErrorCallback() {
+        removeSplash()
+        
+        let signupStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.SignUp,
+                                                          bundle: nil)
+        
+        self.present(signupStoryboard.instantiateInitialViewController()!, animated: false, completion: nil)
+    }
     
     func showLaunchScreen() {
         let v: UIView = self.launchScreenVC!.view!
@@ -217,9 +173,6 @@ class SplashViewController: BaseYibbyViewController {
         // Initialize the status bar before we show the first screen
         setStatusBar()
         
-        // remove the notification observers
-        self.removeNotificationObservers()
-        
         let v: UIView = self.launchScreenVC!.view!
         UIView.animate(withDuration: 1.0, delay: 1.0, options: .curveEaseOut,
                        animations: {() -> Void in
@@ -230,30 +183,6 @@ class SplashViewController: BaseYibbyViewController {
             v.removeFromSuperview()
         }
         )
-    }
-    
-    func pushRegistrationSuccessCallback() {
-        DDLogDebug("pushRegistrationSuccessCallback Called")
-        removeSplash()
-    }
-    
-    func pushRegistrationErrorCallback() {
-        
-        let v: UIView = self.launchScreenVC!.view!
-        let label: UITextView = v.viewWithTag(ERROR_TEXTVIEW_TAG) as! UITextView
-        label.isHidden = false
-        
-        // earlier we were removing the splash, now just showing the error
-        //        removeSplash()
-    }
-    
-    func pushLoginErrorCallback() {
-        removeSplash()
-        
-        let signupStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.SignUp,
-                                                          bundle: nil)
-        
-        self.present(signupStoryboard.instantiateInitialViewController()!, animated: false, completion: nil)
     }
     
     func setStatusBar() {

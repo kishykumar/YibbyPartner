@@ -17,8 +17,6 @@ import CocoaLumberjack
 
 enum YBMessageType: String {
     case bid = "BID"
-    case driverEnRoute = "DRIVER_EN_ROUTE"
-    case offerRejected = "OFFER_REJECTED"
     case rideCancelled = "RIDE_CANCELLED"
 }
 
@@ -138,11 +136,13 @@ open class PushController: NSObject, PushControllerProtocol {
         
         let messageTypeStr = (notification[MESSAGE_JSON_FIELD_NAME] as! String)
         let messageType: YBMessageType = YBMessageType(rawValue: messageTypeStr)!
-        let bid = Bid(JSONString: jsonCustomString)!
 
         if (messageType == YBMessageType.bid) {
+            
             DDLogVerbose("BID message RCVD")
             
+            let bid = Bid(JSONString: jsonCustomString)!
+
             if (YBClient.sharedInstance().isOngoingBid()) {
                 DDLogDebug("Ongoing bid. Discarded: \(notification[MESSAGE_JSON_FIELD_NAME] as! String)")
                 
@@ -156,53 +156,22 @@ open class PushController: NSObject, PushControllerProtocol {
             
             postNotification(BidNotifications.bidReceived, value: bid)
 
-        } else if (messageType == YBMessageType.offerRejected) {
-            DDLogDebug("REJECT RCVD")
+        } else if (messageType == YBMessageType.rideCancelled) {
+            DDLogDebug("RIDE_CANCELLED_MESSAGE_TYPE")
+            let ride = Ride(JSONString: jsonCustomString)!
             
-            if (!YBClient.sharedInstance().isSameAsOngoingBid(bidId: bid.id)) {
-                DDLogDebug("Not same as ongoingBid. Discarded: \(notification[MESSAGE_JSON_FIELD_NAME] as! String)")
+            if (!YBClient.sharedInstance().isSameAsOngoingBid(bidId: ride.bidId)) {
+                DDLogDebug("Ongoing bid. Discarded: \(notification[MESSAGE_JSON_FIELD_NAME] as! String)")
                 
                 if let ongoingBid = YBClient.sharedInstance().bid {
-                    DDLogDebug("Ongoingbid is: \(String(describing: ongoingBid.id)). Incoming is \(String(describing: bid.id))")
+                    DDLogDebug("Ongoingbid is: \(String(describing: ongoingBid.id)). Incoming is \(String(describing: ride.bidId))")
                 } else {
-                    DDLogDebug("Ongoingbid is: nil. Incoming is \(String(describing: bid.id))")
+                    DDLogDebug("Ongoingbid is: nil. Incoming is \(String(describing: ride.bidId))")
                 }
                 return;
             }
             
-            postNotification(BidNotifications.offerRejected, value: bid)
-            
-        } else if (messageType == YBMessageType.driverEnRoute ||
-                    messageType == YBMessageType.rideCancelled) {
-
-            switch messageType {
-            case YBMessageType.driverEnRoute:
-                DDLogDebug("DRIVER EN ROUTE")
-                
-                let ride = Ride(JSONString: jsonCustomString)!
-                if (!YBClient.sharedInstance().isSameAsOngoingBid(bidId: ride.bidId)) {
-                    
-                    if let ongoingBid = YBClient.sharedInstance().bid {
-                        DDLogDebug("Ongoingbid is: \(String(describing: ongoingBid.id)). Incoming is \(String(describing: ride.bidId))")
-                    } else {
-                        DDLogDebug("Ongoingbid is: nil. Incoming is \(String(describing: ride.bidId))")
-                    }
-                    return;
-                }
-                
-                if (YBClient.sharedInstance().status == .offerSent) {
-                    postNotification(RideNotifications.driverEnRoute, value: ride)
-                }
-                
-            case YBMessageType.rideCancelled:
-                // TODO: HANDLE THIS
-                DDLogDebug("RIDE CANCELLED MESSAGE RCVD")
-                
-                break
-            default:
-                DDLogError("Weird message received during Bid1: \(messageType)")
-                break
-            }
+            postNotification(RideNotifications.rideCancelled, value: ride)
         }
     }
 

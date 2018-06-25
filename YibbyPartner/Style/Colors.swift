@@ -30,7 +30,8 @@ private struct YibbyColors {
     static let textFieldTextColor1: UIColor = UIColor.black
     static let textFieldBackgroundColor1: UIColor = UIColor.white
     
-    static let appDarkGreen1: UIColor = UIColor(netHex: 0x2ECC71)
+    static let appDarkGreen1: UIColor = UIColor(netHex: 0x28BE45)
+    static let appDarkGreen2: UIColor = UIColor(netHex: 0x2ECC71)
     
     static let navyblue1: UIColor = UIColor(netHex: 0x000080)
     
