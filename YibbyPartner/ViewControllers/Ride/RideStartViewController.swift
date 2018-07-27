@@ -132,11 +132,13 @@ class RideStartViewController: BaseYibbyViewController {
     @IBAction func startNavAction(_ sender: AnyObject) {
         
         if (controllerState == RideViewControllerState.driverEnRoute) {
-            MapService.sharedInstance().openDirectionsInGoogleMaps((self.bid.pickupLocation?.latitude)!,
-                                                                   lng: (self.bid.pickupLocation?.longitude)!)
+           
+            MapService.sharedInstance().openInGoogleMap(lat: (self.bid.pickupLocation?.latitude)!, long: (self.bid.pickupLocation?.longitude)!)
+            //MapService.sharedInstance().openDirectionsInGoogleMaps((self.bid.pickupLocation?.latitude)!,
+                                                                   //lng: (self.bid.pickupLocation?.longitude)!)
         } else if (controllerState == RideViewControllerState.rideStart) {
-            MapService.sharedInstance().openDirectionsInGoogleMaps((self.bid.dropoffLocation?.latitude)!,
-                                                                   lng: (self.bid.dropoffLocation?.longitude)!)
+            //MapService.sharedInstance().openDirectionsInGoogleMaps((self.bid.dropoffLocation?.latitude)!,
+                                                                   //lng: (self.bid.dropoffLocation?.longitude)!)
         }
     }
     

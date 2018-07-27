@@ -113,18 +113,18 @@ open class YibbyMapMarker: UIView {
         if (type == .pickup) {
         
             infoWindow.placeholder = InterfaceString.Ride.Pickup
-            infoWindow.borderColor = UIColor.red
-            infoWindow.titleTextColour = UIColor.red
-            
-            label.textColor = UIColor.red
-            
-        } else if (type == .dropoff) {
-            
-            infoWindow.placeholder = InterfaceString.Ride.Dropoff
             infoWindow.borderColor = UIColor.appDarkGreen1()
             infoWindow.titleTextColour = UIColor.appDarkGreen1()
             
             label.textColor = UIColor.appDarkGreen1()
+            
+        } else if (type == .dropoff) {
+            
+            infoWindow.placeholder = InterfaceString.Ride.Dropoff
+            infoWindow.borderColor = UIColor.red
+            infoWindow.titleTextColour = UIColor.red
+            
+            label.textColor = UIColor.red
             
         }
 
