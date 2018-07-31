@@ -32,11 +32,14 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
     @IBOutlet var emailEditBtnOutlet: UIButton!
     
     @IBOutlet weak var errorLabelOutlet: UILabel!
+    
+    @IBOutlet weak var mapSelectionSegmentControl: UISegmentedControl!
     @IBOutlet weak var vehicleImageViewOutlet: UIImageView!
     @IBOutlet weak var changeVehicleButtonOutlet: UIButton!
     @IBOutlet weak var vehicleMakeModelLabelOutlet: YibbyPaddingLabel!
     @IBOutlet weak var licensePlateLabelOutlet: YibbyPaddingLabel!
     @IBOutlet weak var vehicleDetailsViewOutlet: YBBorderedUIView!
+    
     
     var emailEditInProgress: Bool = false
     
@@ -156,6 +159,9 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
         vehicleImageViewOutlet.layer.borderColor = UIColor.appDarkGreen1().cgColor
         vehicleImageViewOutlet.layer.borderWidth = 1.0
         vehicleImageViewOutlet.layer.cornerRadius = 20.0
+        
+        //Set segmented control to the map used for navigation
+        setMapSelectionSegmentedIndex()
         
         emailAddress.removeFormatting()
         
@@ -319,6 +325,38 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
         
         setProfilePicture()
     }
+    
+    func setMapSelectionSegmentedIndex(){
+        let mapForNav = Defaults.getDefaultMap()
+        switch mapForNav {
+        case 0:
+            mapSelectionSegmentControl.selectedSegmentIndex = 0
+        case 1:
+            mapSelectionSegmentControl.selectedSegmentIndex = 1
+        case 2:
+            mapSelectionSegmentControl.selectedSegmentIndex = 2
+        default:
+            mapSelectionSegmentControl.selectedSegmentIndex = 0
+        }
+    }
+    
+    @IBAction func mapSelectionChanged(_ sender: UISegmentedControl) {
+        switch mapSelectionSegmentControl.selectedSegmentIndex {
+        case 0:
+            Defaults.setDefaultMap(value: 0)
+            DDLogVerbose("google maps selected")
+        case 1:
+            Defaults.setDefaultMap(value: 1)
+             DDLogVerbose("apple maps selected")
+        case 2:
+            Defaults.setDefaultMap(value: 2)
+             DDLogVerbose("waze maps selected")
+        default:
+            Defaults.setDefaultMap(value: 0)
+             DDLogVerbose("google maps selected")
+        }
+    }
+    
 }
 
 extension SettingsViewController: ImagePickerDelegate {
@@ -396,6 +434,8 @@ extension SettingsViewController: ImagePickerDelegate {
         imagePickerController.dismiss(animated: true, completion: nil)
     }
 }
+
+
 
 extension String {
     public func toPhoneNumber() -> String {

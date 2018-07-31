@@ -48,6 +48,7 @@ class RideStartViewController: BaseYibbyViewController {
     var dropoffMarker: GMSMarker?
     
     let GMS_DEFAULT_CAMERA_ZOOM: Float = 14.0
+    
 
     let messageComposer = MessageComposer()
 
@@ -132,11 +133,34 @@ class RideStartViewController: BaseYibbyViewController {
     @IBAction func startNavAction(_ sender: AnyObject) {
         
         if (controllerState == RideViewControllerState.driverEnRoute) {
-           
-            MapService.sharedInstance().openInGoogleMap(lat: (self.bid.pickupLocation?.latitude)!, long: (self.bid.pickupLocation?.longitude)!)
-            //MapService.sharedInstance().openDirectionsInGoogleMaps((self.bid.pickupLocation?.latitude)!,
-                                                                   //lng: (self.bid.pickupLocation?.longitude)!)
+           let mapForNavValue = Defaults.getDefaultMap()
+            switch mapForNavValue{
+            case 0:
+                MapService.sharedInstance().openInGoogleMap(lat: (self.bid.pickupLocation?.latitude)!, long: (self.bid.pickupLocation?.longitude)!)
+            case 1:
+                MapService.sharedInstance().openInAppleMap(lat: (self.bid.pickupLocation?.latitude)!, long: (self.bid.pickupLocation?.longitude)!)
+                
+            case 2:
+                MapService.sharedInstance().openInWaze(lat: (self.bid.pickupLocation?.latitude)!, long: (self.bid.pickupLocation?.longitude)!)
+                
+            default:
+                MapService.sharedInstance().openInGoogleMap(lat: (self.bid.pickupLocation?.latitude)!, long: (self.bid.pickupLocation?.longitude)!)
+            }
+            
         } else if (controllerState == RideViewControllerState.rideStart) {
+            let mapForNavValue = Defaults.getDefaultMap()
+            switch mapForNavValue{
+            case 0:
+                MapService.sharedInstance().openInGoogleMap(lat: (self.bid.dropoffLocation?.latitude)!, long: (self.bid.dropoffLocation?.longitude)!)
+            case 1:
+                MapService.sharedInstance().openInAppleMap(lat: (self.bid.dropoffLocation?.latitude)!, long: (self.bid.dropoffLocation?.longitude)!)
+                
+            case 2:
+                MapService.sharedInstance().openInWaze(lat: (self.bid.dropoffLocation?.latitude)!, long: (self.bid.dropoffLocation?.longitude)!)
+                
+            default:
+                MapService.sharedInstance().openInGoogleMap(lat: (self.bid.dropoffLocation?.latitude)!, long: (self.bid.dropoffLocation?.longitude)!)
+            }
             //MapService.sharedInstance().openDirectionsInGoogleMaps((self.bid.dropoffLocation?.latitude)!,
                                                                    //lng: (self.bid.dropoffLocation?.longitude)!)
         }

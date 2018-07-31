@@ -90,6 +90,7 @@
 		1228A0B920317C1600AF6801 /* YBRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1228A0B620317C1500AF6801 /* YBRoundedView.swift */; };
 		1228A0BA20317C1600AF6801 /* InitialsImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1228A0B720317C1500AF6801 /* InitialsImageView.swift */; };
 		1228A0BB20317C1600AF6801 /* SwiftyAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1228A0B820317C1500AF6801 /* SwiftyAvatar.swift */; };
+		1234030F210F122D00B4CFDB /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1234030E210F122D00B4CFDB /* UserDefaults.swift */; };
 		123524961C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
 		123524971C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
 		123D8D951FE6FE5700C312C9 /* FundingInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123D8D941FE6FE5700C312C9 /* FundingInformationViewController.swift */; };
@@ -282,6 +283,7 @@
 		1228A0B620317C1500AF6801 /* YBRoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBRoundedView.swift; sourceTree = "<group>"; };
 		1228A0B720317C1500AF6801 /* InitialsImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialsImageView.swift; sourceTree = "<group>"; };
 		1228A0B820317C1500AF6801 /* SwiftyAvatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyAvatar.swift; sourceTree = "<group>"; };
+		1234030E210F122D00B4CFDB /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		123524951C89475D004307EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		123D8D941FE6FE5700C312C9 /* FundingInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundingInformationViewController.swift; sourceTree = "<group>"; };
 		12439387201EFEC50057DA63 /* DispatchQueueExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtensions.swift; sourceTree = "<group>"; };
@@ -667,6 +669,7 @@
 				1211FF031D5991D800AD9591 /* ActivityIndicatorUtil.swift */,
 				125B0C071E2CDFDC00534359 /* TemporaryCache.swift */,
 				126EC5531F73A67F0040704F /* MessageComposer.swift */,
+				1234030E210F122D00B4CFDB /* UserDefaults.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1533,6 +1536,7 @@
 				12000C941F5CFF30004B6078 /* YBMenuButton.swift in Sources */,
 				125B0C041E2C4B2D00534359 /* ImageService.swift in Sources */,
 				12000C7F1F5CF57B004B6078 /* NSObjectClassName.swift in Sources */,
+				1234030F210F122D00B4CFDB /* UserDefaults.swift in Sources */,
 				1201B7D01D23B4AC00A7EEAF /* Ride.swift in Sources */,
 				12439388201EFEC50057DA63 /* DispatchQueueExtensions.swift in Sources */,
 				1201B7D31D23B4AC00A7EEAF /* MapService.swift in Sources */,
