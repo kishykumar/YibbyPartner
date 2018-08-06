@@ -57,6 +57,9 @@ open class MapService: NSObject {
         if UIApplication.shared.canOpenURL(URL(string:url)!){
             UIApplication.shared.open(URL(string:"comgooglemaps://?saddr=&daddr=\(lat),\(long)&zoom=10&directionsmode=driving")!, options: [:], completionHandler: nil)
         }
+        else{
+            openInAppleMap(lat: lat, long: long)
+        }
     }
     
     func openInAppleMap(lat: CLLocationDegrees, long: CLLocationDegrees){
@@ -70,6 +73,9 @@ open class MapService: NSObject {
         let url = "waze://"
         if UIApplication.shared.canOpenURL(URL(string:url)!){
             UIApplication.shared.open(URL(string:"waze://?ll=\(lat),\(long)&navigate=yes")!, options: [:], completionHandler: nil)
+        }
+        else{
+            openInAppleMap(lat: lat, long: long)
         }
     }
     

@@ -131,36 +131,13 @@ class RideStartViewController: BaseYibbyViewController {
     }
     
     @IBAction func startNavAction(_ sender: AnyObject) {
-        
+        let mapForNavValue = Defaults.getDefaultNavigationMap()
         if (controllerState == RideViewControllerState.driverEnRoute) {
-           let mapForNavValue = Defaults.getDefaultMap()
-            switch mapForNavValue{
-            case 0:
-                MapService.sharedInstance().openInGoogleMap(lat: (self.bid.pickupLocation?.latitude)!, long: (self.bid.pickupLocation?.longitude)!)
-            case 1:
-                MapService.sharedInstance().openInAppleMap(lat: (self.bid.pickupLocation?.latitude)!, long: (self.bid.pickupLocation?.longitude)!)
-                
-            case 2:
-                MapService.sharedInstance().openInWaze(lat: (self.bid.pickupLocation?.latitude)!, long: (self.bid.pickupLocation?.longitude)!)
-                
-            default:
-                MapService.sharedInstance().openInGoogleMap(lat: (self.bid.pickupLocation?.latitude)!, long: (self.bid.pickupLocation?.longitude)!)
-            }
+            startNavigation(mapForNavValue: mapForNavValue, lat: (self.bid.pickupLocation?.latitude)!, long: (self.bid.pickupLocation?.longitude)!)
             
         } else if (controllerState == RideViewControllerState.rideStart) {
-            let mapForNavValue = Defaults.getDefaultMap()
-            switch mapForNavValue{
-            case 0:
-                MapService.sharedInstance().openInGoogleMap(lat: (self.bid.dropoffLocation?.latitude)!, long: (self.bid.dropoffLocation?.longitude)!)
-            case 1:
-                MapService.sharedInstance().openInAppleMap(lat: (self.bid.dropoffLocation?.latitude)!, long: (self.bid.dropoffLocation?.longitude)!)
-                
-            case 2:
-                MapService.sharedInstance().openInWaze(lat: (self.bid.dropoffLocation?.latitude)!, long: (self.bid.dropoffLocation?.longitude)!)
-                
-            default:
-                MapService.sharedInstance().openInGoogleMap(lat: (self.bid.dropoffLocation?.latitude)!, long: (self.bid.dropoffLocation?.longitude)!)
-            }
+            startNavigation(mapForNavValue: mapForNavValue, lat: (self.bid.dropoffLocation?.latitude)!, long: (self.bid.dropoffLocation?.longitude)!)
+            
             //MapService.sharedInstance().openDirectionsInGoogleMaps((self.bid.dropoffLocation?.latitude)!,
                                                                    //lng: (self.bid.dropoffLocation?.longitude)!)
         }
@@ -605,4 +582,18 @@ class RideStartViewController: BaseYibbyViewController {
         gmsMapViewOutlet.moveCamera(update)
         
     }
+    
+    fileprivate func startNavigation(mapForNavValue:Int, lat:CLLocationDegrees, long:CLLocationDegrees){
+        switch mapForNavValue{
+        case 0:
+            MapService.sharedInstance().openInGoogleMap(lat: lat, long: long)
+        case 1:
+            MapService.sharedInstance().openInAppleMap(lat: lat, long: long)
+        case 2:
+            MapService.sharedInstance().openInWaze(lat: lat, long: long)
+        default:
+            MapService.sharedInstance().openInGoogleMap(lat: lat, long: long)
+        }
+    }
+    
 }

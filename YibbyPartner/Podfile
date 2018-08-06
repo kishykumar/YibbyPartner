@@ -31,7 +31,7 @@ def shared_pods
     pod 'CocoaLumberjack/Swift'
     pod 'LaunchScreen'
     pod 'NVActivityIndicatorView'
-    pod 'OpenInGoogleMaps'
+    pod 'OpenInGoogleMaps' 
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'JTCalendar'

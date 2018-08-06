@@ -327,7 +327,7 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
     }
     
     func setMapSelectionSegmentedIndex(){
-        let mapForNav = Defaults.getDefaultMap()
+        let mapForNav = Defaults.getDefaultNavigationMap()
         switch mapForNav {
         case 0:
             mapSelectionSegmentControl.selectedSegmentIndex = 0
@@ -343,16 +343,16 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
     @IBAction func mapSelectionChanged(_ sender: UISegmentedControl) {
         switch mapSelectionSegmentControl.selectedSegmentIndex {
         case 0:
-            Defaults.setDefaultMap(value: 0)
+            Defaults.setDefaultNavigationMap(value: 0)
             DDLogVerbose("google maps selected")
         case 1:
-            Defaults.setDefaultMap(value: 1)
+            Defaults.setDefaultNavigationMap(value: 1)
              DDLogVerbose("apple maps selected")
         case 2:
-            Defaults.setDefaultMap(value: 2)
+            Defaults.setDefaultNavigationMap(value: 2)
              DDLogVerbose("waze maps selected")
         default:
-            Defaults.setDefaultMap(value: 0)
+            Defaults.setDefaultNavigationMap(value: 0)
              DDLogVerbose("google maps selected")
         }
     }
