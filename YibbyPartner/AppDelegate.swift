@@ -42,7 +42,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
 
     fileprivate let GOOGLE_API_KEY_IOS: String = "AIzaSyAg47Gp0GvI6myz-sZZfKJ1fPtx0wUBMjU"
     fileprivate let BAASBOX_APPCODE: String = "1234567890"
-    fileprivate let BAASBOX_URL = "http://custom-env.cjamdz6ejx.us-west-1.elasticbeanstalk.com"
+
+    fileprivate var BAASBOX_URL: String {
+        return
+            ((self.isSandbox) ?
+                ("http://custom-env.cjamdz6ejx.us-west-1.elasticbeanstalk.com") :
+                ("http://api.yibbyapp.com"))
+    }
+    
     //fileprivate let BAASBOX_URL = "http://42f3eb3a.ngrok.io"
 
     var centerContainer: MMDrawerController?

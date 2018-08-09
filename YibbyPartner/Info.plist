@@ -47,7 +47,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>12</string>
+	<string>13</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -80,10 +80,10 @@
 	<string>Yibby Partner needs access to your camera for you to be able to take images.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Only when you are Online, Yibby Partner tracks your location in the background to schedule you to the nearest rider. Learn more in our Privacy Statement.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Yibby Partner needs access to your photo library for you to be able to attach images.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Yibby Partner needs access to the microphone to be able to attach voice notes.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Yibby Partner needs access to your photo library for you to be able to attach images.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome.ttf</string>
