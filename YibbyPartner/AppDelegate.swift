@@ -16,7 +16,8 @@ import Crashlytics
 import IQKeyboardManagerSwift
 //import Firebase
 import ObjectMapper
- 
+import Instabug
+
 // TODO: 
 // 1. Bug: The timer in offer view controller shows up less on one of the phones
 // 2. Stop location updates in the background if no driver activity for the last 10 minutes
@@ -27,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
 
     var window: UIWindow?
 
-    fileprivate var isSandbox = true
+    fileprivate var isSandbox = false
 
     fileprivate var connectedToGCM = false
     fileprivate var subscribedToTopic = false
@@ -41,8 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
 
     fileprivate let GOOGLE_API_KEY_IOS: String = "AIzaSyAg47Gp0GvI6myz-sZZfKJ1fPtx0wUBMjU"
     fileprivate let BAASBOX_APPCODE: String = "1234567890"
-    //fileprivate let BAASBOX_URL = "http://custom-env.cjamdz6ejx.us-west-1.elasticbeanstalk.com"
-    fileprivate let BAASBOX_URL = "http://b21de12e.ngrok.io"
+    fileprivate let BAASBOX_URL = "http://custom-env.cjamdz6ejx.us-west-1.elasticbeanstalk.com"
+    //fileprivate let BAASBOX_URL = "http://42f3eb3a.ngrok.io"
 
     var centerContainer: MMDrawerController?
     var pushController: PushController =  PushController()
@@ -56,10 +57,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     fileprivate var handlePushStatusCodeBlock: ((_ isSuccess: Bool, _ error: Error?) -> Void)?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-                
-        // setup Crashlytics
+
+        // Setup Crashlytics
         Fabric.with([Crashlytics.self])
 
+        // Setup Instabug
+        Instabug.start(withToken: "557f3fb01b544e77a87b9ed4e3906411", invocationEvent: .shake)
+        
         // Configure Baasbox
         BaasBox.setBaseURL(BAASBOX_URL, appCode: BAASBOX_APPCODE)
         
