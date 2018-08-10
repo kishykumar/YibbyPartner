@@ -13,11 +13,11 @@ open class Defaults{
     static let defaults = UserDefaults.standard
     static let MAP_FOR_NAVIGATION_STRING = "mapForNav"
     
-    static func setDefaultNavigationMap(value:Int){
+    static func setDefaultNavigationApp(value:Int){
         defaults.set(value, forKey: MAP_FOR_NAVIGATION_STRING)
     }
     
-    static func getDefaultNavigationMap() -> Int{
+    static func getDefaultNavigationApp() -> Int{
         return defaults.integer(forKey: MAP_FOR_NAVIGATION_STRING)
     }
 }

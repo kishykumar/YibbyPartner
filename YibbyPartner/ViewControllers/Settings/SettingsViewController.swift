@@ -23,6 +23,9 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
     
     // MARK: - Properties
     
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var settingsScrollOutlet: UIScrollView!
+    
     @IBOutlet weak var emailAddress: YBTextField!
     @IBOutlet weak var phoneNo: UITextField!
     @IBOutlet weak var profileImageViewOutlet: SwiftyAvatar!
@@ -102,7 +105,6 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
         setupUI()
         setupDelegates()
@@ -115,6 +117,11 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
         
         // TODO: bug in ImagePicker: they remove the status bar :(
         UIApplication.shared.setStatusBarHidden(false, with: .fade)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        settingsScrollOutlet.contentSize = CGSize(width: settingsScrollOutlet.contentSize.width, height: 800)
     }
     
     func setupImagePicker() {
@@ -138,6 +145,7 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
     fileprivate func setupUI() {
         
         setupBackButton()
+        settingsScrollOutlet.contentSize = CGSize(width: settingsScrollOutlet.contentSize.width, height: 2000)
         
         VW.layer.borderColor = UIColor.appDarkGreen1().cgColor
         vehicleDetailsViewOutlet.layer.borderColor = UIColor.appDarkGreen1().cgColor
@@ -327,7 +335,7 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
     }
     
     func setMapSelectionSegmentedIndex(){
-        let mapForNav = Defaults.getDefaultNavigationMap()
+        let mapForNav = Defaults.getDefaultNavigationApp()
         switch mapForNav {
         case 0:
             mapSelectionSegmentControl.selectedSegmentIndex = 0
@@ -343,16 +351,16 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
     @IBAction func mapSelectionChanged(_ sender: UISegmentedControl) {
         switch mapSelectionSegmentControl.selectedSegmentIndex {
         case 0:
-            Defaults.setDefaultNavigationMap(value: 0)
+            Defaults.setDefaultNavigationApp(value: 0)
             DDLogVerbose("google maps selected")
         case 1:
-            Defaults.setDefaultNavigationMap(value: 1)
+            Defaults.setDefaultNavigationApp(value: 1)
              DDLogVerbose("apple maps selected")
         case 2:
-            Defaults.setDefaultNavigationMap(value: 2)
+            Defaults.setDefaultNavigationApp(value: 2)
              DDLogVerbose("waze maps selected")
         default:
-            Defaults.setDefaultNavigationMap(value: 0)
+            Defaults.setDefaultNavigationApp(value: 0)
              DDLogVerbose("google maps selected")
         }
     }

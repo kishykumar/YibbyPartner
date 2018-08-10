@@ -88,6 +88,7 @@ public struct InterfaceString {
         static let CancelReason = NSLocalizedString("Cancel Reason", comment: "Cancel Reason")
         static let PlansChangedReason = NSLocalizedString("Plans Changed", comment: "PlansChangedReason")
         static let EmergencyReason = NSLocalizedString("Emergency", comment: "EmergencyReason")
+        static let Confirm = NSLocalizedString("Confirm", comment: "Confirmation")
     }
     
     public struct TableSections {
