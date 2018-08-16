@@ -174,4 +174,22 @@ class RideDetailViewController: BaseYibbyViewController {
             imageView.pin_setImage(from: newUrl)
         }
     }
+    
+    @IBAction func lostItemButtonClicked(_ sender: UIButton) {        
+    }
+    
+    @IBAction func rideIssueActionClicked(_ sender: UIButton) {
+        let historyStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.History, bundle: nil)
+        let fareIssueViewController = historyStoryboard.instantiateViewController(withIdentifier: "FareIssueViewController") as! FareIssueViewController
+        self.navigationController?.pushViewController(fareIssueViewController, animated: true)
+    }
+    
+    @IBAction func otherIsssueButtonClicked(_ sender: UIButton) {
+        let historyStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.History, bundle: nil)
+        let fareIssueViewController = historyStoryboard.instantiateViewController(withIdentifier: "FareIssueViewController") as! FareIssueViewController
+        self.navigationController?.pushViewController(fareIssueViewController, animated: true)
+    }
+    
+    
+    
 }

@@ -171,6 +171,7 @@
 		12AE130220B50AE6006F3178 /* PXGoogleDirectionsRouteFare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12F020B50AE5006F3178 /* PXGoogleDirectionsRouteFare.swift */; };
 		12C38CFA1E2A143B0003DCB5 /* YBUploadPictureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12C38CF91E2A143B0003DCB5 /* YBUploadPictureView.xib */; };
 		12C38CFC1E2A14490003DCB5 /* YBUploadPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C38CFB1E2A14490003DCB5 /* YBUploadPictureView.swift */; };
+		12EA8E172125A3C00017A78F /* FareIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EA8E162125A3C00017A78F /* FareIssueViewController.swift */; };
 		12F3CCD61C41EFC700F79A26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F3CCD51C41EFC700F79A26 /* AppDelegate.swift */; };
 		12F3CCDB1C41EFC700F79A26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3CCD91C41EFC700F79A26 /* Main.storyboard */; };
 		12F3CCDD1C41EFC700F79A26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12F3CCDC1C41EFC700F79A26 /* Assets.xcassets */; };
@@ -371,6 +372,7 @@
 		12C21E281C7DB0CB000AAFFC /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
 		12C38CF91E2A143B0003DCB5 /* YBUploadPictureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBUploadPictureView.xib; sourceTree = "<group>"; };
 		12C38CFB1E2A14490003DCB5 /* YBUploadPictureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBUploadPictureView.swift; sourceTree = "<group>"; };
+		12EA8E162125A3C00017A78F /* FareIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FareIssueViewController.swift; sourceTree = "<group>"; };
 		12EB18161C5A00780037EB86 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		12F3CCD21C41EFC700F79A26 /* YibbyPartner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YibbyPartner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12F3CCD51C41EFC700F79A26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -775,6 +777,7 @@
 			children = (
 				126EC5681F7E3F440040704F /* CarDetailsChildView.swift */,
 				126EC5691F7E3F440040704F /* History.storyboard */,
+				12EA8E162125A3C00017A78F /* FareIssueViewController.swift */,
 				126EC56A1F7E3F440040704F /* HistoryTableCell.swift */,
 				126EC56B1F7E3F440040704F /* HistoryViewController.swift */,
 				126EC56D1F7E3F440040704F /* RideDetailViewController.swift */,
@@ -1471,6 +1474,7 @@
 			files = (
 				12AE130120B50AE6006F3178 /* PXGoogleDirectionsDistance.swift in Sources */,
 				1201B7B91D23B49000A7EEAF /* SignupViewController.swift in Sources */,
+				12EA8E172125A3C00017A78F /* FareIssueViewController.swift in Sources */,
 				126EC5621F7E31720040704F /* HelpCenterVC.swift in Sources */,
 				129AAE541E226C76006F6CE5 /* UITableViewController+ENFooterActivityIndicatorView.m in Sources */,
 				126EC5631F7E31720040704F /* HelpViewController.swift in Sources */,
