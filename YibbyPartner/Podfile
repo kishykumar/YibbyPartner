@@ -63,6 +63,7 @@ def shared_pods
     pod 'Google/SignIn'
     pod 'AccountKit'
     pod 'PasswordTextField'
+    pod 'Instabug'
 
 end
 

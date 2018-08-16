@@ -47,7 +47,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>9</string>
+	<string>13</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -77,11 +77,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Used to take pictures of documents</string>
+	<string>Yibby Partner needs access to your camera for you to be able to take images.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Only when you are Online, we track your location in the background to schedule you to the nearest rider. This is a must. Learn more in our Privacy Statement.</string>
+	<string>Only when you are Online, Yibby Partner tracks your location in the background to schedule you to the nearest rider. Learn more in our Privacy Statement.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Yibby Partner needs access to the microphone to be able to attach voice notes.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Used to choose pictures of documents</string>
+	<string>Yibby Partner needs access to your photo library for you to be able to attach images.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome.ttf</string>

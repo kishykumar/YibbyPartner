@@ -22,7 +22,7 @@ open class LocationService: NSObject, CLLocationManagerDelegate {
 
     fileprivate let UPDATES_AGE_TIME: TimeInterval = 120
     fileprivate let DESIRED_HORIZONTAL_ACCURACY = 200.0
-    fileprivate let LOCATION_UPDATE_TIME_INTERVAL = 4.0 // seconds
+    fileprivate let LOCATION_UPDATE_TIME_INTERVAL = 15.0 // seconds
 
     fileprivate var isUpdatingLocation = false
     

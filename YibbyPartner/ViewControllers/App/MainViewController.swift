@@ -77,6 +77,16 @@ class MainViewController: BaseYibbyViewController, OfferViewControllerDelegate {
         if (sender.selectedIndex == onlineSwitchIndex.offline.rawValue) {
             // Offline
             
+            // close down all active driver operations
+            
+            onlineStatusLabelOutlet.text = "You are offline"
+            
+            YBClient.sharedInstance().status = .offline
+            stopOnlineStatusAnimation()
+            
+            // stop location updates regardless of whether the request succeeds or fails
+            LocationService.sharedInstance().stopLocationUpdates()
+            
             WebInterface.makeWebRequestAndHandleError(
                 self,
                 webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
@@ -86,7 +96,7 @@ class MainViewController: BaseYibbyViewController, OfferViewControllerDelegate {
                 
                 let client: BAAClient = BAAClient.shared()
                 client.updateDriverStatus(BAASBOX_DRIVER_STATUS_OFFLINE,
-                  latitude: 18.5,
+                  latitude: 18.5, // random coordinates
                   longitude: 16.3,
                   completion: {(success, error) -> Void in
                     
@@ -99,16 +109,6 @@ class MainViewController: BaseYibbyViewController, OfferViewControllerDelegate {
                     }
                 })
             })
-            
-            // close down all active driver operations
-            
-            onlineStatusLabelOutlet.text = "You are offline"
-            
-            YBClient.sharedInstance().status = .offline
-            stopOnlineStatusAnimation()
-            
-            // stop location updates regardless of whether the request succeeds or fails
-            LocationService.sharedInstance().stopLocationUpdates()
             
         } else {
             // Online
