@@ -11,6 +11,7 @@ import GoogleMaps
 import BaasBoxSDK
 import CocoaLumberjack
 import OpenInGoogleMaps
+import MapKit
 
 // MapService singleton
 open class MapService: NSObject {
@@ -50,4 +51,32 @@ open class MapService: NSObject {
         directionsDefinition.travelMode = GoogleMapsTravelMode.driving
         OpenInGoogleMapsController.sharedInstance().openDirections(directionsDefinition)
     }
+    //openingooglemaps pod has been deprecated.So we need to use this
+    func openInGoogleMap(lat: CLLocationDegrees, long: CLLocationDegrees){
+        let url = "comgooglemaps://"
+        if UIApplication.shared.canOpenURL(URL(string:url)!){
+            UIApplication.shared.open(URL(string:"comgooglemaps://?saddr=&daddr=\(lat),\(long)&zoom=10&directionsmode=driving")!, options: [:], completionHandler: nil)
+        }
+        else{
+            openInAppleMap(lat: lat, long: long)
+        }
+    }
+    
+    func openInAppleMap(lat: CLLocationDegrees, long: CLLocationDegrees){
+        let url = "http://maps.apple.com/maps?saddr=&daddr=\(lat),\(long)"
+        if UIApplication.shared.canOpenURL(URL(string:url)!){
+            UIApplication.shared.open(URL(string:url)!, options: [:], completionHandler: nil)
+        }
+    }
+    
+    func openInWaze(lat: CLLocationDegrees, long: CLLocationDegrees){
+        let url = "waze://"
+        if UIApplication.shared.canOpenURL(URL(string:url)!){
+            UIApplication.shared.open(URL(string:"waze://?ll=\(lat),\(long)&navigate=yes")!, options: [:], completionHandler: nil)
+        }
+        else{
+            openInAppleMap(lat: lat, long: long)
+        }
+    }
+    
 }
