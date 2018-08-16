@@ -17,6 +17,7 @@ import CocoaLumberjack
 
 enum YBMessageType: String {
     case bid = "BID"
+    case bidEnded = "BID_ENDED"
     case rideCancelled = "RIDE_CANCELLED"
 }
 
@@ -108,18 +109,18 @@ open class PushController: NSObject, PushControllerProtocol {
             return;
         }
         
-        // check if we have already processed this push message
-        guard let lastGCMMsgId = notification[GCM_MSG_ID_JSON_FIELD_NAME] as? String else {
-            DDLogDebug("Exiting because lastGCMMsgId is nil: \(notification)")
-            return;
-        }
-        
-        if (mLastGCMMsgId != nil) && (mLastGCMMsgId == lastGCMMsgId) {
-            DDLogDebug("Already processed the push message: \(notification)")
-            return;
-        }
-        
-        mLastGCMMsgId = notification[GCM_MSG_ID_JSON_FIELD_NAME] as? String
+//        // check if we have already processed this push message
+//        guard let lastGCMMsgId = notification[GCM_MSG_ID_JSON_FIELD_NAME] as? String else {
+//            DDLogDebug("Exiting because lastGCMMsgId is nil: \(notification)")
+//            return;
+//        }
+//
+//        if (mLastGCMMsgId != nil) && (mLastGCMMsgId == lastGCMMsgId) {
+//            DDLogDebug("Already processed the push message: \(notification)")
+//            return;
+//        }
+//        
+//        mLastGCMMsgId = notification[GCM_MSG_ID_JSON_FIELD_NAME] as? String
         
         if (appDelegate.centerContainer == nil) {
             // this might happen during startup
@@ -156,6 +157,24 @@ open class PushController: NSObject, PushControllerProtocol {
             
             postNotification(BidNotifications.bidReceived, value: bid)
 
+        } else if (messageType == YBMessageType.bidEnded) {
+            
+            DDLogDebug("BID_ENDED_MESSAGE_TYPE")
+            let bidEndModel = Bid(JSONString: jsonCustomString)!
+            
+            if (!YBClient.sharedInstance().isSameAsOngoingBid(bidId: bidEndModel.id)) {
+                DDLogDebug("Ongoing bid. Discarded: \(notification[MESSAGE_JSON_FIELD_NAME] as! String)")
+                
+                if let ongoingBid = YBClient.sharedInstance().bid {
+                    DDLogDebug("Ongoingbid is: \(String(describing: ongoingBid.id)). Incoming is \(String(describing: bidEndModel.id))")
+                } else {
+                    DDLogDebug("Ongoingbid is: nil. Incoming is \(String(describing: bidEndModel.id))")
+                }
+                return;
+            }
+            
+            postNotification(BidNotifications.bidEnded, value: bidEndModel)
+            
         } else if (messageType == YBMessageType.rideCancelled) {
             DDLogDebug("RIDE_CANCELLED_MESSAGE_TYPE")
             let ride = Ride(JSONString: jsonCustomString)!

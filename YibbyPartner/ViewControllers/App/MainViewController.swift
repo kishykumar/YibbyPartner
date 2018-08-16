@@ -43,7 +43,8 @@ class MainViewController: BaseYibbyViewController, OfferViewControllerDelegate {
     var firstValueChangedSkipped = false
     
     fileprivate var bidObserver: NotificationObserver? // for incoming offer
-    
+    fileprivate var bidEndedObserver: NotificationObserver? // for incoming offer
+
     // MARK: Actions
 
     @IBAction func onCentersMarkerViewClick(_ sender: UITapGestureRecognizer) {
@@ -79,6 +80,7 @@ class MainViewController: BaseYibbyViewController, OfferViewControllerDelegate {
             
             // close down all active driver operations
             
+            DDLogVerbose("onOnlineSwitchValueChange: Offline")
             onlineStatusLabelOutlet.text = "You are offline"
             
             YBClient.sharedInstance().status = .offline
@@ -118,6 +120,7 @@ class MainViewController: BaseYibbyViewController, OfferViewControllerDelegate {
                 return;
             }
 
+            DDLogVerbose("onOnlineSwitchValueChange: Online")
             WebInterface.makeWebRequestAndHandleError(
                 self,
                 webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
@@ -188,10 +191,12 @@ class MainViewController: BaseYibbyViewController, OfferViewControllerDelegate {
         }
         
         if (YBClient.sharedInstance().status == .online) {
+            DDLogVerbose("MainViewController: Online")
             self.onlineStatusLabelOutlet.text = "You are online"
             startOnlineStatusAnimation()
             onlineSwitchOutlet.setSelectedIndex(onlineSwitchIndex.online.rawValue, animated: false)
         } else {
+            DDLogVerbose("MainViewController: Offline")
             self.onlineStatusLabelOutlet.text = "You are offline"
             stopOnlineStatusAnimation()
             onlineSwitchOutlet.setSelectedIndex(onlineSwitchIndex.offline.rawValue, animated: false)
@@ -256,6 +261,7 @@ class MainViewController: BaseYibbyViewController, OfferViewControllerDelegate {
     fileprivate func removeNotificationObservers() {
         
         bidObserver?.removeObserver()
+        bidEndedObserver?.removeObserver()
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }
@@ -270,7 +276,26 @@ class MainViewController: BaseYibbyViewController, OfferViewControllerDelegate {
             
             // Initialize the client bid state
             YBClient.sharedInstance().bid = bid
-
+            
+            // if an alert was already displayed, dismiss it
+            if self.presentedViewController != nil {
+                
+                if (self.presentedViewController as? UIAlertController) != nil {
+                    self.dismiss(animated: false, completion: nil)
+                }
+                
+                if let offerNavController = self.presentedViewController as? UINavigationController {
+                    if (offerNavController.viewControllers.first as? OfferViewController != nil) {
+                        self.dismiss(animated: false, completion: nil)
+                    }
+                }
+            }
+            
+            // if RideEndViewController was displayed, remove it
+            if let rideEndVC = self.navigationController?.visibleViewController as? RideEndViewController {
+                rideEndVC.performSegue(withIdentifier: "unwindToMainViewController1", sender: rideEndVC)
+            }
+            
             let bidElapsedTime = TimeUtil.diffFromCurTimeISO(bid.creationTime!)
             
             if (bidElapsedTime > MainViewController.BID_NOTIFICATION_EXPIRE_TIME) {
@@ -295,14 +320,22 @@ class MainViewController: BaseYibbyViewController, OfferViewControllerDelegate {
             // start the timer by accouting the time elapsed since the user actually created the bid
             offerViewController.timerStart = TimeInterval(Int(OfferViewController.OFFER_TIMER_EXPIRE_PERIOD - bidElapsedTime))
             offerViewController.delegate = self
-            
-            // if an alert was already displayed, dismiss it
-            if self.presentedViewController != nil {
-                self.dismiss(animated: false, completion: nil)
-            }
 
             YBClient.sharedInstance().status = .offerInProcess
             self.navigationController?.present(navController, animated: true, completion: nil)
+        }
+        
+        bidEndedObserver = NotificationObserver(notification: BidNotifications.bidEnded) { [unowned self] bid in
+            
+            YBClient.sharedInstance().status = .online
+            YBClient.sharedInstance().bid = nil
+            
+            AlertUtil.displayAlert("Offer Rejected.",
+                                   message: "Reason: Your offer was not the first.",
+                                   completionBlock: {() -> Void in
+                                    
+                                    self.dismiss(animated: true, completion: nil)
+            })
         }
     }
 

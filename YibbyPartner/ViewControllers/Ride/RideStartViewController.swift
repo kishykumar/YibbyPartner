@@ -233,7 +233,8 @@ class RideStartViewController: BaseYibbyViewController {
                             if (error == nil) {
                                 
                                 YBClient.sharedInstance().status = .rideEnd
-                                
+                                YBClient.sharedInstance().bid = nil
+
                                 let rideModel = Mapper<Ride>().map(JSONObject: success)
                                 
                                 // Refresh the ride state from the response

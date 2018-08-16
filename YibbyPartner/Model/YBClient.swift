@@ -15,7 +15,7 @@ enum YBClientStatus: String {
     case offline = "OFFLINE"
     case online = "ONLINE"
     case offerInProcess = "OFFER_IN_PROCESS" // driver is still trying to bid
-    case offerRejected = "OFFER_REJECTED"
+    // case offerRejected = "OFFER_REJECTED" <- Doesn't exist anymore as online/offline state itself tells whether the offer got rejected
     case driverEnRoute = "DRIVER_EN_ROUTE"
     case driverArrived = "DRIVER_ARRIVED"
     case rideStart = "RIDE_START"

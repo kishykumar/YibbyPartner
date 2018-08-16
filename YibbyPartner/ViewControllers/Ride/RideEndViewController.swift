@@ -61,7 +61,6 @@ class RideEndViewController: BaseYibbyViewController {
             client.postReview(BAASBOX_DRIVER_STRING, jsonBody: reviewDict, completion:{(success, error) -> Void in
                 if (success != nil) {
                     DDLogVerbose("Review success: \(String(describing: success))")
-                    YBClient.sharedInstance().bid = nil
 
                     client.syncClient(BAASBOX_DRIVER_STRING, bidId: nil, completion: { (success, error) -> Void in
                         

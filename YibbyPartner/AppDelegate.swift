@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
 
     var window: UIWindow?
 
-    fileprivate var isSandbox = false
+    fileprivate var isSandbox = true
 
     fileprivate var connectedToGCM = false
     fileprivate var subscribedToTopic = false
@@ -46,8 +46,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     fileprivate var BAASBOX_URL: String {
         return
             ((self.isSandbox) ?
-                ("http://custom-env.cjamdz6ejx.us-west-1.elasticbeanstalk.com") :
-                ("http://api.yibbyapp.com"))
+            //("http://custom-env.cjamdz6ejx.us-west-1.elasticbeanstalk.com") :
+            ("http://3a15b3cb.ngrok.io") :
+            ("http://api.yibbyapp.com"))
     }
     
     //fileprivate let BAASBOX_URL = "http://42f3eb3a.ngrok.io"
@@ -474,7 +475,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                 // LocationService
                 self.setupLocationService()
                 
-                let status = YBClient.sharedInstance().status
+                var status = YBClient.sharedInstance().status
                 let bid = YBClient.sharedInstance().bid
                 let bidId = YBClient.sharedInstance().getPersistedBidId()
 
@@ -507,6 +508,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                             LocationService.sharedInstance().startLocationUpdates()
                         }
                         
+                        status = .rideDriverCancelled
                         switch (status) {
                         case .offline:
                             
@@ -531,11 +533,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                             let bidElapsedTime = TimeUtil.diffFromCurTimeISO(bid!.creationTime!)
                             
                             if (bidElapsedTime > MainViewController.BID_NOTIFICATION_EXPIRE_TIME) {
-                                DDLogDebug("Bid Discarded CurrentTime: \(Date()) bidTime: \(bid!.creationTime) bidElapsedTime: \(bidElapsedTime)")
+                                DDLogDebug("Bid Discarded CurrentTime: \(Date()) bidTime: \(String(describing: bid!.creationTime)) bidElapsedTime: \(bidElapsedTime)")
+                                
+                                // Remove the bid if it existed
+                                if (bidId != nil) {
+                                    YBClient.sharedInstance().bid = nil
+                                }
                                 
                                 // The driver missed responding to the bid
-                                AlertUtil.displayAlert("Bid missed.",
-                                                       message: "Reason: You missed sending the bid. Missing a lot of bids would bring you offline.")
+                                // Can't display an alert here if bid is missed because it prevents MainViewController from coming up
+                                // TODO: display alert when MainViewController is up
+                                
                             } else {
                                 
                                 // prepare the offerViewController
@@ -550,15 +558,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                                 
                                 centerNav.present(navController, animated: true, completion: nil)
                             }
-                            
-                            break
-                            
-                        case .offerRejected:
-
-                            // The previous bid was rejected. Don't show any alert on statup. 
-                            
-                            // remove the persisted bid
-                            YBClient.sharedInstance().bid = nil
                             
                             break
                             
@@ -616,10 +615,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                                 YBClient.sharedInstance().bid = nil
                             }
                             
-                            AlertUtil.displayAlertOnVC(centerNav.topViewController!, title: "You had cancelled the previous ride.",
-                                                       message: "",
-                                                       completionBlock: {() -> Void in
-                            })
+//                            // Can't show an Alert
+//                            AlertUtil.displayAlertOnVC(centerNav.topViewController!, title: "You had cancelled the previous ride.",
+//                                                       message: "",
+//                                                       completionBlock: {() -> Void in
+//                            })
                             
                         case .rideRiderCancelled:
                             
@@ -629,10 +629,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                                 YBClient.sharedInstance().bid = nil
                             }
 
-                            AlertUtil.displayAlertOnVC(centerNav.topViewController!, title: "Unfortunately, your ride has been cancelled by the rider.",
-                                                       message: "You will be compensated according to our Terms & Conditions.",
-                                                       completionBlock: {() -> Void in
-                            })
+//                            Can't show alert as it interferes with MainViewController instatiation
+//                            AlertUtil.displayAlertOnVC(centerNav.topViewController!, title: "Unfortunately, your ride has been cancelled by the rider.",
+//                                                       message: "You will be compensated according to our Terms & Conditions.",
+//                                                       completionBlock: {() -> Void in
+//                            })
                             
                         default:
                             // nothing to do here. MainViewController will be shown.
