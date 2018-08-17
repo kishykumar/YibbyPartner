@@ -66,9 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        // Setup Crashlytics
-        Fabric.with([Crashlytics.self])
-
         // Setup Instabug
         Instabug.start(withToken: "557f3fb01b544e77a87b9ed4e3906411", invocationEvent: .shake)
         
@@ -102,6 +99,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         GCMService.sharedInstance().start(with: gcmConfig)
         // [END start_gcm_service]
         
+        // Setup Crashlytics
+        Fabric.with([Crashlytics.self])
+
         return true
     }
     

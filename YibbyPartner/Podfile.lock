@@ -36,11 +36,11 @@ PODS:
   - CocoaLumberjack/Swift (3.4.2):
     - CocoaLumberjack/Default
   - Cosmos (15.0.0)
-  - Crashlytics (3.10.1):
-    - Fabric (~> 1.7.5)
+  - Crashlytics (3.10.7):
+    - Fabric (~> 1.7.11)
   - DGRunkeeperSwitch (1.1.4)
   - DZNEmptyDataSet (1.8.1)
-  - Fabric (1.7.6)
+  - Fabric (1.7.11)
   - FLAnimatedImage (1.0.12)
   - FoldingCell (3.1.1)
   - Font-Awesome-Swift (1.7.2)
@@ -310,10 +310,10 @@ SPEC CHECKSUMS:
   Cache: f28f8dd64b632155aabf9b3906b036a659048251
   CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   Cosmos: a6dbd3d0baa0cc8f51f8598f7508d5a09d0a9ade
-  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  Crashlytics: ccaac42660eb9351b9960c0d66106b0bcf99f4fa
   DGRunkeeperSwitch: cc237936f42237307f5e212e18136a27bf907bf1
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
+  Fabric: f233c9492b3bbc1f04e3882986740f7988a58edb
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FoldingCell: 238c33ae8d9cd655090c9c4c5ff32596cfd18c6e
   Font-Awesome-Swift: 83ab9db365379ee6025167cec67bdc5d3226a811
