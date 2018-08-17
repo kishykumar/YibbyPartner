@@ -23,6 +23,9 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
     
     // MARK: - Properties
     
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var settingsScrollOutlet: UIScrollView!
+    
     @IBOutlet weak var emailAddress: YBTextField!
     @IBOutlet weak var phoneNo: UITextField!
     @IBOutlet weak var profileImageViewOutlet: SwiftyAvatar!
@@ -32,11 +35,14 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
     @IBOutlet var emailEditBtnOutlet: UIButton!
     
     @IBOutlet weak var errorLabelOutlet: UILabel!
+    
+    @IBOutlet weak var mapSelectionSegmentControl: UISegmentedControl!
     @IBOutlet weak var vehicleImageViewOutlet: UIImageView!
     @IBOutlet weak var changeVehicleButtonOutlet: UIButton!
     @IBOutlet weak var vehicleMakeModelLabelOutlet: YibbyPaddingLabel!
     @IBOutlet weak var licensePlateLabelOutlet: YibbyPaddingLabel!
     @IBOutlet weak var vehicleDetailsViewOutlet: YBBorderedUIView!
+    
     
     var emailEditInProgress: Bool = false
     
@@ -99,7 +105,6 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
         setupUI()
         setupDelegates()
@@ -112,6 +117,11 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
         
         // TODO: bug in ImagePicker: they remove the status bar :(
         UIApplication.shared.setStatusBarHidden(false, with: .fade)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        settingsScrollOutlet.contentSize = CGSize(width: settingsScrollOutlet.contentSize.width, height: 800)
     }
     
     func setupImagePicker() {
@@ -135,6 +145,7 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
     fileprivate func setupUI() {
         
         setupBackButton()
+        settingsScrollOutlet.contentSize = CGSize(width: settingsScrollOutlet.contentSize.width, height: 2000)
         
         VW.layer.borderColor = UIColor.appDarkGreen1().cgColor
         vehicleDetailsViewOutlet.layer.borderColor = UIColor.appDarkGreen1().cgColor
@@ -156,6 +167,9 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
         vehicleImageViewOutlet.layer.borderColor = UIColor.appDarkGreen1().cgColor
         vehicleImageViewOutlet.layer.borderWidth = 1.0
         vehicleImageViewOutlet.layer.cornerRadius = 20.0
+        
+        //Set segmented control to the map used for navigation
+        setMapSelectionSegmentedIndex()
         
         emailAddress.removeFormatting()
         
@@ -319,6 +333,38 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
         
         setProfilePicture()
     }
+    
+    func setMapSelectionSegmentedIndex(){
+        let mapForNav = Defaults.getDefaultNavigationApp()
+        switch mapForNav {
+        case 0:
+            mapSelectionSegmentControl.selectedSegmentIndex = 0
+        case 1:
+            mapSelectionSegmentControl.selectedSegmentIndex = 1
+        case 2:
+            mapSelectionSegmentControl.selectedSegmentIndex = 2
+        default:
+            mapSelectionSegmentControl.selectedSegmentIndex = 0
+        }
+    }
+    
+    @IBAction func mapSelectionChanged(_ sender: UISegmentedControl) {
+        switch mapSelectionSegmentControl.selectedSegmentIndex {
+        case 0:
+            Defaults.setDefaultNavigationApp(value: 0)
+            DDLogVerbose("google maps selected")
+        case 1:
+            Defaults.setDefaultNavigationApp(value: 1)
+             DDLogVerbose("apple maps selected")
+        case 2:
+            Defaults.setDefaultNavigationApp(value: 2)
+             DDLogVerbose("waze maps selected")
+        default:
+            Defaults.setDefaultNavigationApp(value: 0)
+             DDLogVerbose("google maps selected")
+        }
+    }
+    
 }
 
 extension SettingsViewController: ImagePickerDelegate {
@@ -396,6 +442,8 @@ extension SettingsViewController: ImagePickerDelegate {
         imagePickerController.dismiss(animated: true, completion: nil)
     }
 }
+
+
 
 extension String {
     public func toPhoneNumber() -> String {

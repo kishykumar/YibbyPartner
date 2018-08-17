@@ -48,6 +48,7 @@ class RideStartViewController: BaseYibbyViewController {
     var dropoffMarker: GMSMarker?
     
     let GMS_DEFAULT_CAMERA_ZOOM: Float = 14.0
+    
 
     let messageComposer = MessageComposer()
 
@@ -59,7 +60,7 @@ class RideStartViewController: BaseYibbyViewController {
     
     @IBAction func onCancelRideClick(_ sender: UIButton) {
         
-        let emergencyAction = UIAlertAction(title: InterfaceString.ActionSheet.EmergencyReason, style: .default) { _ in
+        let confirmAction = UIAlertAction(title: InterfaceString.ActionSheet.Confirm, style: .default) { _ in
             self.cancelRide(with: .driverEmergency)
         }
         
@@ -74,7 +75,7 @@ class RideStartViewController: BaseYibbyViewController {
                                            message: "Cancelling too many rides decreases your chance to get future rides.",
                                            preferredStyle: .actionSheet)
         
-        for action in [emergencyAction, plansChangedAction, cancelAction] {
+        for action in [plansChangedAction, confirmAction, cancelAction] {
             controller.addAction(action)
         }
         present(controller, animated: true, completion: nil)
@@ -130,13 +131,12 @@ class RideStartViewController: BaseYibbyViewController {
     }
     
     @IBAction func startNavAction(_ sender: AnyObject) {
-        
+        let mapForNavValue = Defaults.getDefaultNavigationApp()
         if (controllerState == RideViewControllerState.driverEnRoute) {
-            MapService.sharedInstance().openDirectionsInGoogleMaps((self.bid.pickupLocation?.latitude)!,
-                                                                   lng: (self.bid.pickupLocation?.longitude)!)
+            startNavigation(mapForNavValue: mapForNavValue, lat: (self.bid.pickupLocation?.latitude)!, long: (self.bid.pickupLocation?.longitude)!)
+            
         } else if (controllerState == RideViewControllerState.rideStart) {
-            MapService.sharedInstance().openDirectionsInGoogleMaps((self.bid.dropoffLocation?.latitude)!,
-                                                                   lng: (self.bid.dropoffLocation?.longitude)!)
+            startNavigation(mapForNavValue: mapForNavValue, lat: (self.bid.dropoffLocation?.latitude)!, long: (self.bid.dropoffLocation?.longitude)!)
         }
     }
     
@@ -580,4 +580,18 @@ class RideStartViewController: BaseYibbyViewController {
         gmsMapViewOutlet.moveCamera(update)
         
     }
+    
+    fileprivate func startNavigation(mapForNavValue:Int, lat:CLLocationDegrees, long:CLLocationDegrees){
+        switch mapForNavValue{
+        case 0:
+            MapService.sharedInstance().openInGoogleMap(lat: lat, long: long)
+        case 1:
+            MapService.sharedInstance().openInAppleMap(lat: lat, long: long)
+        case 2:
+            MapService.sharedInstance().openInWaze(lat: lat, long: long)
+        default:
+            MapService.sharedInstance().openInGoogleMap(lat: lat, long: long)
+        }
+    }
+    
 }

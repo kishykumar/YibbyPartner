@@ -10,6 +10,7 @@ import UIKit
 import SwiftyJSON
 import MMDrawerController
 import CocoaLumberjack
+import UserNotifications
 
 @objc public protocol PushControllerProtocol {
     func receiveRemoteNotification(_ application: UIApplication, notification:[AnyHashable: Any])
@@ -21,7 +22,7 @@ enum YBMessageType: String {
     case rideCancelled = "RIDE_CANCELLED"
 }
 
-open class PushController: NSObject, PushControllerProtocol {
+open class PushController: NSObject, PushControllerProtocol, UNUserNotificationCenterDelegate {
     
     let MESSAGE_JSON_FIELD_NAME: String = "message"
     let CUSTOM_JSON_FIELD_NAME: String = "custom"
@@ -197,18 +198,26 @@ open class PushController: NSObject, PushControllerProtocol {
     //MARK: Utility
     
     open static func registerForPushNotifications() {
-        
         let application: UIApplication = UIApplication.shared
-        
-        if #available(iOS 8.0, *) {
-            let settings: UIUserNotificationSettings =
-            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
+        let appDelegate: UIApplicationDelegate = UIApplication.shared.delegate  as! AppDelegate
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = appDelegate as? UNUserNotificationCenterDelegate
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { (bool, error) in
+                if let error = error{
+                    DDLogVerbose("Error in authorization \(error.localizedDescription)")
+                } else {
+                    DispatchQueue.main.async {
+                        application.registerForRemoteNotifications()
+                    }
+                }
+            }
         } else {
             // Fallback
-            let types: UIRemoteNotificationType = [.alert, .badge, .sound]
-            application.registerForRemoteNotifications(matching: types)
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+            application.registerForRemoteNotifications()
         }
     }
 }
