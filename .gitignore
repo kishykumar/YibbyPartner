@@ -5,10 +5,7 @@
 !.gitignore
 
 # Ignore 
-YibbyPartner.xcodeproj/
 MyPlayground.playground/
-
-YibbyPartner/YibbyPartner.xcworkspace/
 
 ## User settings
 xcuserdata/
