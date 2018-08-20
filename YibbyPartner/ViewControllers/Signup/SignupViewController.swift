@@ -27,23 +27,30 @@ class SignupViewController: BaseYibbyViewController,
     @IBOutlet weak var passwordOutlet: UITextField!
     @IBOutlet weak var signupButtonOutlet: YibbyButton1!
     @IBOutlet weak var tandcButtonOutlet: UIButton!
-    
     @IBOutlet weak var errorLabelOutlet: UILabel!
+    
+    @IBOutlet weak var termsCheckBoxOutlet: UIButton!
     
     // flag to test creating the same user without calling the webserver.
     fileprivate let testMode: Bool = false
     
     fileprivate let MAX_PHONE_NUMBER_TEXTFIELD_LENGTH: Int = 14 // includes 10 digits, 1 paranthesis "()", 1 hyphen "-", and 1 space " "
+    fileprivate let MESSAGE_FOR_NOT_ACCEPTING_TANDC = "Terms and Conditions must be accepted before proceeding further."
 
     fileprivate let validator: Validator = Validator()
 
     fileprivate var accountKit: AKFAccountKit!
     fileprivate var formattedPhoneNumber: String?
+    fileprivate var userCheckedTandCBox: Bool = false
     
     // MARK: - Actions
     
     @IBAction func submitFormButton(_ sender: UIButton) {
-        submitForm()
+        if userCheckedTandCBox == true {
+            submitForm()
+        } else {
+            AlertUtil.displayAlert("Message", message: MESSAGE_FOR_NOT_ACCEPTING_TANDC)
+        }
     }
     
     @IBAction func tncButtonAction(_ sender: AnyObject) {
@@ -54,6 +61,12 @@ class SignupViewController: BaseYibbyViewController,
     // MARK: - Setup functions
     
     func setupUI() {
+        termsCheckBoxOutlet.layer.borderColor = UIColor.darkGray.cgColor
+        termsCheckBoxOutlet.layer.borderWidth = 0.7
+        termsCheckBoxOutlet.layer.cornerRadius = termsCheckBoxOutlet.frame.size.width/2
+        termsCheckBoxOutlet.clipsToBounds = true
+        termsCheckBoxOutlet.contentMode = .scaleAspectFill
+        
         signupButtonOutlet.color = UIColor.appDarkGreen1()
         
         let attrTitle = NSAttributedString(string: InterfaceString.Button.TANDC,
@@ -387,4 +400,17 @@ class SignupViewController: BaseYibbyViewController,
         DDLogVerbose("\(viewController) did fail with error: \(error)")
         accountKit.logOut()
     }
+    
+    @IBAction func tandcButtonAction(_ sender: UIButton) {
+        if sender.isSelected == true {
+            sender.isSelected = false
+            userCheckedTandCBox = false
+        } else {
+            sender.setBackgroundImage(UIImage(named: "checked"), for: .selected)
+            sender.isSelected = true
+            userCheckedTandCBox = true
+            
+        }
+    }
+    
 }

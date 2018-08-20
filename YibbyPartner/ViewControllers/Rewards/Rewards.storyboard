@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,25 +18,62 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOU HAVE NO REWARDS." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rW7-7n-ETe">
-                                <rect key="frame" x="10" y="70" width="355" height="21"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <color key="textColor" red="0.26666666666666666" green="0.26666666666666666" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ftE-gg-uM2" userLabel="RewardView" customClass="YibbyBorderedUIView">
+                                <rect key="frame" x="39" y="80" width="296" height="70"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take the full price of the ride!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kLR-fE-pez" userLabel="RewardLabel">
+                                        <rect key="frame" x="20" y="25" width="257" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="5b4-XO-RcR"/>
+                                    <constraint firstItem="kLR-fE-pez" firstAttribute="leading" secondItem="ftE-gg-uM2" secondAttribute="leading" constant="20" id="Ib6-xb-mW4"/>
+                                    <constraint firstAttribute="bottom" secondItem="kLR-fE-pez" secondAttribute="bottom" constant="25.5" id="KUz-bc-v4J"/>
+                                    <constraint firstItem="kLR-fE-pez" firstAttribute="top" secondItem="ftE-gg-uM2" secondAttribute="top" constant="25" id="QO7-oC-Kmw"/>
+                                    <constraint firstAttribute="trailing" secondItem="kLR-fE-pez" secondAttribute="trailing" constant="19" id="TQ3-Yv-208"/>
+                                    <constraint firstAttribute="height" constant="70" id="mNO-EW-sOb"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.21960784310000001" green="0.74509803919999995" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" cocoaTouchSystemColor="darkTextColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.92941176470588238" green="0.94117647058823528" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="rW7-7n-ETe" firstAttribute="top" secondItem="N6b-hY-wpE" secondAttribute="top" constant="50" id="5PV-Ci-PXh"/>
-                            <constraint firstItem="rW7-7n-ETe" firstAttribute="leading" secondItem="N6b-hY-wpE" secondAttribute="leading" constant="10" id="hpI-P4-L9X"/>
-                            <constraint firstItem="N6b-hY-wpE" firstAttribute="trailing" secondItem="rW7-7n-ETe" secondAttribute="trailing" constant="10" id="yhO-my-0ll"/>
+                            <constraint firstItem="ftE-gg-uM2" firstAttribute="leading" secondItem="N6b-hY-wpE" secondAttribute="leading" constant="39" id="1qE-Fd-tDc"/>
+                            <constraint firstItem="ftE-gg-uM2" firstAttribute="top" secondItem="N6b-hY-wpE" secondAttribute="top" constant="60" id="9Hu-yF-MLL"/>
+                            <constraint firstItem="N6b-hY-wpE" firstAttribute="trailing" secondItem="ftE-gg-uM2" secondAttribute="trailing" constant="40" id="J1X-TJ-rmu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N6b-hY-wpE"/>
                     </view>
+                    <connections>
+                        <outlet property="rewardViewOutlet" destination="ftE-gg-uM2" id="ySk-mC-V9Y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YGY-Km-L0F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-124" y="259"/>
+            <point key="canvasLocation" x="-124" y="258.62068965517244"/>
         </scene>
     </scenes>
 </document>

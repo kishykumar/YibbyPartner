@@ -88,7 +88,7 @@
                                     <action selector="submitFormButton:" destination="Idr-6M-XPv" eventType="touchUpInside" id="RjX-oo-KVa"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BY CONTINUING, YOU AGREE TO OUR " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IdC-pi-L6f" userLabel="Signup Label">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BY CONTINUING, YOU AGREE TO OUR " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IdC-pi-L6f" userLabel="Signup Label">
                                 <rect key="frame" x="16" y="586.5" width="343" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -102,6 +102,33 @@
                                     <action selector="tncButtonAction:" destination="Idr-6M-XPv" eventType="touchUpInside" id="lp8-An-ech"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pi7-nc-epW">
+                                <rect key="frame" x="16" y="560" width="343" height="25"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CzF-BL-tFw" userLabel="checkBox">
+                                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="Agc-GG-7t3"/>
+                                            <constraint firstAttribute="width" constant="25" id="DDB-Uz-Sdc"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tandcButtonAction:" destination="Idr-6M-XPv" eventType="touchUpInside" id="7bN-fs-Q3c"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accept Terms and Conditions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWd-9n-tew">
+                                        <rect key="frame" x="35" y="0.0" width="308" height="25"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -112,8 +139,11 @@
                             <constraint firstItem="TWC-Vb-U7h" firstAttribute="leading" secondItem="1GQ-Jz-FfC" secondAttribute="leadingMargin" id="M41-K0-NId"/>
                             <constraint firstItem="TWC-Vb-U7h" firstAttribute="top" secondItem="HeU-NK-SbN" secondAttribute="bottom" constant="25" id="N4S-sZ-tBh"/>
                             <constraint firstItem="EnZ-bK-cVD" firstAttribute="top" secondItem="e2V-9W-LAe" secondAttribute="bottom" constant="40" id="PBe-oz-z6w"/>
+                            <constraint firstItem="pi7-nc-epW" firstAttribute="leading" secondItem="1GQ-Jz-FfC" secondAttribute="leadingMargin" id="W5q-E3-XjE"/>
                             <constraint firstItem="tgX-wm-jvV" firstAttribute="top" secondItem="pte-6d-DIf" secondAttribute="bottom" constant="10" id="Yt1-bv-Hoz"/>
                             <constraint firstItem="IdC-pi-L6f" firstAttribute="leading" secondItem="1GQ-Jz-FfC" secondAttribute="leadingMargin" id="a7L-wb-TTi"/>
+                            <constraint firstItem="e2V-9W-LAe" firstAttribute="top" secondItem="pi7-nc-epW" secondAttribute="bottom" constant="15" id="ar4-C0-MV4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pi7-nc-epW" secondAttribute="trailing" id="ekO-BA-Gpz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tgX-wm-jvV" secondAttribute="trailing" id="imv-sZ-ia3"/>
                             <constraint firstItem="tgX-wm-jvV" firstAttribute="leading" secondItem="1GQ-Jz-FfC" secondAttribute="leadingMargin" id="kWE-3T-Dr4"/>
                             <constraint firstItem="HeU-NK-SbN" firstAttribute="trailing" secondItem="1GQ-Jz-FfC" secondAttribute="trailingMargin" id="ofC-LD-rhL"/>
@@ -129,11 +159,12 @@
                         <outlet property="phoneNumberOutlet" destination="zbd-rO-5Sa" id="yxZ-FR-uYO"/>
                         <outlet property="signupButtonOutlet" destination="TWC-Vb-U7h" id="XQK-3c-Mg2"/>
                         <outlet property="tandcButtonOutlet" destination="e2V-9W-LAe" id="aKj-w8-iOJ"/>
+                        <outlet property="termsCheckBoxOutlet" destination="CzF-BL-tFw" id="wmH-GI-Sti"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uJK-RT-pgS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2202" y="-286"/>
+            <point key="canvasLocation" x="2200.8000000000002" y="-286.50674662668666"/>
         </scene>
         <!--Yibby Partner-->
         <scene sceneID="JbT-tr-Ug0">
