@@ -54,7 +54,7 @@ class RideEndViewController: BaseYibbyViewController {
             
             let client: BAAClient = BAAClient.shared()
             
-            let reviewDict = ["bidId": YBClient.sharedInstance().bid!.id!,
+            let reviewDict = ["bidId": YBClient.sharedInstance().ride?.bidId!,
                               "feedback": "Hello I am here",
                               "rating": rating]
             

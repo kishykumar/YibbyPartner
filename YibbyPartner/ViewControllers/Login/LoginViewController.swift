@@ -3,7 +3,7 @@
 //  Example
 //
 //  Created by Kishy Kumar on 2/13/16.
-//  Copyright © 2016 MyComp. All rights reserved.
+//  Copyright © 2016 Yibby. All rights reserved.
 //
 
 import UIKit
@@ -36,6 +36,7 @@ class LoginViewController: BaseYibbyViewController,
     // MARK: - Actions
     
     @IBAction func facebookAction(_ sender: UIButton) {
+
         AlertUtil.displayAlertOnVC(self, title: "Coming Soon!", message: "Please use our regular login flow.")
         return;
     }

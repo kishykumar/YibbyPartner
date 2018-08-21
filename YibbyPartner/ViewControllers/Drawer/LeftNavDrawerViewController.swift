@@ -11,7 +11,6 @@ import MMDrawerController
 import BaasBoxSDK
 import CocoaLumberjack
 import PINRemoteImage
-import Crashlytics
 
 class LeftNavDrawerViewController: BaseYibbyViewController,
                                     UITableViewDataSource,

@@ -22,13 +22,12 @@ import Instabug
 // 1. Bug: The timer in offer view controller shows up less on one of the phones
 // 2. Stop location updates in the background if no driver activity for the last 10 minutes
  
- 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GCMReceiverDelegate {
 
     var window: UIWindow?
 
-    fileprivate var isSandbox = true
+    fileprivate var isSandbox = false
 
     fileprivate var connectedToGCM = false
     fileprivate var subscribedToTopic = false
@@ -76,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         setupKeyboardManager()
         setupMapService()
         
-        DDLogDebug("LaunchOptions \(launchOptions)");
+        DDLogDebug("LaunchOptions \(String(describing: launchOptions))");
 
         // Override point for customization after application launch.
         GMSServices.provideAPIKey(GOOGLE_API_KEY_IOS)
@@ -99,8 +98,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         GCMService.sharedInstance().start(with: gcmConfig)
         // [END start_gcm_service]
         
-        // Setup Crashlytics
+        // NOTE: Setup Crashlytics the last
         Fabric.with([Crashlytics.self])
+        //Fabric.sharedSDK().debug = true
 
         return true
     }
@@ -508,7 +508,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                             LocationService.sharedInstance().startLocationUpdates()
                         }
                         
-                        status = .rideDriverCancelled
                         switch (status) {
                         case .offline:
                             
@@ -672,7 +671,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                     dump(syncData)
                     
                     YBClient.sharedInstance().syncClient(syncData)
-                
+
+                    // Initialize Crashlytics username, email, identifier
+                    Crashlytics.sharedInstance().setUserName(client.currentUser.username())
+                    Crashlytics.sharedInstance().setUserEmail(syncData.profile?.personal?.emailId)
+                    Crashlytics.sharedInstance().setUserIdentifier(client.currentUser.authenticationToken)
+                    Crashlytics.sharedInstance().setObjectValue(bidId, forKey: "APP_BID_ID")
+                    Crashlytics.sharedInstance().setObjectValue(syncData.status?.rawValue, forKey: "CLIENT_STATUS")
+                    
                 } else {
                     DDLogError("Error in parsing sync data: \(String(describing: error))")
                     self.syncError = error
