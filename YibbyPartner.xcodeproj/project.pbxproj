@@ -168,6 +168,8 @@
 		12AE130020B50AE6006F3178 /* PXGoogleDirectionsEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12EE20B50AE5006F3178 /* PXGoogleDirectionsEnums.swift */; };
 		12AE130120B50AE6006F3178 /* PXGoogleDirectionsDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12EF20B50AE5006F3178 /* PXGoogleDirectionsDistance.swift */; };
 		12AE130220B50AE6006F3178 /* PXGoogleDirectionsRouteFare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12F020B50AE5006F3178 /* PXGoogleDirectionsRouteFare.swift */; };
+		12B3031D21295DE5001026D7 /* FareIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B3031C21295DE5001026D7 /* FareIssueViewController.swift */; };
+		12B3031F21295EE3001026D7 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B3031E21295EE3001026D7 /* UserDefaults.swift */; };
 		12C38CFA1E2A143B0003DCB5 /* YBUploadPictureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12C38CF91E2A143B0003DCB5 /* YBUploadPictureView.xib */; };
 		12C38CFC1E2A14490003DCB5 /* YBUploadPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C38CFB1E2A14490003DCB5 /* YBUploadPictureView.swift */; };
 		12F3CCD61C41EFC700F79A26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F3CCD51C41EFC700F79A26 /* AppDelegate.swift */; };
@@ -363,6 +365,8 @@
 		12AE12EE20B50AE5006F3178 /* PXGoogleDirectionsEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsEnums.swift; sourceTree = "<group>"; };
 		12AE12EF20B50AE5006F3178 /* PXGoogleDirectionsDistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsDistance.swift; sourceTree = "<group>"; };
 		12AE12F020B50AE5006F3178 /* PXGoogleDirectionsRouteFare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsRouteFare.swift; sourceTree = "<group>"; };
+		12B3031C21295DE5001026D7 /* FareIssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FareIssueViewController.swift; sourceTree = "<group>"; };
+		12B3031E21295EE3001026D7 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		12C21E221C7DADE7000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
 		12C21E241C7DAE23000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
 		12C21E261C7DB0A0000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
@@ -654,6 +658,7 @@
 		1201B7C81D23B4AB00A7EEAF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				12B3031E21295EE3001026D7 /* UserDefaults.swift */,
 				12000C8B1F5CFE6D004B6078 /* FreeMethods.swift */,
 				1201B7CA1D23B4AC00A7EEAF /* LogFormatter.swift */,
 				12000C891F5CFE11004B6078 /* YBPasswordRule.swift */,
@@ -770,6 +775,7 @@
 		126EC5671F7E3F440040704F /* History */ = {
 			isa = PBXGroup;
 			children = (
+				12B3031C21295DE5001026D7 /* FareIssueViewController.swift */,
 				126EC5681F7E3F440040704F /* CarDetailsChildView.swift */,
 				126EC5691F7E3F440040704F /* History.storyboard */,
 				126EC56A1F7E3F440040704F /* HistoryTableCell.swift */,
@@ -1216,6 +1222,7 @@
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/Spring/Spring.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftValidator/SwiftValidator.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TTRangeSlider/TTRangeSlider.framework",
@@ -1266,6 +1273,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Spring.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftValidator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTRangeSlider.framework",
@@ -1326,6 +1334,7 @@
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/Spring/Spring.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftValidator/SwiftValidator.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TTRangeSlider/TTRangeSlider.framework",
@@ -1380,6 +1389,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Spring.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftValidator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTRangeSlider.framework",
@@ -1536,6 +1546,7 @@
 				1208265B1F5D3EBB00BA38E9 /* AboutViewController.swift in Sources */,
 				1201B7B51D23B49000A7EEAF /* PushController.swift in Sources */,
 				1201B7B11D23B49000A7EEAF /* LoginViewController.swift in Sources */,
+				12B3031F21295EE3001026D7 /* UserDefaults.swift in Sources */,
 				120F41671F9DC41E0020C565 /* TripEarningsTableViewCell.swift in Sources */,
 				1211F2882005F45200F18CAF /* YBFunding.swift in Sources */,
 				1201B7AF1D23B49000A7EEAF /* LeftNavDrawerViewController.swift in Sources */,
@@ -1543,6 +1554,7 @@
 				129AAE601E233920006F6CE5 /* DriverLicenseViewController.swift in Sources */,
 				125B0C0E1E2DE10500534359 /* YBVehicle.swift in Sources */,
 				1211FF021D5991C800AD9591 /* TimeUtil.swift in Sources */,
+				12B3031D21295DE5001026D7 /* FareIssueViewController.swift in Sources */,
 				1211FF0D1D604AC800AD9591 /* DayEarningsTableCell.swift in Sources */,
 				12AE12F820B50AE6006F3178 /* PXGoogleDirectionsRoute.swift in Sources */,
 				12000C811F5CF57B004B6078 /* ScreenExtensions.swift in Sources */,

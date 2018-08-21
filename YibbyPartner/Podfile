@@ -64,6 +64,7 @@ def shared_pods
     pod 'AccountKit'
     pod 'PasswordTextField'
     pod 'Instabug'
+    pod 'SwiftMessages'
 
 end
 
