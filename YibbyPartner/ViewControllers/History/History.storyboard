@@ -1150,7 +1150,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="100" id="bnS-La-tRU"/>
                                                         </constraints>
-                                                        <string key="text">a. We'll connect with your driver to help the two of you coordinate a return.   b. Email us using the email button below with your name and phone number. </string>
+                                                        <string key="text">a. We'll connect with your rider to help the two of you coordinate a return.   b. Email us using the email button below with your name and phone number. </string>
                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

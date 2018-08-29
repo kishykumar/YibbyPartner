@@ -73,7 +73,6 @@
 		120826861F62863E00BA38E9 /* YBSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120826851F62863E00BA38E9 /* YBSync.swift */; };
 		1208268F1F6BC12B00BA38E9 /* YibbyMapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1208268D1F6BC12B00BA38E9 /* YibbyMapMarker.swift */; };
 		120826901F6BC12B00BA38E9 /* YibbyMapMarker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1208268E1F6BC12B00BA38E9 /* YibbyMapMarker.xib */; };
-		120E9131212AD9BA0035774C /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120E9130212AD9BA0035774C /* UserDefaults.swift */; };
 		120F41671F9DC41E0020C565 /* TripEarningsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120F41661F9DC41E0020C565 /* TripEarningsTableViewCell.swift */; };
 		1211F2882005F45200F18CAF /* YBFunding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211F2872005F45200F18CAF /* YBFunding.swift */; };
 		1211F28D200677F900F18CAF /* YBSSNRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1211F28C200677F900F18CAF /* YBSSNRule.swift */; };
@@ -93,6 +92,7 @@
 		1228A0BB20317C1600AF6801 /* SwiftyAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1228A0B820317C1500AF6801 /* SwiftyAvatar.swift */; };
 		123524961C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
 		123524971C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
+		123640B42133F5EF004D11E1 /* ToastUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123640B32133F5EE004D11E1 /* ToastUtil.swift */; };
 		12368412212ADA3E00B37B8B /* FareIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12368411212ADA3D00B37B8B /* FareIssueViewController.swift */; };
 		12368414212AE73700B37B8B /* LostItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12368413212AE73600B37B8B /* LostItemViewController.swift */; };
 		123D8D951FE6FE5700C312C9 /* FundingInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123D8D941FE6FE5700C312C9 /* FundingInformationViewController.swift */; };
@@ -171,10 +171,10 @@
 		12AE130020B50AE6006F3178 /* PXGoogleDirectionsEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12EE20B50AE5006F3178 /* PXGoogleDirectionsEnums.swift */; };
 		12AE130120B50AE6006F3178 /* PXGoogleDirectionsDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12EF20B50AE5006F3178 /* PXGoogleDirectionsDistance.swift */; };
 		12AE130220B50AE6006F3178 /* PXGoogleDirectionsRouteFare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE12F020B50AE5006F3178 /* PXGoogleDirectionsRouteFare.swift */; };
-		12B3031D21295DE5001026D7 /* FareIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B3031C21295DE5001026D7 /* FareIssueViewController.swift */; };
 		12B3031F21295EE3001026D7 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B3031E21295EE3001026D7 /* UserDefaults.swift */; };
 		12C38CFA1E2A143B0003DCB5 /* YBUploadPictureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12C38CF91E2A143B0003DCB5 /* YBUploadPictureView.xib */; };
 		12C38CFC1E2A14490003DCB5 /* YBUploadPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C38CFB1E2A14490003DCB5 /* YBUploadPictureView.swift */; };
+		12D592DF2135743D00FD45F9 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D592DE2135743C00FD45F9 /* TermsViewController.swift */; };
 		12F3CCD61C41EFC700F79A26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F3CCD51C41EFC700F79A26 /* AppDelegate.swift */; };
 		12F3CCDB1C41EFC700F79A26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12F3CCD91C41EFC700F79A26 /* Main.storyboard */; };
 		12F3CCDD1C41EFC700F79A26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12F3CCDC1C41EFC700F79A26 /* Assets.xcassets */; };
@@ -270,7 +270,6 @@
 		120826851F62863E00BA38E9 /* YBSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBSync.swift; sourceTree = "<group>"; };
 		1208268D1F6BC12B00BA38E9 /* YibbyMapMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YibbyMapMarker.swift; sourceTree = "<group>"; };
 		1208268E1F6BC12B00BA38E9 /* YibbyMapMarker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YibbyMapMarker.xib; sourceTree = "<group>"; };
-		120E9130212AD9BA0035774C /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		120F41661F9DC41E0020C565 /* TripEarningsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripEarningsTableViewCell.swift; sourceTree = "<group>"; };
 		1211F2872005F45200F18CAF /* YBFunding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YBFunding.swift; sourceTree = "<group>"; };
 		1211F28C200677F900F18CAF /* YBSSNRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YBSSNRule.swift; sourceTree = "<group>"; };
@@ -289,6 +288,7 @@
 		1228A0B720317C1500AF6801 /* InitialsImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialsImageView.swift; sourceTree = "<group>"; };
 		1228A0B820317C1500AF6801 /* SwiftyAvatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyAvatar.swift; sourceTree = "<group>"; };
 		123524951C89475D004307EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		123640B32133F5EE004D11E1 /* ToastUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastUtil.swift; sourceTree = "<group>"; };
 		12368411212ADA3D00B37B8B /* FareIssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FareIssueViewController.swift; sourceTree = "<group>"; };
 		12368413212AE73600B37B8B /* LostItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LostItemViewController.swift; sourceTree = "<group>"; };
 		123D8D941FE6FE5700C312C9 /* FundingInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundingInformationViewController.swift; sourceTree = "<group>"; };
@@ -371,7 +371,6 @@
 		12AE12EE20B50AE5006F3178 /* PXGoogleDirectionsEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsEnums.swift; sourceTree = "<group>"; };
 		12AE12EF20B50AE5006F3178 /* PXGoogleDirectionsDistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsDistance.swift; sourceTree = "<group>"; };
 		12AE12F020B50AE5006F3178 /* PXGoogleDirectionsRouteFare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXGoogleDirectionsRouteFare.swift; sourceTree = "<group>"; };
-		12B3031C21295DE5001026D7 /* FareIssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FareIssueViewController.swift; sourceTree = "<group>"; };
 		12B3031E21295EE3001026D7 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		12C21E221C7DADE7000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
 		12C21E241C7DAE23000AAFFC /* BaasBoxSDK1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaasBoxSDK1.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/BaasBoxSDK1.framework"; sourceTree = "<group>"; };
@@ -379,6 +378,7 @@
 		12C21E281C7DB0CB000AAFFC /* Pods.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods.framework; path = "YibbyPartner/Pods/../build/Debug-iphoneos/Pods.framework"; sourceTree = "<group>"; };
 		12C38CF91E2A143B0003DCB5 /* YBUploadPictureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YBUploadPictureView.xib; sourceTree = "<group>"; };
 		12C38CFB1E2A14490003DCB5 /* YBUploadPictureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBUploadPictureView.swift; sourceTree = "<group>"; };
+		12D592DE2135743C00FD45F9 /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		12EB18161C5A00780037EB86 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		12F3CCD21C41EFC700F79A26 /* YibbyPartner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YibbyPartner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12F3CCD51C41EFC700F79A26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -671,6 +671,7 @@
 				1211F28C200677F900F18CAF /* YBSSNRule.swift */,
 				1201B7CB1D23B4AC00A7EEAF /* AppUtil.swift */,
 				1201B7FD1D25102A00A7EEAF /* InterfaceString.swift */,
+				123640B32133F5EE004D11E1 /* ToastUtil.swift */,
 				1211FEFF1D5991BD00AD9591 /* AlertUtil.swift */,
 				1211FF011D5991C800AD9591 /* TimeUtil.swift */,
 				120826561F5D3B1B00BA38E9 /* TypedNotifications.swift */,
@@ -678,7 +679,6 @@
 				1211FF031D5991D800AD9591 /* ActivityIndicatorUtil.swift */,
 				125B0C071E2CDFDC00534359 /* TemporaryCache.swift */,
 				126EC5531F73A67F0040704F /* MessageComposer.swift */,
-				120E9130212AD9BA0035774C /* UserDefaults.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -774,6 +774,7 @@
 				126EC5651F7E38A70040704F /* ReportIssuesViewController.swift */,
 				126EC55E1F7E31710040704F /* HelpCenterVC.swift */,
 				126EC55F1F7E31710040704F /* HelpViewController.swift */,
+				12D592DE2135743C00FD45F9 /* TermsViewController.swift */,
 				126EC5601F7E31720040704F /* LegalVC.swift */,
 			);
 			path = Help;
@@ -782,7 +783,6 @@
 		126EC5671F7E3F440040704F /* History */ = {
 			isa = PBXGroup;
 			children = (
-				12B3031C21295DE5001026D7 /* FareIssueViewController.swift */,
 				126EC5681F7E3F440040704F /* CarDetailsChildView.swift */,
 				12368411212ADA3D00B37B8B /* FareIssueViewController.swift */,
 				126EC5691F7E3F440040704F /* History.storyboard */,
@@ -1488,6 +1488,7 @@
 				12AE130120B50AE6006F3178 /* PXGoogleDirectionsDistance.swift in Sources */,
 				1201B7B91D23B49000A7EEAF /* SignupViewController.swift in Sources */,
 				12368412212ADA3E00B37B8B /* FareIssueViewController.swift in Sources */,
+				123640B42133F5EF004D11E1 /* ToastUtil.swift in Sources */,
 				126EC5621F7E31720040704F /* HelpCenterVC.swift in Sources */,
 				129AAE541E226C76006F6CE5 /* UITableViewController+ENFooterActivityIndicatorView.m in Sources */,
 				126EC5631F7E31720040704F /* HelpViewController.swift in Sources */,
@@ -1528,6 +1529,7 @@
 				126EC5751F7E3F440040704F /* RideDetailViewController.swift in Sources */,
 				125B0C161E2DE77500534359 /* YBClient.swift in Sources */,
 				129AAE5E1E233910006F6CE5 /* VehicleViewController.swift in Sources */,
+				12D592DF2135743D00FD45F9 /* TermsViewController.swift in Sources */,
 				126EC5721F7E3F440040704F /* HistoryTableCell.swift in Sources */,
 				120826861F62863E00BA38E9 /* YBSync.swift in Sources */,
 				12000C871F5CF57B004B6078 /* UIViewExtensions.swift in Sources */,
@@ -1554,7 +1556,6 @@
 				129AAE451E226ABE006F6CE5 /* BaseYibbyTableViewController.swift in Sources */,
 				125B0C121E2DE25600534359 /* YBInsurance.swift in Sources */,
 				1208265B1F5D3EBB00BA38E9 /* AboutViewController.swift in Sources */,
-				120E9131212AD9BA0035774C /* UserDefaults.swift in Sources */,
 				1201B7B51D23B49000A7EEAF /* PushController.swift in Sources */,
 				1201B7B11D23B49000A7EEAF /* LoginViewController.swift in Sources */,
 				12B3031F21295EE3001026D7 /* UserDefaults.swift in Sources */,
@@ -1565,7 +1566,6 @@
 				129AAE601E233920006F6CE5 /* DriverLicenseViewController.swift in Sources */,
 				125B0C0E1E2DE10500534359 /* YBVehicle.swift in Sources */,
 				1211FF021D5991C800AD9591 /* TimeUtil.swift in Sources */,
-				12B3031D21295DE5001026D7 /* FareIssueViewController.swift in Sources */,
 				1211FF0D1D604AC800AD9591 /* DayEarningsTableCell.swift in Sources */,
 				12AE12F820B50AE6006F3178 /* PXGoogleDirectionsRoute.swift in Sources */,
 				12000C811F5CF57B004B6078 /* ScreenExtensions.swift in Sources */,

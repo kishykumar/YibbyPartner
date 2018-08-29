@@ -13,6 +13,7 @@ import XLPagerTabStrip
 import SwiftValidator
 import PhoneNumberKit
 import AccountKit
+import AIFlatSwitch
 
 class SignupViewController: BaseYibbyViewController,
                             IndicatorInfoProvider,
@@ -26,16 +27,18 @@ class SignupViewController: BaseYibbyViewController,
     @IBOutlet weak var phoneNumberOutlet: PhoneNumberTextField!
     @IBOutlet weak var passwordOutlet: UITextField!
     @IBOutlet weak var signupButtonOutlet: YibbyButton1!
-    @IBOutlet weak var tandcButtonOutlet: UIButton!
     @IBOutlet weak var errorLabelOutlet: UILabel!
     
-    @IBOutlet weak var termsCheckBoxOutlet: UIButton!
+    @IBOutlet weak var tandcLabelOutlet: UILabel!
+    @IBOutlet weak var termsStackView: UIStackView!
+    
+    var flatSwitch = AIFlatSwitch(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
     
     // flag to test creating the same user without calling the webserver.
     fileprivate let testMode: Bool = false
     
     fileprivate let MAX_PHONE_NUMBER_TEXTFIELD_LENGTH: Int = 14 // includes 10 digits, 1 paranthesis "()", 1 hyphen "-", and 1 space " "
-    fileprivate let MESSAGE_FOR_NOT_ACCEPTING_TANDC = "Terms and Conditions must be accepted before proceeding further."
+    fileprivate let MESSAGE_FOR_NOT_ACCEPTING_TANDC = "Terms Of Service must be accepted before proceeding further."
 
     fileprivate let validator: Validator = Validator()
 
@@ -49,7 +52,9 @@ class SignupViewController: BaseYibbyViewController,
         if userCheckedTandCBox == true {
             submitForm()
         } else {
-            AlertUtil.displayAlert("Message", message: MESSAGE_FOR_NOT_ACCEPTING_TANDC)
+           // AlertUtil.displayAlert("Message", message: MESSAGE_FOR_NOT_ACCEPTING_TANDC)
+            self.errorLabelOutlet.text = MESSAGE_FOR_NOT_ACCEPTING_TANDC
+            errorLabelOutlet.isHidden = false
         }
     }
     
@@ -61,19 +66,23 @@ class SignupViewController: BaseYibbyViewController,
     // MARK: - Setup functions
     
     func setupUI() {
-        termsCheckBoxOutlet.layer.borderColor = UIColor.darkGray.cgColor
-        termsCheckBoxOutlet.layer.borderWidth = 0.7
-        termsCheckBoxOutlet.layer.cornerRadius = termsCheckBoxOutlet.frame.size.width/2
-        termsCheckBoxOutlet.clipsToBounds = true
-        termsCheckBoxOutlet.contentMode = .scaleAspectFill
+        flatSwitch.lineWidth = 2
+        flatSwitch.strokeColor = UIColor.appDarkGreen1()
+        flatSwitch.trailStrokeColor = UIColor.appDarkGreen1()
+        flatSwitch.backgroundColor = UIColor.white
+        flatSwitch.layer.masksToBounds = false
+        flatSwitch.layer.cornerRadius = flatSwitch.frame.size.width/2
+        flatSwitch.clipsToBounds = true
+    
+        termsStackView.addSubview(flatSwitch)
         
         signupButtonOutlet.color = UIColor.appDarkGreen1()
         
         let attrTitle = NSAttributedString(string: InterfaceString.Button.TANDC,
                                            attributes: [NSAttributedStringKey.foregroundColor : UIColor.appDarkGreen1(),
-                                                        NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 12.0),
+                                                        NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15),
                                                         NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
-        tandcButtonOutlet.setAttributedTitle(attrTitle, for: UIControlState())
+        tandcLabelOutlet.attributedText = attrTitle
         
         phoneNumberOutlet.defaultRegion = "US"
     }
@@ -121,6 +130,8 @@ class SignupViewController: BaseYibbyViewController,
         validator.registerField(passwordOutlet,
                                 errorLabel: self.errorLabelOutlet,
                                 rules: [RequiredRule(message: "Password is required"), YBPasswordRule()])
+
+        
     }
     
     fileprivate func initProperties() {
@@ -135,6 +146,8 @@ class SignupViewController: BaseYibbyViewController,
         setupDelegates()
         setupUI()
         setupValidator()
+        flatSwitch.isSelected = false
+        flatSwitch.addTarget(self, action: #selector(self.handleTandCSwitchStateChanged), for: UIControlEvents.valueChanged)
         self.hideKeyboardWhenTappedAround()
     }
     
@@ -401,16 +414,15 @@ class SignupViewController: BaseYibbyViewController,
         accountKit.logOut()
     }
     
-    @IBAction func tandcButtonAction(_ sender: UIButton) {
-        if sender.isSelected == true {
-            sender.isSelected = false
-            userCheckedTandCBox = false
-        } else {
-            sender.setBackgroundImage(UIImage(named: "checked"), for: .selected)
-            sender.isSelected = true
+    @objc func handleTandCSwitchStateChanged(){
+        if userCheckedTandCBox == false{
+            flatSwitch.setSelected(true, animated: true)
             userCheckedTandCBox = true
-            
+        } else {
+            flatSwitch.setSelected(false, animated: true)
+            userCheckedTandCBox = false
         }
+
     }
     
 }

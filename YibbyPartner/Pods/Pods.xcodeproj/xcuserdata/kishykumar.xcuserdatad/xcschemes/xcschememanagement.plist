@@ -351,11 +351,15 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>58</integer>
 		</dict>
 		<key>SwiftMessages.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>57</integer>
 		</dict>
 		<key>SwiftValidator.xcscheme</key>
 		<dict>

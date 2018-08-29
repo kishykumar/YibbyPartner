@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
 
     var window: UIWindow?
 
-    fileprivate var isSandbox = false
+    fileprivate var isSandbox = true
 
     fileprivate var connectedToGCM = false
     fileprivate var subscribedToTopic = false

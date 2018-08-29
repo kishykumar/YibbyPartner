@@ -10,7 +10,6 @@ import UIKit
 
 class LegalVC: BaseYibbyViewController {
 
-    @IBOutlet var privacyPolicyBtn: UIButton!
     @IBOutlet var termsOfServiceBtn: UIButton!
     
     override func viewDidLoad() {
@@ -24,10 +23,6 @@ class LegalVC: BaseYibbyViewController {
     private func setupUI() {
         setupBackButton()
         
-        privacyPolicyBtn.layer.borderColor = UIColor.borderColor().cgColor
-        privacyPolicyBtn.layer.borderWidth = 1.0
-        privacyPolicyBtn.layer.cornerRadius = 7
-        
         termsOfServiceBtn.layer.borderColor = UIColor.borderColor().cgColor
         termsOfServiceBtn.layer.borderWidth = 1.0
         termsOfServiceBtn.layer.cornerRadius = 7
@@ -38,11 +33,11 @@ class LegalVC: BaseYibbyViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    @IBAction func privacyPolicyBtnAction(_ sender: Any) {
-    }
     
     @IBAction func termsOfServiceBtnAction(_ sender: Any) {
+        let helpStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Help, bundle: nil)
+        let termsViewController = helpStoryboard.instantiateViewController(withIdentifier: "TermsViewController") as! TermsViewController
+        self.navigationController?.pushViewController(termsViewController, animated: true)
     }
     
     /*
