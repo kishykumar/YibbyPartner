@@ -88,16 +88,27 @@
                                     <action selector="submitFormButton:" destination="Idr-6M-XPv" eventType="touchUpInside" id="RjX-oo-KVa"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="pi7-nc-epW" userLabel="TermsStack">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="pi7-nc-epW" userLabel="TermsStack">
                                 <rect key="frame" x="16" y="566.5" width="343" height="25"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4aD-eK-prg">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDH-zm-B6R" customClass="AIFlatSwitch" customModule="AIFlatSwitch">
                                         <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="25" id="DDT-HO-mhn"/>
-                                            <constraint firstAttribute="height" constant="25" id="rxM-cm-WIV"/>
+                                            <constraint firstAttribute="height" constant="25" id="Xe2-N5-TMM"/>
+                                            <constraint firstAttribute="width" constant="25" id="c8t-vG-UPD"/>
                                         </constraints>
-                                    </button>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="strokeColor">
+                                                <color key="value" red="0.1764705882" green="0.70588235290000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="trailStrokeColor">
+                                                <color key="value" red="0.1764705882" green="0.70588235290000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accept " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AWd-9n-tew">
                                         <rect key="frame" x="27" y="0.0" width="55" height="25"/>
                                         <constraints>
@@ -144,6 +155,7 @@
                         <outlet property="phoneNumberOutlet" destination="zbd-rO-5Sa" id="yxZ-FR-uYO"/>
                         <outlet property="signupButtonOutlet" destination="TWC-Vb-U7h" id="XQK-3c-Mg2"/>
                         <outlet property="tandcLabelOutlet" destination="Bhq-Na-Zug" id="KHv-IR-VG7"/>
+                        <outlet property="tandcSwitch" destination="pDH-zm-B6R" id="yxB-xB-xfx"/>
                         <outlet property="termsStackView" destination="pi7-nc-epW" id="DCP-BG-1FX"/>
                     </connections>
                 </viewController>

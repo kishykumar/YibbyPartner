@@ -45,7 +45,7 @@
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.21960784310000001" green="0.74509803919999995" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="value" red="0.21960784310000001" green="0.74509803919999995" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
                                         <real key="value" value="0.5"/>
@@ -67,9 +67,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N6b-hY-wpE"/>
                     </view>
-                    <connections>
-                        <outlet property="rewardViewOutlet" destination="ftE-gg-uM2" id="ySk-mC-V9Y"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YGY-Km-L0F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

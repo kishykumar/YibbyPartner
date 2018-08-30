@@ -287,7 +287,7 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
                     
                     if let profile = profileModel {
                         self.applyProfileModel(profile)
-                        ToastUtil.displayToastOnVC(self, title: "Email Changed", body: "Email has been changed", theme: .success, presentationStyle: .bottom, duration: .seconds(seconds: 5), windowLevel: UIWindowLevelNormal)
+                        ToastUtil.displayToastOnVC(self, title: "Email has been changed successfully", body: "", theme: .success, presentationStyle: .bottom, duration: .seconds(seconds: 5), windowLevel: UIWindowLevelNormal)
                     }
                     else {
                         AlertUtil.displayAlert("Error in Updating User Profile", message: error?.localizedDescription ?? "")
@@ -353,15 +353,15 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
         switch mapSelectionSegmentControl.selectedSegmentIndex {
         case 0:
             Defaults.setDefaultNavigationApp(value: 0)
-            ToastUtil.displayToastOnVC(self, title: "Navigation Preference Changed", body: "Navigation preference changed to Google Maps", theme: .success, presentationStyle: .bottom, duration: .seconds(seconds: 5), windowLevel: UIWindowLevelNormal)
+            ToastUtil.displayToastOnVC(self, title: "Navigation preference changed to Google Maps", body: "", theme: .success, presentationStyle: .bottom, duration: .seconds(seconds: 5), windowLevel: UIWindowLevelNormal)
             DDLogVerbose("google maps selected")
         case 1:
             Defaults.setDefaultNavigationApp(value: 1)
-            ToastUtil.displayToastOnVC(self, title: "Navigation Preference Changed", body: "Navigation preference changed to Apple Maps", theme: .success, presentationStyle: .bottom, duration: .seconds(seconds: 5), windowLevel: UIWindowLevelNormal)
+            ToastUtil.displayToastOnVC(self, title: "Navigation preference changed to Apple Maps", body: "", theme: .success, presentationStyle: .bottom, duration: .seconds(seconds: 5), windowLevel: UIWindowLevelNormal)
              DDLogVerbose("apple maps selected")
         case 2:
             Defaults.setDefaultNavigationApp(value: 2)
-            ToastUtil.displayToastOnVC(self, title: "Navigation Preference Changed", body: "Navigation preference changed to Waze", theme: .success, presentationStyle: .bottom, duration: .seconds(seconds: 5), windowLevel: UIWindowLevelNormal)
+            ToastUtil.displayToastOnVC(self, title: "Navigation preference changed to Waze", body: "", theme: .success, presentationStyle: .bottom, duration: .seconds(seconds: 5), windowLevel: UIWindowLevelNormal)
              DDLogVerbose("waze maps selected")
         default:
             Defaults.setDefaultNavigationApp(value: 0)

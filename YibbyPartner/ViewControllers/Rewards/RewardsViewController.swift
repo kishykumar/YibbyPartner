@@ -11,8 +11,7 @@ import UIKit
 class RewardsViewController: BaseYibbyViewController{
     
     // MARK: - Properties
-    
-    @IBOutlet weak var rewardViewOutlet: UIView!
+
     
     // MARK: - Actions
     
@@ -21,9 +20,7 @@ class RewardsViewController: BaseYibbyViewController{
     
     fileprivate func setupUI() {
         setupBackButton()
-        rewardViewOutlet.layer.borderColor = UIColor.appDarkGreen1().cgColor
-        rewardViewOutlet.layer.borderWidth = 1
-        rewardViewOutlet.layer.cornerRadius = 7
+
     }
     
     override func viewDidLoad() {

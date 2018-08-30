@@ -241,7 +241,7 @@
                                             <action selector="useYibbyBtnAction:" destination="oXH-fA-SqM" eventType="touchUpInside" id="bYF-zg-fne"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Omc-SM-GKe">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Omc-SM-GKe" customClass="YibbyButton1" customModule="YibbyPartner" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="45"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -304,7 +304,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Tn0-wq-hy9">
                                 <rect key="frame" x="10" y="80" width="300" height="45"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EsN-J0-X0q">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EsN-J0-X0q" customClass="YibbyButton1" customModule="YibbyPartner" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="45"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -540,7 +540,7 @@
         <!--Terms View Controller-->
         <scene sceneID="ESP-PI-nZA">
             <objects>
-                <viewController storyboardIdentifier="TermsViewController" id="pZK-7B-mLx" customClass="TermsViewController" customModule="Yibby" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TermsViewController" id="pZK-7B-mLx" customClass="TermsViewController" customModule="YibbyPartner" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mgn-M6-TKP"/>
                         <viewControllerLayoutGuide type="bottom" id="7rT-T4-yNF"/>

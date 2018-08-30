@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         return
             ((self.isSandbox) ?
             ("http://custom-env.cjamdz6ejx.us-west-1.elasticbeanstalk.com") :
-            //("http://3a15b3cb.ngrok.io") :
+           // ("http://3a15b3cb.ngrok.io") :
             ("http://api.yibbyapp.com"))
     }
     

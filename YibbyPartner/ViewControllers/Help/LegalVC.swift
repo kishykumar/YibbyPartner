@@ -22,10 +22,6 @@ class LegalVC: BaseYibbyViewController {
 
     private func setupUI() {
         setupBackButton()
-        
-        termsOfServiceBtn.layer.borderColor = UIColor.borderColor().cgColor
-        termsOfServiceBtn.layer.borderWidth = 1.0
-        termsOfServiceBtn.layer.cornerRadius = 7
     }
     
     override func didReceiveMemoryWarning() {
