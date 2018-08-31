@@ -13,6 +13,7 @@ import XLPagerTabStrip
 import SwiftValidator
 import PhoneNumberKit
 import AccountKit
+import AIFlatSwitch
 
 class SignupViewController: BaseYibbyViewController,
                             IndicatorInfoProvider,
@@ -26,14 +27,17 @@ class SignupViewController: BaseYibbyViewController,
     @IBOutlet weak var phoneNumberOutlet: PhoneNumberTextField!
     @IBOutlet weak var passwordOutlet: UITextField!
     @IBOutlet weak var signupButtonOutlet: YibbyButton1!
-    @IBOutlet weak var tandcButtonOutlet: UIButton!
-    
     @IBOutlet weak var errorLabelOutlet: UILabel!
+    
+    @IBOutlet weak var tandcLabelOutlet: UILabel!
+    @IBOutlet weak var termsStackView: UIStackView!
+    @IBOutlet weak var tandcSwitch: AIFlatSwitch!
     
     // flag to test creating the same user without calling the webserver.
     fileprivate let testMode: Bool = false
     
     fileprivate let MAX_PHONE_NUMBER_TEXTFIELD_LENGTH: Int = 14 // includes 10 digits, 1 paranthesis "()", 1 hyphen "-", and 1 space " "
+    fileprivate let MESSAGE_FOR_NOT_ACCEPTING_TANDC = "Terms of Service must be accepted before proceeding further."
 
     fileprivate let validator: Validator = Validator()
 
@@ -43,7 +47,12 @@ class SignupViewController: BaseYibbyViewController,
     // MARK: - Actions
     
     @IBAction func submitFormButton(_ sender: UIButton) {
-        submitForm()
+        if tandcSwitch.isSelected == true {
+            submitForm()
+        } else {
+            self.errorLabelOutlet.text = MESSAGE_FOR_NOT_ACCEPTING_TANDC
+            errorLabelOutlet.isHidden = false
+        }
     }
     
     @IBAction func tncButtonAction(_ sender: AnyObject) {
@@ -54,13 +63,14 @@ class SignupViewController: BaseYibbyViewController,
     // MARK: - Setup functions
     
     func setupUI() {
+        
         signupButtonOutlet.color = UIColor.appDarkGreen1()
         
         let attrTitle = NSAttributedString(string: InterfaceString.Button.TANDC,
                                            attributes: [NSAttributedStringKey.foregroundColor : UIColor.appDarkGreen1(),
-                                                        NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 12.0),
+                                                        NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15),
                                                         NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
-        tandcButtonOutlet.setAttributedTitle(attrTitle, for: UIControlState())
+        tandcLabelOutlet.attributedText = attrTitle
         
         phoneNumberOutlet.defaultRegion = "US"
     }
@@ -108,6 +118,8 @@ class SignupViewController: BaseYibbyViewController,
         validator.registerField(passwordOutlet,
                                 errorLabel: self.errorLabelOutlet,
                                 rules: [RequiredRule(message: "Password is required"), YBPasswordRule()])
+
+        
     }
     
     fileprivate func initProperties() {
@@ -122,6 +134,7 @@ class SignupViewController: BaseYibbyViewController,
         setupDelegates()
         setupUI()
         setupValidator()
+
         self.hideKeyboardWhenTappedAround()
     }
     
@@ -387,4 +400,6 @@ class SignupViewController: BaseYibbyViewController,
         DDLogVerbose("\(viewController) did fail with error: \(error)")
         accountKit.logOut()
     }
+
+    
 }

@@ -175,7 +175,11 @@ class RideDetailViewController: BaseYibbyViewController {
         }
     }
     
-    @IBAction func lostItemButtonClicked(_ sender: UIButton) {        
+    @IBAction func lostItemButtonClicked(_ sender: UIButton) {
+        let historyStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.History, bundle: nil)
+        let lostItemViewController = historyStoryboard.instantiateViewController(withIdentifier: "LostItemViewControllerIdentifier") as! LostItemViewController
+        lostItemViewController.myTrip = self.ride
+        self.navigationController?.pushViewController(lostItemViewController, animated: true)
     }
     
     @IBAction func rideIssueActionClicked(_ sender: UIButton) {
