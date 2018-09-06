@@ -1228,7 +1228,7 @@ paymentMethodLast4:(NSString *)paymentMethodLast4
     
 }
 
-- (void) uploadFile:(BAAFile *)file withPermissions:(NSDictionary *)permissions completion:(BAAObjectResultBlock)completionBlock {
+- (void) uploadFile:(BAAFile *)file withPermissions:(NSDictionary *)permissions filename:(NSString *)filename completion:(BAAObjectResultBlock)completionBlock {
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", self.baseURL, @"file"]]];
     
@@ -1243,7 +1243,15 @@ paymentMethodLast4:(NSString *)paymentMethodLast4
     
     // image
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"photo\"; filename=\"%@\"\r\n", [[NSUUID UUID] UUIDString]]
+    
+    NSString *uploadedFilename = nil;
+    if (filename) {
+        uploadedFilename = filename;
+    } else {
+        uploadedFilename = [[NSUUID UUID] UUIDString];
+    }
+    
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"photo\"; filename=\"%@\"\r\n", uploadedFilename]
                       dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", file.contentType] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:file.data];
@@ -1291,11 +1299,22 @@ paymentMethodLast4:(NSString *)paymentMethodLast4
                                  
                              } else {
                                  
-                                 NSDictionary *userInfo = @{
-                                                            NSLocalizedDescriptionKey: d[@"message"],
-                                                            NSLocalizedFailureReasonErrorKey: d[@"message"],
-                                                            NSLocalizedRecoverySuggestionErrorKey: @"Make sure that ACL roles and usernames exist on the backend."
-                                                            };
+                                 NSDictionary *userInfo;
+                                 if(d == nil) {
+                                     userInfo = @{
+                                                NSLocalizedDescriptionKey: @"YBError: Server returned empty data",
+                                                NSLocalizedFailureReasonErrorKey: @"Server returned empty data",
+                                                NSLocalizedRecoverySuggestionErrorKey: @"Make sure that ACL roles and usernames exist on the backend."
+                                                };
+                                 } else {
+                                 
+                                     userInfo = @{
+                                                NSLocalizedDescriptionKey: d[@"message"],
+                                                NSLocalizedFailureReasonErrorKey: d[@"message"],
+                                                NSLocalizedRecoverySuggestionErrorKey: @"Make sure that ACL roles and usernames exist on the backend."
+                                                };
+                                 }
+                                 
                                  NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
                                                                       code:[BaasBox errorCode]
                                                                   userInfo:userInfo];
@@ -2598,6 +2617,20 @@ paymentMethodLast4:(NSString *)paymentMethodLast4
                 longitude:(NSNumber *)longitude
                 completion: (BAABooleanResultBlock)completionBlock {
 
+    if (!self.currentUser) {
+        if (completionBlock) {
+            
+            NSMutableDictionary* details = [NSMutableDictionary dictionary];
+            details[@"NSLocalizedDescriptionKey"] = @"updateDriverStatus can't be called for a non logged-in user.";
+            NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
+                                                 code:[BaasBox errorCode]
+                                             userInfo:details];
+            completionBlock(nil, error);
+            
+        }
+        return;
+    }
+    
     [self postPath:[NSString stringWithFormat:@"caber/status"]
         parameters:@{@"status" : status,
                      @"latitude" : latitude,

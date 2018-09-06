@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
 
     var window: UIWindow?
 
-    fileprivate var isSandbox = false
+    fileprivate var isSandbox = true
 
     fileprivate var connectedToGCM = false
     fileprivate var subscribedToTopic = false
@@ -475,8 +475,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                 // LocationService
                 self.setupLocationService()
                 
-                var status = YBClient.sharedInstance().status
-                let bid = YBClient.sharedInstance().bid
+                let status = YBClient.sharedInstance().status
+                //let bid = YBClient.sharedInstance().bid
                 let bidId = YBClient.sharedInstance().getPersistedBidId()
 
                 // The visible view controller can be splash, login, or signup view controller
@@ -529,34 +529,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                             
                         case .offerInProcess:
                             
-                            let bidElapsedTime = TimeUtil.diffFromCurTimeISO(bid!.creationTime!)
-                            
-                            if (bidElapsedTime > MainViewController.BID_NOTIFICATION_EXPIRE_TIME) {
-                                DDLogDebug("Bid Discarded CurrentTime: \(Date()) bidTime: \(String(describing: bid!.creationTime)) bidElapsedTime: \(bidElapsedTime)")
-                                
-                                // Remove the bid if it existed
-                                if (bidId != nil) {
-                                    YBClient.sharedInstance().bid = nil
-                                }
-                                
-                                // The driver missed responding to the bid
-                                // Can't display an alert here if bid is missed because it prevents MainViewController from coming up
-                                // TODO: display alert when MainViewController is up
-                                
-                            } else {
-                                
-                                // prepare the offerViewController
-                                let offerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Offer, bundle: nil)
-                                
-                                let offerViewController = offerStoryboard.instantiateViewController(withIdentifier: "OfferViewControllerIdentifier") as! OfferViewController
-                                
-                                let navController = UINavigationController(rootViewController: offerViewController)
-                                
-                                // start the timer by accouting the time elapsed since the user actually created the bid
-                                offerViewController.timerStart = TimeInterval(Int(OfferViewController.OFFER_TIMER_EXPIRE_PERIOD - bidElapsedTime))
-                                
-                                centerNav.present(navController, animated: true, completion: nil)
+                            // Remove the bid if it existed
+                            if (bidId != nil) {
+                                YBClient.sharedInstance().bid = nil
                             }
+                            
+                            // Make the driver online (even if it's offline?)
+                            YBClient.sharedInstance().status = .online
+                            
+                            break
+                            
+                            // ** NOTE: the following code has been commented out because we can't 'present' the offerViewController on MainViewController from here. Figure out a way and then uncomment it and remove the above code.
+//                            let bidElapsedTime = TimeUtil.diffFromCurTimeISO(bid!.creationTime!)
+//
+//                            if (bidElapsedTime > MainViewController.BID_NOTIFICATION_EXPIRE_TIME) {
+//                                DDLogDebug("Bid Discarded CurrentTime: \(Date()) bidTime: \(String(describing: bid!.creationTime)) bidElapsedTime: \(bidElapsedTime)")
+//
+//                                // Remove the bid if it existed
+//                                if (bidId != nil) {
+//                                    YBClient.sharedInstance().bid = nil
+//                                }
+//
+//                                // The driver missed responding to the bid
+//                                // Can't display an alert here if bid is missed because it prevents MainViewController from coming up
+//                                // TODO: display alert when MainViewController is up
+//
+//                            } else {
+//
+//                                // prepare the offerViewController
+//                                let offerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Offer, bundle: nil)
+//
+//                                let offerViewController = offerStoryboard.instantiateViewController(withIdentifier: "OfferViewControllerIdentifier") as! OfferViewController
+//
+//                                let navController = UINavigationController(rootViewController: offerViewController)
+//
+//                                // start the timer by accouting the time elapsed since the user actually created the bid
+//                                offerViewController.timerStart = TimeInterval(Int(OfferViewController.OFFER_TIMER_EXPIRE_PERIOD - bidElapsedTime))
+//
+//                                centerNav.present(navController, animated: true, completion: nil)
+//                            }
                             
                             break
                             
@@ -608,11 +619,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                             
                         case .rideDriverCancelled:
                             
-                            // Remove the bid if it existed
-                            let bidId = YBClient.sharedInstance().getPersistedBidId()
                             if (bidId != nil) {
                                 YBClient.sharedInstance().bid = nil
                             }
+                            
+                            // Make the driver online (even if it's offline?)
+                            YBClient.sharedInstance().status = .online
                             
 //                            // Can't show an Alert
 //                            AlertUtil.displayAlertOnVC(centerNav.topViewController!, title: "You had cancelled the previous ride.",
@@ -622,12 +634,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                             
                         case .rideRiderCancelled:
                             
-                            // Remove the bid if it existed
-                            let bidId = YBClient.sharedInstance().getPersistedBidId()
                             if (bidId != nil) {
                                 YBClient.sharedInstance().bid = nil
                             }
 
+                            // Make the driver online (even if it's offline?)
+                            YBClient.sharedInstance().status = .online
+                            
 //                            Can't show alert as it interferes with MainViewController instatiation
 //                            AlertUtil.displayAlertOnVC(centerNav.topViewController!, title: "Unfortunately, your ride has been cancelled by the rider.",
 //                                                       message: "You will be compensated according to our Terms & Conditions.",
@@ -636,6 +649,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                             
                         default:
                             // nothing to do here. MainViewController will be shown.
+                            // Make the driver online (even if it's offline?)
+                            YBClient.sharedInstance().status = .online
+                            
                             break
                         }
                         

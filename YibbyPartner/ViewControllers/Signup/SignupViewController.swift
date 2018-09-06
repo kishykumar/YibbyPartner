@@ -47,7 +47,7 @@ class SignupViewController: BaseYibbyViewController,
     }
     
     @IBAction func tncButtonAction(_ sender: AnyObject) {
-        let url = URL(string: "http://yibbyapp.com")!
+        let url = URL(string: "https://www.yibbyapp.com/privacy-policy.html")!
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     

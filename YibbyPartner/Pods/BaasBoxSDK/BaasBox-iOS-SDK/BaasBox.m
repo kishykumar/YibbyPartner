@@ -78,9 +78,18 @@
                                         userInfo:errorDetail];
     }
     
-    NSDictionary *errorDetail = @{NSLocalizedDescriptionKey:response[@"message"],
-                                  @"BaasBox_API_version": @[response[@"API_version"]],
-                                  @"iOS SDK Version" : VERSION};
+    NSDictionary *errorDetail = nil;
+    if (response[@"bb_code"] != nil) {
+        errorDetail = @{NSLocalizedDescriptionKey:response[@"message"],
+                        @"BaasBox_API_version": @[response[@"API_version"]],
+                        @"iOS SDK Version" : VERSION,
+                        @"bb_code": response[@"bb_code"]};
+    } else {
+        errorDetail = @{NSLocalizedDescriptionKey:response[@"message"],
+                        @"BaasBox_API_version": @[response[@"API_version"]],
+                        @"iOS SDK Version" : VERSION};
+    }
+    
     NSError *error = [NSError errorWithDomain:[BaasBox errorDomain]
                                             code:-22223
                                             userInfo:errorDetail];

@@ -78,5 +78,4 @@ open class MapService: NSObject {
             openInAppleMap(lat: lat, long: long)
         }
     }
-    
 }

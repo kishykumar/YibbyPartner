@@ -3,7 +3,7 @@
 //  Yibby
 //
 //  Created by Kishy Kumar on 6/16/16.
-//  Copyright © 2016 MyComp. All rights reserved.
+//  Copyright © 2016 Yibby. All rights reserved.
 //
 
 import UIKit
@@ -26,8 +26,13 @@ class HistoryTableCell : UITableViewCell {
     // MARK: - Setup
     func configure(_ ride: Ride) {
         
+        /********* IMPORTANT NOTE **********/
+        // Any new field added to this function should be reset in resetAllContent as tableview cells are reused
+        
         if (ride.cancelled != RideCancelled.notCancelled.rawValue) {
             cancelledLabelOutlet.isHidden = false
+        } else {
+            cancelledLabelOutlet.isHidden = true
         }
         
         riderImageViewOutlet.layer.borderColor = UIColor.grey5().cgColor
@@ -87,6 +92,15 @@ class HistoryTableCell : UITableViewCell {
     }
     
     // MARK: - Helpers
+    
+    public func resetAllContent() {
+        cancelledLabelOutlet.isHidden = true
+        riderImageViewOutlet.image = UIImage(named: "account1")
+        riderNameLabelOutlet.text = ""
+        dateTimeLabelOutlet.text = ""
+        ridePriceLabelOutlet.text = "$0.00"
+        tripGMSMapViewOutlet.clear()
+    }
     
     fileprivate func adjustGMSCameraFocus(mapView: GMSMapView, pickupMarker: GMSMarker, dropoffMarker: GMSMarker) {
         

@@ -214,12 +214,12 @@
 
 #pragma mark - Upload
 
-- (void) uploadFileWithPermissions:(NSDictionary *)permissions completion:(BAAObjectResultBlock)completionBlock; {
+- (void) uploadFileWithPermissions:(NSDictionary *)permissions filename:(NSString *)filename completion:(BAAObjectResultBlock)completionBlock; {
     
     [self.client uploadFile:self
             withPermissions:permissions
-                 completion:completionBlock];
-    
+            filename:filename
+            completion:completionBlock];
     
 }
 

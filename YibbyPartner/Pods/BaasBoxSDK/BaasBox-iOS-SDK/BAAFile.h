@@ -40,7 +40,7 @@
 + (void) loadFileDetails:(NSString *)fileId completion:(BAAObjectResultBlock)completionBlock;
 + (void) loadFilesAndDetailsWithCompletion:(BAAArrayResultBlock)completionBlock;
 - (void) stopFileLoading;
-- (void) uploadFileWithPermissions:(NSDictionary *)permissions completion:(BAAObjectResultBlock)completionBlock;
+- (void) uploadFileWithPermissions:(NSDictionary *)permissions filename:(NSString *)filename completion:(BAAObjectResultBlock)completionBlock;
 - (void) grantAccessToRole:(NSString *)roleName ofType:(NSString *)accessType completion:(BAAObjectResultBlock)completionBlock;
 - (void) grantAccessToUser:(NSString *)username ofType:(NSString *)accessType completion:(BAAObjectResultBlock)completionBlock;
 - (void) revokeAccessToRole:(NSString *)roleName ofType:(NSString *)accessType completion:(BAAObjectResultBlock)completionBlock;

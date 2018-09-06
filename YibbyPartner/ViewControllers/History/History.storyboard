@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1020,7 +1020,7 @@
         <!--Fare Issue View Controller-->
         <scene sceneID="hxx-dt-U9h">
             <objects>
-                <viewController storyboardIdentifier="FareIssueViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZfY-Fc-Yzc" customClass="FareIssueViewController" customModule="Yibby" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FareIssueViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZfY-Fc-Yzc" customClass="FareIssueViewController" customModule="YibbyPartner" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7ey-xS-HkO"/>
                         <viewControllerLayoutGuide type="bottom" id="1B1-Se-pyh"/>
@@ -1032,7 +1032,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CxC-u8-Zxx" userLabel="ContactYibbyView" customClass="YibbyBorderedUIView">
                                 <rect key="frame" x="12" y="249" width="296" height="70"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gZQ-vK-QpI" userLabel="EmailFAButton" customClass="YibbyButton1" customModule="Yibby" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gZQ-vK-QpI" userLabel="EmailFAButton" customClass="YibbyButton1" customModule="YibbyPartner" customModuleProvider="target">
                                         <rect key="frame" x="251" y="21" width="30" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.21960784310000001" green="0.74509803919999995" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1096,7 +1096,7 @@
         <!--LostItemViewController-->
         <scene sceneID="CB7-oN-WYr">
             <objects>
-                <viewController storyboardIdentifier="LostItemViewControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hgI-wc-zS1" userLabel="LostItemViewController" customClass="LostItemViewController" customModule="Yibby" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LostItemViewControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hgI-wc-zS1" userLabel="LostItemViewController" customClass="LostItemViewController" customModule="YibbyPartner" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zQe-6b-YcB"/>
                         <viewControllerLayoutGuide type="bottom" id="UL8-Dg-pN8"/>
@@ -1117,7 +1117,7 @@
                                                 <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="udg-e2-d3u" userLabel="ContactInfoView" customClass="YibbyBorderedUIView" customModule="Yibby" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="udg-e2-d3u" userLabel="ContactInfoView" customClass="YibbyBorderedUIView" customModule="YibbyPartner" customModuleProvider="target">
                                                 <rect key="frame" x="12" y="99" width="296" height="427"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Contact your driver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IF8-qb-awl" userLabel="ContactLabel">
@@ -1192,7 +1192,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="muZ-wv-MOD" userLabel="ContactDriverView" customClass="YibbyBorderedUIView" customModule="Yibby" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="muZ-wv-MOD" userLabel="ContactDriverView" customClass="YibbyBorderedUIView" customModule="YibbyPartner" customModuleProvider="target">
                                                 <rect key="frame" x="12" y="556" width="296" height="70"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Driver" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jMl-QT-Ipu" userLabel="ContactDriverLabel">
@@ -1201,7 +1201,7 @@
                                                         <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBB-Ln-qNH" userLabel="CallFAButton" customClass="YibbyButton1" customModule="Yibby" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBB-Ln-qNH" userLabel="CallFAButton" customClass="YibbyButton1" customModule="YibbyPartner" customModuleProvider="target">
                                                         <rect key="frame" x="251" y="19" width="30" height="31"/>
                                                         <color key="backgroundColor" red="0.21960784310000001" green="0.74509803919999995" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="19"/>
@@ -1243,7 +1243,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y1h-p2-0xQ" userLabel="ContactYibbyView" customClass="YibbyBorderedUIView" customModule="Yibby" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y1h-p2-0xQ" userLabel="ContactYibbyView" customClass="YibbyBorderedUIView" customModule="YibbyPartner" customModuleProvider="target">
                                                 <rect key="frame" x="12" y="656" width="296" height="70"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Yibby" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJQ-h7-bKp" userLabel="ContactYibbyLabel">
@@ -1252,7 +1252,7 @@
                                                         <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ASx-WN-b9a" userLabel="EmailFAButton" customClass="YibbyButton1" customModule="Yibby" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ASx-WN-b9a" userLabel="EmailFAButton" customClass="YibbyButton1" customModule="YibbyPartner" customModuleProvider="target">
                                                         <rect key="frame" x="251" y="20.5" width="30" height="29"/>
                                                         <color key="backgroundColor" red="0.21960784310000001" green="0.74509803919999995" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="17"/>
