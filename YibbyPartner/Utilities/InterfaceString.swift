@@ -50,7 +50,7 @@ public struct InterfaceString {
     }
     
     public struct Button {
-        static let TANDC = NSLocalizedString("TERMS OF SERVICE AND PRIVACY POLICY", comment: "TANDC")
+        static let TANDC = NSLocalizedString("Terms Of Service", comment: "TANDC")
     }
     
     public struct Ride {

@@ -1,33 +1,23 @@
 //
-//  RewardsViewController.swift
-//  YibbyPartner
+//  TermsViewController.swift
+//  Yibby
 //
-//  Created by Kishy Kumar on 12/28/17.
-//  Copyright © 2017 MyComp. All rights reserved.
+//  Created by Prabhdeep Singh on 8/16/18.
+//  Copyright © 2018 Yibby. All rights reserved.
 //
 
 import UIKit
 
-class RewardsViewController: BaseYibbyViewController{
-    
-    // MARK: - Properties
-
-    
-    // MARK: - Actions
+class TermsViewController: UIViewController {
     
     
-    // MARK: - Setup
-    
-    fileprivate func setupUI() {
-        setupBackButton()
-
-    }
+    @IBOutlet weak var termsTextView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setUpUI()
+
         // Do any additional setup after loading the view.
-        setupUI()
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,6 +25,13 @@ class RewardsViewController: BaseYibbyViewController{
         // Dispose of any resources that can be recreated.
     }
     
+    func setUpUI(){
+        setupBackButton()
+        
+        termsTextView.layer.borderColor = UIColor.borderColor().cgColor
+        termsTextView.layer.borderWidth = 1.0
+        termsTextView.layer.cornerRadius = 7.0
+    }
 
     /*
     // MARK: - Navigation

@@ -7,7 +7,6 @@
         <deployment version="2304" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1032,6 +1031,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CxC-u8-Zxx" userLabel="ContactYibbyView" customClass="YibbyBorderedUIView">
                                 <rect key="frame" x="12" y="249" width="296" height="70"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contact Yibby" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6Y-st-jba" userLabel="ContactYibbyLabel">
+                                        <rect key="frame" x="20" y="25" width="211" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gZQ-vK-QpI" userLabel="EmailFAButton" customClass="YibbyButton1" customModule="YibbyPartner" customModuleProvider="target">
                                         <rect key="frame" x="251" y="21" width="30" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1047,6 +1053,9 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="43y-M1-InT"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="12"/>
@@ -1068,20 +1077,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contact Yibby" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6Y-st-jba" userLabel="ContactYibbyLabel">
-                                <rect key="frame" x="34" y="274" width="216" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                                <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.92941176469999998" green="0.94117647059999998" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="CxC-u8-Zxx" firstAttribute="leading" secondItem="QgR-oa-biO" secondAttribute="leadingMargin" constant="-4" id="ALu-eO-4af"/>
-                            <constraint firstItem="CxC-u8-Zxx" firstAttribute="top" secondItem="7ey-xS-HkO" secondAttribute="bottom" constant="229" id="av3-nO-Cuc"/>
-                            <constraint firstItem="CxC-u8-Zxx" firstAttribute="centerY" secondItem="QgR-oa-biO" secondAttribute="centerY" id="fPQ-T2-gSG"/>
-                            <constraint firstItem="CxC-u8-Zxx" firstAttribute="centerX" secondItem="QgR-oa-biO" secondAttribute="centerX" id="l84-2A-b5P"/>
+                            <constraint firstItem="CxC-u8-Zxx" firstAttribute="top" secondItem="7ey-xS-HkO" secondAttribute="bottom" constant="229" id="D3Q-1K-ZJY"/>
+                            <constraint firstAttribute="trailing" secondItem="CxC-u8-Zxx" secondAttribute="trailing" constant="12" id="Onb-1K-eeC"/>
+                            <constraint firstItem="CxC-u8-Zxx" firstAttribute="leading" secondItem="QgR-oa-biO" secondAttribute="leading" constant="12" id="Ryj-Kf-Kgx"/>
                         </constraints>
                     </view>
                     <size key="freeformSize" width="320" height="568"/>
@@ -1091,7 +1092,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1jX-bk-tNB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3024" y="-1623"/>
+            <point key="canvasLocation" x="-3024.375" y="-1623.5915492957747"/>
         </scene>
         <!--LostItemViewController-->
         <scene sceneID="CB7-oN-WYr">
@@ -1120,7 +1121,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="udg-e2-d3u" userLabel="ContactInfoView" customClass="YibbyBorderedUIView" customModule="YibbyPartner" customModuleProvider="target">
                                                 <rect key="frame" x="12" y="99" width="296" height="427"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Contact your driver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IF8-qb-awl" userLabel="ContactLabel">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Contact your Rider" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IF8-qb-awl" userLabel="ContactLabel">
                                                         <rect key="frame" x="12" y="40" width="272" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                         <nil key="textColor"/>
@@ -1132,7 +1133,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="100" id="V15-SY-eod"/>
                                                         </constraints>
-                                                        <string key="text">a. Contact your driver directly using the call button below to arrange a return ASAP.   b. Leave a voicemail with your contact info if your driver doesn't answer.</string>
+                                                        <string key="text">a. Contact your Rider directly using the call button below to arrange a return ASAP.   b. Leave a voicemail with your contact info if your driver doesn't answer.</string>
                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
@@ -1149,7 +1150,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="100" id="bnS-La-tRU"/>
                                                         </constraints>
-                                                        <string key="text">a. We'll connect with your driver to help the two of you coordinate a return.   b. Email us using the email button below with your name and phone number. </string>
+                                                        <string key="text">a. We'll connect with your rider to help the two of you coordinate a return.   b. Email us using the email button below with your name and phone number. </string>
                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1195,7 +1196,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="muZ-wv-MOD" userLabel="ContactDriverView" customClass="YibbyBorderedUIView" customModule="YibbyPartner" customModuleProvider="target">
                                                 <rect key="frame" x="12" y="556" width="296" height="70"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Driver" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jMl-QT-Ipu" userLabel="ContactDriverLabel">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Rider" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jMl-QT-Ipu" userLabel="ContactDriverLabel">
                                                         <rect key="frame" x="40" y="25" width="216" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                         <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1209,7 +1210,7 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="onCallDriverClick:" destination="hgI-wc-zS1" eventType="touchUpInside" id="590-mJ-EDc"/>
+                                                            <action selector="onCallRiderClick:" destination="hgI-wc-zS1" eventType="touchUpInside" id="Hcw-LB-W9K"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1333,7 +1334,7 @@
                     </view>
                     <size key="freeformSize" width="320" height="800"/>
                     <connections>
-                        <outlet property="callDriverButtonOutlet" destination="cBB-Ln-qNH" id="fI1-CL-Fi5"/>
+                        <outlet property="callRiderButtonOutlet" destination="cBB-Ln-qNH" id="fcC-Eh-pjj"/>
                         <outlet property="emailYibbyButtonOutlet" destination="ASx-WN-b9a" id="Hl6-Z3-SWf"/>
                     </connections>
                 </viewController>
