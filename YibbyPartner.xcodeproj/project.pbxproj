@@ -108,6 +108,9 @@
 		125B0C141E2DE39C00534359 /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C131E2DE39C00534359 /* Registration.swift */; };
 		125B0C161E2DE77500534359 /* YBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C151E2DE77500534359 /* YBClient.swift */; };
 		125B0C1A1E308E3B00534359 /* PendingApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125B0C191E308E3B00534359 /* PendingApprovalViewController.swift */; };
+		12667433213E7C990016E4F8 /* PMAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12667430213E7C990016E4F8 /* PMAlertAction.swift */; };
+		12667434213E7C990016E4F8 /* PMAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12667431213E7C990016E4F8 /* PMAlertController.swift */; };
+		12667435213E7C990016E4F8 /* PMAlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12667432213E7C990016E4F8 /* PMAlertController.xib */; };
 		126E80AB1FC6B39B000EEBEE /* YBDayStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126E80AA1FC6B39B000EEBEE /* YBDayStat.swift */; };
 		126EC5541F73A67F0040704F /* MessageComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126EC5531F73A67F0040704F /* MessageComposer.swift */; };
 		126EC5561F7CCAF40040704F /* YBNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126EC5551F7CCAF40040704F /* YBNotifications.swift */; };
@@ -304,6 +307,9 @@
 		125B0C131E2DE39C00534359 /* Registration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		125B0C151E2DE77500534359 /* YBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBClient.swift; sourceTree = "<group>"; };
 		125B0C191E308E3B00534359 /* PendingApprovalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingApprovalViewController.swift; sourceTree = "<group>"; };
+		12667430213E7C990016E4F8 /* PMAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PMAlertAction.swift; sourceTree = "<group>"; };
+		12667431213E7C990016E4F8 /* PMAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PMAlertController.swift; sourceTree = "<group>"; };
+		12667432213E7C990016E4F8 /* PMAlertController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PMAlertController.xib; sourceTree = "<group>"; };
 		126E80AA1FC6B39B000EEBEE /* YBDayStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YBDayStat.swift; sourceTree = "<group>"; };
 		126EC5531F73A67F0040704F /* MessageComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageComposer.swift; sourceTree = "<group>"; };
 		126EC5551F7CCAF40040704F /* YBNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBNotifications.swift; sourceTree = "<group>"; };
@@ -686,6 +692,7 @@
 		1201B7CC1D23B4AC00A7EEAF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1266742F213E7C990016E4F8 /* PMAlertController-3.2.0 */,
 				1208268C1F6BC10B00BA38E9 /* MapMarker */,
 				12C38CF81E2A13F40003DCB5 /* YBUploadPictureView */,
 				129AAE4B1E226C76006F6CE5 /* ENFooterActivityIndicatorView */,
@@ -757,6 +764,17 @@
 			);
 			path = Documents;
 			sourceTree = "<group>";
+		};
+		1266742F213E7C990016E4F8 /* PMAlertController-3.2.0 */ = {
+			isa = PBXGroup;
+			children = (
+				12667430213E7C990016E4F8 /* PMAlertAction.swift */,
+				12667431213E7C990016E4F8 /* PMAlertController.swift */,
+				12667432213E7C990016E4F8 /* PMAlertController.xib */,
+			);
+			name = "PMAlertController-3.2.0";
+			path = "YibbyPartner/Views/PMAlertController-3.2.0";
+			sourceTree = SOURCE_ROOT;
 		};
 		126EC5571F7E2D490040704F /* Notifications */ = {
 			isa = PBXGroup;
@@ -1097,6 +1115,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12667435213E7C990016E4F8 /* PMAlertController.xib in Resources */,
 				12FA8FD020AEB83300E9C6C5 /* ionicons.ttf in Resources */,
 				12FA8FCF20AEB82F00E9C6C5 /* fontello.ttf in Resources */,
 				12FA8FCE20AEB82800E9C6C5 /* FontAwesome.ttf in Resources */,
@@ -1502,6 +1521,7 @@
 				120826631F5D3F5500BA38E9 /* BoxType.swift in Sources */,
 				129AAE4A1E226B72006F6CE5 /* Colors.swift in Sources */,
 				125B0C101E2DE1B000534359 /* YBDriverLicense.swift in Sources */,
+				12667433213E7C990016E4F8 /* PMAlertAction.swift in Sources */,
 				128491541E263E44002D047B /* VehicleModels.swift in Sources */,
 				12AE130220B50AE6006F3178 /* PXGoogleDirectionsRouteFare.swift in Sources */,
 				1228A0B920317C1600AF6801 /* YBRoundedView.swift in Sources */,
@@ -1578,6 +1598,7 @@
 				12F3CCD61C41EFC700F79A26 /* AppDelegate.swift in Sources */,
 				12368414212AE73700B37B8B /* LostItemViewController.swift in Sources */,
 				128C0B101E2B14E70063FD91 /* YBBorderedUIView.swift in Sources */,
+				12667434213E7C990016E4F8 /* PMAlertController.swift in Sources */,
 				1201B7B81D23B49000A7EEAF /* SettingsViewController.swift in Sources */,
 				12FAC28A1E34768B00D77486 /* YBLocation.swift in Sources */,
 				125B0C141E2DE39C00534359 /* Registration.swift in Sources */,

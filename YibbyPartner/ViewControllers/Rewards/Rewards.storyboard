@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ftE-gg-uM2" userLabel="RewardView" customClass="YibbyBorderedUIView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ftE-gg-uM2" userLabel="RewardView">
                                 <rect key="frame" x="39" y="80" width="296" height="70"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take the full price of the ride!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kLR-fE-pez" userLabel="RewardLabel">
@@ -67,6 +67,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N6b-hY-wpE"/>
                     </view>
+                    <connections>
+                        <outlet property="rewardView" destination="ftE-gg-uM2" id="4wi-gh-bWK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YGY-Km-L0F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

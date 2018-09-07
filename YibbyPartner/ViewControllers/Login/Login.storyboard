@@ -80,6 +80,9 @@
                                 <state key="normal" title="Forgot your password?">
                                     <color key="titleColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="onForgotPasswordClick:" destination="5WA-Fd-nAG" eventType="touchUpInside" id="ZGh-xg-Zeb"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lR9-Td-FVe" userLabel="OtherLoginSV">
                                 <rect key="frame" x="16" y="580" width="343" height="57"/>

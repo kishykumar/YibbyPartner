@@ -208,6 +208,7 @@ class InsuranceViewController: BaseYibbyViewController,
         setupDelegates()
         initProperties()
         setupValidator()
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {

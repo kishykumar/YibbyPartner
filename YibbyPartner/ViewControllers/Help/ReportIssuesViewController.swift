@@ -51,6 +51,16 @@ class ReportIssuesViewController: BaseYibbyViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onClickDriverView(_ sender: UITapGestureRecognizer) {
+    }
+    
+    @IBAction func onClickContactYibby(_ sender: UITapGestureRecognizer) {
+        let email = "support@yibby.zohodesk.com"
+        if let url = URL(string: "mailto:\(email)") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
     
     /*
      // MARK: - Navigation

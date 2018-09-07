@@ -48,7 +48,10 @@ class SignupViewController: BaseYibbyViewController,
     
     @IBAction func submitFormButton(_ sender: UIButton) {
         if tandcSwitch.isSelected == true {
-            submitForm()
+           // submitForm()
+            let registerStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Register, bundle: nil)
+            let initialRegisterController = registerStoryboard.instantiateViewController(withIdentifier: "VehicleViewControllerIdentifier") as! VehicleViewController
+            self.navigationController!.pushViewController(initialRegisterController, animated: true)
         } else {
             self.errorLabelOutlet.text = MESSAGE_FOR_NOT_ACCEPTING_TANDC
             errorLabelOutlet.isHidden = false
