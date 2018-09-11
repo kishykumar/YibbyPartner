@@ -6,6 +6,7 @@
 
 # Ignore 
 MyPlayground.playground/
+*.orig
 
 ## User settings
 xcuserdata/

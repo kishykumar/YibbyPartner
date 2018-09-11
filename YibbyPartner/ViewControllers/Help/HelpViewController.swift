@@ -97,7 +97,26 @@ class HelpViewController: BaseYibbyViewController {
     
     func updateLastRideUI() {
         
-        if let ride = lastRide {
+//        if let ride = lastRide {
+//
+//            lastTripPrice.text = "$\(ride.bidPrice!)"
+//
+//            if let rideISODateTime = ride.datetime, let rideDate = TimeUtil.getDateFromISOTime(rideISODateTime) {
+//                let prettyDate = TimeUtil.prettyPrintDate1(rideDate)
+//                lastTripTime.text = prettyDate
+//            }
+//
+//            if let profilePictureFileId = ride.rider?.profilePictureFileId {
+//                setPicture(imageView: userImage, ride: ride, fileId: profilePictureFileId)
+//            }
+//
+////            if let vehicle = ride.vehicle {
+////                vehicleMakeModelLabelOutlet.text = "\(vehicle.make!.capitalized) \(vehicle.model!.capitalized)"
+////            }
+//        }
+        
+        
+        if let ride = lastRide, let myRider = ride.rider, let myVehicle = ride.vehicle {
             
             lastTripPrice.text = "$\(ride.bidPrice!)"
             
@@ -106,14 +125,24 @@ class HelpViewController: BaseYibbyViewController {
                 lastTripTime.text = prettyDate
             }
             
-            if let profilePictureFileId = ride.rider?.profilePictureFileId {
-                setPicture(imageView: userImage, ride: ride, fileId: profilePictureFileId)
+            self.userImage.setImageForName(string: myRider.firstName!,
+                                           backgroundColor: nil,
+                                           circular: true,
+                                           textAttributes: nil)
+            
+            if let profilePictureFileId = myRider.profilePictureFileId {
+                
+                if (profilePictureFileId != "") {
+                    if let newUrl = BAAFile.getCompleteURL(withToken: profilePictureFileId) {
+                        self.userImage.pin_setImage(from: newUrl)
+                    }
+                }
             }
             
-//            if let vehicle = ride.vehicle {
-//                vehicleMakeModelLabelOutlet.text = "\(vehicle.make!.capitalized) \(vehicle.model!.capitalized)"
-//            }
+            vehicleMakeModelLabelOutlet.text = "\(myVehicle.make!.capitalized) \(myVehicle.model!.capitalized)"
         }
+        
+        
     }
     
     @objc fileprivate func loadLastRide() {

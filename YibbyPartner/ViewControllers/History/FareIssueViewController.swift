@@ -12,7 +12,6 @@ class FareIssueViewController: UIViewController {
     
     @IBOutlet weak var emailYibbyOutlet: YibbyButton1!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()

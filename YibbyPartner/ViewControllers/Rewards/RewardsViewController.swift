@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import MessageUI
 
-class RewardsViewController: BaseYibbyViewController{
+class RewardsViewController: BaseYibbyViewController, MFMailComposeViewControllerDelegate{
     
     // MARK: - Properties
 
     @IBOutlet weak var rewardView: UIView!
+    @IBOutlet weak var referView: UIView!
+    
+    
+    let EMAIL_BODY:String = "Referrer details: <Your name> <Your phone number> \n - is referring my friend - \n\n Friend details: <Your friend's name> <Your friend's phone number> \n\n Yibby will make $5 payment to you via Venmo once your friend takes a ride with us. \n\n Please provide your venmo id: <Referrer venmo id>"
     
     // MARK: - Actions
     
@@ -25,6 +30,10 @@ class RewardsViewController: BaseYibbyViewController{
         rewardView.layer.borderColor = UIColor.borderColor().cgColor
         rewardView.layer.borderWidth = 1.0
         rewardView.layer.cornerRadius = 7
+        
+        referView.layer.borderColor = UIColor.borderColor().cgColor
+        referView.layer.borderWidth = 1.0
+        referView.layer.cornerRadius = 7
         
     }
     
@@ -40,7 +49,28 @@ class RewardsViewController: BaseYibbyViewController{
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func contactYibbyButtonAction(_ sender: UIButton) {
+        sendEmail()
+    }
+    
+    
+    func sendEmail(){
+        if !MFMailComposeViewController.canSendMail(){
+            ToastUtil.displayToastOnVC(self, title: "Mail account not configured", body: "Mail Services are not available. Please configure a mail account to send Referrals", theme: .warning, presentationStyle: .center, duration: .seconds(seconds: 5), windowLevel: UIWindowLevelNormal)
+            return
+        }
+        let composeVc = MFMailComposeViewController()
+        composeVc.mailComposeDelegate = self
+        composeVc.setToRecipients(["support@yibby.zohodesk.com"])
+        composeVc.setSubject("Yibby Referral")
+        composeVc.setMessageBody(EMAIL_BODY, isHTML: false)
+        self.present(composeVc, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
