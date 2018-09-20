@@ -52,6 +52,7 @@ class ReportIssuesViewController: BaseYibbyViewController {
     }
     
     @IBAction func onClickDriverView(_ sender: UITapGestureRecognizer) {
+        AlertUtil.displayAlert("Coming Soon!", message: "")
     }
     
     @IBAction func onClickContactYibby(_ sender: UITapGestureRecognizer) {

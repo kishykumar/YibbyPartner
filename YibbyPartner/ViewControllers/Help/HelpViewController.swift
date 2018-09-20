@@ -97,51 +97,23 @@ class HelpViewController: BaseYibbyViewController {
     
     func updateLastRideUI() {
         
-//        if let ride = lastRide {
-//
-//            lastTripPrice.text = "$\(ride.bidPrice!)"
-//
-//            if let rideISODateTime = ride.datetime, let rideDate = TimeUtil.getDateFromISOTime(rideISODateTime) {
-//                let prettyDate = TimeUtil.prettyPrintDate1(rideDate)
-//                lastTripTime.text = prettyDate
-//            }
-//
-//            if let profilePictureFileId = ride.rider?.profilePictureFileId {
-//                setPicture(imageView: userImage, ride: ride, fileId: profilePictureFileId)
-//            }
-//
-////            if let vehicle = ride.vehicle {
-////                vehicleMakeModelLabelOutlet.text = "\(vehicle.make!.capitalized) \(vehicle.model!.capitalized)"
-////            }
-//        }
-        
-        
-        if let ride = lastRide, let myRider = ride.rider, let myVehicle = ride.vehicle {
-            
+        if let ride = lastRide {
+
             lastTripPrice.text = "$\(ride.bidPrice!)"
-            
+
             if let rideISODateTime = ride.datetime, let rideDate = TimeUtil.getDateFromISOTime(rideISODateTime) {
                 let prettyDate = TimeUtil.prettyPrintDate1(rideDate)
                 lastTripTime.text = prettyDate
             }
-            
-            self.userImage.setImageForName(string: myRider.firstName!,
-                                           backgroundColor: nil,
-                                           circular: true,
-                                           textAttributes: nil)
-            
-            if let profilePictureFileId = myRider.profilePictureFileId {
-                
-                if (profilePictureFileId != "") {
-                    if let newUrl = BAAFile.getCompleteURL(withToken: profilePictureFileId) {
-                        self.userImage.pin_setImage(from: newUrl)
-                    }
-                }
+
+            if let profilePictureFileId = ride.rider?.profilePictureFileId {
+                setPicture(imageView: userImage, ride: ride, fileId: profilePictureFileId)
             }
-            
-            vehicleMakeModelLabelOutlet.text = "\(myVehicle.make!.capitalized) \(myVehicle.model!.capitalized)"
+
+            if let vehicle = ride.vehicle {
+                vehicleMakeModelLabelOutlet.text = "\(vehicle.make!.capitalized) \(vehicle.model!.capitalized)"
+            }
         }
-        
         
     }
     
