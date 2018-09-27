@@ -44,3 +44,19 @@ extension NSString {
     }
     
 }
+
+
+extension String {
+    func stripPhoneNumber() -> String {
+        var formattedPhoneNumber = self
+        formattedPhoneNumber =
+            formattedPhoneNumber.replacingOccurrences(of: "(", with: "", options: .literal, range: nil)
+        formattedPhoneNumber =
+            formattedPhoneNumber.replacingOccurrences(of: ")", with: "", options: .literal, range: nil)
+        formattedPhoneNumber =
+            formattedPhoneNumber.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
+        formattedPhoneNumber =
+            formattedPhoneNumber.replacingOccurrences(of: "-", with: "", options: .literal, range: nil)
+        return formattedPhoneNumber
+    }
+}

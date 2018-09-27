@@ -89,7 +89,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="pi7-nc-epW" userLabel="TermsStack">
-                                <rect key="frame" x="16" y="566.5" width="343" height="25"/>
+                                <rect key="frame" x="88" y="407" width="199.5" height="25"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDH-zm-B6R" customClass="AIFlatSwitch" customModule="AIFlatSwitch">
                                         <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
@@ -102,7 +102,7 @@
                                                 <color key="value" red="0.1764705882" green="0.70588235290000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="trailStrokeColor">
-                                                <color key="value" red="0.1764705882" green="0.70588235290000001" blue="0.20392156859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
                                                 <real key="value" value="2"/>
@@ -119,7 +119,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms of Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bhq-Na-Zug">
-                                        <rect key="frame" x="84" y="0.0" width="259" height="25"/>
+                                        <rect key="frame" x="84" y="0.0" width="115.5" height="25"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
@@ -135,16 +135,15 @@
                         <constraints>
                             <constraint firstItem="HeU-NK-SbN" firstAttribute="leading" secondItem="1GQ-Jz-FfC" secondAttribute="leadingMargin" id="72B-XM-nJh"/>
                             <constraint firstItem="TWC-Vb-U7h" firstAttribute="trailing" secondItem="1GQ-Jz-FfC" secondAttribute="trailingMargin" id="DV6-5y-ZP8"/>
+                            <constraint firstItem="pi7-nc-epW" firstAttribute="top" secondItem="TWC-Vb-U7h" secondAttribute="bottom" constant="20" id="Dai-zJ-iVd"/>
                             <constraint firstItem="HeU-NK-SbN" firstAttribute="top" secondItem="tgX-wm-jvV" secondAttribute="bottom" constant="10" id="FAs-gy-adY"/>
+                            <constraint firstItem="pi7-nc-epW" firstAttribute="centerX" secondItem="1GQ-Jz-FfC" secondAttribute="centerX" id="K60-wk-pE1"/>
                             <constraint firstItem="TWC-Vb-U7h" firstAttribute="leading" secondItem="1GQ-Jz-FfC" secondAttribute="leadingMargin" id="M41-K0-NId"/>
                             <constraint firstItem="TWC-Vb-U7h" firstAttribute="top" secondItem="HeU-NK-SbN" secondAttribute="bottom" constant="25" id="N4S-sZ-tBh"/>
-                            <constraint firstItem="pi7-nc-epW" firstAttribute="leading" secondItem="1GQ-Jz-FfC" secondAttribute="leadingMargin" id="W5q-E3-XjE"/>
                             <constraint firstItem="tgX-wm-jvV" firstAttribute="top" secondItem="pte-6d-DIf" secondAttribute="bottom" constant="10" id="Yt1-bv-Hoz"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="pi7-nc-epW" secondAttribute="trailing" id="ekO-BA-Gpz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tgX-wm-jvV" secondAttribute="trailing" id="imv-sZ-ia3"/>
                             <constraint firstItem="tgX-wm-jvV" firstAttribute="leading" secondItem="1GQ-Jz-FfC" secondAttribute="leadingMargin" id="kWE-3T-Dr4"/>
                             <constraint firstItem="HeU-NK-SbN" firstAttribute="trailing" secondItem="1GQ-Jz-FfC" secondAttribute="trailingMargin" id="ofC-LD-rhL"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="pi7-nc-epW" secondAttribute="bottom" constant="75.5" id="xgm-a8-OSv"/>
                         </constraints>
                     </view>
                     <connections>

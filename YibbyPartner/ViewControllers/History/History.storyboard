@@ -365,7 +365,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FrU-IZ-KxR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3024.375" y="-2505.6338028169016"/>
+            <point key="canvasLocation" x="-3045" y="-2505"/>
         </scene>
         <!--History View Controller-->
         <scene sceneID="QBU-D0-Zne">
@@ -1092,7 +1092,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1jX-bk-tNB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3024.375" y="-1623.5915492957747"/>
+            <point key="canvasLocation" x="-3081" y="-1700"/>
         </scene>
         <!--LostItemViewController-->
         <scene sceneID="CB7-oN-WYr">

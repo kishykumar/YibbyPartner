@@ -108,6 +108,34 @@ extension UIView {
         setBorder(borderColor)
     }
     
+    func addBlur() -> UIVisualEffectView? {
+        
+        //only apply the blur if the user hasn't disabled transparency effects
+        if !UIAccessibilityIsReduceTransparencyEnabled() {
+            self.backgroundColor = .clear
+            
+            let blurEffect = UIBlurEffect(style: .dark)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            //always fill the view
+            blurEffectView.frame = self.bounds
+            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            
+            self.addSubview(blurEffectView) //if you have more UIViews, use an insertSubview API to place it where needed
+            return blurEffectView
+        } else {
+            self.backgroundColor = .black
+        }
+        return nil
+    }
+    
+    func removeBlur(blurEffectView: UIVisualEffectView) {
+        
+        UIView.animate(withDuration: 1.5, animations: {blurEffectView.alpha = 0.0},
+                       completion: {(value: Bool) in
+                        blurEffectView.removeFromSuperview()
+        })
+    }
+    
     /**
      Rounds the given set of corners to the specified radius
      

@@ -98,22 +98,23 @@ class HelpViewController: BaseYibbyViewController {
     func updateLastRideUI() {
         
         if let ride = lastRide {
-            
+
             lastTripPrice.text = "$\(ride.bidPrice!)"
-            
+
             if let rideISODateTime = ride.datetime, let rideDate = TimeUtil.getDateFromISOTime(rideISODateTime) {
                 let prettyDate = TimeUtil.prettyPrintDate1(rideDate)
                 lastTripTime.text = prettyDate
             }
-            
+
             if let profilePictureFileId = ride.rider?.profilePictureFileId {
                 setPicture(imageView: userImage, ride: ride, fileId: profilePictureFileId)
             }
-            
-//            if let vehicle = ride.vehicle {
-//                vehicleMakeModelLabelOutlet.text = "\(vehicle.make!.capitalized) \(vehicle.model!.capitalized)"
-//            }
+
+            if let vehicle = ride.vehicle {
+                vehicleMakeModelLabelOutlet.text = "\(vehicle.make!.capitalized) \(vehicle.model!.capitalized)"
+            }
         }
+        
     }
     
     @objc fileprivate func loadLastRide() {

@@ -18,11 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ftE-gg-uM2" userLabel="RewardView" customClass="YibbyBorderedUIView">
-                                <rect key="frame" x="39" y="80" width="296" height="70"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ftE-gg-uM2" userLabel="RewardView">
+                                <rect key="frame" x="10" y="80" width="355" height="70"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take the full price of the ride!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kLR-fE-pez" userLabel="RewardLabel">
-                                        <rect key="frame" x="20" y="25" width="257" height="19.5"/>
+                                        <rect key="frame" x="20" y="25" width="316" height="20"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -58,15 +58,80 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QcO-rZ-rMa">
+                                <rect key="frame" x="10" y="174" width="355" height="155"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refer Riders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ip0-J4-JMu">
+                                        <rect key="frame" x="10" y="8" width="339" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Lrw-Pn-eCK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cyi-ez-eSd">
+                                        <rect key="frame" x="10" y="43" width="339" height="46"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="46" id="v3E-yF-q4V"/>
+                                        </constraints>
+                                        <string key="text">Get $5 for every rider and driver
+(paid through Venmo)</string>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <color key="textColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ROn-ro-cOK">
+                                        <rect key="frame" x="333" y="380" width="0.0" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="n53-iV-S2N"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7W9-kT-ghV">
+                                        <rect key="frame" x="10" y="105" width="335" height="30"/>
+                                        <state key="normal" title="Contact Yibby for Referral"/>
+                                        <connections>
+                                            <action selector="contactYibbyButtonAction:" destination="Nkd-oB-g8y" eventType="touchUpInside" id="LsJ-Pp-X2W"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="ip0-J4-JMu" firstAttribute="leading" secondItem="QcO-rZ-rMa" secondAttribute="leading" constant="10" id="07b-Lk-ha6"/>
+                                    <constraint firstAttribute="trailing" secondItem="7W9-kT-ghV" secondAttribute="trailing" constant="10" id="56I-mJ-q4e"/>
+                                    <constraint firstItem="ROn-ro-cOK" firstAttribute="top" secondItem="Cyi-ez-eSd" secondAttribute="bottom" constant="291" id="6rQ-II-zjy"/>
+                                    <constraint firstItem="Cyi-ez-eSd" firstAttribute="leading" secondItem="QcO-rZ-rMa" secondAttribute="leading" constant="10" id="BXD-lo-TQN"/>
+                                    <constraint firstAttribute="trailing" secondItem="ip0-J4-JMu" secondAttribute="trailing" constant="6" id="IGC-IC-xuu"/>
+                                    <constraint firstItem="7W9-kT-ghV" firstAttribute="top" secondItem="Cyi-ez-eSd" secondAttribute="bottom" constant="16" id="K2R-7E-uob"/>
+                                    <constraint firstAttribute="trailing" secondItem="ROn-ro-cOK" secondAttribute="trailing" constant="22" id="P4S-D1-M0A"/>
+                                    <constraint firstItem="7W9-kT-ghV" firstAttribute="leading" secondItem="QcO-rZ-rMa" secondAttribute="leading" constant="10" id="bf3-0i-fRJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Cyi-ez-eSd" secondAttribute="trailing" constant="6" id="kuJ-w1-4nv"/>
+                                    <constraint firstAttribute="height" constant="155" id="lbH-Vd-uDc"/>
+                                    <constraint firstItem="ip0-J4-JMu" firstAttribute="top" secondItem="QcO-rZ-rMa" secondAttribute="top" constant="8" id="xFL-WO-oZl"/>
+                                    <constraint firstItem="Cyi-ez-eSd" firstAttribute="top" secondItem="ip0-J4-JMu" secondAttribute="bottom" constant="5" id="zC7-1z-V1L"/>
+                                    <constraint firstItem="Cyi-ez-eSd" firstAttribute="top" secondItem="ip0-J4-JMu" secondAttribute="bottom" constant="5" id="zM9-pt-SLV"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92941176470588238" green="0.94117647058823528" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ftE-gg-uM2" firstAttribute="leading" secondItem="N6b-hY-wpE" secondAttribute="leading" constant="39" id="1qE-Fd-tDc"/>
+                            <constraint firstItem="ftE-gg-uM2" firstAttribute="leading" secondItem="N6b-hY-wpE" secondAttribute="leading" constant="10" id="1qE-Fd-tDc"/>
+                            <constraint firstItem="QcO-rZ-rMa" firstAttribute="top" secondItem="ftE-gg-uM2" secondAttribute="bottom" constant="24" id="72c-bA-RVC"/>
                             <constraint firstItem="ftE-gg-uM2" firstAttribute="top" secondItem="N6b-hY-wpE" secondAttribute="top" constant="60" id="9Hu-yF-MLL"/>
-                            <constraint firstItem="N6b-hY-wpE" firstAttribute="trailing" secondItem="ftE-gg-uM2" secondAttribute="trailing" constant="40" id="J1X-TJ-rmu"/>
+                            <constraint firstItem="N6b-hY-wpE" firstAttribute="trailing" secondItem="ftE-gg-uM2" secondAttribute="trailing" constant="10" id="J1X-TJ-rmu"/>
+                            <constraint firstItem="N6b-hY-wpE" firstAttribute="trailing" secondItem="QcO-rZ-rMa" secondAttribute="trailing" constant="10" id="Rg8-sR-x62"/>
+                            <constraint firstItem="QcO-rZ-rMa" firstAttribute="leading" secondItem="N6b-hY-wpE" secondAttribute="leading" constant="10" id="fQt-Je-cnu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N6b-hY-wpE"/>
                     </view>
+                    <connections>
+                        <outlet property="referView" destination="QcO-rZ-rMa" id="1ON-lM-HfV"/>
+                        <outlet property="rewardView" destination="ftE-gg-uM2" id="4wi-gh-bWK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YGY-Km-L0F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
