@@ -10,6 +10,7 @@ import UIKit
 
 class FareIssueViewController: UIViewController {
     
+    @IBOutlet weak var contactYibbyView: UIView!
     @IBOutlet weak var emailYibbyOutlet: YibbyButton1!
     
     override func viewDidLoad() {
@@ -27,9 +28,13 @@ class FareIssueViewController: UIViewController {
         setupBackButton()
         emailYibbyOutlet.buttonCornerRadius = 5.0
         emailYibbyOutlet.color = UIColor.appDarkGreen1()
+        
+        contactYibbyView.layer.cornerRadius = 7
+        contactYibbyView.layer.borderWidth = 1
+        contactYibbyView.layer.borderColor = UIColor.appDarkGreen1().cgColor
     }
     
-    @IBAction func onClickYibbyEmail(_ sender: YibbyButton1) {
+    @IBAction func onClickYibbyEmail(_ sender: UITapGestureRecognizer!) {
         let email = "support@yibby.zohodesk.com"
         if let url = URL(string: "mailto:\(email)") {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)

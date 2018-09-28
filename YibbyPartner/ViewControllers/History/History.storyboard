@@ -1028,7 +1028,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CxC-u8-Zxx" userLabel="ContactYibbyView" customClass="YibbyBorderedUIView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CxC-u8-Zxx" userLabel="ContactYibbyView">
                                 <rect key="frame" x="12" y="249" width="296" height="70"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contact Yibby" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6Y-st-jba" userLabel="ContactYibbyLabel">
@@ -1046,13 +1046,10 @@
                                         <state key="normal" title="">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <connections>
-                                            <action selector="onClickYibbyEmail:" destination="ZfY-Fc-Yzc" eventType="touchUpInside" id="Cg6-cm-kDL"/>
-                                            <action selector="onEmailYibbyClick:" destination="hgI-wc-zS1" eventType="touchUpInside" id="paZ-ze-AAy"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="43y-M1-InT"/>
                                 </constraints>
@@ -1076,6 +1073,9 @@
                                         <color key="value" cocoaTouchSystemColor="darkTextColor"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="a1j-Te-YSm" appends="YES" id="hav-jk-kel"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92941176469999998" green="0.94117647059999998" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1087,10 +1087,16 @@
                     </view>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
+                        <outlet property="contactYibbyView" destination="CxC-u8-Zxx" id="tPx-d8-Gt9"/>
                         <outlet property="emailYibbyOutlet" destination="gZQ-vK-QpI" id="Pya-T0-Yav"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1jX-bk-tNB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="a1j-Te-YSm">
+                    <connections>
+                        <action selector="onClickYibbyEmail:" destination="ZfY-Fc-Yzc" id="y7e-tZ-kdP"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-3081" y="-1700"/>
         </scene>
@@ -1118,7 +1124,7 @@
                                                 <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="udg-e2-d3u" userLabel="ContactInfoView" customClass="YibbyBorderedUIView" customModule="YibbyPartner" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="udg-e2-d3u" userLabel="ContactInfoView">
                                                 <rect key="frame" x="12" y="99" width="296" height="427"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Contact your Rider" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IF8-qb-awl" userLabel="ContactLabel">
@@ -1193,7 +1199,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="muZ-wv-MOD" userLabel="ContactDriverView" customClass="YibbyBorderedUIView" customModule="YibbyPartner" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="muZ-wv-MOD" userLabel="ContactDriverView">
                                                 <rect key="frame" x="12" y="556" width="296" height="70"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Rider" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jMl-QT-Ipu" userLabel="ContactDriverLabel">
@@ -1203,18 +1209,16 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBB-Ln-qNH" userLabel="CallFAButton" customClass="YibbyButton1" customModule="YibbyPartner" customModuleProvider="target">
-                                                        <rect key="frame" x="251" y="19" width="30" height="31"/>
+                                                        <rect key="frame" x="251" y="18.5" width="30" height="32"/>
                                                         <color key="backgroundColor" red="0.21960784310000001" green="0.74509803919999995" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="19"/>
                                                         <state key="normal" title="">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="onCallRiderClick:" destination="hgI-wc-zS1" eventType="touchUpInside" id="Hcw-LB-W9K"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="cBB-Ln-qNH" secondAttribute="trailing" constant="15" id="0gs-hA-HvI"/>
                                                     <constraint firstAttribute="trailing" secondItem="jMl-QT-Ipu" secondAttribute="trailing" constant="40" id="7LM-Qv-wed"/>
@@ -1243,8 +1247,11 @@
                                                         <color key="value" cocoaTouchSystemColor="darkTextColor"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="PsO-9P-rQs" appends="YES" id="T49-dZ-aYr"/>
+                                                </connections>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y1h-p2-0xQ" userLabel="ContactYibbyView" customClass="YibbyBorderedUIView" customModule="YibbyPartner" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y1h-p2-0xQ" userLabel="ContactYibbyView">
                                                 <rect key="frame" x="12" y="656" width="296" height="70"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Yibby" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJQ-h7-bKp" userLabel="ContactYibbyLabel">
@@ -1254,18 +1261,16 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ASx-WN-b9a" userLabel="EmailFAButton" customClass="YibbyButton1" customModule="YibbyPartner" customModuleProvider="target">
-                                                        <rect key="frame" x="251" y="20.5" width="30" height="29"/>
+                                                        <rect key="frame" x="251" y="20" width="30" height="30"/>
                                                         <color key="backgroundColor" red="0.21960784310000001" green="0.74509803919999995" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="17"/>
                                                         <state key="normal" title="">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="onEmailYibbyClick:" destination="hgI-wc-zS1" eventType="touchUpInside" id="9Hy-Qq-6bh"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstItem="EJQ-h7-bKp" firstAttribute="leading" secondItem="y1h-p2-0xQ" secondAttribute="leading" constant="40" id="5WB-hb-lF6"/>
                                                     <constraint firstItem="ASx-WN-b9a" firstAttribute="centerY" secondItem="y1h-p2-0xQ" secondAttribute="centerY" id="Rjc-hc-7Ze"/>
@@ -1294,6 +1299,9 @@
                                                         <color key="value" cocoaTouchSystemColor="darkTextColor"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="42b-2f-mbj" appends="YES" id="Lo6-Ds-bSH"/>
+                                                </connections>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1334,11 +1342,24 @@
                     </view>
                     <size key="freeformSize" width="320" height="800"/>
                     <connections>
-                        <outlet property="callRiderButtonOutlet" destination="cBB-Ln-qNH" id="fcC-Eh-pjj"/>
+                        <outlet property="callRiderButtonOutlet" destination="cBB-Ln-qNH" id="EoE-jB-KMD"/>
+                        <outlet property="contactInfoViewOutlet" destination="udg-e2-d3u" id="Kws-Ir-bba"/>
+                        <outlet property="contactRiderOutlet" destination="muZ-wv-MOD" id="aoE-n5-N7Z"/>
+                        <outlet property="contactYibbyOutlet" destination="y1h-p2-0xQ" id="lUL-P6-Y12"/>
                         <outlet property="emailYibbyButtonOutlet" destination="ASx-WN-b9a" id="Hl6-Z3-SWf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NvN-qy-8X7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="PsO-9P-rQs">
+                    <connections>
+                        <action selector="onCallRiderClick:" destination="hgI-wc-zS1" id="cQm-rJ-4Ql"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="42b-2f-mbj">
+                    <connections>
+                        <action selector="onEmailClick:" destination="hgI-wc-zS1" id="0OB-cC-ZDf"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-2241" y="-1551"/>
         </scene>
