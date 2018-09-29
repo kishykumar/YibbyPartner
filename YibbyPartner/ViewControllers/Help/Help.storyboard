@@ -553,7 +553,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4710" y="-813"/>
+            <point key="canvasLocation" x="4661" y="-813"/>
         </scene>
         <!--Terms View Controller-->
         <scene sceneID="ESP-PI-nZA">

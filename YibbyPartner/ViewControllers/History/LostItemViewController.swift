@@ -12,19 +12,22 @@ class LostItemViewController: BaseYibbyViewController {
 
     // MARK: - Properties
     
+    @IBOutlet weak var contactRiderOutlet: UIView!
+    @IBOutlet weak var contactYibbyOutlet: UIView!
+    @IBOutlet weak var contactInfoViewOutlet: UIView!
     @IBOutlet weak var callRiderButtonOutlet: YibbyButton1!
     @IBOutlet weak var emailYibbyButtonOutlet: YibbyButton1!
     var myTrip: Ride!
 
     // MARK: - Actions
     
-    @IBAction func onCallRiderClick(_ sender: YibbyButton1) {
+    @IBAction func onCallRiderClick(_ sender: UITapGestureRecognizer) {
         if let myRider = myTrip.rider {
             myRider.call()
         }
     }
 
-    @IBAction func onEmailYibbyClick(_ sender: YibbyButton1) {
+    @IBAction func onEmailClick(_ sender: UITapGestureRecognizer) {
         let email = "support@yibby.zohodesk.com"
         if let url = URL(string: "mailto:\(email)") {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -48,6 +51,18 @@ class LostItemViewController: BaseYibbyViewController {
         
         emailYibbyButtonOutlet.buttonCornerRadius = 5.0
         emailYibbyButtonOutlet.color = UIColor.appDarkGreen1()
+        
+        contactYibbyOutlet.layer.cornerRadius = 7
+        contactYibbyOutlet.layer.borderWidth = 1
+        contactYibbyOutlet.layer.borderColor = UIColor.appDarkGreen1().cgColor
+        
+        contactRiderOutlet.layer.cornerRadius = 7
+        contactRiderOutlet.layer.borderWidth = 1
+        contactRiderOutlet.layer.borderColor = UIColor.appDarkGreen1().cgColor
+        
+        contactInfoViewOutlet.layer.cornerRadius = 7
+        contactInfoViewOutlet.layer.borderWidth = 1
+        contactInfoViewOutlet.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     override func didReceiveMemoryWarning() {
