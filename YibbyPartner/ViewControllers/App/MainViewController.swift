@@ -276,24 +276,24 @@ class MainViewController: BaseYibbyViewController, OfferViewControllerDelegate {
             
             // Initialize the client bid state
             YBClient.sharedInstance().bid = bid
-            
+
+            // If anything is pushed on MainViewController like rideEndViewController, or rideStartViewController, etc, just pop all
+            if ((self.navigationController?.topViewController as? MainViewController) == nil) {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+
             // if an alert was already displayed, dismiss it
             if self.presentedViewController != nil {
-                
+
                 if (self.presentedViewController as? UIAlertController) != nil {
                     self.dismiss(animated: false, completion: nil)
                 }
-                
+
                 if let offerNavController = self.presentedViewController as? UINavigationController {
                     if (offerNavController.viewControllers.first as? OfferViewController != nil) {
                         self.dismiss(animated: false, completion: nil)
                     }
                 }
-            }
-            
-            // if RideEndViewController was displayed, remove it
-            if let rideEndVC = self.navigationController?.visibleViewController as? RideEndViewController {
-                rideEndVC.performSegue(withIdentifier: "unwindToMainViewController1", sender: rideEndVC)
             }
             
             let bidElapsedTime = TimeUtil.diffFromCurTimeISO(bid.creationTime!)

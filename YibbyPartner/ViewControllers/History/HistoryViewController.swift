@@ -91,9 +91,8 @@ class HistoryViewController: BaseYibbyTableViewController, DZNEmptyDataSetSource
         
         let ride = self.ridesList[indexPath.row]
 
-        //let myride = YBClient.sharedInstance().fakeRide
+        cell.resetAllContent()
         cell.configure(ride)
-        
         cell.selectionStyle = .none
         
         return cell

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -14,9 +14,6 @@
     <customFonts key="customFonts">
         <array key="FontAwesome.ttf">
             <string>FontAwesome</string>
-        </array>
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
         </array>
     </customFonts>
     <scenes>
@@ -46,13 +43,13 @@
                                                 </constraints>
                                             </view>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account" translatesAutoresizingMaskIntoConstraints="NO" id="6dQ-5e-E1i" customClass="SwiftyAvatar" customModule="YibbyPartner" customModuleProvider="target">
-                                                <rect key="frame" x="30.5" y="5" width="90.5" height="90.5"/>
+                                                <rect key="frame" x="25.5" y="5" width="100.5" height="100.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="6dQ-5e-E1i" secondAttribute="height" multiplier="1:1" id="jlw-s8-SkF"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Yibby User" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HC3-ju-IHZ" userLabel="NameLabelOutlet" customClass="YibbyPaddingLabel" customModule="YibbyPartner" customModuleProvider="target">
-                                                <rect key="frame" x="32" y="100.5" width="87.5" height="27.5"/>
+                                                <rect key="frame" x="39" y="110.5" width="73.5" height="17.5"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -97,6 +94,7 @@
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="jPc-3p-ToY" firstAttribute="centerY" secondItem="JhR-83-3dD" secondAttribute="centerY" id="3fP-gL-cRG"/>
                                     <constraint firstAttribute="bottom" secondItem="jPc-3p-ToY" secondAttribute="bottom" constant="20" id="Cl2-Ma-Pfj"/>
@@ -111,6 +109,9 @@
                                     <constraint firstItem="ozS-em-iyl" firstAttribute="top" secondItem="JhR-83-3dD" secondAttribute="top" id="s0R-4s-CIk"/>
                                     <constraint firstItem="jPc-3p-ToY" firstAttribute="top" secondItem="JhR-83-3dD" secondAttribute="top" constant="20" id="zNw-DN-og7"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="pYV-3F-yB1" appends="YES" id="yzG-mM-7zM"/>
+                                </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hgJ-yq-LFw">
                                 <rect key="frame" x="0.0" y="178" width="375" height="449"/>
@@ -226,6 +227,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I9F-Vb-c2A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="pYV-3F-yB1" userLabel="ContainerTopView Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="onViewProfileClick:" destination="VyA-Y8-w1c" id="WlR-eq-OWO"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2412" y="-295.50224887556226"/>
         </scene>

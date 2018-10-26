@@ -26,6 +26,9 @@ class SignupViewController: BaseYibbyViewController,
     @IBOutlet weak var emailAddressOutlet: UITextField!
     @IBOutlet weak var phoneNumberOutlet: PhoneNumberTextField!
     @IBOutlet weak var passwordOutlet: UITextField!
+    
+    @IBOutlet weak var inviteCodeOutlet: UITextField!
+    
     @IBOutlet weak var signupButtonOutlet: YibbyButton1!
     @IBOutlet weak var errorLabelOutlet: UILabel!
     
@@ -56,7 +59,7 @@ class SignupViewController: BaseYibbyViewController,
     }
     
     @IBAction func tncButtonAction(_ sender: AnyObject) {
-        let url = URL(string: "http://yibbyapp.com")!
+        let url = URL(string: "https://www.yibbyapp.com/privacy-policy.html")!
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     

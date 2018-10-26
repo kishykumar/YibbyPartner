@@ -49,23 +49,32 @@ class RideStartViewController: BaseYibbyViewController {
     
     let GMS_DEFAULT_CAMERA_ZOOM: Float = 14.0
     
-
     let messageComposer = MessageComposer()
 
     var isRiderDetailsViewHidden = true
-    
+    var isDriverCancellingRide = false
+    var isRiderCancellingRide = false
     fileprivate var rideCancelObserver: NotificationObserver?
+
+    let RIDER_CANCELLED_BB_CODE = 20097
 
     // MARK: - Actions
     
     @IBAction func onCancelRideClick(_ sender: UIButton) {
         
-        let confirmAction = UIAlertAction(title: InterfaceString.ActionSheet.Confirm, style: .default) { _ in
-            self.cancelRide(with: .driverEmergency)
+        // Don't let the driver press the cancel button as ride is being cancelled by rider
+        if (isRiderCancellingRide) {
+            return;
         }
         
-        let plansChangedAction = UIAlertAction(title: InterfaceString.ActionSheet.PlansChangedReason,
-                                               style: .destructive) { _ in
+        let confirmAction = UIAlertAction(title: InterfaceString.ActionSheet.Confirm, style: .destructive) { _ in
+            
+            // Check the rider cancelled flag at cancel time
+            if (self.isRiderCancellingRide) {
+                return;
+            }
+            
+            self.isDriverCancellingRide = true
             self.cancelRide(with: .driverPlansChanged)
         }
         
@@ -75,11 +84,10 @@ class RideStartViewController: BaseYibbyViewController {
                                            message: "Cancelling too many rides decreases your chance to get future rides.",
                                            preferredStyle: .actionSheet)
         
-        for action in [plansChangedAction, confirmAction, cancelAction] {
+        for action in [confirmAction, cancelAction] {
             controller.addAction(action)
         }
         present(controller, animated: true, completion: nil)
-        
     }
     
     @IBAction func onCallButtonTap(_ sender: UIButton) {
@@ -103,7 +111,10 @@ class RideStartViewController: BaseYibbyViewController {
         if (messageComposer.canSendText()) {
             
             // Obtain a configured MFMessageComposeViewController
-            let messageComposeVC = messageComposer.configuredMessageComposeViewController(phoneNumber: phoneNumber)
+            let messageComposeVC =
+                messageComposer.configuredMessageComposeViewController(
+                    phoneNumber: phoneNumber,
+                    body: "Hi. Your Yibby driver (\(YBClient.sharedInstance().profile!.driverLicense!.firstName!.capitalized)) here! ")
             
             // Present the configured MFMessageComposeViewController instance
             self.present(messageComposeVC, animated: true, completion: nil)
@@ -437,8 +448,12 @@ class RideStartViewController: BaseYibbyViewController {
         DDLogVerbose("setup notifications observers")
         
         rideCancelObserver = NotificationObserver(notification: RideNotifications.rideCancelled) { [unowned self] ride in
+            
             DDLogVerbose("NotificationObserver rideCancel: \(ride)")
-            self.riderCancelledRideCallback()
+            if (!self.isDriverCancellingRide) {
+                self.isRiderCancellingRide = true
+                self.riderCancelledRideCallback()
+            }
         }
     }
     
@@ -468,16 +483,18 @@ class RideStartViewController: BaseYibbyViewController {
             self,
             webRequest: {(errorBlock: @escaping (BAAObjectResultBlock)) -> Void in
                 
+                if (YBClient.sharedInstance().bid?.id == nil) {
+                    return;
+                }
+                
                 ActivityIndicatorUtil.enableActivityIndicator(self.view, title: "Cancelling Ride")
                 
                 let client: BAAClient = BAAClient.shared()
-                
                 client.cancelDriverRide(YBClient.sharedInstance().bid?.id,
                                         cancelCode: reason.rawValue as NSNumber,
                                         completion: {(success, error) -> Void in
                                         
                                         ActivityIndicatorUtil.disableActivityIndicator(self.view)
-                                        
                                         if (success != nil) {
                                             
                                             // Set the client state
@@ -488,13 +505,31 @@ class RideStartViewController: BaseYibbyViewController {
                                                                        message: "Cancelling too many rides decreases your chance to get future rides.",
                                                                        completionBlock: {() -> Void in
                                                                         
-                                                                        // Trigger unwind segue to MainViewController
-                                                                        self.performSegue(withIdentifier: "unwindToMainViewControllerFromRideStartViewController", sender: self)
+                                                // Trigger unwind segue to MainViewController
+                                                self.performSegue(withIdentifier: "unwindToMainViewControllerFromRideStartViewController", sender: self)
                                             })
                                             
                                         } else {
-                                            DDLogVerbose("Ride Cancel failed: \(String(describing: error))")
-                                            errorBlock(success, error)
+                                            
+                                            if let bbCode = (error! as NSError).userInfo["bb_code"] as? String {
+                                                
+                                                if (Int(bbCode) == self.RIDER_CANCELLED_BB_CODE) {
+                                                    
+                                                    AlertUtil.displayAlertOnVC(self, title: (error! as NSError).localizedDescription,
+                                                                               message: "",
+                                                                               completionBlock: {() -> Void in
+
+                                                        // Trigger unwind segue to MainViewController
+                                                        self.performSegue(withIdentifier: "unwindToMainViewControllerFromRideStartViewController", sender: self)
+                                                    })
+                                                    
+                                                } else {
+                                                    errorBlock(success, error)
+                                                }
+                                                
+                                            } else {
+                                                errorBlock(success, error)
+                                            }
                                         }
                 })
         })

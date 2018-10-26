@@ -42,7 +42,24 @@ class LeftNavDrawerViewController: BaseYibbyViewController,
     }
     
     // MARK: - Actions
-
+    @IBAction func onViewProfileClick(_ sender: UITapGestureRecognizer) {
+        
+        let settingsStoryboard: UIStoryboard = UIStoryboard(name: InterfaceString.StoryboardName.Settings, bundle: nil)
+        
+        let settingsViewController = settingsStoryboard.instantiateViewController(withIdentifier: "SettingsViewControllerIdentifier") as! SettingsViewController
+        
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        if let mmnvc = appDelegate.centerContainer!.centerViewController as? UINavigationController {
+            
+            mmnvc.pushViewController(settingsViewController, animated: true)
+            appDelegate.centerContainer!.toggle(MMDrawerSide.left, animated: true, completion: nil)
+            
+        } else {
+            assert(false)
+        }
+    }
+    
     @IBAction func onAboutButtonClick(_ sender: AnyObject) {
         
         // Push the About View Controller
@@ -193,7 +210,7 @@ class LeftNavDrawerViewController: BaseYibbyViewController,
         let mycell = tableView.dequeueReusableCell(withIdentifier: "LeftNavDrawerCellIdentifier", for: indexPath) as! LeftNavDrawerTableViewCell
         
         // set the label
-        mycell.menuItemLabel.text = menuItems[indexPath.row].uppercased()
+        mycell.menuItemLabel.text = menuItems[indexPath.row]
         
         // set the icon
         mycell.menuItemIconLabelOutlet.font = UIFont(name: "FontAwesome", size: 20)
@@ -321,6 +338,15 @@ class LeftNavDrawerViewController: BaseYibbyViewController,
     
     // BaasBox logout driver
     func logoutDriver() {
+
+        // logging out the driver should also make it offline
+        if (YBClient.sharedInstance().status != .offline) {
+            
+            YBClient.sharedInstance().status = .offline
+
+            // stop location updates regardless of whether the request succeeds or fails
+            LocationService.sharedInstance().stopLocationUpdates()
+        }
         
         WebInterface.makeWebRequestAndHandleError(
             self,

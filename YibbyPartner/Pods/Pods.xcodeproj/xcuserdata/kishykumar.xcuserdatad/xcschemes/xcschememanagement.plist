@@ -53,6 +53,13 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
+		<key>Bolts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>56</integer>
+		</dict>
 		<key>Braintree-Braintree-Drop-In-Localization.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -109,6 +116,20 @@
 			<key>orderHint</key>
 			<integer>14</integer>
 		</dict>
+		<key>FBSDKCoreKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>58</integer>
+		</dict>
+		<key>FBSDKLoginKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>59</integer>
+		</dict>
 		<key>FLAnimatedImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -136,6 +157,27 @@
 			<false/>
 			<key>orderHint</key>
 			<integer>17</integer>
+		</dict>
+		<key>GTMOAuth2.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>61</integer>
+		</dict>
+		<key>GTMSessionFetcher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>62</integer>
+		</dict>
+		<key>GoogleToolboxForMac.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>60</integer>
 		</dict>
 		<key>Hue.xcscheme</key>
 		<dict>
@@ -352,14 +394,14 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>58</integer>
+			<integer>64</integer>
 		</dict>
 		<key>SwiftMessages.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>57</integer>
+			<integer>63</integer>
 		</dict>
 		<key>SwiftValidator.xcscheme</key>
 		<dict>

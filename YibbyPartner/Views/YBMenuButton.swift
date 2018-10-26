@@ -38,6 +38,7 @@ class YBMenuButton: UIButton {
     
     func sharedSetup(type: YBMenuButtonType) {
         
+        let app: UIApplication = UIApplication.shared
         var buttonName = "menu_icon_green"
         
         self.removeTarget(nil, action: nil, for: .touchUpInside)
@@ -52,7 +53,7 @@ class YBMenuButton: UIButton {
         self.setImage(image, for: .normal)
         
         // get the image size and apply it to the button frame
-        let frame = CGRect(x: 0.0, y: 20.0, width: image.size.width, height: image.size.height)
+        let frame = CGRect(x: 0.0, y: app.statusBarFrame.size.height, width: image.size.width, height: image.size.height)
         self.frame = frame
         
         self.backgroundColor = UIColor.clear

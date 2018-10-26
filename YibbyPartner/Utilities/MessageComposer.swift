@@ -17,12 +17,12 @@ class MessageComposer: NSObject, MFMessageComposeViewControllerDelegate {
     }
     
     // Configures and returns a MFMessageComposeViewController instance
-    func configuredMessageComposeViewController(phoneNumber: String) -> MFMessageComposeViewController {
+    func configuredMessageComposeViewController(phoneNumber: String, body: String) -> MFMessageComposeViewController {
         
         let messageComposeVC = MFMessageComposeViewController()
         messageComposeVC.messageComposeDelegate = self  //  Make sure to set this property to self, so that the controller can be dismissed!
         messageComposeVC.recipients = [phoneNumber]
-        messageComposeVC.body = "Hello. Your Yibby driver here! "
+        messageComposeVC.body = body
         return messageComposeVC
     }
     
