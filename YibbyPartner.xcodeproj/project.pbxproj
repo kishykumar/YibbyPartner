@@ -92,6 +92,7 @@
 		1228A0BB20317C1600AF6801 /* SwiftyAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1228A0B820317C1500AF6801 /* SwiftyAvatar.swift */; };
 		123524961C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
 		123524971C89475D004307EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 123524951C89475D004307EE /* GoogleService-Info.plist */; };
+		1235932D21833890004726B6 /* ReferRidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1235932C21833890004726B6 /* ReferRidersViewController.swift */; };
 		123640B42133F5EF004D11E1 /* ToastUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123640B32133F5EE004D11E1 /* ToastUtil.swift */; };
 		12368412212ADA3E00B37B8B /* FareIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12368411212ADA3D00B37B8B /* FareIssueViewController.swift */; };
 		12368414212AE73700B37B8B /* LostItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12368413212AE73600B37B8B /* LostItemViewController.swift */; };
@@ -291,6 +292,7 @@
 		1228A0B720317C1500AF6801 /* InitialsImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialsImageView.swift; sourceTree = "<group>"; };
 		1228A0B820317C1500AF6801 /* SwiftyAvatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyAvatar.swift; sourceTree = "<group>"; };
 		123524951C89475D004307EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1235932C21833890004726B6 /* ReferRidersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferRidersViewController.swift; sourceTree = "<group>"; };
 		123640B32133F5EE004D11E1 /* ToastUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastUtil.swift; sourceTree = "<group>"; };
 		12368411212ADA3D00B37B8B /* FareIssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FareIssueViewController.swift; sourceTree = "<group>"; };
 		12368413212AE73600B37B8B /* LostItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LostItemViewController.swift; sourceTree = "<group>"; };
@@ -973,6 +975,7 @@
 			isa = PBXGroup;
 			children = (
 				12F992311FF5CD12001567A0 /* Rewards.storyboard */,
+				1235932C21833890004726B6 /* ReferRidersViewController.swift */,
 				12F992331FF5CD24001567A0 /* RewardsViewController.swift */,
 			);
 			path = Rewards;
@@ -1558,6 +1561,7 @@
 				125B0C0C1E2DD04D00534359 /* YBPersonal.swift in Sources */,
 				1284914E1E262DA2002D047B /* VehicleMake.swift in Sources */,
 				12AE12F120B50AE6006F3178 /* PXGoogleDirectionsTransitLineVehicle.swift in Sources */,
+				1235932D21833890004726B6 /* ReferRidersViewController.swift in Sources */,
 				12AE12F720B50AE6006F3178 /* PXGoogleDirectionsRouteLeg.swift in Sources */,
 				12AE12FA20B50AE6006F3178 /* PXUtils.swift in Sources */,
 				1201B7D11D23B4AC00A7EEAF /* WebInterface.swift in Sources */,
