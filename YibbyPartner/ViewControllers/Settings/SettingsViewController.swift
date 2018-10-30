@@ -25,7 +25,6 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
     
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var settingsScrollOutlet: UIScrollView!
-    
     @IBOutlet weak var emailAddress: YBTextField!
     @IBOutlet weak var phoneNo: UITextField!
     @IBOutlet weak var profileImageViewOutlet: SwiftyAvatar!
@@ -33,16 +32,15 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
     @IBOutlet var firstNameLbl: UILabel!
     @IBOutlet var lastNameLbl: UILabel!
     @IBOutlet var emailEditBtnOutlet: UIButton!
-    
     @IBOutlet weak var errorLabelOutlet: UILabel!
-    
     @IBOutlet weak var mapSelectionSegmentControl: UISegmentedControl!
     @IBOutlet weak var vehicleImageViewOutlet: UIImageView!
     @IBOutlet weak var changeVehicleButtonOutlet: UIButton!
     @IBOutlet weak var vehicleMakeModelLabelOutlet: YibbyPaddingLabel!
     @IBOutlet weak var licensePlateLabelOutlet: YibbyPaddingLabel!
     @IBOutlet weak var vehicleDetailsViewOutlet: YBBorderedUIView!
-    
+    @IBOutlet weak var editLabelOutlet: UILabel!
+    @IBOutlet weak var profileImageViewContainer: UIView!
     
     var emailEditInProgress: Bool = false
     
@@ -177,6 +175,10 @@ class SettingsViewController: BaseYibbyViewController, UITextFieldDelegate, Vali
             self.applyProfileModel(profile)
             setProfilePicture()
         }
+        
+        profileImageViewContainer.layer.cornerRadius = profileImageViewContainer.frame.size.height/2
+        profileImageViewContainer.layer.masksToBounds = true
+        profileImageViewContainer.clipsToBounds = true
     }
     
     // MARK: - ValidationDelegate Methods

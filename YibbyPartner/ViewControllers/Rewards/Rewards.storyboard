@@ -235,11 +235,11 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8R-TL-Nlo">
                                 <rect key="frame" x="10" y="95" width="355" height="562"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">When friends sign up with your invite code, their first ride will be free. Once a friend has ridden with Uber, your next ride in any city that shares your signup city's national currency will be free. 
+                                <string key="text">When friends sign up with your invite code, their first ride will be free. Once a friend has ridden with Uber, your next ride in any city that shares your signup city's national currency will be free. 
 
 You can share your code by tapping Invite Friends and selecting one of the options available. These include text, email, sharing on social media or copying your personal invite code. 
 
-Personal invite codes should only be used for personal and non-commercial purposes. This means you can share your invite link with your personal connections via social media as long as you are the primary content owner. </mutableString>
+Personal invite codes should only be used for personal and non-commercial purposes. This means you can share your invite link with your personal connections via social media as long as you are the primary content owner. </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
