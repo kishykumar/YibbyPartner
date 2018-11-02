@@ -144,17 +144,6 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndf-qB-0Wj" userLabel="ProfileDetailsView" customClass="YBBorderedUIView" customModule="YibbyPartner" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="80.5" width="354.5" height="296.5"/>
                                                 <subviews>
-                                                    <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account" translatesAutoresizingMaskIntoConstraints="NO" id="c9j-PE-vqZ" userLabel="ProfileImageView" customClass="SwiftyAvatar" customModule="YibbyPartner" customModuleProvider="target">
-                                                        <rect key="frame" x="134.5" y="15" width="85" height="85"/>
-                                                        <gestureRecognizers/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="c9j-PE-vqZ" secondAttribute="height" multiplier="1:1" id="U1F-x1-xmv"/>
-                                                            <constraint firstAttribute="height" constant="85" id="vuI-vX-z9z"/>
-                                                        </constraints>
-                                                        <connections>
-                                                            <outletCollection property="gestureRecognizers" destination="UuS-h0-sqV" appends="YES" id="YXR-bj-eUr"/>
-                                                        </connections>
-                                                    </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DDh-mX-8Ii" userLabel="NameSV">
                                                         <rect key="frame" x="0.0" y="115" width="363.5" height="50"/>
                                                         <subviews>
@@ -288,23 +277,48 @@
                                                             <constraint firstAttribute="bottom" secondItem="V7Q-mt-Kh0" secondAttribute="bottom" id="zRe-nh-Zpj"/>
                                                         </constraints>
                                                     </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="16c-g5-tPI">
+                                                        <rect key="frame" x="132.5" y="12" width="90" height="90"/>
+                                                        <subviews>
+                                                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="account" translatesAutoresizingMaskIntoConstraints="NO" id="mSx-gq-Cov" userLabel="ProfileImageView" customClass="SwiftyAvatar" customModule="Yibby" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <gestureRecognizers/>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="UuS-h0-sqV" appends="YES" id="APB-3t-jMB"/>
+                                                                </connections>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Edit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAn-vf-Ma4">
+                                                                <rect key="frame" x="1" y="74" width="87" height="15"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="16c-g5-tPI" secondAttribute="height" multiplier="1:1" id="9cR-LI-Fgk"/>
+                                                            <constraint firstAttribute="height" constant="90" id="KEu-Aw-r68"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="Suk-bz-XsI" secondAttribute="trailing" constant="11.5" id="26E-Ys-whX"/>
                                                     <constraint firstItem="Suk-bz-XsI" firstAttribute="leading" secondItem="ndf-qB-0Wj" secondAttribute="leading" constant="20" id="6Dg-GD-CFe"/>
-                                                    <constraint firstItem="DDh-mX-8Ii" firstAttribute="top" secondItem="c9j-PE-vqZ" secondAttribute="bottom" constant="15" id="6WM-JJ-DEa"/>
                                                     <constraint firstAttribute="bottom" secondItem="wNK-DQ-ljm" secondAttribute="bottom" constant="25" id="AZO-tB-jzH"/>
                                                     <constraint firstItem="Suk-bz-XsI" firstAttribute="centerX" secondItem="ndf-qB-0Wj" secondAttribute="centerX" constant="4.25" id="GuC-bB-9dd"/>
+                                                    <constraint firstItem="16c-g5-tPI" firstAttribute="top" secondItem="ndf-qB-0Wj" secondAttribute="top" constant="12" id="HfJ-Cc-FKl"/>
                                                     <constraint firstAttribute="trailing" secondItem="DDh-mX-8Ii" secondAttribute="trailing" constant="-8.5" id="JCh-qA-qLq"/>
                                                     <constraint firstItem="DDh-mX-8Ii" firstAttribute="leading" secondItem="ndf-qB-0Wj" secondAttribute="leading" id="KmE-lG-87e"/>
-                                                    <constraint firstItem="c9j-PE-vqZ" firstAttribute="centerX" secondItem="ndf-qB-0Wj" secondAttribute="centerX" id="Q7f-wi-Gd1"/>
                                                     <constraint firstItem="wNK-DQ-ljm" firstAttribute="top" secondItem="Suk-bz-XsI" secondAttribute="bottom" constant="25" id="YdD-w8-bxG"/>
                                                     <constraint firstAttribute="trailing" secondItem="wNK-DQ-ljm" secondAttribute="trailing" constant="11.5" id="Yr1-LT-a9D"/>
                                                     <constraint firstItem="Suk-bz-XsI" firstAttribute="top" secondItem="DDh-mX-8Ii" secondAttribute="bottom" constant="25" id="eRH-Ub-uFK"/>
                                                     <constraint firstItem="Suk-bz-XsI" firstAttribute="top" secondItem="ndf-qB-0Wj" secondAttribute="top" constant="190" id="ktg-jH-lQd"/>
+                                                    <constraint firstItem="16c-g5-tPI" firstAttribute="centerX" secondItem="ndf-qB-0Wj" secondAttribute="centerX" id="lV0-ot-bGh"/>
                                                     <constraint firstItem="wNK-DQ-ljm" firstAttribute="leading" secondItem="ndf-qB-0Wj" secondAttribute="leading" constant="20" id="oEe-VZ-Z6m"/>
-                                                    <constraint firstItem="c9j-PE-vqZ" firstAttribute="top" secondItem="ndf-qB-0Wj" secondAttribute="top" constant="15" id="zAi-vJ-lqT"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -382,6 +396,7 @@
                         <outlet property="VW" destination="ndf-qB-0Wj" id="OAB-Rb-QHV"/>
                         <outlet property="changeVehicleButtonOutlet" destination="WcO-zG-eqr" id="lF1-Oq-6Zs"/>
                         <outlet property="contentView" destination="RCV-eT-uLL" id="815-Nw-Ffc"/>
+                        <outlet property="editLabelOutlet" destination="pAn-vf-Ma4" id="5Cu-U4-WPQ"/>
                         <outlet property="emailAddress" destination="0CV-3f-u9L" id="Jji-ic-Faz"/>
                         <outlet property="emailEditBtnOutlet" destination="TaR-ie-BVM" id="TtZ-qV-ApU"/>
                         <outlet property="errorLabelOutlet" destination="I3y-5y-gXY" id="KpJ-fa-qBN"/>
@@ -390,7 +405,8 @@
                         <outlet property="licensePlateLabelOutlet" destination="kyb-TA-f2n" id="LDQ-Xz-fW6"/>
                         <outlet property="mapSelectionSegmentControl" destination="xKe-tq-tw7" id="zjk-vE-HcV"/>
                         <outlet property="phoneNo" destination="t37-Ki-ain" id="Y2P-6N-1kd"/>
-                        <outlet property="profileImageViewOutlet" destination="c9j-PE-vqZ" id="JrI-EX-fiH"/>
+                        <outlet property="profileImageViewContainer" destination="16c-g5-tPI" id="jAg-yw-jLP"/>
+                        <outlet property="profileImageViewOutlet" destination="mSx-gq-Cov" id="WLh-2C-Xkl"/>
                         <outlet property="settingsScrollOutlet" destination="oTS-Lf-TFP" id="Ukf-SJ-8vN"/>
                         <outlet property="vehicleDetailsViewOutlet" destination="Ern-Uy-nhI" id="M2G-fr-Y1e"/>
                         <outlet property="vehicleImageViewOutlet" destination="bnQ-su-Dnu" id="55Y-gx-t0K"/>
@@ -404,7 +420,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1741.5999999999999" y="-318.44077961019491"/>
+            <point key="canvasLocation" x="1706" y="-454"/>
         </scene>
     </scenes>
     <resources>

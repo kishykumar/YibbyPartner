@@ -16,12 +16,8 @@ class RewardsViewController: BaseYibbyViewController, MFMailComposeViewControlle
 
     @IBOutlet weak var rewardView: UIView!
     @IBOutlet weak var referView: UIView!
-  
     @IBOutlet weak var inviteCodeLabelOutlet: UILabel!
-    
     @IBOutlet weak var shareIcon: UILabel!
-    
-    
     
     let EMAIL_BODY:String = "Referrer details: <Your name> <Your phone number> \n - is referring my friend - \n\n Friend details: <Your friend's name> <Your friend's phone number> \n\n Yibby will make $5 payment to you via Venmo once your friend takes a ride with us. \n\n Please provide your venmo id: <Referrer venmo id>"
     let YIBBY_LINK:String = "https://www.google.co.in/"

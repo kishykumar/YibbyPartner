@@ -232,10 +232,13 @@
                                 <color key="textColor" red="0.1529411765" green="0.68235294120000001" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8R-TL-Nlo">
-                                <rect key="frame" x="10" y="95" width="355" height="562"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvb-p0-eYx">
+                                <rect key="frame" x="10" y="105" width="355" height="315"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">When friends sign up with your invite code, their first ride will be free. Once a friend has ridden with Uber, your next ride in any city that shares your signup city's national currency will be free. 
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="315" id="ywt-Es-rBm"/>
+                                </constraints>
+                                <mutableString key="text">When friends sign up with your invite code, their first ride will be free. Once a friend has ridden, your next ride in any city that shares your signup city's national currency will be free. 
 
 You can share your code by tapping Invite Friends and selecting one of the options available. These include text, email, sharing on social media or copying your personal invite code. 
 
@@ -246,23 +249,22 @@ Personal invite codes should only be used for personal and non-commercial purpos
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="v8R-TL-Nlo" firstAttribute="top" secondItem="Ht6-gd-EUa" secondAttribute="bottom" constant="10" id="3Tp-0B-tYb"/>
-                            <constraint firstItem="Qwt-j2-gCu" firstAttribute="top" secondItem="v8R-TL-Nlo" secondAttribute="bottom" constant="10" id="9rc-Mr-RMh"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="v8R-TL-Nlo" secondAttribute="trailing" constant="-6" id="Cdf-bW-2Q0"/>
+                            <constraint firstItem="rvb-p0-eYx" firstAttribute="leading" secondItem="ZCb-zB-Iiv" secondAttribute="leading" constant="10" id="9m8-iN-jKe"/>
                             <constraint firstItem="Ht6-gd-EUa" firstAttribute="leading" secondItem="m2t-QI-O6K" secondAttribute="leading" constant="10" id="H8C-oS-8kX"/>
-                            <constraint firstItem="v8R-TL-Nlo" firstAttribute="leading" secondItem="m2t-QI-O6K" secondAttribute="leadingMargin" constant="-6" id="MP1-DY-FCB"/>
                             <constraint firstAttribute="trailing" secondItem="Ht6-gd-EUa" secondAttribute="trailing" constant="10" id="O4Y-Qn-y8x"/>
                             <constraint firstItem="Ht6-gd-EUa" firstAttribute="top" secondItem="KYV-dZ-B21" secondAttribute="bottom" constant="35" id="S31-N8-W86"/>
+                            <constraint firstItem="rvb-p0-eYx" firstAttribute="top" secondItem="Ht6-gd-EUa" secondAttribute="bottom" constant="20" id="UfW-gG-GZk"/>
+                            <constraint firstItem="ZCb-zB-Iiv" firstAttribute="trailing" secondItem="rvb-p0-eYx" secondAttribute="trailing" constant="10" id="sqk-fZ-0XF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZCb-zB-Iiv"/>
                     </view>
                     <connections>
-                        <outlet property="inviteDescriptionTextView" destination="v8R-TL-Nlo" id="Oqo-nP-Fi2"/>
+                        <outlet property="inviteDescriptionTextView" destination="rvb-p0-eYx" id="5pz-QH-CsQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d41-Rn-Vsl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="575" y="259"/>
+            <point key="canvasLocation" x="573.60000000000002" y="258.62068965517244"/>
         </scene>
     </scenes>
 </document>
